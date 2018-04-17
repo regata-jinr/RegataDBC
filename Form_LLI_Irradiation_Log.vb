@@ -148,7 +148,7 @@ Public Class Form_LLI_Irradiation_Log
 
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text)
+            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text, Convert.ToInt32(TextBox_Download.Text))
             ListBox_Sample_ID.Items.Clear()
             ListBox_Sample_ID_All_LLI_Weight.Items.Clear()
 
@@ -801,11 +801,7 @@ Public Class Form_LLI_Irradiation_Log
             ' это чтобы по умолчанию была высота 2,5
             ComboBox_Sample_Geometry.SelectedIndex = 0
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
-                MsgBox("Операция была отменена (ошибка в Form_LLI_Irradiation_Log_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
-                MsgBox("Operation was cancelled (error in Form_LLI_Irradiation_Log_Load!", MsgBoxStyle.Critical, Me.Text)
-            End If
+            Form_Main.LangException(Form_Main.language, ex.Message & ex.ToString)
             Exit Sub
         End Try
     End Sub
@@ -840,7 +836,7 @@ Public Class Form_LLI_Irradiation_Log
 
                 cmd.CommandText = "SELECT DISTINCT Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index FROM dbo.table_LLI_Irradiation_Log" +
                          " WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
-                         "' and Country_Code<>'m' and Country_Code<>'s'"
+                         "'  and Country_Code<>'m' and Country_Code<>'s' and loadNumber = '" + TextBox_Download.Text + "'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -900,7 +896,7 @@ Public Class Form_LLI_Irradiation_Log
                 Dim reader1 As SqlDataReader
                 Dim cmd1 As New System.Data.SqlClient.SqlCommand
                 cmd1.CommandType = System.Data.CommandType.Text
-                cmd1.CommandText = "SELECT distinct loadNumber from table_LLI_Irradiation_Log where Date_Start = '" & MaskedTextBox_LLI_Irradiation_Log.Text & "'"
+                cmd1.CommandText = "SELECT distinct loadNumber from table_LLI_Irradiation_Log where Date_Start = '" & MaskedTextBox_LLI_Irradiation_Log.Text & "' order by loadNumber desc"
 
                 cmd1.Connection = sqlConnection2
                 sqlConnection2.Open()
@@ -2215,7 +2211,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             sqlConnection1.Close()
 
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text)
+            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text, TextBox_Download.Text)
             Table_SRM_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Table_SRM_TableAdapter.Fill_Empty(Me.NAA_DB_EXPDataSet.table_SRM)
 
@@ -2388,7 +2384,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             sqlConnection1.Close()
 
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text)
+            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text, TextBox_Download.Text)
             Table_Monitor_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Table_Monitor_TableAdapter.Fill_Empty(Me.NAA_DB_EXPDataSet.table_Monitor)
 
@@ -2815,7 +2811,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 MkDir("C:\GENIE2K\JOURNALS")
             End If
             SaveFileDialog_LLI.InitialDirectory = "C:\GENIE2K\JOURNALS"
-            SaveFileDialog_LLI.FileName = "LLI_journals_" + MaskedTextBox_LLI_Irradiation_Log.Text + ".xlsx"
+            SaveFileDialog_LLI.FileName = $"LLI_journals_{MaskedTextBox_LLI_Irradiation_Log.Text}_{TextBox_Download.Text}.xlsx"
             If SaveFileDialog_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then ' Эта строчка открывает диалог и сравнивает результат с cancel 
                 Exit Sub
             ElseIf System.Windows.Forms.DialogResult.OK Then ' Эта строчка только сравнивает результат с OK 
@@ -2874,7 +2870,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 colorNames.Add(9, ClosedXML.Excel.XLColor.CosmicLatte)
 
                 Using wb As New ClosedXML.Excel.XLWorkbook()
-                    Dim ws = wb.Worksheets.Add(dt, MaskedTextBox_LLI_Irradiation_Log.Text)
+                    Dim ws = wb.Worksheets.Add(dt, $"{MaskedTextBox_LLI_Irradiation_Log.Text}_{TextBox_Download.Text}")
 
                     For Each key In colorDict
                         If key.Value <> "init" Then

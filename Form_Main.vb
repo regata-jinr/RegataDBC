@@ -749,23 +749,23 @@ Public Class Form_Main
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
-            cmd.CommandText = "SELECT COUNT(*) FROM table_LLI_Irradiation_Log WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text + "'"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
+            'cmd.CommandText = "SELECT COUNT(*) FROM table_LLI_Irradiation_Log WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text + "'"
+            'cmd.Connection = sqlConnection1
+            'sqlConnection1.Open()
+            'reader = cmd.ExecuteReader()
 
-            While reader.Read()
-                If reader(0) > 0 Then
-                    If language = "russian" Then
-                        MsgBox("This LLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf language = "english" Then
-                        MsgBox("Такой журнал ДЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                    End If
-                    sqlConnection1.Close()
-                    Exit Sub
-                End If
-            End While
-            sqlConnection1.Close()
+            'While reader.Read()
+            '    If reader(0) > 0 Then
+            '        If language = "russian" Then
+            '            MsgBox("This LLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
+            '        ElseIf language = "english" Then
+            '            MsgBox("Такой журнал ДЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
+            '        End If
+            '        sqlConnection1.Close()
+            '        Exit Sub
+            '    End If
+            'End While
+            'sqlConnection1.Close()
 
             cmd.CommandText = "declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  '" & MaskedTextBox_LLI_Irradiation_Log.Text & "';"
             cmd.Connection = sqlConnection1
@@ -843,13 +843,16 @@ Public Class Form_Main
             'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
             Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
-            Dim s As String
+            Dim jDate As String
+            Dim number As String
 
-            s = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
+            jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
+            number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
             's1 = s(s.Count - 4) + s(s.Count - 3) + s(s.Count - 2) + s(s.Count - 1)
-            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(Form_LLI_Irradiation_Log.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, s)
+            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(Form_LLI_Irradiation_Log.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
 
             Form_LLI_Irradiation_Log.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
+            Form_LLI_Irradiation_Log.TextBox_Download.Text = number
 
             Me.Enabled = False
             Form_LLI_Irradiation_Log.Show()
