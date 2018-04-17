@@ -1,0 +1,195 @@
+F, концентрация, uгр/гр;R_F_Concentaration
+F, погрешность, %;R_F_Error
+F, предел обнаружения, uгр/гр;R_F_Detection_Limit
+Na, концентрация, uгр/гр;R_Na_Concentaration
+Na, погрешность, %;R_Na_Error
+Na, предел обнаружения, uгр/гр;R_Na_Detection_Limit
+Mg, концентрация, uгр/гр;R_Mg_Concentaration
+Mg, погрешность, %;R_Mg_Error
+Mg, предел обнаружения, uгр/гр;R_Mg_Detection_Limit
+Al, концентрация, uгр/гр;R_Al_Concentaration
+Al, погрешность, %;R_Al_Error
+Al, предел обнаружения, uгр/гр;R_Al_Detection_Limit
+Si, концентрация, uгр/гр;R_Si_Concentaration
+Si, погрешность, %;R_Si_Error
+Si, предел обнаружения, uгр/гр;R_Si_Detection_Limit
+S, концентрация, uгр/гр;R_S_Concentaration
+S, погрешность, %;R_S_Error
+S, предел обнаружения, uгр/гр;R_S_Detection_Limit
+Cl, концентрация, uгр/гр;R_Cl_Concentaration
+Cl, погрешность, %;R_Cl_Error
+Cl, предел обнаружения, uгр/гр;R_Cl_Detection_Limit
+K, концентрация, uгр/гр;R_K_Concentaration
+K, погрешность, %;R_K_Error
+K, предел обнаружения, uгр/гр;R_K_Detection_Limit
+Ca, концентрация, uгр/гр;R_Ca_Concentaration
+Ca, погрешность, %;R_Ca_Error
+Ca, предел обнаружения, uгр/гр;R_Ca_Detection_Limit
+Sc, концентрация, uгр/гр;R_Sc_Concentaration
+Sc, погрешность, %;R_Sc_Error
+Sc, предел обнаружения, uгр/гр;R_Sc_Detection_Limit
+Ti, концентрация, uгр/гр;R_Ti_Concentaration
+Ti, погрешность, %;R_Ti_Error
+Ti, предел обнаружения, uгр/гр;R_Ti_Detection_Limit
+V, концентрация, uгр/гр;R_V_Concentaration
+V, погрешность, %;R_V_Error
+V, предел обнаружения, uгр/гр;R_V_Detection_Limit
+Cr, концентрация, uгр/гр;R_Cr_Concentaration
+Cr, погрешность, %;R_Cr_Error
+Cr, предел обнаружения, uгр/гр;R_Cr_Detection_Limit
+Mn, концентрация, uгр/гр;R_Mn_Concentaration
+Mn, погрешность, %;R_Mn_Error
+Mn, предел обнаружения, uгр/гр;R_Mn_Detection_Limit
+Fe, концентрация, uгр/гр;R_Fe_Concentaration
+Fe, погрешность, %;R_Fe_Error
+Fe, предел обнаружения, uгр/гр;R_Fe_Detection_Limit
+Co, концентрация, uгр/гр;R_Co_Concentaration
+Co, погрешность, %;R_Co_Error
+Co, предел обнаружения, uгр/гр;R_Co_Detection_Limit
+Ni, концентрация, uгр/гр;R_Ni_Concentaration
+Ni, погрешность, %;R_Ni_Error
+Ni, предел обнаружения, uгр/гр;R_Ni_Detection_Limit
+Cu, концентрация, uгр/гр;R_Cu_Concentaration
+Cu, погрешность, %;R_Cu_Error
+Cu, предел обнаружения, uгр/гр;R_Cu_Detection_Limit
+Zn, концентрация, uгр/гр;R_Zn_Concentaration
+Zn, погрешность, %;R_Zn_Error
+Zn, предел обнаружения, uгр/гр;R_Zn_Detection_Limit
+Ga, концентрация, uгр/гр;R_Ga_Concentaration
+Ga, погрешность, %;R_Ga_Error
+Ga, предел обнаружения, uгр/гр;R_Ga_Detection_Limit
+Ge, концентрация, uгр/гр;R_Ge_Concentaration
+Ge, погрешность, %;R_Ge_Error
+Ge, предел обнаружения, uгр/гр;R_Ge_Detection_Limit
+As, концентрация, uгр/гр;R_As_Concentaration
+As, погрешность, %;R_As_Error
+As, предел обнаружения, uгр/гр;R_As_Detection_Limit
+Se, концентрация, uгр/гр;R_Se_Concentaration
+Se, погрешность, %;R_Se_Error
+Se, предел обнаружения, uгр/гр;R_Se_Detection_Limit
+Br, концентрация, uгр/гр;R_Br_Concentaration
+Br, погрешность, %;R_Br_Error
+Br, предел обнаружения, uгр/гр;R_Br_Detection_Limit
+Rb, концентрация, uгр/гр;R_Rb_Concentaration
+Rb, погрешность, %;R_Rb_Error
+Rb, предел обнаружения, uгр/гр;R_Rb_Detection_Limit
+Sr, концентрация, uгр/гр;R_Sr_Concentaration
+Sr, погрешность, %;R_Sr_Error
+Sr, предел обнаружения, uгр/гр;R_Sr_Detection_Limit
+Y, концентрация, uгр/гр;R_Y_Concentaration
+Y, погрешность, %;R_Y_Error
+Y, предел обнаружения, uгр/гр;R_Y_Detection_Limit
+Zr, концентрация, uгр/гр;R_Zr_Concentaration
+Zr, погрешность, %;R_Zr_Error
+Zr, предел обнаружения, uгр/гр;R_Zr_Detection_Limit
+Nb, концентрация, uгр/гр;R_Nb_Concentaration
+Nb, погрешность, %;R_Nb_Error
+Nb, предел обнаружения, uгр/гр;R_Nb_Detection_Limit
+Mo, концентрация, uгр/гр;R_Mo_Concentaration
+Mo, погрешность, %;R_Mo_Error
+Mo, предел обнаружения, uгр/гр;R_Mo_Detection_Limit
+Ru, концентрация, uгр/гр;R_Ru_Concentaration
+Ru, погрешность, %;R_Ru_Error
+Ru, предел обнаружения, uгр/гр;R_Ru_Detection_Limit
+Pd, концентрация, uгр/гр;R_Pd_Concentaration
+Pd, погрешность, %;R_Pd_Error
+Pd, предел обнаружения, uгр/гр;R_Pd_Detection_Limit
+Ag, концентрация, uгр/гр;R_Ag_Concentaration
+Ag, погрешность, %;R_Ag_Error
+Ag, предел обнаружения, uгр/гр;R_Ag_Detection_Limit
+Cd, концентрация, uгр/гр;R_Cd_Concentaration
+Cd, погрешность, %;R_Cd_Error
+Cd, предел обнаружения, uгр/гр;R_Cd_Detection_Limit
+In, концентрация, uгр/гр;R_In_Concentaration
+In, погрешность, %;R_In_Error
+In, предел обнаружения, uгр/гр;R_In_Detection_Limit
+Sn, концентрация, uгр/гр;R_Sn_Concentaration
+Sn, погрешность, %;R_Sn_Error
+Sn, предел обнаружения, uгр/гр;R_Sn_Detection_Limit
+Sb, концентрация, uгр/гр;R_Sb_Concentaration
+Sb, погрешность, %;R_Sb_Error
+Sb, предел обнаружения, uгр/гр;R_Sb_Detection_Limit
+I, концентрация, uгр/гр;R_I_Concentaration
+I, погрешность, %;R_I_Error
+I, предел обнаружения, uгр/гр;R_I_Detection_Limit
+Cs, концентрация, uгр/гр;R_Cs_Concentaration
+Cs, погрешность, %;R_Cs_Error
+Cs, предел обнаружения, uгр/гр;R_Cs_Detection_Limit
+Ba, концентрация, uгр/гр;R_Ba_Concentaration
+Ba, погрешность, %;R_Ba_Error
+Ba, предел обнаружения, uгр/гр;R_Ba_Detection_Limit
+La, концентрация, uгр/гр;R_La_Concentaration
+La, погрешность, %;R_La_Error
+La, предел обнаружения, uгр/гр;R_La_Detection_Limit
+Ce, концентрация, uгр/гр;R_Ce_Concentaration
+Ce, погрешность, %;R_Ce_Error
+Ce, предел обнаружения, uгр/гр;R_Ce_Detection_Limit
+Pr, концентрация, uгр/гр;R_Pr_Concentaration
+Pr, погрешность, %;R_Pr_Error
+Pr, предел обнаружения, uгр/гр;R_Pr_Detection_Limit
+Nd, концентрация, uгр/гр;R_Nd_Concentaration
+Nd, погрешность, %;R_Nd_Error
+Nd, предел обнаружения, uгр/гр;R_Nd_Detection_Limit
+Sm, концентрация, uгр/гр;R_Sm_Concentaration
+Sm, погрешность, %;R_Sm_Error
+Sm, предел обнаружения, uгр/гр;R_Sm_Detection_Limit
+Eu, концентрация, uгр/гр;R_Eu_Concentaration
+Eu, погрешность, %;R_Eu_Error
+Eu, предел обнаружения, uгр/гр;R_Eu_Detection_Limit
+Gd, концентрация, uгр/гр;R_Gd_Concentaration
+Gd, погрешность, %;R_Gd_Error
+Gd, предел обнаружения, uгр/гр;R_Gd_Detection_Limit
+Tb, концентрация, uгр/гр;R_Tb_Concentaration
+Tb, погрешность, %;R_Tb_Error
+Tb, предел обнаружения, uгр/гр;R_Tb_Detection_Limit
+Dy, концентрация, uгр/гр;R_Dy_Concentaration
+Dy, погрешность, %;R_Dy_Error
+Dy, предел обнаружения, uгр/гр;R_Dy_Detection_Limit
+Ho, концентрация, uгр/гр;R_Ho_Concentaration
+Ho, погрешность, %;R_Ho_Error
+Ho, предел обнаружения, uгр/гр;R_Ho_Detection_Limit
+Er, концентрация, uгр/гр;R_Er_Concentaration
+Er, погрешность, %;R_Er_Error
+Er, предел обнаружения, uгр/гр;R_Er_Detection_Limit
+Tm, концентрация, uгр/гр;R_Tm_Concentaration
+Tm, погрешность, %;R_Tm_Error
+Tm, предел обнаружения, uгр/гр;R_Tm_Detection_Limit
+Yb, концентрация, uгр/гр;R_Yb_Concentaration
+Yb, погрешность, %;R_Yb_Error
+Yb, предел обнаружения, uгр/гр;R_Yb_Detection_Limit
+Lu, концентрация, uгр/гр;R_Lu_Concentaration
+Lu, погрешность, %;R_Lu_Error
+Lu, предел обнаружения, uгр/гр;R_Lu_Detection_Limit
+Hf, концентрация, uгр/гр;R_Hf_Concentaration
+Hf, погрешность, %;R_Hf_Error
+Hf, предел обнаружения, uгр/гр;R_Hf_Detection_Limit
+Ta, концентрация, uгр/гр;R_Ta_Concentaration
+Ta, погрешность, %;R_Ta_Error
+Ta, предел обнаружения, uгр/гр;R_Ta_Detection_Limit
+W, концентрация, uгр/гр;R_W_Concentaration
+W, погрешность, %;R_W_Error
+W, предел обнаружения, uгр/гр;R_W_Detection_Limit
+Re, концентрация, uгр/гр;R_Re_Concentaration
+Re, погрешность, %;R_Re_Error
+Re, предел обнаружения, uгр/гр;R_Re_Detection_Limit
+Os, концентрация, uгр/гр;R_Os_Concentaration
+Os, погрешность, %;R_Os_Error
+Os, предел обнаружения, uгр/гр;R_Os_Detection_Limit
+Ir, концентрация, uгр/гр;R_Ir_Concentaration
+Ir, погрешность, %;R_Ir_Error
+Ir, предел обнаружения, uгр/гр;R_Ir_Detection_Limit
+Pt, концентрация, uгр/гр;R_Pt_Concentaration
+Pt, погрешность, %;R_Pt_Error
+Pt, предел обнаружения, uгр/гр;R_Pt_Detection_Limit
+Au, концентрация, uгр/гр;R_Au_Concentaration
+Au, погрешность, %;R_Au_Error
+Au, предел обнаружения, uгр/гр;R_Au_Detection_Limit
+Hg, концентрация, uгр/гр;R_Hg_Concentaration
+Hg, погрешность, %;R_Hg_Error
+Hg, предел обнаружения, uгр/гр;R_Hg_Detection_Limit
+Th, концентрация, uгр/гр;R_Th_Concentaration
+Th, погрешность, %;R_Th_Error
+Th, предел обнаружения, uгр/гр;R_Th_Detection_Limit
+U, концентрация, uгр/гр;R_U_Concentaration
+U, погрешность, %;R_U_Error
+U, предел обнаружения, uгр/гр;R_U_Detection_Limit
