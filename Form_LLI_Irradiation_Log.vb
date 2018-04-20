@@ -2401,22 +2401,22 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
 
     Private Sub Save_And_Update_LLI_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Save_And_Update_LLI.Click
         Try
-            If Not loadNumFlag Then
+            '   If Not loadNumFlag Then
 
-                Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
                 Dim reader As SqlDataReader
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
 
 
-                cmd.CommandText = "update  table_LLI_Irradiation_Log set loadNumber = '" & TextBox_Download.Text & "' where Date_Start = '" & MaskedTextBox_LLI_Irradiation_Log.Text & "' and loadNumber is null"
+            cmd.CommandText = $"update  table_LLI_Irradiation_Log set loadNumber = '{TextBox_Download.Text}' where Date_Start = '{MaskedTextBox_LLI_Irradiation_Log.Text}' and loadNumber is null"
 
-                cmd.Connection = sqlConnection1
+            cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
                 sqlConnection1.Close()
 
-            End If
+            '  End If
 
 
             Dim s_var_1, s_var_2, s_var_3, s_var_4 As String
@@ -2444,11 +2444,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
-                MsgBox("Операция была отменена (ошибка в Save_And_Update_LLI_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
-                MsgBox("Operation was cancelled (error in Save_And_Update_LLI_Click!", MsgBoxStyle.Critical, Me.Text)
-            End If
+            Form_Main.LangException(Form_Main.language, ex.Message & ex.ToString)
             Exit Sub
         End Try
     End Sub
