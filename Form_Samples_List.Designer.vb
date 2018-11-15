@@ -43,6 +43,7 @@ Partial Class Form_Samples_List
         Me.L_SS_Sample_Set_Index = New System.Windows.Forms.Label()
         Me.B_NAA_Results = New System.Windows.Forms.Button()
         Me.B_Insert_All_Samples_Into_Sample_Set = New System.Windows.Forms.Button()
+        Me.Button_ShowNotice = New System.Windows.Forms.Button()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SampleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -137,7 +138,7 @@ Partial Class Form_Samples_List
         Me.ListBox_Sample_ID.FormattingEnabled = True
         Me.ListBox_Sample_ID.Location = New System.Drawing.Point(287, 24)
         Me.ListBox_Sample_ID.Name = "ListBox_Sample_ID"
-        Me.ListBox_Sample_ID.Size = New System.Drawing.Size(55, 186)
+        Me.ListBox_Sample_ID.Size = New System.Drawing.Size(55, 212)
         Me.ListBox_Sample_ID.TabIndex = 137
         '
         'L_Name_Sample_ID
@@ -186,7 +187,7 @@ Partial Class Form_Samples_List
         '
         'B_Close
         '
-        Me.B_Close.Location = New System.Drawing.Point(12, 190)
+        Me.B_Close.Location = New System.Drawing.Point(12, 219)
         Me.B_Close.Name = "B_Close"
         Me.B_Close.Size = New System.Drawing.Size(269, 23)
         Me.B_Close.TabIndex = 145
@@ -220,11 +221,21 @@ Partial Class Form_Samples_List
         Me.B_Insert_All_Samples_Into_Sample_Set.Text = "Insert all samples into sample set"
         Me.B_Insert_All_Samples_Into_Sample_Set.UseVisualStyleBackColor = True
         '
+        'Button_ShowNotice
+        '
+        Me.Button_ShowNotice.Location = New System.Drawing.Point(12, 190)
+        Me.Button_ShowNotice.Name = "Button_ShowNotice"
+        Me.Button_ShowNotice.Size = New System.Drawing.Size(269, 23)
+        Me.Button_ShowNotice.TabIndex = 175
+        Me.Button_ShowNotice.Text = "Show Notice"
+        Me.Button_ShowNotice.UseVisualStyleBackColor = True
+        '
         'Form_Samples_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(350, 217)
+        Me.ClientSize = New System.Drawing.Size(350, 245)
+        Me.Controls.Add(Me.Button_ShowNotice)
         Me.Controls.Add(Me.B_Insert_All_Samples_Into_Sample_Set)
         Me.Controls.Add(Me.B_NAA_Results)
         Me.Controls.Add(Me.L_SS_Sample_Set_Index)
@@ -272,4 +283,5 @@ Partial Class Form_Samples_List
     Friend WithEvents Table_SampleTableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_TableAdapter
     Friend WithEvents B_NAA_Results As System.Windows.Forms.Button
     Friend WithEvents B_Insert_All_Samples_Into_Sample_Set As System.Windows.Forms.Button
+    Friend WithEvents Button_ShowNotice As Button
 End Class

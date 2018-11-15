@@ -138,6 +138,7 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Изменить информацию об образце"
                 B_Samples_Preparation.Text = "Пробоподготовка"
                 B_NAA_Results.Text = "Результаты НАА"
+                Button_ShowNotice.Text = "Примечания к партии"
                 B_Close.Text = "Закрыть"
             ElseIf Form_Main.language = "english" Then
                 Me.Text = "Samples list"
@@ -149,6 +150,7 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Change information about sample"
                 B_Samples_Preparation.Text = "Samples preparation"
                 B_NAA_Results.Text = "NAA results"
+                Button_ShowNotice.Text = "Notices for set"
                 B_Close.Text = "Close"
             End If
         Catch ex As Exception
@@ -543,5 +545,20 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
             Form_Sample_Accept.Close()
             Exit Sub
         End Try
+    End Sub
+
+    Private Sub Button_ShowNotice_Click(sender As Object, e As EventArgs) Handles Button_ShowNotice.Click
+        Form_Notice.Show()
+
+        Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+        Dim cmd As New SqlCommand
+        Dim reader As SqlDataReader
+        cmd.CommandText = "select Note from table_Sample_Set where Country_Code = '" & L_SS_Country_Code.Text & "' and Client_ID = '" & L_SS_Client_ID.Text & "' and Year = '" & L_SS_Year.Text & "' and Sample_Set_Id = '" & L_SS_Sample_Set_ID.Text & "' and Sample_Set_Index = '" & L_SS_Sample_Set_Index.Text & "'"
+        cmd.Connection = sqlConnection1
+        sqlConnection1.Open()
+        reader = cmd.ExecuteReader()
+        reader.Read()
+        Form_Notice.RichTextBoxFormNotice.Text = reader(0)
+        sqlConnection1.Close()
     End Sub
 End Class

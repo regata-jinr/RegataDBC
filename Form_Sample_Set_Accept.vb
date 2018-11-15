@@ -51,12 +51,8 @@ Public Class Form_Sample_Set_Accept
                 L_Name_SampleSetReceiptDate.Text = "Дата приёма партии образцов"
                 L_Name_SampleSetReportDate.Text = "Дата возврата партии образцов"
 
-                L_Name_Notes_1.Text = "Примечания 1"
-                B_Fill_Notes_1.Text = "Быстро заполнить примечания 1"
-                L_Name_Notes_2.Text = "Примечания 2"
-                B_Fill_Notes_2.Text = "Быстро заполнить примечания 2"
-                L_Name_Notes_3.Text = "Примечания 3"
-                B_Fill_Notes_3.Text = "Быстро заполнить примечания 3"
+                L_Name_Notes_1.Text = "Примечания"
+                B_Fill_Notes_1.Text = "Заполнить примечания"
 
                 L_Name_ReceivedBy.Text = "Принято"
                 Label_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Ин. п."
@@ -107,12 +103,8 @@ Public Class Form_Sample_Set_Accept
                 L_Name_SampleSetReceiptDate.Text = "Sample set acceptance date"
                 L_Name_SampleSetReportDate.Text = "Sample set report date"
 
-                L_Name_Notes_1.Text = "Notes 1"
-                B_Fill_Notes_1.Text = "Quick fill in notes 1"
-                L_Name_Notes_2.Text = "Notes 2"
-                B_Fill_Notes_2.Text = "Quick fill in notes 2"
-                L_Name_Notes_3.Text = "Notes 3"
-                B_Fill_Notes_3.Text = "Quick fill in notes 3"
+                L_Name_Notes_1.Text = "Notes"
+                B_Fill_Notes_1.Text = "Fill the notes "
 
                 L_Name_ReceivedBy.Text = "Received by"
                 Label_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
@@ -424,13 +416,13 @@ Public Class Form_Sample_Set_Accept
                 End While
                 sqlConnection1.Close()
 
-                cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Notes_1, Notes_2, Notes_3) " +
+            cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Note) " +
                      "VALUES ('" + Country_Code + "', '" + ComboBox_Client_ID.Text + "', '" + L_NSSID_Year.Text + "', '" +
                      MaskedTextBox_New_Sample_Set_ID.Text + "', '" + MaskedTextBox_New_Sample_Set_Index.Text + "', '" +
                      MaskedTextBox_Sample_Set_Receipt_Date.Text + "', '" +
                      MaskedTextBox_Sample_Set_Report_Date.Text + "', '" + ComboBox_Table_ReceivedBy.Text + "', '" +
-                     TextBox_Notes_1.Text + "', '" + TextBox_Notes_2.Text + "', '" + TextBox_Notes_3.Text + "')"
-                cmd.Connection = sqlConnection1
+                     TextBox_Notes_1.Text + "')"
+            cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 cmd.ExecuteNonQuery()
                 sqlConnection1.Close()
@@ -589,8 +581,6 @@ Public Class Form_Sample_Set_Accept
             Form_Sample_Set_Accept_Print_Form.L_Sample_Set_Receipt_Date.Text = ""
             Form_Sample_Set_Accept_Print_Form.L_Sample_Set_Report_Date.Text = ""
             Form_Sample_Set_Accept_Print_Form.L_Notes_1.Text = ""
-            Form_Sample_Set_Accept_Print_Form.L_Notes_2.Text = ""
-            Form_Sample_Set_Accept_Print_Form.L_Notes_3.Text = ""
 
             Form_Sample_Set_Accept_Print_Form.L_Received_By.Text = ""
             Form_Sample_Set_Accept_Print_Form.L_NSSID_Country_Code.Text = ""
@@ -632,8 +622,6 @@ Public Class Form_Sample_Set_Accept
             Form_Sample_Set_Accept_Print_Form.L_Sample_Set_Receipt_Date.Text = MaskedTextBox_Sample_Set_Receipt_Date.Text
             Form_Sample_Set_Accept_Print_Form.L_Sample_Set_Report_Date.Text = MaskedTextBox_Sample_Set_Report_Date.Text
             Form_Sample_Set_Accept_Print_Form.L_Notes_1.Text = TextBox_Notes_1.Text
-            Form_Sample_Set_Accept_Print_Form.L_Notes_2.Text = TextBox_Notes_2.Text
-            Form_Sample_Set_Accept_Print_Form.L_Notes_3.Text = TextBox_Notes_3.Text
 
             Form_Sample_Set_Accept_Print_Form.L_Received_By.Text = ComboBox_Table_ReceivedBy.Text
             Form_Sample_Set_Accept_Print_Form.L_NSSID_Country_Code.Text = L_NSSID_Country_Code.Text
@@ -663,34 +651,6 @@ Public Class Form_Sample_Set_Accept
                 MsgBox("Операция была отменена (ошибка в B_Fill_Notes_1_Click!", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "english" Then
                 MsgBox("Operation was cancelled (error in B_Fill_Notes_1_Click!", MsgBoxStyle.Critical, Me.Text)
-            End If
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub B_Fill_Notes_2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_Notes_2.Click
-        Try
-            Notes_Number = 2
-            Form_Fill_Notes.Show()
-        Catch ex As Exception
-            If Form_Main.language = "russian" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_Notes_2_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
-                MsgBox("Operation was cancelled (error in B_Fill_Notes_2_Click!", MsgBoxStyle.Critical, Me.Text)
-            End If
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub B_Fill_Notes_3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_Notes_3.Click
-        Try
-            Notes_Number = 3
-            Form_Fill_Notes.Show()
-        Catch ex As Exception
-            If Form_Main.language = "russian" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_Notes_3_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
-                MsgBox("Operation was cancelled (error in B_Fill_Notes_3_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try

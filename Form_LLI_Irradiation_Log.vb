@@ -1353,36 +1353,41 @@ Public Class Form_LLI_Irradiation_Log
                 Exit Sub
             End If
 
-            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            'Dim reader As SqlDataReader
-            Dim cmd As New System.Data.SqlClient.SqlCommand
-            cmd.CommandType = System.Data.CommandType.Text
+            For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows
+                DataGridView_LLI_Irradiation_Log.Rows.RemoveAt(row.Index)
+            Next
 
-            cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log" +
-               " WHERE Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
-               "' and Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
-               "' and Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
-               "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
-               "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
-               "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
-               "' and Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            cmd.ExecuteNonQuery()
-            sqlConnection1.Close()
 
-            cmd.CommandText = "UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL" +
-               " WHERE F_Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
-               "' and F_Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
-               "' and F_Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
-               "' and F_Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
-               "' and F_Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
-               "' and A_Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
-               "' and I_LLI_Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            cmd.ExecuteNonQuery()
-            sqlConnection1.Close()
+            'Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            ''Dim reader As SqlDataReader
+            'Dim cmd As New System.Data.SqlClient.SqlCommand
+            'cmd.CommandType = System.Data.CommandType.Text
+
+            'cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log" +
+            '   " WHERE Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
+            '   "' and Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
+            '   "' and Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
+            '   "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
+            '   "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
+            '   "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
+            '   "' and Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
+            'cmd.Connection = sqlConnection1
+            'sqlConnection1.Open()
+            'cmd.ExecuteNonQuery()
+            'sqlConnection1.Close()
+
+            'cmd.CommandText = "UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL" +
+            '   " WHERE F_Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
+            '   "' and F_Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
+            '   "' and F_Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
+            '   "' and F_Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
+            '   "' and F_Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
+            '   "' and A_Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
+            '   "' and I_LLI_Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
+            'cmd.Connection = sqlConnection1
+            'sqlConnection1.Open()
+            'cmd.ExecuteNonQuery()
+            'sqlConnection1.Close()
 
             Save_And_Update_LLI_Click(sender, e)
 

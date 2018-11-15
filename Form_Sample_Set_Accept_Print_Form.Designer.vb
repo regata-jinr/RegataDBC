@@ -78,13 +78,11 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.PictureBox_IBR = New System.Windows.Forms.PictureBox()
         Me.L_Name_FLNP = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.L_Notes_3 = New System.Windows.Forms.Label()
-        Me.L_Notes_2 = New System.Windows.Forms.Label()
+        Me.L_Name_SampleSetReportDate = New System.Windows.Forms.Label()
+        Me.L_Name_SampleSetReceiptDate = New System.Windows.Forms.Label()
         Me.L_Notes_1 = New System.Windows.Forms.Label()
         Me.L_Sample_Set_Report_Date = New System.Windows.Forms.Label()
         Me.L_Sample_Set_Receipt_Date = New System.Windows.Forms.Label()
-        Me.L_Name_Notes_3 = New System.Windows.Forms.Label()
-        Me.L_Name_Notes_2 = New System.Windows.Forms.Label()
         Me.L_Name_Notes_1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.L_NSSID_New_Sample_Set_Index = New System.Windows.Forms.Label()
@@ -96,8 +94,6 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.L_NSSID_Country_Code = New System.Windows.Forms.Label()
         Me.L_Name_ReceivedBy = New System.Windows.Forms.Label()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.L_Name_SampleSetReportDate = New System.Windows.Forms.Label()
-        Me.L_Name_SampleSetReceiptDate = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,7 +105,7 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         'L_Name_Client_s_Signature
         '
         Me.L_Name_Client_s_Signature.AutoSize = True
-        Me.L_Name_Client_s_Signature.Location = New System.Drawing.Point(285, 824)
+        Me.L_Name_Client_s_Signature.Location = New System.Drawing.Point(285, 707)
         Me.L_Name_Client_s_Signature.Name = "L_Name_Client_s_Signature"
         Me.L_Name_Client_s_Signature.Size = New System.Drawing.Size(167, 13)
         Me.L_Name_Client_s_Signature.TabIndex = 132
@@ -117,7 +113,7 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         '
         'B_Print
         '
-        Me.B_Print.Location = New System.Drawing.Point(288, 847)
+        Me.B_Print.Location = New System.Drawing.Point(288, 730)
         Me.B_Print.Name = "B_Print"
         Me.B_Print.Size = New System.Drawing.Size(75, 23)
         Me.B_Print.TabIndex = 133
@@ -126,7 +122,7 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         '
         'B_Close
         '
-        Me.B_Close.Location = New System.Drawing.Point(392, 847)
+        Me.B_Close.Location = New System.Drawing.Point(392, 730)
         Me.B_Close.Name = "B_Close"
         Me.B_Close.Size = New System.Drawing.Size(75, 23)
         Me.B_Close.TabIndex = 134
@@ -620,7 +616,7 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.L_Name_FLNP.Name = "L_Name_FLNP"
         Me.L_Name_FLNP.Size = New System.Drawing.Size(552, 13)
         Me.L_Name_FLNP.TabIndex = 132
-        Me.L_Name_FLNP.Text = "           Joint Institute for Nuclear Research                       Frank Labor" & _
+        Me.L_Name_FLNP.Text = "           Joint Institute for Nuclear Research                       Frank Labor" &
     "atory of Neutron Physics"
         '
         'Panel3
@@ -628,36 +624,32 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel3.Controls.Add(Me.L_Name_SampleSetReportDate)
         Me.Panel3.Controls.Add(Me.L_Name_SampleSetReceiptDate)
-        Me.Panel3.Controls.Add(Me.L_Notes_3)
-        Me.Panel3.Controls.Add(Me.L_Notes_2)
         Me.Panel3.Controls.Add(Me.L_Notes_1)
         Me.Panel3.Controls.Add(Me.L_Sample_Set_Report_Date)
         Me.Panel3.Controls.Add(Me.L_Sample_Set_Receipt_Date)
-        Me.Panel3.Controls.Add(Me.L_Name_Notes_3)
-        Me.Panel3.Controls.Add(Me.L_Name_Notes_2)
         Me.Panel3.Controls.Add(Me.L_Name_Notes_1)
         Me.Panel3.Location = New System.Drawing.Point(48, 455)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(661, 227)
+        Me.Panel3.Size = New System.Drawing.Size(661, 114)
         Me.Panel3.TabIndex = 137
         '
-        'L_Notes_3
+        'L_Name_SampleSetReportDate
         '
-        Me.L_Notes_3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_Notes_3.Location = New System.Drawing.Point(40, 173)
-        Me.L_Notes_3.Name = "L_Notes_3"
-        Me.L_Notes_3.Size = New System.Drawing.Size(562, 41)
-        Me.L_Notes_3.TabIndex = 212
-        Me.L_Notes_3.Text = "Label"
+        Me.L_Name_SampleSetReportDate.AutoSize = True
+        Me.L_Name_SampleSetReportDate.Location = New System.Drawing.Point(325, 13)
+        Me.L_Name_SampleSetReportDate.Name = "L_Name_SampleSetReportDate"
+        Me.L_Name_SampleSetReportDate.Size = New System.Drawing.Size(116, 13)
+        Me.L_Name_SampleSetReportDate.TabIndex = 214
+        Me.L_Name_SampleSetReportDate.Text = "Sample set report date:"
         '
-        'L_Notes_2
+        'L_Name_SampleSetReceiptDate
         '
-        Me.L_Notes_2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_Notes_2.Location = New System.Drawing.Point(40, 111)
-        Me.L_Notes_2.Name = "L_Notes_2"
-        Me.L_Notes_2.Size = New System.Drawing.Size(562, 41)
-        Me.L_Notes_2.TabIndex = 211
-        Me.L_Notes_2.Text = "Label"
+        Me.L_Name_SampleSetReceiptDate.AutoSize = True
+        Me.L_Name_SampleSetReceiptDate.Location = New System.Drawing.Point(47, 13)
+        Me.L_Name_SampleSetReceiptDate.Name = "L_Name_SampleSetReceiptDate"
+        Me.L_Name_SampleSetReceiptDate.Size = New System.Drawing.Size(146, 13)
+        Me.L_Name_SampleSetReceiptDate.TabIndex = 213
+        Me.L_Name_SampleSetReceiptDate.Text = "Sample set acceptance date:"
         '
         'L_Notes_1
         '
@@ -684,24 +676,6 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.L_Sample_Set_Receipt_Date.TabIndex = 209
         Me.L_Sample_Set_Receipt_Date.Text = "Label"
         '
-        'L_Name_Notes_3
-        '
-        Me.L_Name_Notes_3.AutoSize = True
-        Me.L_Name_Notes_3.Location = New System.Drawing.Point(308, 160)
-        Me.L_Name_Notes_3.Name = "L_Name_Notes_3"
-        Me.L_Name_Notes_3.Size = New System.Drawing.Size(44, 13)
-        Me.L_Name_Notes_3.TabIndex = 175
-        Me.L_Name_Notes_3.Text = "Notes 3"
-        '
-        'L_Name_Notes_2
-        '
-        Me.L_Name_Notes_2.AutoSize = True
-        Me.L_Name_Notes_2.Location = New System.Drawing.Point(306, 98)
-        Me.L_Name_Notes_2.Name = "L_Name_Notes_2"
-        Me.L_Name_Notes_2.Size = New System.Drawing.Size(44, 13)
-        Me.L_Name_Notes_2.TabIndex = 173
-        Me.L_Name_Notes_2.Text = "Notes 2"
-        '
         'L_Name_Notes_1
         '
         Me.L_Name_Notes_1.AutoSize = True
@@ -722,7 +696,7 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         Me.Panel4.Controls.Add(Me.L_NSSID_Year)
         Me.Panel4.Controls.Add(Me.L_NSSID_Country_Code)
         Me.Panel4.Controls.Add(Me.L_Name_ReceivedBy)
-        Me.Panel4.Location = New System.Drawing.Point(48, 688)
+        Me.Panel4.Location = New System.Drawing.Point(48, 575)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(661, 103)
         Me.Panel4.TabIndex = 138
@@ -797,30 +771,12 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         'PrintDocument1
         '
         '
-        'L_Name_SampleSetReportDate
-        '
-        Me.L_Name_SampleSetReportDate.AutoSize = True
-        Me.L_Name_SampleSetReportDate.Location = New System.Drawing.Point(325, 13)
-        Me.L_Name_SampleSetReportDate.Name = "L_Name_SampleSetReportDate"
-        Me.L_Name_SampleSetReportDate.Size = New System.Drawing.Size(116, 13)
-        Me.L_Name_SampleSetReportDate.TabIndex = 214
-        Me.L_Name_SampleSetReportDate.Text = "Sample set report date:"
-        '
-        'L_Name_SampleSetReceiptDate
-        '
-        Me.L_Name_SampleSetReceiptDate.AutoSize = True
-        Me.L_Name_SampleSetReceiptDate.Location = New System.Drawing.Point(47, 13)
-        Me.L_Name_SampleSetReceiptDate.Name = "L_Name_SampleSetReceiptDate"
-        Me.L_Name_SampleSetReceiptDate.Size = New System.Drawing.Size(146, 13)
-        Me.L_Name_SampleSetReceiptDate.TabIndex = 213
-        Me.L_Name_SampleSetReceiptDate.Text = "Sample set acceptance date:"
-        '
         'Form_Sample_Set_Accept_Print_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(765, 888)
+        Me.ClientSize = New System.Drawing.Size(765, 766)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -857,13 +813,9 @@ Partial Class Form_Sample_Set_Accept_Print_Form
     Friend WithEvents PictureBox_IBR As System.Windows.Forms.PictureBox
     Friend WithEvents L_Name_FLNP As System.Windows.Forms.Label
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
-    Friend WithEvents L_Name_Notes_3 As System.Windows.Forms.Label
-    Friend WithEvents L_Name_Notes_2 As System.Windows.Forms.Label
     Friend WithEvents L_Name_Notes_1 As System.Windows.Forms.Label
     Friend WithEvents L_Sample_Set_Report_Date As System.Windows.Forms.Label
     Friend WithEvents L_Sample_Set_Receipt_Date As System.Windows.Forms.Label
-    Friend WithEvents L_Notes_3 As System.Windows.Forms.Label
-    Friend WithEvents L_Notes_2 As System.Windows.Forms.Label
     Friend WithEvents L_Notes_1 As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents L_Received_By As System.Windows.Forms.Label

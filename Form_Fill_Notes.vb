@@ -235,16 +235,6 @@
             Me.Close()
             Exit Sub
         End If
-        If Form_Sample_Set_Accept.Notes_Number = 2 Then
-            Form_Sample_Set_Accept.TextBox_Notes_2.Text = Notes_Text
-            Me.Close()
-            Exit Sub
-        End If
-        If Form_Sample_Set_Accept.Notes_Number = 3 Then
-            Form_Sample_Set_Accept.TextBox_Notes_3.Text = Notes_Text
-            Me.Close()
-            Exit Sub
-        End If
     End Sub
 
     Private Sub B_Select_All_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_All.Click
