@@ -183,281 +183,6 @@ Public Class Form_SRM_Accept
         End Try
     End Sub
 
-    '    Private Sub B_Fill_SLI_From_File_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        'Form_Main.Fill_In_Weight_From_File()
-    '        Try
-    '            Dim array_length_VES As Integer
-    '            Dim Samples_Names(,) As String
-    '            Dim Samples_Weights(,) As Single
-    '            Dim Correct_Name As String
-    '            Dim row_count As Integer
-
-    '            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-    '            Dim reader As SqlDataReader
-    '            Dim cmd As New System.Data.SqlClient.SqlCommand
-    '            cmd.CommandType = System.Data.CommandType.Text
-    '            Dim weight_SRM_Sum, weight_SRM_Set As Single
-    '            weight_SRM_Sum = 0
-    '            weight_SRM_Set = 0
-
-    '            OpenFileDialog_Weighting_SLI_LLI.InitialDirectory = "C:\"
-    '            Correct_Name = Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString + "-" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + "_kji.ves"
-    '            Correct_Name = Correct_Name.ToUpper
-    '            OpenFileDialog_Weighting_SLI_LLI.FileName = Correct_Name
-    '            ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
-    '            If OpenFileDialog_Weighting_SLI_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-    '                MsgBox("Select weighting file!")
-    '                Exit Sub
-    '            Else
-    '                If OpenFileDialog_Weighting_SLI_LLI.SafeFileName.ToUpper <> Correct_Name Then
-    '                    If MessageBox.Show("Not valid file name! Resume?", "Warning!", MessageBoxButtons.YesNo) = System.Windows.Forms.DialogResult.Yes Then
-    '                        GoTo 1
-    '                    Else
-    '                        Exit Sub
-    '                    End If
-    '                End If
-
-    '1:              array_length_VES = Form_Main.Fill_In_Weight_From_File_String_Quant(OpenFileDialog_Weighting_SLI_LLI.FileName)
-
-    '                ReDim Samples_Names(array_length_VES, 1)
-    '                ReDim Samples_Weights(array_length_VES, 1)
-
-    '                Form_Main.Fill_In_Weight_From_File(OpenFileDialog_Weighting_SLI_LLI.FileName, row_count, Samples_Names, Samples_Weights)
-
-    '                For i = 0 To row_count - 1
-    '                    cmd.CommandText = "SELECT COUNT (*) FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                        "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                        "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                    cmd.Connection = sqlConnection1
-    '                    sqlConnection1.Open()
-    '                    reader = cmd.ExecuteReader()
-    '                    While reader.Read()
-
-    '                        If reader(0) = 0 Then 'строчки нет
-    '                            sqlConnection1.Close()
-    '                            cmd.CommandText = "INSERT dbo.table_SRM (SRM_Set_Name, SRM_Set_Number, SRM_Set_Weight, SRM_Number, SRM_SLI_Weight) VALUES ('" +
-    '                                 Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString + "', " +
-    '                                 Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + ", " +
-    '                                 Replace(Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(3).Value.ToString, ",", ".") + ", " +
-    '                                 Samples_Names(i, 0).ToString + ", " + Replace(Samples_Weights(i, 0).ToString, ",", ".") + ")"
-    '                            cmd.Connection = sqlConnection1
-    '                            sqlConnection1.Open()
-    '                            cmd.ExecuteNonQuery()
-    '                            sqlConnection1.Close()
-    '                            GoTo c1
-
-    '                        Else 'строчка есть
-    '                            sqlConnection1.Close()
-    '                            cmd.CommandText = "SELECT SRM_SLI_Weight FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                        "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                        "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                            cmd.Connection = sqlConnection1
-    '                            sqlConnection1.Open()
-    '                            reader = cmd.ExecuteReader()
-    '                            While reader.Read()
-    '                                If IsDBNull(reader(0)) = True Then 'строчка нет, но SLI=NULL
-    '                                    sqlConnection1.Close()
-    '                                    cmd.CommandText = "UPDATE table_SRM SET SRM_SLI_Weight=" + Replace(Samples_Weights(i, 0).ToString, ",", ".") + " WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                                                                     "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                                                                     "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                                    cmd.Connection = sqlConnection1
-    '                                    sqlConnection1.Open()
-    '                                    cmd.ExecuteNonQuery()
-    '                                    sqlConnection1.Close()
-    '                                    GoTo c1
-    '                                End If
-    '                            End While
-    '                        End If
-    '                    End While
-    '                    sqlConnection1.Close()
-    'c1:             Next
-    '            End If
-
-    '            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
-    '            Table_SRMTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-    '            Me.Table_SRMTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value)
-
-    '            If Table_SRMDataGridView.RowCount > 0 Then
-    '                Table_SRMDataGridView.FirstDisplayedScrollingRowIndex = Table_SRMDataGridView.RowCount - 1
-    '                For i = 0 To Table_SRMDataGridView.RowCount - 1
-    '                    Table_SRMDataGridView.Rows.Item(i).Selected = False
-    '                Next
-    '                Try
-    '                    Table_SRMDataGridView.Rows.Item(Table_SRMDataGridView.RowCount - 1).Selected = True
-    '                Catch ex As Exception
-    '                End Try
-    '            End If
-
-    '            cmd.CommandText = "SELECT SRM_Set_Weight FROM dbo.table_SRM_Set WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + "'"
-    '            cmd.Connection = sqlConnection1
-    '            sqlConnection1.Open()
-    '            reader = cmd.ExecuteReader()
-    '            While reader.Read()
-    '                weight_SRM_Set = reader(0)
-    '            End While
-    '            sqlConnection1.Close()
-
-    '            If Table_SRMDataGridView.RowCount > 0 Then
-    '                cmd.CommandText = "SELECT SRM_SLI_Weight, SRM_LLI_Weight FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                    "' and SRM_Set_Number=" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + ""
-    '                cmd.Connection = sqlConnection1
-    '                sqlConnection1.Open()
-    '                reader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    If IsDBNull(reader(0)) = False Then weight_SRM_Sum = weight_SRM_Sum + reader(0)
-    '                    If IsDBNull(reader(1)) = False Then weight_SRM_Sum = weight_SRM_Sum + reader(1)
-    '                End While
-    '                sqlConnection1.Close()
-    '            End If
-    '            L_Weight_Balance.Text = (weight_SRM_Set - weight_SRM_Sum).ToString
-    '        Catch ex As Exception
-    '            If Form_Main.language = "russian" Then
-    '                MsgBox("Операция была отменена (ошибка в B_Fill_SLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-    '            ElseIf Form_Main.language = "english" Then
-    '                MsgBox("Operation was cancelled (error in B_Fill_SLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-    '            End If
-    '            Exit Sub
-    '        End Try
-    '    End Sub
-
-    '    Private Sub B_Fill_LLI_From_File_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        Try
-    '            Dim array_length_VES As Integer
-    '            Dim Samples_Names(,) As String
-    '            Dim Samples_Weights(,) As Single
-    '            Dim row_count As Integer
-
-    '            Dim correct_name As String
-    '            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-    '            Dim reader As SqlDataReader
-    '            Dim cmd As New System.Data.SqlClient.SqlCommand
-    '            cmd.CommandType = System.Data.CommandType.Text
-    '            Dim weight_SRM_Sum, weight_SRM_Set As Single
-    '            weight_SRM_Sum = 0
-    '            weight_SRM_Set = 0
-
-    '            OpenFileDialog_Weighting_SLI_LLI.InitialDirectory = "C:\"
-    '            correct_name = Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString + "-" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + "_dji.ves"
-    '            correct_name = correct_name.ToUpper
-    '            OpenFileDialog_Weighting_SLI_LLI.FileName = correct_name
-    '            ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
-    '            If OpenFileDialog_Weighting_SLI_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-    '                MsgBox("Select weighting file!")
-    '                Exit Sub
-    '            Else
-    '                If OpenFileDialog_Weighting_SLI_LLI.SafeFileName.ToUpper <> correct_name Then
-    '                    If MessageBox.Show("Not valid file name! Resume?", "Warning!", MessageBoxButtons.YesNo) = System.Windows.Forms.DialogResult.Yes Then
-    '                        GoTo 2
-    '                    Else
-    '                        Exit Sub
-    '                    End If
-    '                End If
-
-    '2:              array_length_VES = Form_Main.Fill_In_Weight_From_File_String_Quant(OpenFileDialog_Weighting_SLI_LLI.FileName)
-
-    '                ReDim Samples_Names(array_length_VES, 1)
-    '                ReDim Samples_Weights(array_length_VES, 1)
-
-    '                Form_Main.Fill_In_Weight_From_File(OpenFileDialog_Weighting_SLI_LLI.FileName, row_count, Samples_Names, Samples_Weights)
-
-    '                For i = 0 To row_count - 1
-    '                    cmd.CommandText = "SELECT COUNT (*) FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                        "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                        "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                    cmd.Connection = sqlConnection1
-    '                    sqlConnection1.Open()
-    '                    reader = cmd.ExecuteReader()
-    '                    While reader.Read()
-
-    '                        If reader(0) = 0 Then 'строчки нет
-    '                            sqlConnection1.Close()
-    '                            cmd.CommandText = "INSERT dbo.table_SRM (SRM_Set_Name, SRM_Set_Number, SRM_Set_Weight, SRM_Number, SRM_LLI_Weight) VALUES ('" +
-    '                                 Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString + "', " +
-    '                                 Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + ", " +
-    '                                 Replace(Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(3).Value.ToString, ",", ".") + ", " +
-    '                                 Samples_Names(i, 0).ToString + ", " + Replace(Samples_Weights(i, 1).ToString, ",", ".") + ")"
-    '                            cmd.Connection = sqlConnection1
-    '                            sqlConnection1.Open()
-    '                            cmd.ExecuteNonQuery()
-    '                            sqlConnection1.Close()
-    '                            GoTo c2
-
-    '                        Else 'строчка есть
-    '                            sqlConnection1.Close()
-    '                            cmd.CommandText = "SELECT SRM_LLI_Weight FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                        "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                        "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                            cmd.Connection = sqlConnection1
-    '                            sqlConnection1.Open()
-    '                            reader = cmd.ExecuteReader()
-    '                            While reader.Read()
-    '                                If IsDBNull(reader(0)) = True Then 'строчка нет, но SLI=NULL
-    '                                    sqlConnection1.Close()
-    '                                    cmd.CommandText = "UPDATE table_SRM SET SRM_LLI_Weight=" + Replace(Samples_Weights(i, 1).ToString, ",", ".") + " WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                                                                     "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-    '                                                                     "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-    '                                    cmd.Connection = sqlConnection1
-    '                                    sqlConnection1.Open()
-    '                                    cmd.ExecuteNonQuery()
-    '                                    sqlConnection1.Close()
-    '                                    GoTo c2
-    '                                End If
-    '                            End While
-    '                        End If
-    '                    End While
-    '                    sqlConnection1.Close()
-    'c2:             Next
-    '            End If
-
-    '            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
-    '            Table_SRMTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-    '            Me.Table_SRMTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value)
-
-    '            If Table_SRMDataGridView.RowCount > 0 Then
-    '                Table_SRMDataGridView.FirstDisplayedScrollingRowIndex = Table_SRMDataGridView.RowCount - 1
-    '                For i = 0 To Table_SRMDataGridView.RowCount - 1
-    '                    Table_SRMDataGridView.Rows.Item(i).Selected = False
-    '                Next
-    '                Try
-    '                    Table_SRMDataGridView.Rows.Item(Table_SRMDataGridView.RowCount - 1).Selected = True
-    '                Catch ex As Exception
-    '                End Try
-    '            End If
-
-    '            cmd.CommandText = "SELECT SRM_Set_Weight FROM dbo.table_SRM_Set WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + "'"
-    '            cmd.Connection = sqlConnection1
-    '            sqlConnection1.Open()
-    '            reader = cmd.ExecuteReader()
-    '            While reader.Read()
-    '                weight_SRM_Set = reader(0)
-    '            End While
-    '            sqlConnection1.Close()
-
-    '            If Table_SRMDataGridView.RowCount > 0 Then
-    '                cmd.CommandText = "SELECT SRM_SLI_Weight, SRM_LLI_Weight FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-    '                    "' and SRM_Set_Number=" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString + ""
-    '                cmd.Connection = sqlConnection1
-    '                sqlConnection1.Open()
-    '                reader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    If IsDBNull(reader(0)) = False Then weight_SRM_Sum = weight_SRM_Sum + reader(0)
-    '                    If IsDBNull(reader(1)) = False Then weight_SRM_Sum = weight_SRM_Sum + reader(1)
-    '                End While
-    '                sqlConnection1.Close()
-    '            End If
-    '            L_Weight_Balance.Text = (weight_SRM_Set - weight_SRM_Sum).ToString
-    '        Catch ex As Exception
-    '            If Form_Main.language = "russian" Then
-    '                MsgBox("Операция была отменена (ошибка в B_Fill_LLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-    '            ElseIf Form_Main.language = "english" Then
-    '                MsgBox("Operation was cancelled (error in B_Fill_LLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-    '            End If
-    '            Exit Sub
-    '        End Try
-    '    End Sub
-
     Private Sub B_Fill_SRM_From_File_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_SRM_From_File.Click
         Try
             Dim array_length_VES As Integer
@@ -480,7 +205,7 @@ Public Class Form_SRM_Accept
             OpenFileDialog_Weighting_SLI_LLI.FileName = correct_name
             ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
             If OpenFileDialog_Weighting_SLI_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                 If Form_Main.language = "russian" Then
+                If Form_Main.language = "russian" Then
                     MsgBox("Выберите весовой файл!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "english" Then
                     MsgBox("Select file with samples's weight!", MsgBoxStyle.Exclamation, Me.Text)
@@ -534,7 +259,7 @@ Public Class Form_SRM_Accept
                             sqlConnection1.Open()
                             cmd.ExecuteNonQuery()
                             sqlConnection1.Close()
-                            GoTo c3
+                            Continue For
 
                         Else 'строчка есть
                             sqlConnection1.Close()
@@ -545,31 +270,11 @@ Public Class Form_SRM_Accept
                             sqlConnection1.Open()
                             cmd.ExecuteNonQuery()
                             sqlConnection1.Close()
-                            GoTo c3
-                            '    sqlConnection1.Close()
-                            '    cmd.CommandText = "SELECT SRM_LLI_Weight FROM dbo.table_SRM WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-                            '"' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-                            '"' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-                            '    cmd.Connection = sqlConnection1
-                            '    sqlConnection1.Open()
-                            '    reader = cmd.ExecuteReader()
-                            '    While reader.Read()
-                            '        If IsDBNull(reader(0)) = True Then 'строчка есть, но SLI=NULL
-                            '            sqlConnection1.Close()
-                            '            cmd.CommandText = "UPDATE table_SRM SET SRM_LLI_Weight=" + Replace(Samples_Weights(i, 1).ToString, ",", ".") + " WHERE SRM_Set_Name='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value.ToString +
-                            '                                             "' and SRM_Set_Number='" + Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value.ToString +
-                            '                                             "' and SRM_Number='" + Samples_Names(i, 0).ToString + "'"
-                            '            cmd.Connection = sqlConnection1
-                            '            sqlConnection1.Open()
-                            '            cmd.ExecuteNonQuery()
-                            '            sqlConnection1.Close()
-                            '            GoTo c2
-                            '        End If
-                            '    End While
+                            Continue For
                         End If
                     End While
                     sqlConnection1.Close()
-c3:             Next
+                Next
             End If
 
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
@@ -584,6 +289,7 @@ c3:             Next
                 Try
                     Table_SRMDataGridView.Rows.Item(Table_SRMDataGridView.RowCount - 1).Selected = True
                 Catch ex As Exception
+                    MsgBox(ex.ToString)
                 End Try
             End If
 

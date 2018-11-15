@@ -30,7 +30,7 @@
     <ProductName>NaaDB</ProductName>
     <PublisherName>SNAAR</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>44</ApplicationRevision>
     <ApplicationVersion>5.9.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -200,6 +200,12 @@
     <Compile Include="Form_NAA_Results.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_Notice.Designer.vb">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Notice.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_Samples_Search.Designer.vb">
       <DependentUpon>Form_Samples_Search.vb</DependentUpon>
     </Compile>
@@ -328,6 +334,9 @@
     <EmbeddedResource Include="Form_NAA_Results.resx">
       <DependentUpon>Form_NAA_Results.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Notice.resx">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Samples_Search.resx">
       <DependentUpon>Form_Samples_Search.vb</DependentUpon>

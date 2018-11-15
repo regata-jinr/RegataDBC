@@ -135,12 +135,8 @@ Public Class Form_Sample_Set_Accept_Print_Form
                 L_Name_SampleSetReceiptDate.Text = "Дата приёма партии образцов:"
                 L_Name_SampleSetReportDate.Text = "Дата возврата партии образцов:"
 
-                L_Name_Notes_1.Text = "Примечания 1"
+                L_Name_Notes_1.Text = "Примечания"
                 'B_Fill_Notes_1.Text = "Быстро заполнить примечания 1"
-                L_Name_Notes_2.Text = "Примечания 2"
-                'B_Fill_Notes_2.Text = "Быстро заполнить примечания 2"
-                L_Name_Notes_3.Text = "Примечания 3"
-                'B_Fill_Notes_3.Text = "Быстро заполнить примечания 3"
 
                 L_Name_ReceivedBy.Text = "Принято"
                 Label_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Ин. п."
@@ -192,12 +188,7 @@ Public Class Form_Sample_Set_Accept_Print_Form
                 L_Name_SampleSetReceiptDate.Text = "Sample set acceptance date:"
                 L_Name_SampleSetReportDate.Text = "Sample set report date:"
 
-                L_Name_Notes_1.Text = "Notes 1"
-                'B_Fill_Notes_1.Text = "Quick fill in notes 1"
-                L_Name_Notes_2.Text = "Notes 2"
-                'B_Fill_Notes_2.Text = "Quick fill in notes 2"
-                L_Name_Notes_3.Text = "Notes 3"
-                'B_Fill_Notes_3.Text = "Quick fill in notes 3"
+                L_Name_Notes_1.Text = "Notes"
 
                 L_Name_ReceivedBy.Text = "Received by"
                 Label_Name_Code.Text = "Country-Client-Year-Set ID-Set index"

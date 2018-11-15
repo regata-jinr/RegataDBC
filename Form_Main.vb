@@ -216,7 +216,7 @@ Public Class Form_Main
         Try
             L_Monitor.Text = ""
             Dim i As Integer
-            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, PrepFact, SLIFact, LLIFact As String
+            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, PrepFact, SLIFact, LLIFact, Notice As String
             Dim ProcessedBy As String = ""
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
@@ -233,6 +233,7 @@ Public Class Form_Main
             PrepFact = ""
             SLIFact = ""
             LLIFact = ""
+            Notice = ""
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New System.Data.SqlClient.SqlCommand
             Dim reader As SqlDataReader
@@ -299,6 +300,12 @@ Public Class Form_Main
                 'If Not IsDBNull(reader(14)) Then PrepFact = reader(14).ToString
                 'If Not IsDBNull(reader(15)) Then SLIFact = reader(15).ToString
                 'If Not IsDBNull(reader(16)) Then LLIFact = reader(16).ToString
+                If Not IsDBNull(reader(17)) Then
+                    Notice = reader(17).ToString
+                    If Notice.Length > 20 Then
+                        Notice = Notice.Substring(0, 20) + "..."
+                    End If
+                End If
 
                 i += 1
             End While
@@ -321,7 +328,7 @@ Public Class Form_Main
 
             If Results <> "" Then Results = "Yes"
 
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + vbCrLf + "Организация: " + Organzation + vbCrLf + vbCrLf + "Фамилия: " + LastName + vbCrLf + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + vbCrLf + "Результаты: " + Results
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Примечания:" + Notice
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
@@ -749,23 +756,6 @@ Public Class Form_Main
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
-            'cmd.CommandText = "SELECT COUNT(*) FROM table_LLI_Irradiation_Log WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text + "'"
-            'cmd.Connection = sqlConnection1
-            'sqlConnection1.Open()
-            'reader = cmd.ExecuteReader()
-
-            'While reader.Read()
-            '    If reader(0) > 0 Then
-            '        If language = "russian" Then
-            '            MsgBox("This LLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
-            '        ElseIf language = "english" Then
-            '            MsgBox("Такой журнал ДЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-            '        End If
-            '        sqlConnection1.Close()
-            '        Exit Sub
-            '    End If
-            'End While
-            'sqlConnection1.Close()
 
             cmd.CommandText = "declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  '" & MaskedTextBox_LLI_Irradiation_Log.Text & "';"
             cmd.Connection = sqlConnection1
@@ -878,15 +868,6 @@ Public Class Form_Main
             End If
             Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
-            'Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            'Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            'Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
-            'Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            'Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
-            'Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
             Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -899,58 +880,33 @@ Public Class Form_Main
         Try
             Dim currentRow_p As String
 
-1:          Fill_In_Weight_From_File_String_Quant = 0
+            Dim cnt = 0
             Using MyReader As New FileIO.TextFieldParser(file_name_p, System.Text.Encoding.Default)
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
                 MyReader.SetDelimiters(" ")
-
+                Dim readFlag As Boolean
+                readFlag = False
                 currentRow_p = ""
                 While Not MyReader.EndOfData
                     currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    If currentRow_p(0) = "-" Then 'старый формат файла без строки "Количество образцов"
-
-                    ElseIf currentRow_p(0) = "К" Then 'новый формат файла со строкой "Количество образцов"
-                        currentRow_p = MyReader.ReadLine
+                    If readFlag Then
+                        cnt += 1
+                        Continue While
                     End If
-                    currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                    While InStr(currentRow_p, "--") > 0
-                        currentRow_p = Replace(currentRow_p, "--", "-")
-                    End While
-                    If currentRow_p = "-" Then
-                        currentRow_p = MyReader.ReadLine
-                        currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                        'While InStr(currentRow_p, "  ") > 0
-                        '    currentRow_p = Replace(currentRow_p, "  ", " ")
-                        'End While
-                        If currentRow_p = "Номер 	Инд. + 	Вес 	Вес" Then
-                            currentRow_p = MyReader.ReadLine
-                            currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                            'While InStr(currentRow_p, "  ") > 0
-                            '    currentRow_p = Replace(currentRow_p, "  ", " ")
-                            'End While
-                            If currentRow_p = "измер. 	№ обр. 	КЖИ, г 	ДЖИ, г" Then
-                                'MessageBox.Show("Похоже, правильный формат файла активностей исследуемого образца!")
-                                currentRow_p = MyReader.ReadLine
-a1:                             Fill_In_Weight_From_File_String_Quant = Fill_In_Weight_From_File_String_Quant + 1
-                                currentRow_p = MyReader.ReadLine
-                                If currentRow_p <> "" Then GoTo a1
-                            End If
-                        End If
+                    If currentRow_p.Contains("------") Then
+                        readFlag = True
                     End If
                 End While
             End Using
+            Debug.WriteLine($"Count of samples: {cnt - 2}")
+            Return cnt - 2 ' checking contains of "-----" returns headers from 2 rows
         Catch ex As Exception
-            Fill_In_Weight_From_File_String_Quant = -1
+            ' Fill_In_Weight_From_File_String_Quant = -1
             LangException(language, ex.Message & ex.ToString)
             Exit Function
         End Try
     End Function
+
     Public Sub Fill_In_Weight_From_File(ByVal file_name_p As String, ByRef row_count_p As Integer, ByRef Samples_Names_p(,) As String, ByRef Samples_Weights_p(,) As Single)
         Try
             Dim currentRow_p As String
@@ -958,60 +914,31 @@ a1:                             Fill_In_Weight_From_File_String_Quant = Fill_In_
             Using MyReader As New FileIO.TextFieldParser(file_name_p, System.Text.Encoding.Default)
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
                 MyReader.SetDelimiters(" ")
-
+                Dim readFlag As Boolean
+                Dim parsedValue As String()
+                Dim headersSkip As Integer
+                headersSkip = 0
+                readFlag = False
                 currentRow_p = ""
+                Debug.WriteLine("Rows for parsing:")
                 While Not MyReader.EndOfData
                     currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    currentRow_p = MyReader.ReadLine
-                    If currentRow_p(0) = "-" Then 'старый формат файла без строки "Количество образцов"
+                    If readFlag Then
+                        If headersSkip > 1 Then
+                            parsedValue = currentRow_p.Split(vbTab)
+                            Debug.WriteLine($"Raw was parsed to the next values: 0:{parsedValue(0)}, 1:{parsedValue(1)}, 2:{parsedValue(2)}, 3:{parsedValue(3)}")
+                            Samples_Names_p(row_count_p, 0) = parsedValue(0) 'индекс пробы - первое слово до пробела
+                            Samples_Names_p(row_count_p, 1) = parsedValue(1)  'имя образца - первое слово до пробела
+                            Samples_Weights_p(row_count_p, 0) = parsedValue(2)
+                            Samples_Weights_p(row_count_p, 1) = parsedValue(3)
+                            row_count_p += 1
 
-                    ElseIf currentRow_p(0) = "К" Then 'новый формат файла со строкой "Количество образцов"
-                        currentRow_p = MyReader.ReadLine
-                    End If
-                    currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                    While InStr(currentRow_p, "--") > 0
-                        currentRow_p = Replace(currentRow_p, "--", "-")
-                    End While
-                    If currentRow_p = "-" Then
-                        currentRow_p = MyReader.ReadLine
-                        currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                        'While InStr(currentRow_p, "  ") > 0
-                        '    currentRow_p = Replace(currentRow_p, "  ", " ")
-                        'End While
-                        If currentRow_p = "Номер 	Инд. + 	Вес 	Вес" Then
-                            currentRow_p = MyReader.ReadLine
-                            currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                            'While InStr(currentRow_p, "  ") > 0
-                            '    currentRow_p = Replace(currentRow_p, "  ", " ")
-                            'End While
-                            If currentRow_p = "измер. 	№ обр. 	КЖИ, г 	ДЖИ, г" Then
-                                'MessageBox.Show("Похоже, правильный формат файла активностей исследуемого образца!")
-
-                                row_count_p = 0
-                                currentRow_p = MyReader.ReadLine
-b1:                             currentRow_p = currentRow_p.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                                While InStr(currentRow_p, "  ") > 0
-                                    currentRow_p = Replace(currentRow_p, "  ", " ") ' заменяем все двойные пробелы одинарными
-                                End While
-                                If currentRow_p(currentRow_p.Count - 1) <> " " Then currentRow_p = currentRow_p + " " 'добавляем пробел в конец строки
-                                Samples_Names_p(row_count_p, 0) = Mid(currentRow_p, 1, InStr(1, currentRow_p, vbTab) - 1) 'индекс пробы - первое слово до пробела
-                                currentRow_p = Replace(currentRow_p, Samples_Names_p(row_count_p, 0) + vbTab, "", , 1, )
-                                Samples_Names_p(row_count_p, 1) = Mid(currentRow_p, 1, InStr(1, currentRow_p, vbTab) - 1) 'имя образца - первое слово до пробела
-                                currentRow_p = Replace(currentRow_p, Samples_Names_p(row_count_p, 1) + vbTab, "", , 1, )
-                                Samples_Weights_p(row_count_p, 0) = CDbl(Replace(Mid(currentRow_p, 1, InStr(1, currentRow_p, vbTab) - 1), ".", ","))
-                                currentRow_p = Replace(currentRow_p, Mid(currentRow_p, 1, InStr(1, currentRow_p, vbTab) - 1) + vbTab, "")
-                                Samples_Weights_p(row_count_p, 1) = CDbl(Replace(Mid(currentRow_p, 1, InStr(1, currentRow_p, " ") - 1), ".", ","))
-
-                                row_count_p = row_count_p + 1
-                                currentRow_p = MyReader.ReadLine
-                                If currentRow_p <> "" Then GoTo b1
-                            End If
                         End If
+                        headersSkip += 1
+                        Continue While
+                    End If
+                    If currentRow_p.Contains("-----") Then
+                        readFlag = True
                     End If
                 End While
             End Using
@@ -1021,26 +948,26 @@ b1:                             currentRow_p = currentRow_p.Trim 'удаляем
         End Try
     End Sub
 
-    Public Sub BubbleSort(ByRef Arr() As Single, ByRef N As Integer)
-        Try
-            Dim I As Long
-            Dim J As Long
-            Dim Tmp As Double
+    'Public Sub BubbleSort(ByRef Arr() As Single, ByRef N As Integer)
+    '    Try
+    '        Dim I As Long
+    '        Dim J As Long
+    '        Dim Tmp As Double
 
-            For I = 0 To N - 1 Step 1
-                For J = 0 To N - 2 - I Step 1
-                    If Arr(J) > Arr(J + 1) Then
-                        Tmp = Arr(J)
-                        Arr(J) = Arr(J + 1)
-                        Arr(J + 1) = Tmp
-                    End If
-                Next J
-            Next I
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-            Exit Sub
-        End Try
-    End Sub
+    '        For I = 0 To N - 1 Step 1
+    '            For J = 0 To N - 2 - I Step 1
+    '                If Arr(J) > Arr(J + 1) Then
+    '                    Tmp = Arr(J)
+    '                    Arr(J) = Arr(J + 1)
+    '                    Arr(J + 1) = Tmp
+    '                End If
+    '            Next J
+    '        Next I
+    '    Catch ex As Exception
+    '        LangException(language, ex.Message & ex.ToString)
+    '        Exit Sub
+    '    End Try
+    'End Sub
 
     'Private Sub DataGridView_Sample_Set_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Sample_Set.CellMouseUp
     '    ' Fill_In_Monitor()

@@ -21,7 +21,5 @@ Public Class Form_Login
         Me.Close()
     End Sub
 
-
-
 End Class
 
