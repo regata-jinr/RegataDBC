@@ -37,9 +37,7 @@ Partial Class Form_Main
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView_Sample_Set = New System.Windows.Forms.DataGridView()
         Me.B_Select_Sample_Set = New System.Windows.Forms.Button()
-        Me.B_Close = New System.Windows.Forms.Button()
         Me.B_Physical_Environment = New System.Windows.Forms.Button()
-        Me.B_Search = New System.Windows.Forms.Button()
         Me.L_Name_SLI_Irradiation_Log = New System.Windows.Forms.Label()
         Me.L_Name_LLI_Irradiation_Log = New System.Windows.Forms.Label()
         Me.B_Select_SLI_Irradiation_Log = New System.Windows.Forms.Button()
@@ -49,13 +47,6 @@ Partial Class Form_Main
         Me.B_Select_SRM_Set = New System.Windows.Forms.Button()
         Me.B_New_SRM_Set_Accept = New System.Windows.Forms.Button()
         Me.Table_SRM_SetDataGridView = New System.Windows.Forms.DataGridView()
-        Me.SRMSetNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SRM_Set_Number = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SRMSetTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SRMSetWeightDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.L_Name_SRM_Set = New System.Windows.Forms.Label()
         Me.L_Name_Monitor_Set = New System.Windows.Forms.Label()
         Me.Table_Monitor_SetDataGridView = New System.Windows.Forms.DataGridView()
@@ -65,6 +56,7 @@ Partial Class Form_Main
         Me.MonitorSetWeightDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Table_Monitor_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Monitor_Set = New System.Windows.Forms.Button()
         Me.B_New_Monitor_Set_Accept = New System.Windows.Forms.Button()
         Me.MaskedTextBox_LLI_Irradiation_Log = New System.Windows.Forms.MaskedTextBox()
@@ -81,7 +73,6 @@ Partial Class Form_Main
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.L_Name_Sample_Set_View = New System.Windows.Forms.Label()
         Me.ComboBox_Sample_Set_View = New System.Windows.Forms.ComboBox()
-        Me.B_Refresh = New System.Windows.Forms.Button()
         Me.ComboBox_Journal_Of_Irradiation_View = New System.Windows.Forms.ComboBox()
         Me.OpenSet = New System.Windows.Forms.Button()
         Me.ChangeLang = New System.Windows.Forms.Button()
@@ -89,24 +80,25 @@ Partial Class Form_Main
         Me.LFilterField = New System.Windows.Forms.Label()
         Me.CBFilter = New System.Windows.Forms.ComboBox()
         Me.SampleSetInfo = New System.Windows.Forms.GroupBox()
+        Me.ButtonshowAll = New System.Windows.Forms.Button()
+        Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableAdapterManager = New NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager()
         Me.Table_Sample_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter()
-        Me.Table_Sample_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_TableAdapter()
         Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
-        Me.Table_SRM_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRM_SetTableAdapter()
         Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
-        Me.BDBSet = New System.Windows.Forms.Button()
+        Me.B_Refresh = New System.Windows.Forms.Button()
+        Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
+        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -116,7 +108,7 @@ Partial Class Form_Main
         Me.B_NewSampleSetIDAccept.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(4, 254)
         Me.B_NewSampleSetIDAccept.Name = "B_NewSampleSetIDAccept"
-        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(108, 23)
+        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(84, 23)
         Me.B_NewSampleSetIDAccept.TabIndex = 0
         Me.B_NewSampleSetIDAccept.Text = "New sample set acceptance"
         Me.B_NewSampleSetIDAccept.UseVisualStyleBackColor = True
@@ -182,43 +174,22 @@ Partial Class Form_Main
         'B_Select_Sample_Set
         '
         Me.B_Select_Sample_Set.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(254, 254)
+        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(272, 254)
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
-        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(108, 23)
+        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(90, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
         Me.B_Select_Sample_Set.Text = "Select sample set"
         Me.B_Select_Sample_Set.UseVisualStyleBackColor = True
         '
-        'B_Close
-        '
-        Me.B_Close.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Close.Location = New System.Drawing.Point(614, 690)
-        Me.B_Close.Name = "B_Close"
-        Me.B_Close.Size = New System.Drawing.Size(180, 23)
-        Me.B_Close.TabIndex = 4
-        Me.B_Close.Text = "Close"
-        Me.B_Close.UseVisualStyleBackColor = True
-        '
         'B_Physical_Environment
         '
         Me.B_Physical_Environment.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Physical_Environment.Location = New System.Drawing.Point(242, 690)
+        Me.B_Physical_Environment.Location = New System.Drawing.Point(4, 690)
         Me.B_Physical_Environment.Name = "B_Physical_Environment"
-        Me.B_Physical_Environment.Size = New System.Drawing.Size(180, 23)
+        Me.B_Physical_Environment.Size = New System.Drawing.Size(226, 23)
         Me.B_Physical_Environment.TabIndex = 144
         Me.B_Physical_Environment.Text = "Physical environment"
         Me.B_Physical_Environment.UseVisualStyleBackColor = True
-        '
-        'B_Search
-        '
-        Me.B_Search.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Search.Enabled = False
-        Me.B_Search.Location = New System.Drawing.Point(428, 690)
-        Me.B_Search.Name = "B_Search"
-        Me.B_Search.Size = New System.Drawing.Size(180, 23)
-        Me.B_Search.TabIndex = 146
-        Me.B_Search.Text = "Search"
-        Me.B_Search.UseVisualStyleBackColor = True
         '
         'L_Name_SLI_Irradiation_Log
         '
@@ -285,9 +256,9 @@ Partial Class Form_Main
         'B_Select_SRM_Set
         '
         Me.B_Select_SRM_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_SRM_Set.Location = New System.Drawing.Point(131, 661)
+        Me.B_Select_SRM_Set.Location = New System.Drawing.Point(176, 657)
         Me.B_Select_SRM_Set.Name = "B_Select_SRM_Set"
-        Me.B_Select_SRM_Set.Size = New System.Drawing.Size(278, 23)
+        Me.B_Select_SRM_Set.Size = New System.Drawing.Size(321, 23)
         Me.B_Select_SRM_Set.TabIndex = 159
         Me.B_Select_SRM_Set.Text = "Select SRM set"
         Me.B_Select_SRM_Set.UseVisualStyleBackColor = True
@@ -295,9 +266,9 @@ Partial Class Form_Main
         'B_New_SRM_Set_Accept
         '
         Me.B_New_SRM_Set_Accept.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.B_New_SRM_Set_Accept.Location = New System.Drawing.Point(131, 628)
+        Me.B_New_SRM_Set_Accept.Location = New System.Drawing.Point(176, 628)
         Me.B_New_SRM_Set_Accept.Name = "B_New_SRM_Set_Accept"
-        Me.B_New_SRM_Set_Accept.Size = New System.Drawing.Size(278, 23)
+        Me.B_New_SRM_Set_Accept.Size = New System.Drawing.Size(321, 23)
         Me.B_New_SRM_Set_Accept.TabIndex = 158
         Me.B_New_SRM_Set_Accept.Text = "New SRM set acceptance"
         Me.B_New_SRM_Set_Accept.UseVisualStyleBackColor = True
@@ -309,7 +280,7 @@ Partial Class Form_Main
         Me.Table_SRM_SetDataGridView.AllowUserToResizeColumns = False
         Me.Table_SRM_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_SRM_SetDataGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Table_SRM_SetDataGridView.AutoGenerateColumns = False
+        Me.Table_SRM_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
@@ -319,8 +290,6 @@ Partial Class Form_Main
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.Table_SRM_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Table_SRM_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SRMSetNameDataGridViewTextBoxColumn, Me.SRM_Set_Number, Me.SRMSetTypeDataGridViewTextBoxColumn, Me.SRMSetWeightDataGridViewTextBoxColumn, Me.SRMSetPurchasingDateDataGridViewTextBoxColumn})
-        Me.Table_SRM_SetDataGridView.DataSource = Me.Table_SRM_Set_BindingSource
         Me.Table_SRM_SetDataGridView.Location = New System.Drawing.Point(6, 478)
         Me.Table_SRM_SetDataGridView.Name = "Table_SRM_SetDataGridView"
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -334,58 +303,8 @@ Partial Class Form_Main
         Me.Table_SRM_SetDataGridView.RowHeadersVisible = False
         Me.Table_SRM_SetDataGridView.RowHeadersWidth = 21
         Me.Table_SRM_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Table_SRM_SetDataGridView.Size = New System.Drawing.Size(448, 144)
+        Me.Table_SRM_SetDataGridView.Size = New System.Drawing.Size(491, 144)
         Me.Table_SRM_SetDataGridView.TabIndex = 157
-        '
-        'SRMSetNameDataGridViewTextBoxColumn
-        '
-        Me.SRMSetNameDataGridViewTextBoxColumn.DataPropertyName = "SRM_Set_Name"
-        Me.SRMSetNameDataGridViewTextBoxColumn.HeaderText = "Name"
-        Me.SRMSetNameDataGridViewTextBoxColumn.Name = "SRMSetNameDataGridViewTextBoxColumn"
-        Me.SRMSetNameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.SRMSetNameDataGridViewTextBoxColumn.Width = 89
-        '
-        'SRM_Set_Number
-        '
-        Me.SRM_Set_Number.DataPropertyName = "SRM_Set_Number"
-        Me.SRM_Set_Number.HeaderText = "Number"
-        Me.SRM_Set_Number.Name = "SRM_Set_Number"
-        Me.SRM_Set_Number.ReadOnly = True
-        Me.SRM_Set_Number.Width = 89
-        '
-        'SRMSetTypeDataGridViewTextBoxColumn
-        '
-        Me.SRMSetTypeDataGridViewTextBoxColumn.DataPropertyName = "SRM_Set_Type"
-        Me.SRMSetTypeDataGridViewTextBoxColumn.HeaderText = "Type"
-        Me.SRMSetTypeDataGridViewTextBoxColumn.Name = "SRMSetTypeDataGridViewTextBoxColumn"
-        Me.SRMSetTypeDataGridViewTextBoxColumn.ReadOnly = True
-        Me.SRMSetTypeDataGridViewTextBoxColumn.Width = 89
-        '
-        'SRMSetWeightDataGridViewTextBoxColumn
-        '
-        Me.SRMSetWeightDataGridViewTextBoxColumn.DataPropertyName = "SRM_Set_Weight"
-        Me.SRMSetWeightDataGridViewTextBoxColumn.HeaderText = "Weight, g"
-        Me.SRMSetWeightDataGridViewTextBoxColumn.Name = "SRMSetWeightDataGridViewTextBoxColumn"
-        Me.SRMSetWeightDataGridViewTextBoxColumn.ReadOnly = True
-        Me.SRMSetWeightDataGridViewTextBoxColumn.Width = 89
-        '
-        'SRMSetPurchasingDateDataGridViewTextBoxColumn
-        '
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn.DataPropertyName = "SRM_Set_Purchasing_Date"
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn.HeaderText = "Purchasing date"
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn.Name = "SRMSetPurchasingDateDataGridViewTextBoxColumn"
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn.ReadOnly = True
-        Me.SRMSetPurchasingDateDataGridViewTextBoxColumn.Width = 89
-        '
-        'Table_SRM_Set_BindingSource
-        '
-        Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
-        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'NAA_DB_EXPDataSet
-        '
-        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
-        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'L_Name_SRM_Set
         '
@@ -427,7 +346,7 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_Monitor_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MonitorSetNameDataGridViewTextBoxColumn, Me.MonitorSetNumberDataGridViewTextBoxColumn, Me.MonitorSetTypeDataGridViewTextBoxColumn, Me.MonitorSetWeightDataGridViewTextBoxColumn, Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn})
         Me.Table_Monitor_SetDataGridView.DataSource = Me.Table_Monitor_Set_BindingSource
-        Me.Table_Monitor_SetDataGridView.Location = New System.Drawing.Point(483, 478)
+        Me.Table_Monitor_SetDataGridView.Location = New System.Drawing.Point(520, 478)
         Me.Table_Monitor_SetDataGridView.Name = "Table_Monitor_SetDataGridView"
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
@@ -440,7 +359,7 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView.RowHeadersVisible = False
         Me.Table_Monitor_SetDataGridView.RowHeadersWidth = 21
         Me.Table_Monitor_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Table_Monitor_SetDataGridView.Size = New System.Drawing.Size(466, 144)
+        Me.Table_Monitor_SetDataGridView.Size = New System.Drawing.Size(429, 144)
         Me.Table_Monitor_SetDataGridView.TabIndex = 161
         '
         'MonitorSetNameDataGridViewTextBoxColumn
@@ -483,10 +402,15 @@ Partial Class Form_Main
         Me.Table_Monitor_Set_BindingSource.DataMember = "table_Monitor_Set"
         Me.Table_Monitor_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
         '
+        'NAA_DB_EXPDataSet
+        '
+        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
+        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'B_Select_Monitor_Set
         '
         Me.B_Select_Monitor_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_Monitor_Set.Location = New System.Drawing.Point(563, 661)
+        Me.B_Select_Monitor_Set.Location = New System.Drawing.Point(671, 661)
         Me.B_Select_Monitor_Set.Name = "B_Select_Monitor_Set"
         Me.B_Select_Monitor_Set.Size = New System.Drawing.Size(278, 23)
         Me.B_Select_Monitor_Set.TabIndex = 164
@@ -496,7 +420,7 @@ Partial Class Form_Main
         'B_New_Monitor_Set_Accept
         '
         Me.B_New_Monitor_Set_Accept.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_Monitor_Set_Accept.Location = New System.Drawing.Point(563, 628)
+        Me.B_New_Monitor_Set_Accept.Location = New System.Drawing.Point(671, 628)
         Me.B_New_Monitor_Set_Accept.Name = "B_New_Monitor_Set_Accept"
         Me.B_New_Monitor_Set_Accept.Size = New System.Drawing.Size(278, 23)
         Me.B_New_Monitor_Set_Accept.TabIndex = 163
@@ -579,16 +503,16 @@ Partial Class Form_Main
         Me.ListBox_Monitor_SRM.FormattingEnabled = True
         Me.ListBox_Monitor_SRM.Location = New System.Drawing.Point(6, 628)
         Me.ListBox_Monitor_SRM.Name = "ListBox_Monitor_SRM"
-        Me.ListBox_Monitor_SRM.Size = New System.Drawing.Size(119, 56)
+        Me.ListBox_Monitor_SRM.Size = New System.Drawing.Size(164, 56)
         Me.ListBox_Monitor_SRM.TabIndex = 174
         '
         'ListBox_Monitor_Monitor
         '
         Me.ListBox_Monitor_Monitor.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListBox_Monitor_Monitor.FormattingEnabled = True
-        Me.ListBox_Monitor_Monitor.Location = New System.Drawing.Point(438, 628)
+        Me.ListBox_Monitor_Monitor.Location = New System.Drawing.Point(520, 628)
         Me.ListBox_Monitor_Monitor.Name = "ListBox_Monitor_Monitor"
-        Me.ListBox_Monitor_Monitor.Size = New System.Drawing.Size(119, 56)
+        Me.ListBox_Monitor_Monitor.Size = New System.Drawing.Size(145, 56)
         Me.ListBox_Monitor_Monitor.TabIndex = 175
         '
         'DataGridView_Description
@@ -653,16 +577,6 @@ Partial Class Form_Main
         Me.ComboBox_Sample_Set_View.Size = New System.Drawing.Size(146, 26)
         Me.ComboBox_Sample_Set_View.TabIndex = 178
         '
-        'B_Refresh
-        '
-        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Refresh.Location = New System.Drawing.Point(56, 690)
-        Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(180, 23)
-        Me.B_Refresh.TabIndex = 179
-        Me.B_Refresh.Text = "Refresh"
-        Me.B_Refresh.UseVisualStyleBackColor = True
-        '
         'ComboBox_Journal_Of_Irradiation_View
         '
         Me.ComboBox_Journal_Of_Irradiation_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -676,9 +590,9 @@ Partial Class Form_Main
         'OpenSet
         '
         Me.OpenSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.OpenSet.Location = New System.Drawing.Point(131, 254)
+        Me.OpenSet.Location = New System.Drawing.Point(94, 254)
         Me.OpenSet.Name = "OpenSet"
-        Me.OpenSet.Size = New System.Drawing.Size(108, 23)
+        Me.OpenSet.Size = New System.Drawing.Size(76, 23)
         Me.OpenSet.TabIndex = 181
         Me.OpenSet.Text = "Просмотр партии"
         Me.OpenSet.UseVisualStyleBackColor = True
@@ -740,6 +654,21 @@ Partial Class Form_Main
         Me.SampleSetInfo.TabStop = False
         Me.SampleSetInfo.Text = "Информация о выбранной партии"
         '
+        'ButtonshowAll
+        '
+        Me.ButtonshowAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.ButtonshowAll.Location = New System.Drawing.Point(176, 254)
+        Me.ButtonshowAll.Name = "ButtonshowAll"
+        Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
+        Me.ButtonshowAll.TabIndex = 192
+        Me.ButtonshowAll.Text = "Показать все"
+        Me.ButtonshowAll.UseVisualStyleBackColor = True
+        '
+        'Table_SRM_Set_BindingSource
+        '
+        Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
+        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
+        '
         'Table_Sample_Set_BindingSource
         '
         Me.Table_Sample_Set_BindingSource.DataMember = "table_Sample_Set"
@@ -776,40 +705,41 @@ Partial Class Form_Main
         '
         Me.Table_Sample_Set_TableAdapter.ClearBeforeFill = True
         '
-        'Table_Sample_TableAdapter
-        '
-        Me.Table_Sample_TableAdapter.ClearBeforeFill = True
-        '
         'Table_SRM_TableAdapter
         '
         Me.Table_SRM_TableAdapter.ClearBeforeFill = True
-        '
-        'Table_SRM_Set_TableAdapter
-        '
-        Me.Table_SRM_Set_TableAdapter.ClearBeforeFill = True
         '
         'Table_Monitor_Set_TableAdapter
         '
         Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
         '
-        'BDBSet
+        'B_Refresh
         '
-        Me.BDBSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.BDBSet.Enabled = False
-        Me.BDBSet.Location = New System.Drawing.Point(800, 690)
-        Me.BDBSet.Name = "BDBSet"
-        Me.BDBSet.Size = New System.Drawing.Size(125, 23)
-        Me.BDBSet.TabIndex = 191
-        Me.BDBSet.Text = "DBSettings"
-        Me.BDBSet.UseVisualStyleBackColor = True
-        Me.BDBSet.Visible = False
+        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
+        Me.B_Refresh.Name = "B_Refresh"
+        Me.B_Refresh.Size = New System.Drawing.Size(429, 23)
+        Me.B_Refresh.TabIndex = 179
+        Me.B_Refresh.Text = "Refresh"
+        Me.B_Refresh.UseVisualStyleBackColor = True
+        '
+        'ButtonShowAllSrms
+        '
+        Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
+        Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
+        Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
+        Me.ButtonShowAllSrms.TabIndex = 195
+        Me.ButtonShowAllSrms.Text = "ShowAllSRMs"
+        Me.ButtonShowAllSrms.UseVisualStyleBackColor = True
         '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 718)
-        Me.Controls.Add(Me.BDBSet)
+        Me.Controls.Add(Me.ButtonShowAllSrms)
+        Me.Controls.Add(Me.ButtonshowAll)
         Me.Controls.Add(Me.SampleSetInfo)
         Me.Controls.Add(Me.GBFilters)
         Me.Controls.Add(Me.ChangeLang)
@@ -839,9 +769,7 @@ Partial Class Form_Main
         Me.Controls.Add(Me.B_New_SLI_Irradiation_Log)
         Me.Controls.Add(Me.L_Name_LLI_Irradiation_Log)
         Me.Controls.Add(Me.L_Name_SLI_Irradiation_Log)
-        Me.Controls.Add(Me.B_Search)
         Me.Controls.Add(Me.B_Physical_Environment)
-        Me.Controls.Add(Me.B_Close)
         Me.Controls.Add(Me.B_Select_Sample_Set)
         Me.Controls.Add(Me.DataGridView_Sample_Set)
         Me.Controls.Add(Me.B_NewSampleSetIDAccept)
@@ -852,14 +780,14 @@ Partial Class Form_Main
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBFilters.ResumeLayout(False)
         Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
+        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -877,14 +805,11 @@ Partial Class Form_Main
     Friend WithEvents Table_Sample_Set_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter
     Friend WithEvents DataGridView_Sample_Set As System.Windows.Forms.DataGridView
     Friend WithEvents B_Select_Sample_Set As System.Windows.Forms.Button
-    Friend WithEvents B_Close As System.Windows.Forms.Button
     Friend WithEvents B_Physical_Environment As System.Windows.Forms.Button
-    Friend WithEvents B_Search As System.Windows.Forms.Button
     Friend WithEvents ISLILogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ILLI1LogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ILLI2LogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Table_Sample_BindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents Table_Sample_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_TableAdapter
     Friend WithEvents L_Name_SLI_Irradiation_Log As System.Windows.Forms.Label
     Friend WithEvents L_Name_LLI_Irradiation_Log As System.Windows.Forms.Label
     Friend WithEvents B_Select_SLI_Irradiation_Log As System.Windows.Forms.Button
@@ -896,12 +821,6 @@ Partial Class Form_Main
     Friend WithEvents B_Select_SRM_Set As System.Windows.Forms.Button
     Friend WithEvents B_New_SRM_Set_Accept As System.Windows.Forms.Button
     Friend WithEvents Table_SRM_SetDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents SRMSetNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SRM_Set_Number As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SRMSetTypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SRMSetWeightDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SRMSetPurchasingDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Table_SRM_Set_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRM_SetTableAdapter
     Friend WithEvents L_Name_SRM_Set As System.Windows.Forms.Label
     Friend WithEvents L_Name_Monitor_Set As System.Windows.Forms.Label
     Friend WithEvents Table_Monitor_SetDataGridView As System.Windows.Forms.DataGridView
@@ -928,7 +847,6 @@ Partial Class Form_Main
     Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents L_Name_Sample_Set_View As System.Windows.Forms.Label
     Friend WithEvents ComboBox_Sample_Set_View As System.Windows.Forms.ComboBox
-    Friend WithEvents B_Refresh As System.Windows.Forms.Button
     Friend WithEvents ComboBox_Journal_Of_Irradiation_View As System.Windows.Forms.ComboBox
     Friend WithEvents OpenSet As System.Windows.Forms.Button
     Friend WithEvents ChangeLang As System.Windows.Forms.Button
@@ -941,5 +859,7 @@ Partial Class Form_Main
     Friend WithEvents SampleSetInfo As System.Windows.Forms.GroupBox
     Friend WithEvents LFilterField As System.Windows.Forms.Label
     Friend WithEvents CBFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents BDBSet As Button
+    Friend WithEvents ButtonshowAll As Button
+    Friend WithEvents B_Refresh As Button
+    Friend WithEvents ButtonShowAllSrms As Button
 End Class

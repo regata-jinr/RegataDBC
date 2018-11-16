@@ -100,8 +100,8 @@ Public Class Form_SRM_Set_Accept
             sqlConnection1.Close()
 
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
-            Form_Main.Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Form_Main.Table_SRM_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_SRM_Set)
+            'Form_Main.Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
+            'Form_Main.Table_SRM_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_SRM_Set)
 
             Form_Main.Table_SRM_SetDataGridView.FirstDisplayedScrollingRowIndex = Form_Main.Table_SRM_SetDataGridView.RowCount - 1
             For i = 0 To Form_Main.Table_SRM_SetDataGridView.RowCount - 1

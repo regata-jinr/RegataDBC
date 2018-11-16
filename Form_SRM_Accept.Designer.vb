@@ -188,6 +188,7 @@ Partial Class Form_SRM_Accept
         Me.Table_SRMDataGridView.AllowUserToResizeColumns = False
         Me.Table_SRMDataGridView.AllowUserToResizeRows = False
         Me.Table_SRMDataGridView.AutoGenerateColumns = False
+        Me.Table_SRMDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
@@ -201,6 +202,7 @@ Partial Class Form_SRM_Accept
         Me.Table_SRMDataGridView.DataSource = Me.TableSRMBindingSource
         Me.Table_SRMDataGridView.Location = New System.Drawing.Point(12, 76)
         Me.Table_SRMDataGridView.Name = "Table_SRMDataGridView"
+        Me.Table_SRMDataGridView.RowHeadersVisible = False
         Me.Table_SRMDataGridView.RowHeadersWidth = 21
         Me.Table_SRMDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Table_SRMDataGridView.Size = New System.Drawing.Size(263, 151)
@@ -212,21 +214,18 @@ Partial Class Form_SRM_Accept
         Me.DataGridViewTextBoxColumn5.HeaderText = "SRM number"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Width = 65
         '
         'DataGridViewTextBoxColumn6
         '
         Me.DataGridViewTextBoxColumn6.DataPropertyName = "SRM_SLI_Weight"
         Me.DataGridViewTextBoxColumn6.HeaderText = "SRM SLI weight, g"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.Width = 70
         '
         'DataGridViewTextBoxColumn7
         '
         Me.DataGridViewTextBoxColumn7.DataPropertyName = "SRM_LLI_Weight"
         Me.DataGridViewTextBoxColumn7.HeaderText = "SRM LLI weight, g"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        Me.DataGridViewTextBoxColumn7.Width = 70
         '
         'B_Fill_SRM_From_File
         '
