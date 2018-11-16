@@ -4,6 +4,7 @@ Public Class Form_Login
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
         Try
             Form_Main.MyConnectionString = "Data Source=159.93.100.205,1433;Initial Catalog=NAA_DB;User ID=" + UsernameTextBox.Text + ";Password=" + PasswordTextBox.Text
+            Form_Main.us = UsernameTextBox.Text
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
             sqlConnection1.Open()
             sqlConnection1.Close()

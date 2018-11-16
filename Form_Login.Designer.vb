@@ -77,6 +77,7 @@ Partial Class Form_Login
         '
         'PasswordTextBox
         '
+        Me.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PasswordTextBox.Location = New System.Drawing.Point(174, 101)
         Me.PasswordTextBox.Name = "PasswordTextBox"
         Me.PasswordTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -115,13 +116,13 @@ Partial Class Form_Login
         Me.Controls.Add(Me.UsernameLabel)
         Me.Controls.Add(Me.LogoPictureBox)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form_Login"
-        ' Me.Text = "База данных НАА " & Application.ProductVersion
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "База данных НАА " & Application.ProductVersion
+        Me.Text = "База данных НАА 15.9.28307.53"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

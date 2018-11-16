@@ -138,7 +138,7 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Изменить информацию об образце"
                 B_Samples_Preparation.Text = "Пробоподготовка"
                 B_NAA_Results.Text = "Результаты НАА"
-                Button_ShowNotice.Text = "Примечания к партии"
+                Button_ShowNotice.Text = "Комментарии к партии"
                 B_Close.Text = "Закрыть"
             ElseIf Form_Main.language = "english" Then
                 Me.Text = "Samples list"
@@ -150,7 +150,7 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Change information about sample"
                 B_Samples_Preparation.Text = "Samples preparation"
                 B_NAA_Results.Text = "NAA results"
-                Button_ShowNotice.Text = "Notices for set"
+                Button_ShowNotice.Text = "Comments for set"
                 B_Close.Text = "Close"
             End If
         Catch ex As Exception
