@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Main
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_Main
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -71,16 +71,14 @@ Partial Class Form_Main
         Me.DataGridView_Description = New System.Windows.Forms.DataGridView()
         Me.Cell_Color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.L_Name_Sample_Set_View = New System.Windows.Forms.Label()
-        Me.ComboBox_Sample_Set_View = New System.Windows.Forms.ComboBox()
         Me.ComboBox_Journal_Of_Irradiation_View = New System.Windows.Forms.ComboBox()
         Me.OpenSet = New System.Windows.Forms.Button()
         Me.ChangeLang = New System.Windows.Forms.Button()
-        Me.GBFilters = New System.Windows.Forms.GroupBox()
-        Me.LFilterField = New System.Windows.Forms.Label()
-        Me.CBFilter = New System.Windows.Forms.ComboBox()
         Me.SampleSetInfo = New System.Windows.Forms.GroupBox()
-        Me.ButtonshowAll = New System.Windows.Forms.Button()
+        Me.B_Refresh = New System.Windows.Forms.Button()
+        Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.LabelSearch = New System.Windows.Forms.Label()
         Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -88,15 +86,12 @@ Partial Class Form_Main
         Me.Table_Sample_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter()
         Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
         Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
-        Me.B_Refresh = New System.Windows.Forms.Button()
-        Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,9 +101,9 @@ Partial Class Form_Main
         'B_NewSampleSetIDAccept
         '
         Me.B_NewSampleSetIDAccept.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(4, 254)
+        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(12, 438)
         Me.B_NewSampleSetIDAccept.Name = "B_NewSampleSetIDAccept"
-        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(84, 23)
+        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(149, 23)
         Me.B_NewSampleSetIDAccept.TabIndex = 0
         Me.B_NewSampleSetIDAccept.Text = "New sample set acceptance"
         Me.B_NewSampleSetIDAccept.UseVisualStyleBackColor = True
@@ -161,22 +156,22 @@ Partial Class Form_Main
         Me.DataGridView_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView_Sample_Set.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Sample_Set.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DataGridView_Sample_Set.Location = New System.Drawing.Point(6, 39)
+        Me.DataGridView_Sample_Set.Location = New System.Drawing.Point(6, 68)
         Me.DataGridView_Sample_Set.MultiSelect = False
         Me.DataGridView_Sample_Set.Name = "DataGridView_Sample_Set"
         Me.DataGridView_Sample_Set.ReadOnly = True
         Me.DataGridView_Sample_Set.RowHeadersVisible = False
         Me.DataGridView_Sample_Set.RowHeadersWidth = 10
         Me.DataGridView_Sample_Set.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 209)
+        Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 334)
         Me.DataGridView_Sample_Set.TabIndex = 2
         '
         'B_Select_Sample_Set
         '
         Me.B_Select_Sample_Set.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(272, 254)
+        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(204, 436)
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
-        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(90, 23)
+        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(160, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
         Me.B_Select_Sample_Set.Text = "Select sample set"
         Me.B_Select_Sample_Set.UseVisualStyleBackColor = True
@@ -247,9 +242,10 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Name_Sample_Set.AutoSize = True
-        Me.L_Name_Sample_Set.Location = New System.Drawing.Point(128, 9)
+        Me.L_Name_Sample_Set.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.L_Name_Sample_Set.Location = New System.Drawing.Point(173, 9)
         Me.L_Name_Sample_Set.Name = "L_Name_Sample_Set"
-        Me.L_Name_Sample_Set.Size = New System.Drawing.Size(64, 13)
+        Me.L_Name_Sample_Set.Size = New System.Drawing.Size(90, 18)
         Me.L_Name_Sample_Set.TabIndex = 156
         Me.L_Name_Sample_Set.Text = "Sample sets"
         '
@@ -463,9 +459,10 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Count.AutoSize = True
+        Me.L_Count.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.L_Count.Location = New System.Drawing.Point(12, 9)
         Me.L_Count.Name = "L_Count"
-        Me.L_Count.Size = New System.Drawing.Size(104, 13)
+        Me.L_Count.Size = New System.Drawing.Size(143, 18)
         Me.L_Count.TabIndex = 168
         Me.L_Count.Text = "Samples in NAA DB:"
         '
@@ -475,7 +472,7 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Monitor.Location = New System.Drawing.Point(6, 20)
         Me.L_Monitor.Name = "L_Monitor"
-        Me.L_Monitor.Size = New System.Drawing.Size(290, 321)
+        Me.L_Monitor.Size = New System.Drawing.Size(290, 274)
         Me.L_Monitor.TabIndex = 169
         Me.L_Monitor.Text = "Monitor"
         '
@@ -525,7 +522,7 @@ Partial Class Form_Main
         Me.DataGridView_Description.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -533,7 +530,7 @@ Partial Class Form_Main
         Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView_Description.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Description.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cell_Color, Me.Description})
-        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 283)
+        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 308)
         Me.DataGridView_Description.MultiSelect = False
         Me.DataGridView_Description.Name = "DataGridView_Description"
         Me.DataGridView_Description.ReadOnly = True
@@ -541,7 +538,7 @@ Partial Class Form_Main
         Me.DataGridView_Description.RowHeadersWidth = 21
         Me.DataGridView_Description.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView_Description.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView_Description.Size = New System.Drawing.Size(358, 176)
+        Me.DataGridView_Description.Size = New System.Drawing.Size(289, 141)
         Me.DataGridView_Description.TabIndex = 176
         '
         'Cell_Color
@@ -556,27 +553,6 @@ Partial Class Form_Main
         Me.Description.Name = "Description"
         Me.Description.ReadOnly = True
         '
-        'L_Name_Sample_Set_View
-        '
-        Me.L_Name_Sample_Set_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.L_Name_Sample_Set_View.AutoSize = True
-        Me.L_Name_Sample_Set_View.Location = New System.Drawing.Point(147, 20)
-        Me.L_Name_Sample_Set_View.Name = "L_Name_Sample_Set_View"
-        Me.L_Name_Sample_Set_View.Size = New System.Drawing.Size(104, 36)
-        Me.L_Name_Sample_Set_View.TabIndex = 177
-        Me.L_Name_Sample_Set_View.Text = "Выбирите тип" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "фильтра"
-        '
-        'ComboBox_Sample_Set_View
-        '
-        Me.ComboBox_Sample_Set_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox_Sample_Set_View.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.ComboBox_Sample_Set_View.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboBox_Sample_Set_View.FormattingEnabled = True
-        Me.ComboBox_Sample_Set_View.Location = New System.Drawing.Point(150, 59)
-        Me.ComboBox_Sample_Set_View.Name = "ComboBox_Sample_Set_View"
-        Me.ComboBox_Sample_Set_View.Size = New System.Drawing.Size(146, 26)
-        Me.ComboBox_Sample_Set_View.TabIndex = 178
-        '
         'ComboBox_Journal_Of_Irradiation_View
         '
         Me.ComboBox_Journal_Of_Irradiation_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -590,79 +566,70 @@ Partial Class Form_Main
         'OpenSet
         '
         Me.OpenSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.OpenSet.Location = New System.Drawing.Point(94, 254)
+        Me.OpenSet.Location = New System.Drawing.Point(6, 407)
         Me.OpenSet.Name = "OpenSet"
-        Me.OpenSet.Size = New System.Drawing.Size(76, 23)
+        Me.OpenSet.Size = New System.Drawing.Size(358, 23)
         Me.OpenSet.TabIndex = 181
         Me.OpenSet.Text = "Просмотр партии"
         Me.OpenSet.UseVisualStyleBackColor = True
         '
         'ChangeLang
         '
-        Me.ChangeLang.Location = New System.Drawing.Point(244, 9)
+        Me.ChangeLang.Location = New System.Drawing.Point(749, 690)
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(120, 24)
+        Me.ChangeLang.Size = New System.Drawing.Size(200, 24)
         Me.ChangeLang.TabIndex = 182
         Me.ChangeLang.Text = Global.NaaDB.My.MySettings.Default.languaged
         Me.ChangeLang.UseVisualStyleBackColor = True
-        '
-        'GBFilters
-        '
-        Me.GBFilters.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GBFilters.Controls.Add(Me.LFilterField)
-        Me.GBFilters.Controls.Add(Me.CBFilter)
-        Me.GBFilters.Controls.Add(Me.L_Name_Sample_Set_View)
-        Me.GBFilters.Controls.Add(Me.ComboBox_Sample_Set_View)
-        Me.GBFilters.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.GBFilters.Location = New System.Drawing.Point(370, 3)
-        Me.GBFilters.Name = "GBFilters"
-        Me.GBFilters.Size = New System.Drawing.Size(305, 101)
-        Me.GBFilters.TabIndex = 189
-        Me.GBFilters.TabStop = False
-        Me.GBFilters.Text = "Фильтрация списка партий"
-        '
-        'LFilterField
-        '
-        Me.LFilterField.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LFilterField.AutoSize = True
-        Me.LFilterField.Location = New System.Drawing.Point(7, 20)
-        Me.LFilterField.Name = "LFilterField"
-        Me.LFilterField.Size = New System.Drawing.Size(115, 36)
-        Me.LFilterField.TabIndex = 180
-        Me.LFilterField.Text = "Выберите поле" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "для фильтра"
-        '
-        'CBFilter
-        '
-        Me.CBFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CBFilter.FormattingEnabled = True
-        Me.CBFilter.Items.AddRange(New Object() {"Обработано", "Страна", "Год", "Код клиента", "Показать все"})
-        Me.CBFilter.Location = New System.Drawing.Point(6, 59)
-        Me.CBFilter.Name = "CBFilter"
-        Me.CBFilter.Size = New System.Drawing.Size(121, 26)
-        Me.CBFilter.TabIndex = 179
-        Me.CBFilter.Tag = ""
         '
         'SampleSetInfo
         '
         Me.SampleSetInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SampleSetInfo.Controls.Add(Me.L_Monitor)
+        Me.SampleSetInfo.Controls.Add(Me.DataGridView_Description)
         Me.SampleSetInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.SampleSetInfo.Location = New System.Drawing.Point(370, 110)
+        Me.SampleSetInfo.Location = New System.Drawing.Point(370, 12)
         Me.SampleSetInfo.Name = "SampleSetInfo"
-        Me.SampleSetInfo.Size = New System.Drawing.Size(302, 357)
+        Me.SampleSetInfo.Size = New System.Drawing.Size(302, 455)
         Me.SampleSetInfo.TabIndex = 190
         Me.SampleSetInfo.TabStop = False
         Me.SampleSetInfo.Text = "Информация о выбранной партии"
         '
-        'ButtonshowAll
+        'B_Refresh
         '
-        Me.ButtonshowAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonshowAll.Location = New System.Drawing.Point(176, 254)
-        Me.ButtonshowAll.Name = "ButtonshowAll"
-        Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
-        Me.ButtonshowAll.TabIndex = 192
-        Me.ButtonshowAll.Text = "Показать все"
-        Me.ButtonshowAll.UseVisualStyleBackColor = True
+        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
+        Me.B_Refresh.Name = "B_Refresh"
+        Me.B_Refresh.Size = New System.Drawing.Size(220, 23)
+        Me.B_Refresh.TabIndex = 179
+        Me.B_Refresh.Text = "Refresh"
+        Me.B_Refresh.UseVisualStyleBackColor = True
+        '
+        'ButtonShowAllSrms
+        '
+        Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
+        Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
+        Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
+        Me.ButtonShowAllSrms.TabIndex = 195
+        Me.ButtonShowAllSrms.Text = "ShowAllSRMs"
+        Me.ButtonShowAllSrms.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(71, 42)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(293, 20)
+        Me.TextBox1.TabIndex = 170
+        '
+        'LabelSearch
+        '
+        Me.LabelSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.LabelSearch.Location = New System.Drawing.Point(3, 41)
+        Me.LabelSearch.Name = "LabelSearch"
+        Me.LabelSearch.Size = New System.Drawing.Size(62, 20)
+        Me.LabelSearch.TabIndex = 170
+        Me.LabelSearch.Text = "Label1"
         '
         'Table_SRM_Set_BindingSource
         '
@@ -713,40 +680,19 @@ Partial Class Form_Main
         '
         Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
         '
-        'B_Refresh
-        '
-        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
-        Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(429, 23)
-        Me.B_Refresh.TabIndex = 179
-        Me.B_Refresh.Text = "Refresh"
-        Me.B_Refresh.UseVisualStyleBackColor = True
-        '
-        'ButtonShowAllSrms
-        '
-        Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
-        Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
-        Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
-        Me.ButtonShowAllSrms.TabIndex = 195
-        Me.ButtonShowAllSrms.Text = "ShowAllSRMs"
-        Me.ButtonShowAllSrms.UseVisualStyleBackColor = True
-        '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 718)
+        Me.Controls.Add(Me.LabelSearch)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ButtonShowAllSrms)
-        Me.Controls.Add(Me.ButtonshowAll)
         Me.Controls.Add(Me.SampleSetInfo)
-        Me.Controls.Add(Me.GBFilters)
         Me.Controls.Add(Me.ChangeLang)
         Me.Controls.Add(Me.OpenSet)
         Me.Controls.Add(Me.ComboBox_Journal_Of_Irradiation_View)
         Me.Controls.Add(Me.B_Refresh)
-        Me.Controls.Add(Me.DataGridView_Description)
         Me.Controls.Add(Me.ListBox_Monitor_Monitor)
         Me.Controls.Add(Me.ListBox_Monitor_SRM)
         Me.Controls.Add(Me.ListBox_LLI_Irradiation_Log_Date)
@@ -773,7 +719,7 @@ Partial Class Form_Main
         Me.Controls.Add(Me.B_Select_Sample_Set)
         Me.Controls.Add(Me.DataGridView_Sample_Set)
         Me.Controls.Add(Me.B_NewSampleSetIDAccept)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form_Main"
@@ -784,8 +730,6 @@ Partial Class Form_Main
         CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GBFilters.ResumeLayout(False)
-        Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -845,8 +789,6 @@ Partial Class Form_Main
     Friend WithEvents DataGridView_Description As System.Windows.Forms.DataGridView
     Friend WithEvents Cell_Color As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents L_Name_Sample_Set_View As System.Windows.Forms.Label
-    Friend WithEvents ComboBox_Sample_Set_View As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox_Journal_Of_Irradiation_View As System.Windows.Forms.ComboBox
     Friend WithEvents OpenSet As System.Windows.Forms.Button
     Friend WithEvents ChangeLang As System.Windows.Forms.Button
@@ -855,11 +797,9 @@ Partial Class Form_Main
     Friend WithEvents SRMSetTypeDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SRMSetWeightDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SRMSetPurchasingDateDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents GBFilters As System.Windows.Forms.GroupBox
     Friend WithEvents SampleSetInfo As System.Windows.Forms.GroupBox
-    Friend WithEvents LFilterField As System.Windows.Forms.Label
-    Friend WithEvents CBFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents ButtonshowAll As Button
     Friend WithEvents B_Refresh As Button
     Friend WithEvents ButtonShowAllSrms As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents LabelSearch As Label
 End Class

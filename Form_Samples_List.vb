@@ -266,17 +266,17 @@ Public Class Form_Samples_List
 
             Dim inum As Integer = 1
 
-            For j As Integer = 8 To Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
-                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
-                If inum <= 3 Then
-                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
-                Else
-                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
-                End If
-                inum += 1
-                If inum = 7 Then inum = 1
+            'For j As Integer = 8 To Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
+            '    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
+            '    If inum <= 3 Then
+            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
+            '    Else
+            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
+            '    End If
+            '    inum += 1
+            '    If inum = 7 Then inum = 1
 
-            Next
+            'Next
 
 
         Catch ex As Exception

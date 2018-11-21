@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports SqlData
 
 Public Class Form_Main
     Public us As String
@@ -13,42 +14,53 @@ Public Class Form_Main
 
 
     Sub DataSampleSetLoad(ByVal Field As String)
-        Debug.WriteLine("DataSampleSetLoad:")
-        SampleSetFormLoadFlag = False
-        Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-        Dim cmd As New System.Data.SqlClient.SqlCommand
+        Try
+            ' Debug.WriteLine("DataSampleSetLoad:")
+            SampleSetFormLoadFlag = False
+            'Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+            'Dim cmd As New System.Data.SqlClient.SqlCommand
 
-        cmd.CommandType = System.Data.CommandType.Text
-        fields = Field
+            'cmd.CommandType = System.Data.CommandType.Text
+            'fields = Field
 
-        cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SampleSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
+            'cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID, sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year desc, sampSet.Sample_Set_ID desc"
 
-        Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-        Dim ds As New DataSet()
+            'Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+            'Dim ds As New DataSet()
 
-        dataadapter.Fill(ds, "SampleInf")
-        DataGridView_Sample_Set.DataSource = ds
-        DataGridView_Sample_Set.DataMember = "SampleInf"
-        DataGridView_Sample_Set.ReadOnly = True
-        DataGridView_Sample_Set.AllowUserToAddRows = False
-        DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
-        SampleSetFormLoadFlag = True
+            'dataadapter.Fill(ds, "SampleInf")
+            Dim testDS As New SqlGridView(MyConnectionString, "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID, sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet order by sampSet.Year desc, sampSet.Sample_Set_ID desc")
+            testDS.PartialFillingVertical(100)
+            DataGridView_Sample_Set.DataSource = testDS.DataSource
+            '  DataGridView_Sample_Set.DataMember = "SampleInf"
+            DataGridView_Sample_Set.ReadOnly = True
+            DataGridView_Sample_Set.AllowUserToAddRows = False
+            DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
+            SampleSetFormLoadFlag = True
 
-        For i As Integer = 0 To (DataGridView_Sample_Set.RowCount - 1)
-            DataGridView_Sample_Set.Rows.Item(i).Height = 24
-            DataGridView_Sample_Set.Rows.Item(i).Selected = True
-            ' Fill_In_Monitor()
-            '  DataGridView_Sample_Set.Rows.Item(i).Selected = False
-        Next
+            'For i As Integer = 0 To (DataGridView_Sample_Set.RowCount - 1)
+            '    DataGridView_Sample_Set.Rows.Item(i).Height = 24
+            '    DataGridView_Sample_Set.Rows.Item(i).Selected = True
+            '    ' Fill_In_Monitor()
+            '    '  DataGridView_Sample_Set.Rows.Item(i).Selected = False
+            'Next
 
-        If DataGridView_Sample_Set.RowCount = 0 Then
-            MsgBox("Таких значений нет")
-            DataSampleSetLoad("")
-            ' Exit Sub
-        End If
+            If DataGridView_Sample_Set.RowCount = 0 Then
+                MsgBox("Таких значений нет")
+                ' DataSampleSetLoad("")
+                Exit Sub
+            End If
+            DataGridView_Sample_Set.Rows.Item(0).Selected = True
+            DataGridView_Sample_Set.CurrentCell = DataGridView_Sample_Set.Rows(0).Cells(0)
 
-        DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-        DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
+            '  DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
+        Catch exS As SqlException
+            LangException(language, exS.Message & vbCrLf & exS.ToString)
+        Catch ex As Exception
+            LangException(language, ex.Message & vbCrLf & ex.ToString)
+            Exit Sub
+
+        End Try
 
     End Sub
 
@@ -218,7 +230,7 @@ Public Class Form_Main
         Try
             L_Monitor.Text = ""
             Dim i As Integer
-            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, PrepFact, SLIFact, LLIFact, Notice, NoticeMod As String
+            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, PrepFact, SLIFact, LLIFact, Notice, NoticeMod, ColorStr As String
             Dim ProcessedBy As String = ""
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
@@ -237,14 +249,15 @@ Public Class Form_Main
             LLIFact = ""
             Notice = ""
             NoticeMod = ""
+            ColorStr = ""
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim cmd As New System.Data.SqlClient.SqlCommand
+            Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
 
             If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub 'чтобы избежать ошибки при сортировке срабатывает selectionChanged до выполнения тела события columnHeaderClick
 
             cmd.CommandType = System.Data.CommandType.Text
-            cmd.CommandText = "select * from SampleSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
+            cmd.CommandText = "select * from SamplesSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
 
             CountOfSample = 0
             i = 1
@@ -253,11 +266,14 @@ Public Class Form_Main
             reader = cmd.ExecuteReader()
             'подумать над оптимизацией через циклы и индексы
             While reader.Read()
-                '  MsgBox(reader(5) & "__" & reader(6) & "__" & reader(7) & "__" & reader(8) & "__" & reader(9) & "__" & reader(10) & "__" & reader(11) & "__" & reader(12) & "__" & reader(13) & "__" & reader(14))
-                If Not IsDBNull(reader(5)) Then Country = reader(5).ToString
-                If Not IsDBNull(reader(6)) Then Organzation = reader(6).ToString
-                If Not IsDBNull(reader(7)) Then LastName = reader(7).ToString
-                If Not IsDBNull(reader(8)) Then CountOfSample += reader(8)
+                ' If Not IsDBNull(reader(5)) Then
+                Country = reader(5).ToString
+                ' If Not IsDBNull(reader(6)) Then 
+                Organzation = reader(6).ToString
+                ' If Not IsDBNull(reader(7)) Then
+                LastName = reader(7).ToString
+                '  If Not IsDBNull(reader(8)) Then 
+                CountOfSample += reader(8)
                 If Not IsDBNull(reader(9)) Then SampleType = reader(9).ToString
 
                 If Not IsDBNull(reader(10)) Then
@@ -293,12 +309,13 @@ Public Class Form_Main
 
                 If Not IsDBNull(reader(12)) Then ProcessedBy = reader(12).ToString
 
-                Results += Results & reader(13).ToString
-                PrepFact += PrepFact & reader(14).ToString
-                SLIFact += SLIFact & reader(15).ToString
-                LLIFact += LLIFact & reader(16).ToString
-                If Not IsDBNull(reader(17)) Then
-                    Notice = reader(17).ToString
+                Results = reader(13).ToString
+                PrepFact = reader(14).ToString
+                SLIFact = reader(15).ToString
+                LLIFact = reader(16).ToString
+                ColorStr = reader(17).ToString
+                If Not IsDBNull(reader(18)) Then
+                    Notice = reader(18).ToString
                     For Each notc In Notice.Split(vbCrLf)
                         'TODO: check why for large string cond doesn't work 
                         If notc.Length > 40 Then
@@ -313,23 +330,12 @@ Public Class Form_Main
             reader.Close()
             sqlConnection1.Close()
 
-            If Results <> "" And SLIFact <> "" And LLIFact <> "" And PrepFact <> "" Then 'кжи, джи, результаты
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LimeGreen
-            ElseIf Results <> "" And (SLIFact <> "" Or LLIFact <> "") Then ' кжи или джи плюс результаты
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LightGreen
-            ElseIf Results = "" And LLIFact <> "" Then ' облучение джи
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.Yellow
-            ElseIf Results = "" And SLIFact <> "" And LLIFact = "" Then ' облучение кжи
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LemonChiffon
-            ElseIf Results = "" And SLIFact = "" And LLIFact = "" And PrepFact <> "" Then ' проведена пробоподготовка
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.White
-            Else
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LightPink
-            End If
+            DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.FromName(ColorStr)
+
 
             If Results <> "" Then Results = "Yes"
 
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + NoticeMod
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + NoticeMod
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
@@ -343,7 +349,6 @@ Public Class Form_Main
         Me.Text = "База данных НАА - " & Application.ProductVersion & "  " & us
         Try
             Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.InitialDirectory = "C:\"
-            CBFilter.Text = "Показать все"
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim reader As SqlDataReader
             Dim cmd As New System.Data.SqlClient.SqlCommand
@@ -1117,7 +1122,6 @@ Public Class Form_Main
                 DataGridView_Sample_Set.Rows.Item(i).Selected = True
             Next
             DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-            ComboBox_Sample_Set_View.Text = ""
             DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
             ' End If
             '  SampleSetFormLoadFlag = True
@@ -1254,8 +1258,8 @@ Public Class Form_Main
                 ' DataGridView_Sample_Set.Columns.Item(5).HeaderText = "Кол-во образцов"
                 B_NewSampleSetIDAccept.Text = "Приём новой партии образцов"
                 B_Select_Sample_Set.Text = "Выбрать партию образцов"
-                OpenSet.Text = "Просмотр партии"
-                L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
+                OpenSet.Text = "Просмотр информации о партии"
+                LabelSearch.Text = "Поиск"
 
                 L_Name_SLI_Irradiation_Log.Text = "Журналы облучения КЖИ"
                 B_Select_SLI_Irradiation_Log.Text = "Выбр. жур. обл. КЖИ"
@@ -1303,8 +1307,7 @@ Public Class Form_Main
                 DataGridView_Sample_Set.Columns.Item(4).HeaderText = "Samle set index"
                 B_NewSampleSetIDAccept.Text = "New sample set acceptance"
                 B_Select_Sample_Set.Text = "Select sample set"
-
-                L_Name_Sample_Set_View.Text = "Choose type of" & vbCrLf & "filter"
+                LabelSearch.Text = "Search"
 
                 L_Name_SLI_Irradiation_Log.Text = "SLI irradiation logs"
                 B_Select_SLI_Irradiation_Log.Text = "Select SLI irradiation log"
@@ -1315,7 +1318,7 @@ Public Class Form_Main
                 ComboBox_Journal_Of_Irradiation_View.Items.Clear()
                 ComboBox_Journal_Of_Irradiation_View.Items.Add("Current year")
                 ComboBox_Journal_Of_Irradiation_View.Items.Add("All years")
-                OpenSet.Text = "Viewing set"
+                OpenSet.Text = "View information about set"
                 ButtonShowAllSrms.Text = "Show all SRMs"
                 L_Name_SRM_Set.Text = "SRM sets"
                 Table_SRM_SetDataGridView.Columns.Item(0).HeaderText = "Name"
@@ -1497,148 +1500,145 @@ Public Class Form_Main
 
     End Sub
 
-    Private Sub ButtonshowAll_Click(sender As Object, e As EventArgs) Handles ButtonshowAll.Click
-        DataSampleSetLoad("")
-    End Sub
 
     Public hist As String = ""
     Public firstFlag As Integer = 0
 
-    Private Sub CBFilter_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBFilter.SelectedIndexChanged
-        Try
-            If SampleSetFormLoadFlag Then
-                Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-                Dim reader As SqlDataReader
-                Dim cmd As New System.Data.SqlClient.SqlCommand
-                cmd.CommandType = System.Data.CommandType.Text
-                Dim qs As String = "select * from SampleSetForNaaDB as sampSet "
-                If CBFilter.SelectedItem = "Показать все" Then
-                    hist = ""
-                    L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
-                    DataSampleSetLoad(hist)
-                    ComboBox_Sample_Set_View.Text = ""
-                    ComboBox_Sample_Set_View.Items.Clear()
-                    firstFlag = 0
-                ElseIf CBFilter.SelectedItem = "Обработано" Then
-                    ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика"
+    'Private Sub CBFilter_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
+    '    Try
+    '        If SampleSetFormLoadFlag Then
+    '            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+    '            Dim reader As SqlDataReader
+    '            Dim cmd As New System.Data.SqlClient.SqlCommand
+    '            cmd.CommandType = System.Data.CommandType.Text
+    '            Dim qs As String = "select * from SampleSetForNaaDB as sampSet "
+    '            If CBFilter.SelectedItem = "Показать все" Then
+    '                hist = ""
+    '                L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
+    '                DataSampleSetLoad(hist)
+    '                ComboBox_Sample_Set_View.Text = ""
+    '                ComboBox_Sample_Set_View.Items.Clear()
+    '                firstFlag = 0
+    '            ElseIf CBFilter.SelectedItem = "Обработано" Then
+    '                ComboBox_Sample_Set_View.Text = ""
+    '                L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.R_Processed_By from (" & qs & fields & ") as b ORDER BY b.R_Processed_By"
-                    Debug.WriteLine(cmd.CommandText)
-                    'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
-                    cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+    '                ComboBox_Sample_Set_View.Items.Clear()
+    '                cmd.CommandText = "select distinct b.R_Processed_By from (" & qs & fields & ") as b ORDER BY b.R_Processed_By"
+    '                Debug.WriteLine(cmd.CommandText)
+    '                'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
+    '                cmd.Connection = sqlConnection1
+    '                sqlConnection1.Open()
+    '                reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+    '                End While
+    '                sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Код клиента" Then
-                        ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента"
+    '            ElseIf CBFilter.SelectedItem = "Код клиента" Then
+    '                ComboBox_Sample_Set_View.Text = ""
+    '                L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code" & fields & ") as b ORDER BY b.clientInfo"
+    '                ComboBox_Sample_Set_View.Items.Clear()
+    '                cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code" & fields & ") as b ORDER BY b.clientInfo"
 
-                        cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+    '                cmd.Connection = sqlConnection1
+    '                sqlConnection1.Open()
+    '                reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+    '                End While
+    '                sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Страна" Then
-                        ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Страна"
+    '            ElseIf CBFilter.SelectedItem = "Страна" Then
+    '                ComboBox_Sample_Set_View.Text = ""
+    '                L_Name_Sample_Set_View.Text = "Страна"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.Country_Code from (" & qs & fields & ") as b ORDER BY b.Country_Code"
+    '                ComboBox_Sample_Set_View.Items.Clear()
+    '                cmd.CommandText = "select distinct b.Country_Code from (" & qs & fields & ") as b ORDER BY b.Country_Code"
 
-                        cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+    '                cmd.Connection = sqlConnection1
+    '                sqlConnection1.Open()
+    '                reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+    '                End While
+    '                sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Год" Then
-                        ComboBox_Sample_Set_View.Text = ""
-                    L_Name_Sample_Set_View.Text = "Год"
+    '            ElseIf CBFilter.SelectedItem = "Год" Then
+    '                ComboBox_Sample_Set_View.Text = ""
+    '                L_Name_Sample_Set_View.Text = "Год"
 
-                    ComboBox_Sample_Set_View.Items.Clear()
-                    cmd.CommandText = "select distinct b.Year from (" & qs & fields & ") as b ORDER BY b.Year"
-                    '"select distinct Year from SampleSetForNaaDB ORDER BY Year"
-                    cmd.Connection = sqlConnection1
-                    sqlConnection1.Open()
-                    reader = cmd.ExecuteReader()
-                    While reader.Read()
-                        If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+    '                ComboBox_Sample_Set_View.Items.Clear()
+    '                cmd.CommandText = "select distinct b.Year from (" & qs & fields & ") as b ORDER BY b.Year"
+    '                '"select distinct Year from SampleSetForNaaDB ORDER BY Year"
+    '                cmd.Connection = sqlConnection1
+    '                sqlConnection1.Open()
+    '                reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                    End While
-                    sqlConnection1.Close()
+    '                End While
+    '                sqlConnection1.Close()
 
-                End If
-                DataGridView_Sample_Set.Focus()
-            End If
-        Catch ex As Exception
+    '            End If
+    '            DataGridView_Sample_Set.Focus()
+    '        End If
+    '    Catch ex As Exception
 
-            LangException(language, ex.Message & ex.ToString)
-        End Try
+    '        LangException(language, ex.Message & ex.ToString)
+    '    End Try
 
-    End Sub
+    'End Sub
 
 
-    Private Sub ComboBox_Sample_Set_View_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox_Sample_Set_View.SelectedIndexChanged
+    'Private Sub ComboBox_Sample_Set_View_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
 
-        Try
-            If L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика" Then
-                Try
-                    If hist = "" Then
-                        hist = hist & " where sampSet.R_Processed_By like  '%" + ComboBox_Sample_Set_View.SelectedItem + "%'"
-                    Else
-                        hist = hist & " and sampSet.R_Processed_By like '%" + ComboBox_Sample_Set_View.SelectedItem + "%'"
-                    End If
-                    If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
+    '    Try
+    '        If L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика" Then
+    '            Try
+    '                If hist = "" Then
+    '                    hist = hist & " where sampSet.R_Processed_By like  '%" + ComboBox_Sample_Set_View.SelectedItem + "%'"
+    '                Else
+    '                    hist = hist & " and sampSet.R_Processed_By like '%" + ComboBox_Sample_Set_View.SelectedItem + "%'"
+    '                End If
+    '                If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
 
-                Catch ex As Exception
-                    MsgBox("Партий с таким обработчиком не найдено.")
-                    DataSampleSetLoad("")
-                End Try
-            ElseIf L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента" Then
-                If hist = "" Then
-                    hist = hist & " where sampSet.Client_ID = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(2) & "' and sampSet.Country_Code = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(1) & "'"
-                Else
-                    hist = hist & " and sampSet.Client_ID = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(2) & "' and sampSet.Country_Code = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(1) & "'"
-                End If
+    '            Catch ex As Exception
+    '                MsgBox("Партий с таким обработчиком не найдено.")
+    '                DataSampleSetLoad("")
+    '            End Try
+    '        ElseIf L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента" Then
+    '            If hist = "" Then
+    '                hist = hist & " where sampSet.Client_ID = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(2) & "' and sampSet.Country_Code = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(1) & "'"
+    '            Else
+    '                hist = hist & " and sampSet.Client_ID = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(2) & "' and sampSet.Country_Code = '" & Split(ComboBox_Sample_Set_View.SelectedItem, ";")(1) & "'"
+    '            End If
 
-                If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
-            ElseIf L_Name_Sample_Set_View.Text = "Страна" Then
-                If hist = "" Then
-                    hist = hist & " where sampSet.Country_Code = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
-                Else
-                    hist = hist & " and sampSet.Country_Code = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
-                End If
+    '            If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
+    '        ElseIf L_Name_Sample_Set_View.Text = "Страна" Then
+    '            If hist = "" Then
+    '                hist = hist & " where sampSet.Country_Code = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+    '            Else
+    '                hist = hist & " and sampSet.Country_Code = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+    '            End If
 
-                If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
-            ElseIf L_Name_Sample_Set_View.Text = "Год" Then
-                If hist = "" Then
-                    hist = hist & " where sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
-                Else
-                    hist = hist & " and sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
-                End If
-                If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
-            End If
-            DataGridView_Sample_Set.Focus()
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-        End Try
-    End Sub
+    '            If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
+    '        ElseIf L_Name_Sample_Set_View.Text = "Год" Then
+    '            If hist = "" Then
+    '                hist = hist & " where sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+    '            Else
+    '                hist = hist & " and sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+    '            End If
+    '            If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
+    '        End If
+    '        DataGridView_Sample_Set.Focus()
+    '    Catch ex As Exception
+    '        LangException(language, ex.Message & ex.ToString)
+    '    End Try
+    'End Sub
 
 End Class

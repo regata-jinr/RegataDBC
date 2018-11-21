@@ -179,7 +179,7 @@ Public Class Form_NAA_Results
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
-            cmd.CommandText = "select distinct a.R_Processed_By from SampleSetForNaaDB as a ORDER BY a.R_Processed_By"
+            cmd.CommandText = "select distinct a.R_Processed_By from SamplesSetForNaaDB as a ORDER BY a.R_Processed_By"
             'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
