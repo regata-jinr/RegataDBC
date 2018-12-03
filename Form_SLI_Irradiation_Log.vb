@@ -2366,4 +2366,5 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
             Exit Sub
         End Try
     End Sub
+
 End Class

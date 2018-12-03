@@ -976,8 +976,11 @@ Public Class Form_LLI_Irradiation_Log
             '    Next
             '    Form_Main.ListBox_LLI_Irradiation_Log_Date.SetSelected(Form_Main.ListBox_LLI_Irradiation_Log_Date.Items.Count - 1, True)
             'End If
-            Form_Main.Form_Main_Load(sender, e)
-            Form_Main.Enabled = True
+
+
+            'we don't need to refresh For_Main
+            '   Form_Main.Form_Main_Load(sender, e)
+            '  Form_Main.Enabled = True
         Catch ex As Exception
             If Form_Main.language = "russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_LLI_Irradiation_Log_FormClosed!", MsgBoxStyle.Critical, Me.Text)

@@ -139,6 +139,7 @@ Partial Class Form_NAA_Results
         Me.DataGridView_Table_Sample_NAA_Results.RowHeadersWidth = 21
         Me.DataGridView_Table_Sample_NAA_Results.Size = New System.Drawing.Size(1188, 489)
         Me.DataGridView_Table_Sample_NAA_Results.TabIndex = 193
+        Me.DataGridView_Table_Sample_NAA_Results.VirtualMode = True
         '
         'L_SS_Sample_ID
         '

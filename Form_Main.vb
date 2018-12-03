@@ -29,7 +29,7 @@ Public Class Form_Main
             'Dim ds As New DataSet()
 
             'dataadapter.Fill(ds, "SampleInf")
-            Dim testDS As New SqlGridView(MyConnectionString, "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID, sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet order by sampSet.Year desc, sampSet.Sample_Set_ID desc")
+            Dim testDS As New SqlGridView(MyConnectionString, "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID, sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet")
             testDS.PartialFillingVertical(100)
             DataGridView_Sample_Set.DataSource = testDS.DataSource
             '  DataGridView_Sample_Set.DataMember = "SampleInf"
@@ -639,6 +639,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
+        Dim FormS As New Form_SLI_Irradiation_Log
         Try
             If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
                 If language = "russian" Then
@@ -660,41 +661,41 @@ Public Class Form_Main
 
             'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            Form_SLI_Irradiation_Log.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
+            FormS.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim s As String
             s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
-            Form_SLI_Irradiation_Log.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(Form_SLI_Irradiation_Log.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, s)
+            FormS.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(FormS.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, s)
 
-            Form_SLI_Irradiation_Log.MaskedTextBox_SLI_Irradiation_Log.Text = s
+            FormS.MaskedTextBox_SLI_Irradiation_Log.Text = s
 
-            Me.Enabled = False
-            Form_SLI_Irradiation_Log.Show()
-
-            If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+            '  Me.Enabled = False
+            FormS.Show()
 
             If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+                FormS.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
             ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+                FormS.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
-            Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+            FormS.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
             If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+                FormS.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
             ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+                FormS.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
-            Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            FormS.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            Me.Enabled = False
+            If language = "russian" Then
+                FormS.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+            ElseIf language = "english" Then
+                FormS.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+            End If
+            FormS.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+
+            '  Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Form_SLI_Irradiation_Log.Close()
+            FormS.Close()
             Exit Sub
         End Try
     End Sub
@@ -826,6 +827,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_LLI_Irradiation_Log.Click
+        Dim FormL As New Form_LLI_Irradiation_Log
         Try
             If ListBox_LLI_Irradiation_Log_Date.Items.Count < 1 Then
                 If language = "russian" Then
@@ -845,48 +847,47 @@ Public Class Form_Main
                 Exit Sub
             End If
 
-            'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
+
+            FormL.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim jDate As String
             Dim number As String
 
             jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
             number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
             's1 = s(s.Count - 4) + s(s.Count - 3) + s(s.Count - 2) + s(s.Count - 1)
-            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(Form_LLI_Irradiation_Log.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
+            FormL.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormL.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
 
-            Form_LLI_Irradiation_Log.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
-            Form_LLI_Irradiation_Log.TextBox_Download.Text = number
+            FormL.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
+            FormL.TextBox_Download.Text = number
 
-            Me.Enabled = False
-            Form_LLI_Irradiation_Log.Show()
-
-            If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+            ' Me.Enabled = False
+            FormL.Show()
 
             If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+                FormL.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
             ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+                FormL.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
-            Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+            FormL.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
             If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+                FormL.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
             ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+                FormL.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
-            Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            FormL.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            Me.Enabled = False
+            If language = "russian" Then
+                FormL.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+            ElseIf language = "english" Then
+                FormL.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+            End If
+            FormL.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+
+            ' Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Form_LLI_Irradiation_Log.Close()
+            FormL.Close()
             Exit Sub
         End Try
     End Sub
