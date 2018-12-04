@@ -81,6 +81,8 @@ Partial Class Form_Main
         Me.CBFilter = New System.Windows.Forms.ComboBox()
         Me.SampleSetInfo = New System.Windows.Forms.GroupBox()
         Me.ButtonshowAll = New System.Windows.Forms.Button()
+        Me.B_Refresh = New System.Windows.Forms.Button()
+        Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -88,8 +90,7 @@ Partial Class Form_Main
         Me.Table_Sample_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter()
         Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
         Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
-        Me.B_Refresh = New System.Windows.Forms.Button()
-        Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
+        Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -664,6 +665,26 @@ Partial Class Form_Main
         Me.ButtonshowAll.Text = "Показать все"
         Me.ButtonshowAll.UseVisualStyleBackColor = True
         '
+        'B_Refresh
+        '
+        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
+        Me.B_Refresh.Name = "B_Refresh"
+        Me.B_Refresh.Size = New System.Drawing.Size(429, 23)
+        Me.B_Refresh.TabIndex = 179
+        Me.B_Refresh.Text = "Refresh"
+        Me.B_Refresh.UseVisualStyleBackColor = True
+        '
+        'ButtonShowAllSrms
+        '
+        Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
+        Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
+        Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
+        Me.ButtonShowAllSrms.TabIndex = 195
+        Me.ButtonShowAllSrms.Text = "ShowAllSRMs"
+        Me.ButtonShowAllSrms.UseVisualStyleBackColor = True
+        '
         'Table_SRM_Set_BindingSource
         '
         Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
@@ -713,25 +734,8 @@ Partial Class Form_Main
         '
         Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
         '
-        'B_Refresh
+        'BackgroundWorkerColorizer
         '
-        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
-        Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(429, 23)
-        Me.B_Refresh.TabIndex = 179
-        Me.B_Refresh.Text = "Refresh"
-        Me.B_Refresh.UseVisualStyleBackColor = True
-        '
-        'ButtonShowAllSrms
-        '
-        Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
-        Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
-        Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
-        Me.ButtonShowAllSrms.TabIndex = 195
-        Me.ButtonShowAllSrms.Text = "ShowAllSRMs"
-        Me.ButtonShowAllSrms.UseVisualStyleBackColor = True
         '
         'Form_Main
         '
@@ -862,4 +866,5 @@ Partial Class Form_Main
     Friend WithEvents ButtonshowAll As Button
     Friend WithEvents B_Refresh As Button
     Friend WithEvents ButtonShowAllSrms As Button
+    Friend WithEvents BackgroundWorkerColorizer As System.ComponentModel.BackgroundWorker
 End Class

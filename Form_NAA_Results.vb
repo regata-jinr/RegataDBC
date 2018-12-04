@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 
 Public Class Form_NAA_Results
     Public HidColumnsDict As New Dictionary(Of Integer, String)
@@ -179,7 +180,7 @@ Public Class Form_NAA_Results
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
-            cmd.CommandText = "select distinct a.R_Processed_By from SampleSetForNaaDB as a ORDER BY a.R_Processed_By"
+            cmd.CommandText = "select distinct a.R_Processed_By from SamplesSetForNaaDB as a ORDER BY a.R_Processed_By"
             'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
@@ -210,35 +211,35 @@ Public Class Form_NAA_Results
                     End If
 
                 End While
-            sqlConnection1.Close()
+                sqlConnection1.Close()
 
-            B_Fill_In_From_File.Text = "Заполнить из файла"
-            Clear_Table.Text = "Очистить таблицу"
-            B_Save.Text = "Сохранить в БД"
-            B_Save_Final_Report.Text = "Сохранить финальный отчёт"
-            B_Close.Text = "Закрыть"
+                B_Fill_In_From_File.Text = "Заполнить из файла"
+                Clear_Table.Text = "Очистить таблицу"
+                B_Save.Text = "Сохранить в БД"
+                B_Save_Final_Report.Text = "Сохранить финальный отчёт"
+                B_Close.Text = "Закрыть"
 
-            Label_ProgressBar_Save_File_CON.Text = "Ждите, идет обработка данных!"
+                Label_ProgressBar_Save_File_CON.Text = "Ждите, идет обработка данных!"
 
-            OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+                OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+                SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
             ElseIf Form_Main.language = "english" Then
-            Me.Text = "NAA results"
+                Me.Text = "NAA results"
 
-            L_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
+                L_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
 
-            L_Name_Person.Text = "Person"
+                L_Name_Person.Text = "Person"
 
-            B_Fill_In_From_File.Text = "Fill in from file"
-            Clear_Table.Text = "Clear table"
-            B_Save.Text = "Save into DB"
-            B_Save_Final_Report.Text = "Save final report"
-            B_Close.Text = "Close"
+                B_Fill_In_From_File.Text = "Fill in from file"
+                Clear_Table.Text = "Clear table"
+                B_Save.Text = "Save into DB"
+                B_Save_Final_Report.Text = "Save final report"
+                B_Close.Text = "Close"
 
-            Label_ProgressBar_Save_File_CON.Text = "Wait, data is processing!"
+                Label_ProgressBar_Save_File_CON.Text = "Wait, data is processing!"
 
-            OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
-            SaveFileDialog_Final_Report.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+                OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+                SaveFileDialog_Final_Report.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
 
 
 
@@ -305,7 +306,7 @@ Public Class Form_NAA_Results
                         End If
 
                     End If
-                   
+
                 Next
                 If queryBody <> "" Then
                     cmd.CommandText = "update NaaRes set " & queryBody & where & DataGridView_Table_Sample_NAA_Results.Rows(j).Cells(0).Value.ToString & "'"
@@ -471,8 +472,8 @@ Public Class Form_NAA_Results
                     ws.Columns().AdjustToContents()
                     wb.SaveAs(SaveFileDialog_Final_Report.FileName)
                 End Using
-                End If
-                Me.Close()
+            End If
+            Me.Close()
         Catch ex As Exception
             Me.Enabled = True
             MsgBox(ex.ToString)
@@ -613,5 +614,27 @@ Public Class Form_NAA_Results
         End If
 
 
+    End Sub
+
+    Public Sub ColorizeAll()
+        Debug.WriteLine($"It's in background")
+
+        Dim inum As Integer = 1
+        For j As Integer = 24 To DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
+            Debug.WriteLine(j)
+            DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
+            If inum <= 3 Then
+                DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
+            Else
+                DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
+            End If
+            inum += 1
+            If inum = 7 Then inum = 1
+
+        Next
+    End Sub
+
+    Private Sub BackgroundWorkerNaaResults_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorkerNaaResults.DoWork
+        ColorizeAll()
     End Sub
 End Class

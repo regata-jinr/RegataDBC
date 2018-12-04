@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_NAA_Results
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_NAA_Results
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.B_Close = New System.Windows.Forms.Button()
         Me.B_Fill_In_From_File = New System.Windows.Forms.Button()
@@ -51,6 +51,7 @@ Partial Class Form_NAA_Results
         Me.CBCol1 = New System.Windows.Forms.CheckBox()
         Me.CBCol0 = New System.Windows.Forms.CheckBox()
         Me.HidEmptEl = New System.Windows.Forms.CheckBox()
+        Me.BackgroundWorkerNaaResults = New System.ComponentModel.BackgroundWorker()
         CType(Me.DataGridView_Table_Sample_NAA_Results, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel_ProgressBar_Save_File_CON.SuspendLayout()
         Me.HidBox.SuspendLayout()
@@ -449,4 +450,5 @@ Partial Class Form_NAA_Results
     Friend WithEvents CBCol0 As System.Windows.Forms.CheckBox
     Friend WithEvents CBHideAll As System.Windows.Forms.CheckBox
     Friend WithEvents HidEmptEl As System.Windows.Forms.CheckBox
+    Friend WithEvents BackgroundWorkerNaaResults As System.ComponentModel.BackgroundWorker
 End Class

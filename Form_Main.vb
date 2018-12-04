@@ -1,4 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
+Imports System.Threading
+Imports System.Threading.Tasks
+Imports System.Deployment.Application
 
 Public Class Form_Main
     Public us As String
@@ -21,7 +25,7 @@ Public Class Form_Main
         cmd.CommandType = System.Data.CommandType.Text
         fields = Field
 
-        cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SampleSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
+        cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
 
         Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
         Dim ds As New DataSet()
@@ -34,12 +38,21 @@ Public Class Form_Main
         DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
         SampleSetFormLoadFlag = True
 
-        For i As Integer = 0 To (DataGridView_Sample_Set.RowCount - 1)
-            DataGridView_Sample_Set.Rows.Item(i).Height = 24
-            DataGridView_Sample_Set.Rows.Item(i).Selected = True
-            ' Fill_In_Monitor()
-            '  DataGridView_Sample_Set.Rows.Item(i).Selected = False
+
+        DataGridView_Sample_Set.SelectAll()
+        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True) - 50
+        Dim finish As Integer = DataGridView_Sample_Set.RowCount
+
+
+        'For i As Integer = 0 To (DataGridView_Sample_Set.RowCount - 1)
+        For i As Integer = start To finish - 1
+
+            'DataGridView_Sample_Set.Rows.Item(i).Height = 24
+            'DataGridView_Sample_Set.Rows.Item(i).Selected = True
+            Colorize(DataGridView_Sample_Set.Rows.Item(i))
         Next
+
+
 
         If DataGridView_Sample_Set.RowCount = 0 Then
             MsgBox("Таких значений нет")
@@ -50,7 +63,19 @@ Public Class Form_Main
         DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
         DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
 
+        BackgroundWorkerColorizer.RunWorkerAsync()
+
     End Sub
+
+    Private Sub ColorizeAll()
+        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True) - 50
+        For Each row As DataGridViewRow In DataGridView_Sample_Set.Rows
+            If row.Index >= start Then Exit For
+            Colorize(row)
+        Next
+    End Sub
+
+
 
     Public Sub LangException(ByVal language As String, ByVal msg As String)
         If language = "russian" Then
@@ -211,6 +236,24 @@ Public Class Form_Main
             Exit Sub
         End Try
     End Sub
+    Private Sub Colorize(row As DataGridViewRow) 'раскраска DataGridView1
+        Try
+            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+            Dim cmd As New System.Data.SqlClient.SqlCommand
+
+            cmd.CommandType = System.Data.CommandType.Text
+            cmd.CommandText = "select color from SamplesSetForNaaDB where Country_Code ='" + row.Cells(0).Value + "' and  Client_ID = '" + row.Cells(1).Value + "' and Year = '" + row.Cells(2).Value + "' and Sample_Set_ID = '" + row.Cells(3).Value + "' and Sample_Set_Index = '" + row.Cells(4).Value + "'"
+
+            cmd.Connection = sqlConnection1
+            sqlConnection1.Open()
+            row.DefaultCellStyle.BackColor = Color.FromName(cmd.ExecuteScalar().ToString())
+            sqlConnection1.Close()
+
+        Catch ex As Exception
+            LangException(language, ex.Message & ex.ToString)
+        End Try
+    End Sub
+
 
 
 
@@ -218,7 +261,7 @@ Public Class Form_Main
         Try
             L_Monitor.Text = ""
             Dim i As Integer
-            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, PrepFact, SLIFact, LLIFact, Notice, NoticeMod As String
+            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, Notice, NoticeMod As String
             Dim ProcessedBy As String = ""
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
@@ -232,9 +275,6 @@ Public Class Form_Main
             Results = ""
             SLIDateString = ""
             LLIDateString = ""
-            PrepFact = ""
-            SLIFact = ""
-            LLIFact = ""
             Notice = ""
             NoticeMod = ""
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
@@ -244,7 +284,7 @@ Public Class Form_Main
             If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub 'чтобы избежать ошибки при сортировке срабатывает selectionChanged до выполнения тела события columnHeaderClick
 
             cmd.CommandType = System.Data.CommandType.Text
-            cmd.CommandText = "select * from SampleSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
+            cmd.CommandText = "select * from SamplesSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
 
             CountOfSample = 0
             i = 1
@@ -253,7 +293,6 @@ Public Class Form_Main
             reader = cmd.ExecuteReader()
             'подумать над оптимизацией через циклы и индексы
             While reader.Read()
-                '  MsgBox(reader(5) & "__" & reader(6) & "__" & reader(7) & "__" & reader(8) & "__" & reader(9) & "__" & reader(10) & "__" & reader(11) & "__" & reader(12) & "__" & reader(13) & "__" & reader(14))
                 If Not IsDBNull(reader(5)) Then Country = reader(5).ToString
                 If Not IsDBNull(reader(6)) Then Organzation = reader(6).ToString
                 If Not IsDBNull(reader(7)) Then LastName = reader(7).ToString
@@ -293,12 +332,9 @@ Public Class Form_Main
 
                 If Not IsDBNull(reader(12)) Then ProcessedBy = reader(12).ToString
 
-                Results += Results & reader(13).ToString
-                PrepFact += PrepFact & reader(14).ToString
-                SLIFact += SLIFact & reader(15).ToString
-                LLIFact += LLIFact & reader(16).ToString
-                If Not IsDBNull(reader(17)) Then
-                    Notice = reader(17).ToString
+                Results = reader(13).ToString
+                If Not IsDBNull(reader(18)) Then
+                    Notice = reader(18).ToString
                     For Each notc In Notice.Split(vbCrLf)
                         'TODO: check why for large string cond doesn't work 
                         If notc.Length > 40 Then
@@ -313,26 +349,14 @@ Public Class Form_Main
             reader.Close()
             sqlConnection1.Close()
 
-            If Results <> "" And SLIFact <> "" And LLIFact <> "" And PrepFact <> "" Then 'кжи, джи, результаты
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LimeGreen
-            ElseIf Results <> "" And (SLIFact <> "" Or LLIFact <> "") Then ' кжи или джи плюс результаты
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LightGreen
-            ElseIf Results = "" And LLIFact <> "" Then ' облучение джи
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.Yellow
-            ElseIf Results = "" And SLIFact <> "" And LLIFact = "" Then ' облучение кжи
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LemonChiffon
-            ElseIf Results = "" And SLIFact = "" And LLIFact = "" And PrepFact <> "" Then ' проведена пробоподготовка
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.White
-            Else
-                DataGridView_Sample_Set.SelectedRows.Item(0).DefaultCellStyle.BackColor = Color.LightPink
-            End If
-
             If Results <> "" Then Results = "Yes"
 
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + NoticeMod
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + NoticeMod
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
+
+            Colorize(DataGridView_Sample_Set.SelectedRows.Item(0))
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -341,7 +365,10 @@ Public Class Form_Main
 
     Public Sub Form_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = "База данных НАА - " & Application.ProductVersion & "  " & us
+
+
         Try
+
             Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.InitialDirectory = "C:\"
             CBFilter.Text = "Показать все"
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
@@ -414,7 +441,16 @@ Public Class Form_Main
             sqlConnection1.Close()
             DataSampleSetLoad("")
 
-            ' SampleSetFormLoadFlag = True
+            Dim UpdMsg As String
+            UpdMsg = $"Оптимизирован процесс загрузки{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
+            'update message
+            If ApplicationDeployment.IsNetworkDeployed Then
+
+                Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
+                If current.IsFirstRun Then
+                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{UpdMsg}", $"Обновление базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End If
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Me.Close()
@@ -634,6 +670,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
+        Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
             If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
                 If language = "russian" Then
@@ -655,41 +692,41 @@ Public Class Form_Main
 
             'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            Form_SLI_Irradiation_Log.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
+            ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim s As String
             s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
-            Form_SLI_Irradiation_Log.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(Form_SLI_Irradiation_Log.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, s)
+            ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(ForSliLog.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, s)
 
-            Form_SLI_Irradiation_Log.MaskedTextBox_SLI_Irradiation_Log.Text = s
+            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = s
 
-            Me.Enabled = False
-            Form_SLI_Irradiation_Log.Show()
-
-            If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            Form_SLI_Irradiation_Log.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+            ' Me.Enabled = False
+            ForSliLog.Show()
 
             If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
             ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
-            Form_SLI_Irradiation_Log.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+            ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
             If language = "russian" Then
-                Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
             ElseIf language = "english" Then
-                Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
-            Form_SLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+
+            If language = "russian" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+            ElseIf language = "english" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+            End If
+            ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
             Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Form_SLI_Irradiation_Log.Close()
+            ForSliLog.Close()
             Exit Sub
         End Try
     End Sub
@@ -821,6 +858,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_LLI_Irradiation_Log.Click
+        Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
             If ListBox_LLI_Irradiation_Log_Date.Items.Count < 1 Then
                 If language = "russian" Then
@@ -842,46 +880,46 @@ Public Class Form_Main
 
             'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
             'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
+            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim jDate As String
             Dim number As String
 
             jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
             number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
             's1 = s(s.Count - 4) + s(s.Count - 3) + s(s.Count - 2) + s(s.Count - 1)
-            Form_LLI_Irradiation_Log.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(Form_LLI_Irradiation_Log.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
+            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormLLiLog.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
 
-            Form_LLI_Irradiation_Log.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
-            Form_LLI_Irradiation_Log.TextBox_Download.Text = number
+            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
+            FormLLiLog.TextBox_Download.Text = number
 
-            Me.Enabled = False
-            Form_LLI_Irradiation_Log.Show()
-
-            If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            Form_LLI_Irradiation_Log.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+            ' Me.Enabled = False))
+            FormLLiLog.Show()
 
             If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
             ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
-            Form_LLI_Irradiation_Log.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+            FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
             If language = "russian" Then
-                Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
             ElseIf language = "english" Then
-                Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
-            Form_LLI_Irradiation_Log.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            Me.Enabled = False
+            If language = "russian" Then
+                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+            ElseIf language = "english" Then
+                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+            End If
+            FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+
+            ' Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Form_LLI_Irradiation_Log.Close()
+            FormLLiLog.Close()
             Exit Sub
         End Try
     End Sub
@@ -1502,6 +1540,25 @@ Public Class Form_Main
     End Sub
 
     Public hist As String = ""
+
+    Private Sub ButtonShowAllSrms_Click(sender As Object, e As EventArgs) Handles ButtonShowAllSrms.Click
+        Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+        Dim cmd As New System.Data.SqlClient.SqlCommand
+        cmd.CommandType = System.Data.CommandType.Text
+
+        ComboBox_Journal_Of_Irradiation_View_SelectedIndexChanged(sender, e)
+
+        cmd.CommandText = "select * from SRM_Set_All"
+
+        Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+        Dim ds As New DataSet()
+
+        dataadapter.Fill(ds, "SrmSetAll")
+        Table_SRM_SetDataGridView.DataSource = ds
+        Table_SRM_SetDataGridView.DataMember = "SrmSetAll"
+        Change_Language()
+    End Sub
+
     Public firstFlag As Integer = 0
 
     Private Sub CBFilter_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBFilter.SelectedIndexChanged
@@ -1511,7 +1568,7 @@ Public Class Form_Main
                 Dim reader As SqlDataReader
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
-                Dim qs As String = "select * from SampleSetForNaaDB as sampSet "
+                Dim qs As String = "select * from SamplesSetForNaaDB as sampSet "
                 If CBFilter.SelectedItem = "Показать все" Then
                     hist = ""
                     L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
@@ -1521,55 +1578,55 @@ Public Class Form_Main
                     firstFlag = 0
                 ElseIf CBFilter.SelectedItem = "Обработано" Then
                     ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика"
+                    L_Name_Sample_Set_View.Text = "Фамилия" & vbCrLf & "обработчика"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.R_Processed_By from (" & qs & fields & ") as b ORDER BY b.R_Processed_By"
+                    ComboBox_Sample_Set_View.Items.Clear()
+                    cmd.CommandText = "select distinct b.R_Processed_By from (" & qs & fields & ") as b ORDER BY b.R_Processed_By"
                     Debug.WriteLine(cmd.CommandText)
                     'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
                     cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+                    End While
+                    sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Код клиента" Then
-                        ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента"
+                ElseIf CBFilter.SelectedItem = "Код клиента" Then
+                    ComboBox_Sample_Set_View.Text = ""
+                    L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code" & fields & ") as b ORDER BY b.clientInfo"
+                    ComboBox_Sample_Set_View.Items.Clear()
+                    cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code" & fields & ") as b ORDER BY b.clientInfo"
 
-                        cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+                    End While
+                    sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Страна" Then
-                        ComboBox_Sample_Set_View.Text = ""
-                        L_Name_Sample_Set_View.Text = "Страна"
+                ElseIf CBFilter.SelectedItem = "Страна" Then
+                    ComboBox_Sample_Set_View.Text = ""
+                    L_Name_Sample_Set_View.Text = "Страна"
 
-                        ComboBox_Sample_Set_View.Items.Clear()
-                        cmd.CommandText = "select distinct b.Country_Code from (" & qs & fields & ") as b ORDER BY b.Country_Code"
+                    ComboBox_Sample_Set_View.Items.Clear()
+                    cmd.CommandText = "select distinct b.Country_Code from (" & qs & fields & ") as b ORDER BY b.Country_Code"
 
-                        cmd.Connection = sqlConnection1
-                        sqlConnection1.Open()
-                        reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
-                        End While
-                        sqlConnection1.Close()
+                    End While
+                    sqlConnection1.Close()
 
-                    ElseIf CBFilter.SelectedItem = "Год" Then
-                        ComboBox_Sample_Set_View.Text = ""
+                ElseIf CBFilter.SelectedItem = "Год" Then
+                    ComboBox_Sample_Set_View.Text = ""
                     L_Name_Sample_Set_View.Text = "Год"
 
                     ComboBox_Sample_Set_View.Items.Clear()
@@ -1641,4 +1698,7 @@ Public Class Form_Main
         End Try
     End Sub
 
+    Private Sub BackgroundWorkerColorizer_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorkerColorizer.DoWork
+        ColorizeAll()
+    End Sub
 End Class

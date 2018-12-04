@@ -1,4 +1,6 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
+
 Public Class Form_Samples_List
     Public sample_action As String
 
@@ -215,11 +217,10 @@ Public Class Form_Samples_List
     End Sub
 
 
-
-  
     Private Sub B_NAA_Results_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_NAA_Results.Click
         Try
-
+            Dim timer As New Stopwatch()
+            timer.Start()
             If ListBox_Sample_ID.Items.Count = 0 Then
                 If Form_Main.language = "russian" Then
                     MsgBox("Партия образцов не содержит ни одного образца. Выберите другую партию!", MsgBoxStyle.Exclamation, Me.Text)
@@ -231,6 +232,7 @@ Public Class Form_Samples_List
 
             Me.Enabled = False
             Form_NAA_Results.Show()
+
             Form_NAA_Results.L_SS_Country_Code.Text = L_SS_Country_Code.Text
             Form_NAA_Results.L_SS_Client_ID.Text = L_SS_Client_ID.Text
             Form_NAA_Results.L_SS_Year.Text = L_SS_Year.Text
@@ -246,10 +248,14 @@ Public Class Form_Samples_List
             Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
             Dim ds As New DataSet()
 
-            dataadapter.Fill(ds, "SampleInf")
+            Debug.WriteLine($"Pre fill  {timer.ElapsedMilliseconds / 1000}")
 
+            dataadapter.Fill(ds, "SampleInf")
+            Debug.WriteLine($"fill  {timer.ElapsedMilliseconds / 1000}")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = False
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataSource = ds
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataMember = "SampleInf"
+            Debug.WriteLine($"Source  {timer.ElapsedMilliseconds / 1000}")
 
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Country_Code")
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Client_ID")
@@ -265,19 +271,22 @@ Public Class Form_Samples_List
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.AllowUserToAddRows = False
 
             Dim inum As Integer = 1
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = True
+            Debug.WriteLine($"End  {timer.ElapsedMilliseconds / 1000}")
 
-            For j As Integer = 8 To Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
-                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
-                If inum <= 3 Then
-                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
-                Else
-                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
-                End If
-                inum += 1
-                If inum = 7 Then inum = 1
+            'For j As Integer = 8 To 25 'Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
+            '    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
+            '    If inum <= 3 Then
+            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
+            '    Else
+            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
+            '    End If
+            '    inum += 1
+            '    If inum = 7 Then inum = 1
 
-            Next
+            'Next
 
+            'Form_NAA_Results.BackgroundWorkerNaaResults.RunWorkerAsync()
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)
@@ -535,7 +544,7 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
                 Next
             End If
 
-          
+
         Catch ex As Exception
             If Form_Main.language = "russian" Then
                 MsgBox("Операция была отменена (ошибка в B_Insert_All_Samples_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -561,4 +570,5 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
         Form_Notice.RichTextBoxFormNotice.Text = reader(0)
         sqlConnection1.Close()
     End Sub
+
 End Class
