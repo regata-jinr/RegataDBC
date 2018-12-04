@@ -335,13 +335,13 @@ Public Class Form_Main
                 Results = reader(13).ToString
                 If Not IsDBNull(reader(18)) Then
                     Notice = reader(18).ToString
-                    For Each notc In Notice.Split(vbCrLf)
-                        'TODO: check why for large string cond doesn't work 
-                        If notc.Length > 40 Then
-                            notc = notc.Substring(0, 40) + "..."
-                        End If
-                        NoticeMod += notc
-                    Next
+                    ' For Each notc In Notice.Split("@")
+                    'TODO: check why for large string cond doesn't work 
+                    If Notice.Length > 40 Then
+                        Notice = Notice.Substring(0, 40) + "..."
+                    End If
+                    ' NoticeMod += notc
+                    ' Next
 
                 End If
                 i += 1
@@ -351,7 +351,7 @@ Public Class Form_Main
 
             If Results <> "" Then Results = "Yes"
 
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + NoticeMod
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + Notice
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
