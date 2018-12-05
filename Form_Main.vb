@@ -17,53 +17,63 @@ Public Class Form_Main
 
 
     Sub DataSampleSetLoad(ByVal Field As String)
-        Debug.WriteLine("DataSampleSetLoad:")
-        SampleSetFormLoadFlag = False
-        Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-        Dim cmd As New System.Data.SqlClient.SqlCommand
+        Try
+            Debug.WriteLine("DataSampleSetLoad:")
+            SampleSetFormLoadFlag = False
+            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+            Dim cmd As New System.Data.SqlClient.SqlCommand
 
-        cmd.CommandType = System.Data.CommandType.Text
-        fields = Field
+            cmd.CommandType = System.Data.CommandType.Text
+            fields = Field
 
-        cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
+            cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
 
-        Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-        Dim ds As New DataSet()
+            Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+            Dim ds As New DataSet()
 
-        dataadapter.Fill(ds, "SampleInf")
-        DataGridView_Sample_Set.DataSource = ds
-        DataGridView_Sample_Set.DataMember = "SampleInf"
-        DataGridView_Sample_Set.ReadOnly = True
-        DataGridView_Sample_Set.AllowUserToAddRows = False
-        DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
-        SampleSetFormLoadFlag = True
-
-
-        DataGridView_Sample_Set.SelectAll()
-        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
-        Dim finish As Integer = DataGridView_Sample_Set.RowCount
-        Debug.WriteLine(start)
-        Debug.WriteLine(finish)
-
-        For i As Integer = start To finish - 1
-
-            'DataGridView_Sample_Set.Rows.Item(i).Height = 24
-            'DataGridView_Sample_Set.Rows.Item(i).Selected = True
-            Colorize(DataGridView_Sample_Set.Rows.Item(i))
-        Next
+            dataadapter.Fill(ds, "SampleInf")
+            DataGridView_Sample_Set.DataSource = ds
+            DataGridView_Sample_Set.DataMember = "SampleInf"
+            DataGridView_Sample_Set.ReadOnly = True
+            DataGridView_Sample_Set.AllowUserToAddRows = False
+            DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
+            SampleSetFormLoadFlag = True
 
 
+            DataGridView_Sample_Set.SelectAll()
+            Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
+            Dim finish As Integer = DataGridView_Sample_Set.RowCount
+            Debug.WriteLine(start)
+            Debug.WriteLine(finish)
 
-        If DataGridView_Sample_Set.RowCount = 0 Then
+            For i As Integer = start To finish - 1
+
+                'DataGridView_Sample_Set.Rows.Item(i).Height = 24
+                'DataGridView_Sample_Set.Rows.Item(i).Selected = True
+                Colorize(DataGridView_Sample_Set.Rows.Item(i))
+            Next
+
+
+
+            If DataGridView_Sample_Set.RowCount = 0 Then
                 MsgBox("Таких значений нет")
                 DataSampleSetLoad("")
                 ' Exit Sub
             End If
 
             DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-        DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
+            DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
+
+            If BackgroundWorkerColorizer.IsBusy Then
+                BackgroundWorkerColorizer.CancelAsync()
+            End If
 
             BackgroundWorkerColorizer.RunWorkerAsync()
+        Catch backgroundWorker As InvalidOperationException
+        Catch ex As Exception
+            LangException(language, ex.Message & ex.ToString)
+        End Try
+
 
     End Sub
 
@@ -264,6 +274,7 @@ Public Class Form_Main
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
             Dim CountOfSample As Integer
+            Dim ProcessedSample As Integer = 0
             Country = ""
             Organzation = ""
             LastName = ""
@@ -298,7 +309,6 @@ Public Class Form_Main
                 If Not IsDBNull(reader(9)) Then SampleType = reader(9).ToString
 
                 If Not IsDBNull(reader(10)) Then
-
                     If Not SLIDateAr.Contains(Format(reader(10), "dd.MM.yyyy").ToString()) Then
                         If i Mod 3 <> 0 Then
                             SLIDateAr.Add(Format(reader(10), "dd.MM.yyyy").ToString())
@@ -342,6 +352,11 @@ Public Class Form_Main
                     ' Next
 
                 End If
+
+                If Not IsDBNull(reader(20)) Then
+                    ProcessedSample = reader(20)
+                End If
+
                 i += 1
             End While
             reader.Close()
@@ -349,7 +364,7 @@ Public Class Form_Main
 
             If Results <> "" Then Results = "Yes"
 
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Комментарии:" + vbCrLf + Notice
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
@@ -437,10 +452,10 @@ Public Class Form_Main
                 End If
             End While
             sqlConnection1.Close()
-            DataSampleSetLoad("")
+            DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"Оптимизирован процесс загрузки{vbCrLf}Исправлена ошибка в поиске{vbCrLf}{vbCrLf}{vbCrLf}Нововведения с версии 5.10.3{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
+            UpdMsg = $"В мониторе партии добавлена информация о том, сколько образцов обработано.{vbCrLf}Изменена логика закрашивания партий{vbCrLf}По умолчанию загружаются все партии кроме 'зеленых'.{vbCrLf}{vbCrLf}Нововведения с версии 5.10.3 {vbCrLf}Оптимизирован процесс загрузки{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
@@ -1534,7 +1549,11 @@ Public Class Form_Main
     End Sub
 
     Private Sub ButtonshowAll_Click(sender As Object, e As EventArgs) Handles ButtonshowAll.Click
-        CBFilter.SelectedItem = "Показать все"
+        If CBFilter.SelectedItem <> "Показать все" Then
+            CBFilter.SelectedItem = "Показать все"
+        Else
+            DataSampleSetLoad("")
+        End If
     End Sub
 
     Public hist As String = ""
