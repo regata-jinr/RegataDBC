@@ -40,11 +40,11 @@ Public Class Form_Main
 
 
         DataGridView_Sample_Set.SelectAll()
-        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True) - 50
+        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
         Dim finish As Integer = DataGridView_Sample_Set.RowCount
+        Debug.WriteLine(start)
+        Debug.WriteLine(finish)
 
-
-        'For i As Integer = 0 To (DataGridView_Sample_Set.RowCount - 1)
         For i As Integer = start To finish - 1
 
             'DataGridView_Sample_Set.Rows.Item(i).Height = 24
@@ -55,22 +55,20 @@ Public Class Form_Main
 
 
         If DataGridView_Sample_Set.RowCount = 0 Then
-            MsgBox("Таких значений нет")
-            DataSampleSetLoad("")
-            ' Exit Sub
-        End If
+                MsgBox("Таких значений нет")
+                DataSampleSetLoad("")
+                ' Exit Sub
+            End If
 
-        DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
+            DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
         DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
 
-        BackgroundWorkerColorizer.RunWorkerAsync()
+            BackgroundWorkerColorizer.RunWorkerAsync()
 
     End Sub
 
     Private Sub ColorizeAll()
-        Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True) - 50
         For Each row As DataGridViewRow In DataGridView_Sample_Set.Rows
-            If row.Index >= start Then Exit For
             Colorize(row)
         Next
     End Sub
@@ -442,7 +440,7 @@ Public Class Form_Main
             DataSampleSetLoad("")
 
             Dim UpdMsg As String
-            UpdMsg = $"Оптимизирован процесс загрузки{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
+            UpdMsg = $"Оптимизирован процесс загрузки{vbCrLf}Исправлена ошибка в поиске{vbCrLf}{vbCrLf}{vbCrLf}Нововведения с версии 5.10.3{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
@@ -1536,7 +1534,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub ButtonshowAll_Click(sender As Object, e As EventArgs) Handles ButtonshowAll.Click
-        DataSampleSetLoad("")
+        CBFilter.SelectedItem = "Показать все"
     End Sub
 
     Public hist As String = ""
