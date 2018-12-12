@@ -24,65 +24,16 @@ Partial Class OpenSampleForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OpenSampleForm))
-        Me.OpenSetSLIDataGridView = New System.Windows.Forms.DataGridView()
-        Me.OpenSetLLIDataGridView = New System.Windows.Forms.DataGridView()
-        Me.OpenSetBaseDataGridView = New System.Windows.Forms.DataGridView()
         Me.BaseLabel = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DataGridViewForPrint = New System.Windows.Forms.DataGridView()
+        Me.ButtonExport = New System.Windows.Forms.Button()
+        Me.SaveFileDialogExportToExcel = New System.Windows.Forms.SaveFileDialog()
         Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.NAADBEXPDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        CType(Me.OpenSetSLIDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OpenSetLLIDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OpenSetBaseDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridViewForPrint, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAADBEXPDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'OpenSetSLIDataGridView
-        '
-        Me.OpenSetSLIDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OpenSetSLIDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.OpenSetSLIDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        Me.OpenSetSLIDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.OpenSetSLIDataGridView.Location = New System.Drawing.Point(12, 101)
-        Me.OpenSetSLIDataGridView.Name = "OpenSetSLIDataGridView"
-        Me.OpenSetSLIDataGridView.ReadOnly = True
-        Me.OpenSetSLIDataGridView.RowHeadersVisible = False
-        Me.OpenSetSLIDataGridView.Size = New System.Drawing.Size(913, 280)
-        Me.OpenSetSLIDataGridView.TabIndex = 0
-        '
-        'OpenSetLLIDataGridView
-        '
-        Me.OpenSetLLIDataGridView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OpenSetLLIDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.OpenSetLLIDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        Me.OpenSetLLIDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.OpenSetLLIDataGridView.Location = New System.Drawing.Point(12, 407)
-        Me.OpenSetLLIDataGridView.Name = "OpenSetLLIDataGridView"
-        Me.OpenSetLLIDataGridView.ReadOnly = True
-        Me.OpenSetLLIDataGridView.RowHeadersVisible = False
-        Me.OpenSetLLIDataGridView.Size = New System.Drawing.Size(913, 274)
-        Me.OpenSetLLIDataGridView.TabIndex = 1
-        '
-        'OpenSetBaseDataGridView
-        '
-        Me.OpenSetBaseDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OpenSetBaseDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.OpenSetBaseDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.OpenSetBaseDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        Me.OpenSetBaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.OpenSetBaseDataGridView.Location = New System.Drawing.Point(12, 28)
-        Me.OpenSetBaseDataGridView.MultiSelect = False
-        Me.OpenSetBaseDataGridView.Name = "OpenSetBaseDataGridView"
-        Me.OpenSetBaseDataGridView.ReadOnly = True
-        Me.OpenSetBaseDataGridView.RowHeadersVisible = False
-        Me.OpenSetBaseDataGridView.Size = New System.Drawing.Size(913, 47)
-        Me.OpenSetBaseDataGridView.TabIndex = 2
         '
         'BaseLabel
         '
@@ -90,35 +41,40 @@ Partial Class OpenSampleForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BaseLabel.AutoSize = True
         Me.BaseLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.BaseLabel.Location = New System.Drawing.Point(356, 6)
+        Me.BaseLabel.Location = New System.Drawing.Point(297, 19)
         Me.BaseLabel.Name = "BaseLabel"
-        Me.BaseLabel.Size = New System.Drawing.Size(234, 20)
+        Me.BaseLabel.Size = New System.Drawing.Size(351, 20)
         Me.BaseLabel.TabIndex = 3
-        Me.BaseLabel.Text = "Общая информация о партии"
+        Me.BaseLabel.Text = "Подготовка списка партий к экспорту в excel"
         '
-        'Label2
+        'DataGridViewForPrint
         '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label2.Location = New System.Drawing.Point(400, 78)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(160, 20)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Информации о КЖИ"
+        Me.DataGridViewForPrint.AllowUserToAddRows = False
+        Me.DataGridViewForPrint.AllowUserToOrderColumns = True
+        Me.DataGridViewForPrint.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridViewForPrint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewForPrint.Location = New System.Drawing.Point(12, 42)
+        Me.DataGridViewForPrint.Name = "DataGridViewForPrint"
+        Me.DataGridViewForPrint.ReadOnly = True
+        Me.DataGridViewForPrint.RowHeadersVisible = False
+        Me.DataGridViewForPrint.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridViewForPrint.Size = New System.Drawing.Size(913, 579)
+        Me.DataGridViewForPrint.TabIndex = 4
         '
-        'Label3
+        'ButtonExport
         '
-        Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label3.Location = New System.Drawing.Point(400, 384)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(162, 20)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Информация о ДЖИ"
+        Me.ButtonExport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.ButtonExport.Location = New System.Drawing.Point(12, 627)
+        Me.ButtonExport.Name = "ButtonExport"
+        Me.ButtonExport.Size = New System.Drawing.Size(124, 31)
+        Me.ButtonExport.TabIndex = 5
+        Me.ButtonExport.Text = "Экпорт в Excel"
+        Me.ButtonExport.UseVisualStyleBackColor = True
+        '
+        'SaveFileDialogExportToExcel
+        '
+        Me.SaveFileDialogExportToExcel.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+        Me.SaveFileDialogExportToExcel.RestoreDirectory = True
         '
         'NAA_DB_EXPDataSet
         '
@@ -135,31 +91,24 @@ Partial Class OpenSampleForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(937, 684)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
+        Me.ClientSize = New System.Drawing.Size(937, 665)
+        Me.Controls.Add(Me.ButtonExport)
+        Me.Controls.Add(Me.DataGridViewForPrint)
         Me.Controls.Add(Me.BaseLabel)
-        Me.Controls.Add(Me.OpenSetBaseDataGridView)
-        Me.Controls.Add(Me.OpenSetLLIDataGridView)
-        Me.Controls.Add(Me.OpenSetSLIDataGridView)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "OpenSampleForm"
-        Me.Text = "Подробная информация о партии"
-        CType(Me.OpenSetSLIDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OpenSetLLIDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OpenSetBaseDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Text = "Подробная информация о партиях"
+        CType(Me.DataGridViewForPrint, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NAADBEXPDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents OpenSetSLIDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents NAADBEXPDataSetBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents NAA_DB_EXPDataSet As NaaDB.NAA_DB_EXPDataSet
-    Friend WithEvents OpenSetLLIDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents OpenSetBaseDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents BaseLabel As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents DataGridViewForPrint As DataGridView
+    Friend WithEvents ButtonExport As Button
+    Friend WithEvents SaveFileDialogExportToExcel As SaveFileDialog
 End Class

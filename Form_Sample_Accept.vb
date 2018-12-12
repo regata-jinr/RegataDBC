@@ -585,42 +585,15 @@ Public Class Form_Sample_Accept
                 cmd.ExecuteNonQuery()
                 sqlConnection1.Close()
 
+
+                cmd.CommandText = $"update dbo.table_Sample_Set set PrepCompl=0, SLICompl=0, LLICompl=0, ResCompl=0 WHERE Country_Code='{L_SS_Country_Code.Text}' and Client_ID='{L_SS_Client_ID.Text}' and Year='{L_SS_Year.Text}' and Sample_Set_ID='{L_SS_Sample_Set_ID.Text}' and Sample_Set_Index='{L_SS_Sample_Set_Index.Text}'"
+                cmd.Connection = sqlConnection1
+                sqlConnection1.Open()
+                cmd.ExecuteNonQuery()
+                sqlConnection1.Close()
+
+
                 Form_Main.B_Select_Sample_Set_Click(sender, e)
-
-                'cmd.CommandText = "SELECT A_Sample_ID FROM dbo.table_Sample WHERE F_Country_Code='" + L_SS_Country_Code.Text +
-                '    "' and F_Client_ID='" + L_SS_Client_ID.Text +
-                '    "' and F_Year='" + L_SS_Year.Text +
-                '    "' and F_Sample_Set_ID='" + L_SS_Sample_Set_ID.Text +
-                '    "' and F_Sample_Set_Index='" + L_SS_Sample_Set_Index.Text + "'"
-                'cmd.Connection = sqlConnection1
-                'sqlConnection1.Open()
-                'reader = cmd.ExecuteReader()
-                'Form_Samples_List.ListBox_Sample_ID.Items.Clear()
-                'While reader.Read()
-                '    If Not IsDBNull(reader(0)) Then Form_Samples_List.ListBox_Sample_ID.Items.Add(CInt(reader(0)))
-                'End While
-                'sqlConnection1.Close()
-
-                'cmd.CommandText = "SELECT MAX(A_Sample_ID) FROM dbo.table_Sample WHERE F_Country_Code='" + L_SS_Country_Code.Text +
-                '    "' and F_Client_ID='" + L_SS_Client_ID.Text +
-                '    "' and F_Year='" + L_SS_Year.Text +
-                '    "' and F_Sample_Set_ID='" + L_SS_Sample_Set_ID.Text +
-                '    "' and F_Sample_Set_Index='" + L_SS_Sample_Set_Index.Text + "'"
-
-                'cmd.Connection = sqlConnection1
-                'sqlConnection1.Open()
-                'reader = cmd.ExecuteReader()
-                'While reader.Read()
-                '    If IsDBNull(reader(0)) Then
-                '        Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = "01"
-                '        'ElseIf reader(0) < 9 Then
-                '        '    Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = "0" + (reader(0) + 1).ToString
-                '    Else
-                '        Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = (reader(0) + 1).ToString
-                '    End If
-
-                'End While
-                'sqlConnection1.Close()
 
                 Form_Samples_List.ListBox_Sample_ID.SelectedIndex = Form_Samples_List.ListBox_Sample_ID.Items.Count - 1
                 Me.Close()

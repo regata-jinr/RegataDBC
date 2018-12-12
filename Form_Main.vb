@@ -281,6 +281,7 @@ Public Class Form_Main
             LLIDateString = ""
             Notice = ""
             NoticeMod = ""
+            Dim TypeSet As HashSet(Of String) = New HashSet(Of String)
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New System.Data.SqlClient.SqlCommand
             Dim reader As SqlDataReader
@@ -301,7 +302,7 @@ Public Class Form_Main
                 If Not IsDBNull(reader(6)) Then Organzation = reader(6).ToString
                 If Not IsDBNull(reader(7)) Then LastName = reader(7).ToString
                 If Not IsDBNull(reader(8)) Then CountOfSample += reader(8)
-                If Not IsDBNull(reader(9)) Then SampleType = reader(9).ToString
+                If Not IsDBNull(reader(9)) Then TypeSet.Add(reader(9).ToString)
                 If Not IsDBNull(reader(10)) Then
                     If Not SLIDateAr.Contains(Format(reader(10), "dd.MM.yyyy").ToString()) Then
                         If i Mod 3 <> 0 Then
@@ -372,6 +373,10 @@ Public Class Form_Main
 
             If Results <> "" Then Results = "Yes"
 
+            For k As Integer = 0 To TypeSet.Count - 1
+                SampleType += $"{TypeSet.ToArray().GetValue(k)},"
+            Next
+            SampleType = SampleType.Substring(0, SampleType.Length - 1)
             L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice
 
             SLIDateAr.Clear()
@@ -477,13 +482,13 @@ Public Class Form_Main
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"Исправлен баг с воспроизведением сообщения об обновлении при закрытии форм журналов.{vbCrLf}"
+            UpdMsg = $"Добавлена возможность отбора партий, которые не облучались как для ДЖИ так и для КЖИ, а также экспорт списка таких партий в Excel для форматирования и печати.{vbCrLf}Изменена логика отображения закрашенных партий{vbCrLf}Исправлен баг с воспроизведением сообщения об обновлении при закрытии форм журналов.{vbCrLf}Добавлена информация о количестве образцов на каждом этапе работы с образцами.{vbCrLf}Добавлена возможность завершения этапа по необходимости. При этом в комментариях необходимо указать причину."
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
                 Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
                 If current.IsFirstRun Then
-                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{UpdMsg}", $"Обновление клиента базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{vbCrLf}{UpdMsg}{vbCrLf}{vbCrLf}Свои комментарии, замечания, сообщения об ошибках Вы можете сообщить мне {vbCrLf}по почте - bdrum@jinr.ru{vbCrLf}по телефону - 6 24 36{vbCrLf}лично{vbCrLf}С уважением,{vbCrLf}Борис Румянцев", $"Обновление клиента базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             End If
         Catch ex As Exception
@@ -1209,20 +1214,29 @@ Public Class Form_Main
     Private Sub SelectionChanged(sender As System.Object, e As System.EventArgs) Handles DataGridView_Description.SelectionChanged
 
         If DataGridViewDescriptionFill Then
+            If CBFilter.SelectedItem <> "Показать все" Then
+                CBFilter.SelectedItem = "Показать все"
+            End If
             If DataGridView_Description.CurrentRow.Index() = 0 Then
-                DataSampleSetLoad("where Results is null and SamplPrep is null and SamplSLI is null and SamplLLI is null")
+                '  DataSampleSetLoad("where Results is null and SamplPrep is null and SamplSLI is null and SamplLLI is null")
+                DataSampleSetLoad("where color = 'LightPink'")
             ElseIf DataGridView_Description.CurrentRow.Index() = 1 Then
-                DataSampleSetLoad("where Results is null and SamplPrep is not null and SamplSLI is null and SamplLLI is null")
+                ' DataSampleSetLoad("where Results is null and SamplPrep is not null and SamplSLI is null and SamplLLI is null")
+                DataSampleSetLoad("where color = 'White'")
             ElseIf DataGridView_Description.CurrentRow.Index() = 2 Then
-                DataSampleSetLoad("where Results is null and SamplSLI is not null and SamplLLI is null")
+                DataSampleSetLoad("where color = 'Yellow'")
+                ' DataSampleSetLoad("where SLIDate_Start is null and LLIDate_Start is not null")
             ElseIf DataGridView_Description.CurrentRow.Index() = 3 Then
-                DataSampleSetLoad("where Results is null and SamplSLI is null and SamplLLI is not null")
+                DataSampleSetLoad("where color = 'LemonChiffon'")
+                ' DataSampleSetLoad("where LLIDate_Start is null and SLIDate_Start is not null")
             ElseIf DataGridView_Description.CurrentRow.Index() = 4 Then
-                DataSampleSetLoad("where Results is not null and (SamplSLI is null or SamplLLI is null)")
+                DataSampleSetLoad("where color = 'LightGreen'")
+                ' DataSampleSetLoad("where Results is not null and (SamplSLI is null or SamplLLI is null)")
             ElseIf DataGridView_Description.CurrentRow.Index() = 5 Then
-                DataSampleSetLoad("where Results is not null and SamplSLI is not null and SamplLLI is not null")
+                DataSampleSetLoad("where color = 'LimeGreen'")
+                ' DataSampleSetLoad("where Results is not null and SamplSLI is not null and SamplLLI is not null")
             ElseIf DataGridView_Description.CurrentRow.Index() = 6 Then
-                DataSampleSetLoad("")
+                '  DataSampleSetLoad("")
             End If
 
         End If
@@ -1548,16 +1562,55 @@ Public Class Form_Main
     End Sub
 
     Private Sub OpenSet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenSet.Click
-        If DataGridView_Sample_Set.SelectedRows.Count = 0 Then
-            MsgBox("Выберете строку с номером партии.")
-        Else
-            CountryCodeForOpenSet = DataGridView_Sample_Set.SelectedRows(0).Cells(0).Value.ToString
-            ClientIDForOpenSet = DataGridView_Sample_Set.SelectedRows(0).Cells(1).Value.ToString
-            YearForOpenSet = DataGridView_Sample_Set.SelectedRows(0).Cells(2).Value.ToString
-            SampleSetIDForOpenSet = DataGridView_Sample_Set.SelectedRows(0).Cells(3).Value.ToString
-            SampleSetIndexForOpenSet = DataGridView_Sample_Set.SelectedRows(0).Cells(4).Value.ToString
-            OpenSampleForm.Show()
+
+        Dim whereString As String = ""
+
+        If DataGridView_Description.SelectedRows.Count <> 0 Then
+
+            If DataGridView_Description.CurrentRow.Index() = 0 Then
+                ' whereString = "where s.Results is null and a.SamplPrep is null and s.SamplSLI is null and s.SamplLLI is null"
+                whereString = "where s.color='LightPink'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 1 Then
+                ' whereString = "where s.Results is null and s.SamplPrep is not null and s.SamplSLI is null and s.SamplLLI is null and s.PrepCompl=0"
+                whereString = "where s.color='White'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 2 Then
+                '  whereString = "where s.SLIDate_Start is null and s.LLIDate_Start is not null and s.SLICompl=0"
+                whereString = "where s.color='Yellow'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 3 Then
+                ' whereString = "where s.LLIDate_Start is null and s.SLIDate_Start is not null and s.LLICompl=0"
+                whereString = "where s.color='LemonChiffon'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 4 Then
+                'whereString = "where s.Results is not null and (s.SamplSLI is null or s.SamplLLI is null)"
+                whereString = "where s.color='LightGreen'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 5 Then
+                ' whereString = "where s.Results is not null and s.SamplSLI is not null and s.SamplLLI is not null"
+                whereString = "where s.color='LimeGreen'"
+            ElseIf DataGridView_Description.CurrentRow.Index() = 6 Then
+                whereString = ""
+            End If
         End If
+
+        Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+        Dim cmd As New System.Data.SqlClient.SqlCommand
+        cmd.CommandType = System.Data.CommandType.Text
+        cmd.CommandText = $"select s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name, sampType = STUFF((SELECT distinct ','+ s1.A_Sample_Type from SamplesSetForNaaDB s1 where s1.Country_Code=s.Country_Code and s1.Client_ID = s.Client_ID and s.Year = s1.Year and S.Sample_Set_ID = s1.Sample_Set_ID and s.Sample_Set_Index = s1.Sample_Set_Index FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), s2.cnt as cnt from SamplesSetForNaaDB as s join (select Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, SUM(countOfSamples) as cnt from SamplesSetForNaaDB group by Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index) s2 on s.Country_Code=s2.Country_Code and s.Client_ID = s2.Client_ID and s.Year = s2.Year and S.Sample_Set_ID = s2.Sample_Set_ID and s.Sample_Set_Index = s2.Sample_Set_Index {whereString} group by  s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name,s2.cnt order by s.Year, S.Sample_Set_ID, S.Sample_Set_Index"
+
+        Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+        Dim ds1 As New DataSet()
+        Debug.WriteLine(cmd.CommandText)
+        dataadapter.Fill(ds1, "PrintView")
+        OpenSampleForm.DataGridViewForPrint.DataSource = ds1
+        OpenSampleForm.DataGridViewForPrint.DataMember = "PrintView"
+        Debug.WriteLine(OpenSampleForm.DataGridViewForPrint.RowCount)
+        OpenSampleForm.DataGridViewForPrint.Columns(0).HeaderText = "Код страны"
+        OpenSampleForm.DataGridViewForPrint.Columns(1).HeaderText = "Номер клиента"
+        OpenSampleForm.DataGridViewForPrint.Columns(2).HeaderText = "Год"
+        OpenSampleForm.DataGridViewForPrint.Columns(3).HeaderText = "Номер партии"
+        OpenSampleForm.DataGridViewForPrint.Columns(4).HeaderText = "Индекс партии"
+        OpenSampleForm.DataGridViewForPrint.Columns(5).HeaderText = "Фамилия клиента"
+        OpenSampleForm.DataGridViewForPrint.Columns(6).HeaderText = "Тип образцов"
+        OpenSampleForm.DataGridViewForPrint.Columns(7).HeaderText = "Кол-во образцов"
+        OpenSampleForm.Show()
 
     End Sub
 

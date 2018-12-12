@@ -50,6 +50,13 @@ Partial Class Form_Main
         Me.L_Name_SRM_Set = New System.Windows.Forms.Label()
         Me.L_Name_Monitor_Set = New System.Windows.Forms.Label()
         Me.Table_Monitor_SetDataGridView = New System.Windows.Forms.DataGridView()
+        Me.MonitorSetNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MonitorSetNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MonitorSetTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MonitorSetWeightDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Table_Monitor_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Monitor_Set = New System.Windows.Forms.Button()
         Me.B_New_Monitor_Set_Accept = New System.Windows.Forms.Button()
         Me.MaskedTextBox_LLI_Irradiation_Log = New System.Windows.Forms.MaskedTextBox()
@@ -77,13 +84,6 @@ Partial Class Form_Main
         Me.B_Refresh = New System.Windows.Forms.Button()
         Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
-        Me.MonitorSetNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetWeightDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Table_Monitor_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_Sample_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -94,11 +94,11 @@ Partial Class Form_Main
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
-        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -364,6 +364,51 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView.Size = New System.Drawing.Size(429, 144)
         Me.Table_Monitor_SetDataGridView.TabIndex = 161
         '
+        'MonitorSetNameDataGridViewTextBoxColumn
+        '
+        Me.MonitorSetNameDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Name"
+        Me.MonitorSetNameDataGridViewTextBoxColumn.HeaderText = "Name"
+        Me.MonitorSetNameDataGridViewTextBoxColumn.Name = "MonitorSetNameDataGridViewTextBoxColumn"
+        Me.MonitorSetNameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'MonitorSetNumberDataGridViewTextBoxColumn
+        '
+        Me.MonitorSetNumberDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Number"
+        Me.MonitorSetNumberDataGridViewTextBoxColumn.HeaderText = "Number"
+        Me.MonitorSetNumberDataGridViewTextBoxColumn.Name = "MonitorSetNumberDataGridViewTextBoxColumn"
+        Me.MonitorSetNumberDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'MonitorSetTypeDataGridViewTextBoxColumn
+        '
+        Me.MonitorSetTypeDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Type"
+        Me.MonitorSetTypeDataGridViewTextBoxColumn.HeaderText = "Type"
+        Me.MonitorSetTypeDataGridViewTextBoxColumn.Name = "MonitorSetTypeDataGridViewTextBoxColumn"
+        Me.MonitorSetTypeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'MonitorSetWeightDataGridViewTextBoxColumn
+        '
+        Me.MonitorSetWeightDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Weight"
+        Me.MonitorSetWeightDataGridViewTextBoxColumn.HeaderText = "Weight, g"
+        Me.MonitorSetWeightDataGridViewTextBoxColumn.Name = "MonitorSetWeightDataGridViewTextBoxColumn"
+        Me.MonitorSetWeightDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'MonitorSetPurchasingDateDataGridViewTextBoxColumn
+        '
+        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Purchasing_Date"
+        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.HeaderText = "Purchasing date"
+        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.Name = "MonitorSetPurchasingDateDataGridViewTextBoxColumn"
+        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'Table_Monitor_Set_BindingSource
+        '
+        Me.Table_Monitor_Set_BindingSource.DataMember = "table_Monitor_Set"
+        Me.Table_Monitor_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
+        '
+        'NAA_DB_EXPDataSet
+        '
+        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
+        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'B_Select_Monitor_Set
         '
         Me.B_Select_Monitor_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -551,7 +596,7 @@ Partial Class Form_Main
         Me.OpenSet.Name = "OpenSet"
         Me.OpenSet.Size = New System.Drawing.Size(76, 23)
         Me.OpenSet.TabIndex = 181
-        Me.OpenSet.Text = "Просмотр партии"
+        Me.OpenSet.Text = "Просмотр"
         Me.OpenSet.UseVisualStyleBackColor = True
         '
         'ChangeLang
@@ -643,51 +688,6 @@ Partial Class Form_Main
         '
         'BackgroundWorkerColorizer
         '
-        '
-        'MonitorSetNameDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetNameDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Name"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.HeaderText = "Name"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.Name = "MonitorSetNameDataGridViewTextBoxColumn"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetNumberDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Number"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.HeaderText = "Number"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.Name = "MonitorSetNumberDataGridViewTextBoxColumn"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetTypeDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Type"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.HeaderText = "Type"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.Name = "MonitorSetTypeDataGridViewTextBoxColumn"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetWeightDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Weight"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.HeaderText = "Weight, g"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.Name = "MonitorSetWeightDataGridViewTextBoxColumn"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetPurchasingDateDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Purchasing_Date"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.HeaderText = "Purchasing date"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.Name = "MonitorSetPurchasingDateDataGridViewTextBoxColumn"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'Table_Monitor_Set_BindingSource
-        '
-        Me.Table_Monitor_Set_BindingSource.DataMember = "table_Monitor_Set"
-        Me.Table_Monitor_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'NAA_DB_EXPDataSet
-        '
-        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
-        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Table_SRM_Set_BindingSource
         '
@@ -786,12 +786,12 @@ Partial Class Form_Main
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBFilters.ResumeLayout(False)
         Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
-        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()

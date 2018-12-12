@@ -190,6 +190,7 @@ Partial Class Form_NAA_Results
         'SaveFileDialog_Final_Report
         '
         Me.SaveFileDialog_Final_Report.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+        Me.SaveFileDialog_Final_Report.RestoreDirectory = True
         '
         'L_Name_Person
         '
@@ -324,6 +325,9 @@ Partial Class Form_NAA_Results
         Me.HidEmptEl.TabIndex = 207
         Me.HidEmptEl.Text = "Скрыть отсутствующие " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "элементы"
         Me.HidEmptEl.UseVisualStyleBackColor = True
+        '
+        'BackgroundWorkerNaaResults
+        '
         '
         'Form_NAA_Results
         '
