@@ -39,17 +39,10 @@ Public Class Form_Main
             DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
             SampleSetFormLoadFlag = True
 
-
-            DataGridView_Sample_Set.SelectAll()
             Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
             Dim finish As Integer = DataGridView_Sample_Set.RowCount
-            Debug.WriteLine(start)
-            Debug.WriteLine(finish)
 
             For i As Integer = start To finish - 1
-
-                'DataGridView_Sample_Set.Rows.Item(i).Height = 24
-                'DataGridView_Sample_Set.Rows.Item(i).Selected = True
                 Colorize(DataGridView_Sample_Set.Rows.Item(i))
             Next
 
@@ -266,6 +259,7 @@ Public Class Form_Main
 
 
     Private Sub Fill_In_Monitor() 'заполнение отображаемой информации в Label Monitor и раскраска DataGridView1
+        Debug.WriteLine("Fill In Monitor started:")
         Try
             L_Monitor.Text = ""
             Dim i As Integer
@@ -275,6 +269,7 @@ Public Class Form_Main
             Dim LLIDateAr As New ArrayList
             Dim CountOfSample As Integer
             Dim ProcessedSample As Integer = 0
+            Dim SamplesDistribution As New Dictionary(Of String, Integer) From {{"accepted", 0}, {"prepared", 0}, {"SLI", 0}, {"LLI", 0}, {"SLI|LLI&Results", 0}, {"SLI&LLI&Results", 0}}
             Country = ""
             Organzation = ""
             LastName = ""
@@ -307,7 +302,6 @@ Public Class Form_Main
                 If Not IsDBNull(reader(7)) Then LastName = reader(7).ToString
                 If Not IsDBNull(reader(8)) Then CountOfSample += reader(8)
                 If Not IsDBNull(reader(9)) Then SampleType = reader(9).ToString
-
                 If Not IsDBNull(reader(10)) Then
                     If Not SLIDateAr.Contains(Format(reader(10), "dd.MM.yyyy").ToString()) Then
                         If i Mod 3 <> 0 Then
@@ -339,17 +333,29 @@ Public Class Form_Main
                 End If
 
                 If Not IsDBNull(reader(12)) Then ProcessedBy = reader(12).ToString
-
-                Results = reader(13).ToString
+                If Not IsDBNull(reader(13)) Then
+                    Results = reader(13).ToString
+                End If
+                If Not IsDBNull(reader(14)) Then
+                    SamplesDistribution("prepared") += reader(8)
+                End If
+                If Not IsDBNull(reader(15)) Then
+                    SamplesDistribution("SLI") += reader(8)
+                End If
+                If Not IsDBNull(reader(16)) Then
+                    SamplesDistribution("LLI") += reader(8)
+                End If
+                If ((Not IsDBNull(reader(15))) Or (Not IsDBNull(reader(16)))) And (Not IsDBNull(reader(13))) Then
+                    SamplesDistribution("SLI|LLI&Results") += reader(8)
+                End If
+                If Not IsDBNull(reader(15)) And Not IsDBNull(reader(16)) And Not IsDBNull(reader(13)) Then
+                    SamplesDistribution("SLI&LLI&Results") += reader(8)
+                End If
                 If Not IsDBNull(reader(18)) Then
                     Notice = reader(18).ToString
-                    ' For Each notc In Notice.Split("@")
-                    'TODO: check why for large string cond doesn't work 
                     If Notice.Length > 40 Then
                         Notice = Notice.Substring(0, 40) + "..."
                     End If
-                    ' NoticeMod += notc
-                    ' Next
 
                 End If
 
@@ -362,6 +368,8 @@ Public Class Form_Main
             reader.Close()
             sqlConnection1.Close()
 
+            SamplesDistribution("accepted") = CountOfSample
+
             If Results <> "" Then Results = "Yes"
 
             L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice
@@ -369,6 +377,20 @@ Public Class Form_Main
             SLIDateAr.Clear()
             LLIDateAr.Clear()
 
+            If DataGridView_Description.RowCount > 0 Then
+                DataGridView_Description.Rows(0).Cells(0).Value = SamplesDistribution("accepted")
+                DataGridView_Description.Rows(1).Cells(0).Value = SamplesDistribution("prepared")
+                DataGridView_Description.Rows(2).Cells(0).Value = SamplesDistribution("SLI")
+                DataGridView_Description.Rows(3).Cells(0).Value = SamplesDistribution("LLI")
+                DataGridView_Description.Rows(4).Cells(0).Value = SamplesDistribution("SLI|LLI&Results")
+                DataGridView_Description.Rows(5).Cells(0).Value = SamplesDistribution("SLI&LLI&Results")
+
+            End If
+
+
+
+            DataGridView_Description.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            DataGridView_Description.Columns(0).DefaultCellStyle.Font = New Font("Tahoma", 12, FontStyle.Regular)
             Colorize(DataGridView_Sample_Set.SelectedRows.Item(0))
 
         Catch ex As Exception
@@ -455,13 +477,13 @@ Public Class Form_Main
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"В мониторе партии добавлена информация о том, сколько образцов обработано.{vbCrLf}Изменена логика закрашивания партий{vbCrLf}По умолчанию загружаются все партии кроме 'зеленых'.{vbCrLf}{vbCrLf}Нововведения с версии 5.10.3 {vbCrLf}Оптимизирован процесс загрузки{vbCrLf}В партиях стандартах новая логика отображения (отображается только активная партия).{vbCrLf}{vbCrLf}Добавлена оценка количества стандартов, которое можно подготовить по банке. Рассчитывается по среднему весу типа (fauna,soil,...){vbCrLf}Можно вместо среднего типа считать среднее в партии. Инга, прокомментриуй, пожалуйста.{vbCrLf}{vbCrLf}Добавлена возможность показать все партии стандартов{vbCrLf}Выбор журнала КЖИ и ДЖИ не блокирует основную форму{vbCrLf}Добавлено обновление по интернету (теперь обновления приходят везде, не только в сети главного корпуса){vbCrLf}Отображение окна Результаты НАА оптимизировано (пока за счет раскрашивания)"
+            UpdMsg = $"Исправлен баг с воспроизведением сообщения об обновлении при закрытии форм журналов.{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
                 Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
                 If current.IsFirstRun Then
-                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{UpdMsg}", $"Обновление базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{UpdMsg}", $"Обновление клиента базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             End If
         Catch ex As Exception
@@ -736,7 +758,7 @@ Public Class Form_Main
             End If
             ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
-            Me.Enabled = False
+            '  Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             ForSliLog.Close()
@@ -1159,19 +1181,24 @@ Public Class Form_Main
     End Sub
 
     Private Sub DataGridView_Sample_Set_ColumnHeaderMouseClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Sample_Set.ColumnHeaderMouseClick
-
+        Debug.WriteLine("DataGridView_Sample_Set HeaderClick event started")
         Try
-            '   SampleSetFormLoadFlag = False
-            '  If DataGridView_Sample_Set.SelectedCells.Count > 0 Then
+            Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
+            Dim finish As Integer = DataGridView_Sample_Set.RowCount
 
-            For i = 0 To DataGridView_Sample_Set.RowCount - 1
-                DataGridView_Sample_Set.Rows.Item(i).Selected = True
+            For i As Integer = start To finish - 1
+                Colorize(DataGridView_Sample_Set.Rows.Item(i))
             Next
+
+
             DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-            ComboBox_Sample_Set_View.Text = ""
             DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
-            ' End If
-            '  SampleSetFormLoadFlag = True
+
+            If BackgroundWorkerColorizer.IsBusy Then
+                BackgroundWorkerColorizer.CancelAsync()
+            End If
+
+            BackgroundWorkerColorizer.RunWorkerAsync()
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub

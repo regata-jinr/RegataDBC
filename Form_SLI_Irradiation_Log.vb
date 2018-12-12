@@ -6,8 +6,8 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub Form_SLI_Table_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Try
             Form_Main.ComboBox_Journal_Of_Irradiation_View_SelectedIndexChanged(sender, e)
-            Form_Main.Form_Main_Load(sender, e)
-            Form_Main.Enabled = True
+            '  Form_Main.Form_Main_Load(sender, e)
+            '  Form_Main.Enabled = True
         Catch ex As Exception
             Form_Main.LangException(Form_Main.language, ex.Message & ex.ToString)
             Exit Sub
