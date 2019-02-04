@@ -4,7 +4,7 @@ Public Class Form_Monitor_Accept
     Private Sub Form_Monitor_Accept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Try
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     Me.Text = "Список мониторов"
 
                     L_Name_Monitor_Set_Name.Text = "Имя партии мониторов"
@@ -16,7 +16,7 @@ Public Class Form_Monitor_Accept
                     B_Close.Text = "Закрыть"
 
                     OpenFileDialog_Weighting_SLI_LLI.Filter = "Весовые файлы (*.ves)|*.ves|Все файлы (*.*)|*.*"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     Me.Text = "Monitors list"
 
                     L_Name_Monitor_Set_Name.Text = "Monitor set name"
@@ -35,27 +35,27 @@ Public Class Form_Monitor_Accept
                     Dim offset As Integer = Convert.ToInt32(Math.Ceiling(g.MeasureString("  ", .ColumnHeadersDefaultCellStyle.Font).Width))
                     .Columns.Clear()
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("Monitor_Number", "№ монитора")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("Monitor_Number", "Monitor number")
                     End If
                     .Columns(0).DataPropertyName = "Monitor_Number" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                     .Columns(0).ReadOnly = True
                     .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("монитора", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("Monitor_SLI_Weight", "Вес КЖИ, гр")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("Monitor_SLI_Weight", "SLI weight, g")
                     End If
                     .Columns(1).DataPropertyName = "Monitor_SLI_Weight"
                     .Columns(1).ReadOnly = True
                     .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("weight, g", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("Monitor_LLI_Weight", "Вес ДЖИ, гр")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("Monitor_LLI_Weight", "LLI weight, g")
                     End If
                     .Columns(2).DataPropertyName = "Monitor_LLI_Weight"
@@ -78,9 +78,9 @@ Public Class Form_Monitor_Accept
                     End If
                 End With
             Catch ex As Exception
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Операция была отменена (ошибка в Form_Monitor_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
                 End If
                 Me.Close()
@@ -106,9 +106,9 @@ Public Class Form_Monitor_Accept
                 End While
                 sqlConnection1.Close()
             Catch ex As Exception
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Операция была отменена (ошибка в Form_Monitor_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
                 End If
                 Me.Close()
@@ -132,9 +132,9 @@ Public Class Form_Monitor_Accept
                     End While
                     sqlConnection1.Close()
                 Catch ex As Exception
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Операция была отменена (ошибка в Form_Monitor_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
                     End If
                     Me.Close()
@@ -144,9 +144,9 @@ Public Class Form_Monitor_Accept
 
             L_Weight_Balance.Text = (weight_Monitor_Set - weight_Monitor_Sum).ToString
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Monitor_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -157,9 +157,9 @@ Public Class Form_Monitor_Accept
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -170,9 +170,9 @@ Public Class Form_Monitor_Accept
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Monitor_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_Monitor_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -389,9 +389,9 @@ c1:             Next
             End If
             L_Weight_Balance.Text = (weight_Monitor_Set - weight_Monitor_Sum).ToString
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_SLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_SLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -607,9 +607,9 @@ c1:             Next
     '            End If
     '            L_Weight_Balance.Text = (weight_Monitor_Set - weight_Monitor_Sum).ToString
     '        Catch ex As Exception
-    '            If Form_Main.language = "russian" Then
+    '            If Form_Main.language = "Русский" Then
     '                MsgBox("Операция была отменена (ошибка в B_Fill_LLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-    '            ElseIf Form_Main.language = "english" Then
+    '            ElseIf Form_Main.language = "English" Then
     '                MsgBox("Operation was cancelled (error in B_Fill_LLI_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
     '            End If
     '            Exit Sub
@@ -638,23 +638,23 @@ c1:             Next
             OpenFileDialog_Weighting_SLI_LLI.FileName = correct_name
             ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
             If OpenFileDialog_Weighting_SLI_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите весовой файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file with samples's weight!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             Else
                 If OpenFileDialog_Weighting_SLI_LLI.SafeFileName.ToUpper <> correct_name.ToUpper Then
                     Dim response As MsgBoxResult
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         response = MsgBox("Неправильное имя файла! Продолжить?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, Me.Text)
                         If response = System.Windows.Forms.DialogResult.Yes Then
                             GoTo 2
                         Else
                             Exit Sub
                         End If
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         response = MsgBox("Not valid file name! Resume?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, Me.Text)
                         If response = System.Windows.Forms.DialogResult.Yes Then
                             GoTo 2
@@ -768,9 +768,9 @@ c2:             Next
             End If
             L_Weight_Balance.Text = (weight_Monitor_Set - weight_Monitor_Sum).ToString
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_Monitor_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_Monitor_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

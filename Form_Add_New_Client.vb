@@ -5,7 +5,7 @@ Public Class Form_Add_New_Client
 
     Private Sub Form_AddNewClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Информация о клиенте"
 
                 L_Name_Country.Text = "Страна"
@@ -44,7 +44,7 @@ Public Class Form_Add_New_Client
                 B_Save_New_Client_ID.Text = "Сохранить информацию о клиенте"
                 B_Fill_In_From_File.Text = "Заполнить из файла"
                 B_Close.Text = "Закрыть"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "Information about client"
 
                 L_Name_Country.Text = "Country"
@@ -111,9 +111,9 @@ Public Class Form_Add_New_Client
                 MaskedTextBox_NewClientID.Enabled = False
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_AddNewClient_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_AddNewClient_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -185,9 +185,9 @@ Public Class Form_Add_New_Client
             While reader.Read()
                 value = reader(0) + 1 'следующий номер партии образцов
                 If value > 99 Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Максимальный номер партии не должен быть > 99!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Maximum sample set ID must not be > 99!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
@@ -210,9 +210,9 @@ Public Class Form_Add_New_Client
             sqlConnection1.Close()
 1:
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в CountryComboBox_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in CountryComboBox_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -223,9 +223,9 @@ Public Class Form_Add_New_Client
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -239,17 +239,17 @@ Public Class Form_Add_New_Client
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
             If Table_CountryComboBox_ANC.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите страну!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select country!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_NewClientID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите номер нового клиента!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type new client ID!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -257,9 +257,9 @@ Public Class Form_Add_New_Client
             Dim value As Integer
             value = MaskedTextBox_NewClientID.Text
             If value = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Номер нового клиента должен быть > 0!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("New client ID must be > 0!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -274,9 +274,9 @@ Public Class Form_Add_New_Client
                 reader = cmd.ExecuteReader()
                 While reader.Read()
                     If reader(0) > 0 Then
-                        If Form_Main.language = "russian" Then
+                        If Form_Main.language = "Русский" Then
                             MsgBox("Клиент с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                        ElseIf Form_Main.language = "english" Then
+                        ElseIf Form_Main.language = "English" Then
                             MsgBox("Сlient with this client ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
                         End If
                         sqlConnection1.Close()
@@ -368,9 +368,9 @@ Public Class Form_Add_New_Client
 
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Save_new_client_ID_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Save_new_client_ID_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -381,9 +381,9 @@ Public Class Form_Add_New_Client
         Try
             Form_Sample_Set_Accept.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Add_New_Client_FormClosed!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_Add_New_Client_FormClosed!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -394,9 +394,9 @@ Public Class Form_Add_New_Client
         Try
             'OpenFileDialog_Add_New_Client_From_File.InitialDirectory = "C:\"
             If OpenFileDialog_Add_New_Client_From_File.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -502,9 +502,9 @@ Public Class Form_Add_New_Client
                 End Using
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

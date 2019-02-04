@@ -4,7 +4,7 @@ Public Class Form_Monitor_Set_Accept
 
     Private Sub Form_Monitor_Set_Accept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Новая партия мониторов"
 
                 L_Name_New_Monitor_Set_Name.Text = "Имя новой партии"
@@ -15,7 +15,7 @@ Public Class Form_Monitor_Set_Accept
 
                 B_Save_New_Monitor_Set.Text = "Сохранить новую партию мониторов"
                 B_Close.Text = "Закрыть"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "New monitor set"
 
                 L_Name_New_Monitor_Set_Name.Text = "New monitor set name"
@@ -33,18 +33,18 @@ Public Class Form_Monitor_Set_Accept
                 Dim offset As Integer = Convert.ToInt32(Math.Ceiling(g.MeasureString("  ", .ColumnHeadersDefaultCellStyle.Font).Width))
                 .Columns.Clear()
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Name", "Имя")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Name", "Name")
                 End If
                 .Columns(0).DataPropertyName = "Monitor_Set_Name" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("NameName", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Number", "Номер")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Number", "Number")
                 End If
                 .Columns(1).DataPropertyName = "Monitor_Set_Number"
@@ -67,9 +67,9 @@ Public Class Form_Monitor_Set_Accept
                 End If
             End With
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Monitor_Set_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_Monitor_Set_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -80,9 +80,9 @@ Public Class Form_Monitor_Set_Accept
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Monitor_Set_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_Monitor_Set_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -93,9 +93,9 @@ Public Class Form_Monitor_Set_Accept
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -110,17 +110,17 @@ Public Class Form_Monitor_Set_Accept
             cmd.CommandType = System.Data.CommandType.Text
 
             If ComboBox_New_Monitor_Set_Name.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите имя партии мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select monitor set name!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_New_Monitor_Set_Number.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите номер партии мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type monitor set number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -132,9 +132,9 @@ Public Class Form_Monitor_Set_Accept
             reader = cmd.ExecuteReader()
             While reader.Read()
                 If reader(0) > 0 Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Партия мониторов с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("This monitor set already exist!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     sqlConnection1.Close()
@@ -144,34 +144,34 @@ Public Class Form_Monitor_Set_Accept
             sqlConnection1.Close()
 
             If ComboBox_Monitor_Set_Type.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите тип партии мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select type of monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_New_Monitor_Set_Weight.Text = "   ," Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите вес партии мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type weight of monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_New_Monitor_Set_Purchasing_Date.Text = "  .  ." Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("проверьте дату!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Check date!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If MaskedTextBox_New_Monitor_Set_Number.Text > 99 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Максимальный номер партии мониторов не должен быть > 99!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Maximum monitor set number must not be > 99!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -202,9 +202,9 @@ Public Class Form_Monitor_Set_Accept
 
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Save_New_Monitor_Set_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Save_New_Monitor_Set_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

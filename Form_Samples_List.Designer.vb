@@ -44,6 +44,7 @@ Partial Class Form_Samples_List
         Me.B_NAA_Results = New System.Windows.Forms.Button()
         Me.B_Insert_All_Samples_Into_Sample_Set = New System.Windows.Forms.Button()
         Me.Button_ShowNotice = New System.Windows.Forms.Button()
+        Me.BShowSumAbEls = New System.Windows.Forms.Button()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SampleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -138,7 +139,7 @@ Partial Class Form_Samples_List
         Me.ListBox_Sample_ID.FormattingEnabled = True
         Me.ListBox_Sample_ID.Location = New System.Drawing.Point(287, 24)
         Me.ListBox_Sample_ID.Name = "ListBox_Sample_ID"
-        Me.ListBox_Sample_ID.Size = New System.Drawing.Size(55, 212)
+        Me.ListBox_Sample_ID.Size = New System.Drawing.Size(55, 251)
         Me.ListBox_Sample_ID.TabIndex = 137
         '
         'L_Name_Sample_ID
@@ -187,7 +188,7 @@ Partial Class Form_Samples_List
         '
         'B_Close
         '
-        Me.B_Close.Location = New System.Drawing.Point(12, 219)
+        Me.B_Close.Location = New System.Drawing.Point(12, 252)
         Me.B_Close.Name = "B_Close"
         Me.B_Close.Size = New System.Drawing.Size(269, 23)
         Me.B_Close.TabIndex = 145
@@ -230,11 +231,21 @@ Partial Class Form_Samples_List
         Me.Button_ShowNotice.Text = "Show Notice"
         Me.Button_ShowNotice.UseVisualStyleBackColor = True
         '
+        'BShowSumAbEls
+        '
+        Me.BShowSumAbEls.Location = New System.Drawing.Point(12, 219)
+        Me.BShowSumAbEls.Name = "BShowSumAbEls"
+        Me.BShowSumAbEls.Size = New System.Drawing.Size(269, 23)
+        Me.BShowSumAbEls.TabIndex = 176
+        Me.BShowSumAbEls.Text = "Show elements summary"
+        Me.BShowSumAbEls.UseVisualStyleBackColor = True
+        '
         'Form_Samples_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(350, 245)
+        Me.ClientSize = New System.Drawing.Size(350, 280)
+        Me.Controls.Add(Me.BShowSumAbEls)
         Me.Controls.Add(Me.Button_ShowNotice)
         Me.Controls.Add(Me.B_Insert_All_Samples_Into_Sample_Set)
         Me.Controls.Add(Me.B_NAA_Results)
@@ -284,4 +295,5 @@ Partial Class Form_Samples_List
     Friend WithEvents B_NAA_Results As System.Windows.Forms.Button
     Friend WithEvents B_Insert_All_Samples_Into_Sample_Set As System.Windows.Forms.Button
     Friend WithEvents Button_ShowNotice As Button
+    Friend WithEvents BShowSumAbEls As Button
 End Class

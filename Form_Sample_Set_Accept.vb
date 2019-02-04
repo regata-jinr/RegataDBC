@@ -7,7 +7,7 @@ Public Class Form_Sample_Set_Accept
 
     Private Sub Form_NewSampleAccept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Приём новой партии образцов"
                 L_Name_Country.Text = "Страна"
                 L_Name_Client_ID.Text = "Номер клиента"
@@ -59,7 +59,7 @@ Public Class Form_Sample_Set_Accept
                 B_SaveNewSampleAcceptance.Text = "Сохранить новую партию"
                 B_Print_Preview_Form.Text = "Форма для печати"
                 B_Close.Text = "Закрыть"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "New sample set acceptance"
                 L_Name_Country.Text = "Country"
                 L_Name_Client_ID.Text = "Client ID"
@@ -119,53 +119,53 @@ Public Class Form_Sample_Set_Accept
                 '.Columns.Clear()
                 '.RowHeadersWidth = 21
 
-                '    If Form_Main.language = "russian" Then
+                '    If Form_Main.language = "Русский" Then
                 '        .Columns.Add("A_Year", "Год")
-                '    ElseIf Form_Main.language = "english" Then
+                '    ElseIf Form_Main.language = "English" Then
                 '        .Columns.Add("A_Year", "Year")
                 '    End If
                 '    .Columns(0).DataPropertyName = "A_Year" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                 '    .Columns(0).ReadOnly = True
                 '    .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(0).HeaderText = "Год"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(0).HeaderText = "Year"
                 End If
                 .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                '    If Form_Main.language = "russian" Then
+                '    If Form_Main.language = "Русский" Then
                 '        .Columns.Add("A_Sample_Set_ID", "Номер партии образцов")
-                '    ElseIf Form_Main.language = "english" Then
+                '    ElseIf Form_Main.language = "English" Then
                 '        .Columns.Add("A_Sample_Set_ID", "Sample set ID")
                 '    End If
                 '    .Columns(1).DataPropertyName = "A_Sample_Set_ID" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                 '    .Columns(1).ReadOnly = True
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(1).HeaderText = "Номер партии образцов"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(1).HeaderText = "Sample set ID"
                 End If
                 .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                '    If Form_Main.language = "russian" Then
+                '    If Form_Main.language = "Русский" Then
                 '        .Columns.Add("A_Sample_Set_Index", "Индекс партии образцов")
-                '    ElseIf Form_Main.language = "english" Then
+                '    ElseIf Form_Main.language = "English" Then
                 '        .Columns.Add("A_Sample_Set_Index", "Sample set index")
                 '    End If
                 '    .Columns(2).DataPropertyName = "A_Sample_Set_Index" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                 '    .Columns(2).ReadOnly = True
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(2).HeaderText = "Индекс партии образцов"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(2).HeaderText = "Sample set index"
                 End If
                 .Columns(2).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
             End With
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_NewSampleAccept_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_NewSampleAccept_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -180,9 +180,9 @@ Public Class Form_Sample_Set_Accept
         Try
             L_NSSID_Client_ID.Text = ComboBox_Client_ID.Text
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Table_ClientIDComboBox_SelectedIndexChanged!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Table_ClientIDComboBox_SelectedIndexChanged!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -267,9 +267,9 @@ Public Class Form_Sample_Set_Accept
             End While
             sqlConnection1.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Table_ClientIDComboBox_SelectionChangeCommittedd!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Table_ClientIDComboBox_SelectionChangeCommittedd!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -285,9 +285,9 @@ Public Class Form_Sample_Set_Accept
             Me.Enabled = False
             Form_Add_New_Client.Show()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_NewClient_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_NewClient_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -298,9 +298,9 @@ Public Class Form_Sample_Set_Accept
         Try
             L_NSSID_New_Sample_Set_ID.Text = MaskedTextBox_New_Sample_Set_ID.Text
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в MaskedTextBox_NewSampleSetID_TextChanged!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in MaskedTextBox_NewSampleSetID_TextChanged!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -313,17 +313,17 @@ Public Class Form_Sample_Set_Accept
             ReceiptDate = MaskedTextBox_Sample_Set_Receipt_Date.Text
             ReportDate = MaskedTextBox_Sample_Set_Report_Date.Text
             If ReportDate < ReceiptDate Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Дата возврата не должна быть раньше даты приёма!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Report date must not by earlier receipt date!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Проверьте даты!", MsgBoxStyle.Exclamation, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Check dates!", MsgBoxStyle.Exclamation, Me.Text)
             End If
             Exit Sub
@@ -331,42 +331,42 @@ Public Class Form_Sample_Set_Accept
         Try
             Dim value As Integer
             If L_NSSID_Country_Code.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите страну!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select country!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If L_NSSID_Client_ID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите номер клиента!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select client ID!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Sample_Set_Report_Date.Text = "  .  ." Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите дату возврата партии образцов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type sample set report date!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_New_Sample_Set_ID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите номер новой партии образцов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type new sample set ID!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             value = MaskedTextBox_New_Sample_Set_ID.Text
             If value = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Номер новой партии образцов должен быть > 0!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("New sample set ID must be > 0!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -375,9 +375,9 @@ Public Class Form_Sample_Set_Accept
                 MaskedTextBox_New_Sample_Set_ID.Text = "0" + value.ToString
             End If
             If ComboBox_Table_ReceivedBy.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -385,9 +385,9 @@ Public Class Form_Sample_Set_Accept
 
 
             'If ComboBox_Table_ReceivedBy.Text.Equals("Chepurchenko O.E.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Alekseenok Yu.V.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Vergel K.N.") Then
-            '    If Form_Main.language = "russian" Then
+            '    If Form_Main.language = "Русский" Then
             '        MsgBox("Вы не можете добавлять партии. Обратитесь к Чепурченко О.Е.", MsgBoxStyle.Exclamation, Me.Text)
-            '    ElseIf Form_Main.language = "english" Then
+            '    ElseIf Form_Main.language = "English" Then
             '        MsgBox("You don't have rights for add sets!", MsgBoxStyle.Exclamation, Me.Text)
             '    End If
             '    Exit Sub
@@ -405,9 +405,9 @@ Public Class Form_Sample_Set_Accept
                 reader = cmd.ExecuteReader()
                 While reader.Read()
                     If reader(0) > 0 Then
-                        If Form_Main.language = "russian" Then
+                        If Form_Main.language = "Русский" Then
                             MsgBox("Партия образцов с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                        ElseIf Form_Main.language = "english" Then
+                        ElseIf Form_Main.language = "English" Then
                             MsgBox("This sample set ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
                         End If
                         sqlConnection1.Close()
@@ -448,16 +448,16 @@ Public Class Form_Sample_Set_Accept
                 '  Table_Sample_SetDataGridView.Rows.Item(Table_Sample_SetDataGridView.RowCount - 1).Selected = True
 
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Сделано!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Done!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_SaveNewSampleAcceptance_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_SaveNewSampleAcceptance_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -536,9 +536,9 @@ Public Class Form_Sample_Set_Accept
 
             L_NSSID_Country_Code.Text = Country_Code
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Table_CountryComboBox_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Table_CountryComboBox_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -633,9 +633,9 @@ Public Class Form_Sample_Set_Accept
             Me.Enabled = False
             Form_Sample_Set_Accept_Print_Form.Show()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Print_Preview_Form_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Print_Preview_Form_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -647,9 +647,9 @@ Public Class Form_Sample_Set_Accept
             Notes_Number = 1
             Form_Fill_Notes.Show()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_Notes_1_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_Notes_1_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -660,9 +660,9 @@ Public Class Form_Sample_Set_Accept
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в MaskedTextBox_New_Sample_Set_Index_TextChanged!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in MaskedTextBox_New_Sample_Set_Index_TextChanged!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -673,17 +673,17 @@ Public Class Form_Sample_Set_Accept
         Try
             Client_Action = "correct client"
             If ComboBox_Country.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите страну!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select country!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Client_ID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите номер клиента!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select cleint ID!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -770,9 +770,9 @@ Public Class Form_Sample_Set_Accept
             sqlConnection1.Close()
             Me.Enabled = False
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Correct_Client_Info_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Correct_Client_Info_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -783,9 +783,9 @@ Public Class Form_Sample_Set_Accept
         Try
             L_NSSID_New_Sample_Set_Index.Text = MaskedTextBox_New_Sample_Set_Index.Text
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в MaskedTextBox_New_Sample_Set_Index_TextChanged!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in MaskedTextBox_New_Sample_Set_Index_TextChanged!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

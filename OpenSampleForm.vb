@@ -54,9 +54,9 @@ Public Class OpenSampleForm
         Catch ex As Exception
             Me.Enabled = True
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Save_Final_Report_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Save_Final_Report_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

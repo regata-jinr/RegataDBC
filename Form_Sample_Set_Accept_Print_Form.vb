@@ -22,9 +22,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
             B_Close.Visible = True
             B_Print.Visible = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Print_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Print_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -35,9 +35,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -52,9 +52,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
             Dim memoryGraphics As Graphics = Graphics.FromImage(memoryImage)
             memoryGraphics.CopyFromScreen(Me.Location.X, Me.Location.Y, 0, 0, s)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в CaptureScreen!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in CaptureScreen!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -67,9 +67,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
         Try
             e.Graphics.DrawImage(memoryImage, 0, 0)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в printDocument1_PrintPage!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in printDocument1_PrintPage!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -80,9 +80,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
         Try
             Form_Sample_Set_Accept.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_New_Sample_Set_Accept_Print_Form_FormClosed!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_New_Sample_Set_Accept_Print_Form_FormClosed!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -91,7 +91,7 @@ Public Class Form_Sample_Set_Accept_Print_Form
 
     Private Sub Form_Sample_Set_Accept_Print_Form_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Приём новой партии образцов"
 
                 L_Name_FLNP.Text = "Объединённый институт ядерных исследований     Лаборатория нейтронной физики им И.М. Франка"
@@ -144,7 +144,7 @@ Public Class Form_Sample_Set_Accept_Print_Form
                 L_Name_Client_s_Signature.Text = "Подпись клиента   ____________"
                 B_Print.Text = "Печать"
                 B_Close.Text = "Закрыть"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "New sample set acceptance"
 
                 L_Name_FLNP.Text = "           Joint Institute for Nuclear Research                       Frank Laboratory of Neutron Physics"
@@ -198,9 +198,9 @@ Public Class Form_Sample_Set_Accept_Print_Form
                 B_Close.Text = "Close"
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Sample_Set_Accept_Print_Form_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_Sample_Set_Accept_Print_Form_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

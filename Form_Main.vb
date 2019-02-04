@@ -9,7 +9,7 @@ Public Class Form_Main
     Public MyConnectionString As String
     Public arr() As Single
     Public Table_Elements(64) As String ' всего 65 элементов
-    Public language = My.MySettings.Default.languaged
+    Public language = My.MySettings.Default.language
     Public SampleSetFormLoadFlag As Boolean = False
     Public fields As String = ""
     Public DataGridViewDescriptionFill As Boolean = False
@@ -79,9 +79,9 @@ Public Class Form_Main
 
 
     Public Sub LangException(ByVal language As String, ByVal msg As String)
-        If language = "russian" Then
+        If language = "Русский" Then
             msg = "Операция была отменена (ошибка '" & msg & "' в DataGridView_Sample_Weight_CellClick_Respond())!"
-        ElseIf language = "english" Then
+        ElseIf language = "English" Then
             msg = "Operation was cancelled (error: '" & msg & "' in DataGridView_Sample_Weight_CellClick_Respond())!"
         End If
         MsgBox(msg, MsgBoxStyle.Critical, Me.Text)
@@ -184,9 +184,9 @@ Public Class Form_Main
                     value_ID = reader(0) + 1 'следующий номер партии образцов
                     Sample_Set_ID_pred = reader(0)
                     If value_ID > 99 Then
-                        If language = "russian" Then
+                        If language = "Русский" Then
                             MsgBox("Максимальный номер партии образцов не должен быть > 99", MsgBoxStyle.Critical, Me.Text)
-                        ElseIf language = "english" Then
+                        ElseIf language = "English" Then
                             MsgBox("Maximum sample set ID must not be > 99", MsgBoxStyle.Critical, Me.Text)
                         End If
                         Exit Sub
@@ -369,7 +369,7 @@ Public Class Form_Main
             For k As Integer = 0 To TypeSet.Count - 1
                 SampleType += $"{TypeSet.ToArray().GetValue(k)},"
             Next
-            SampleType = SampleType.Substring(0, SampleType.Length - 1)
+            If Not String.IsNullOrEmpty(SampleType) Then SampleType = SampleType.Substring(0, SampleType.Length - 1)
             L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice
 
             SLIDateAr.Clear()
@@ -464,9 +464,9 @@ Public Class Form_Main
             reader = cmd.ExecuteReader()
             While reader.Read()
                 If Not IsDBNull(reader(0)) Then
-                    If language = "russian" Then
+                    If language = "Русский" Then
                         L_Count.Text = "Количество образцов в базе данных: " + reader(0).ToString
-                    ElseIf language = "english" Then
+                    ElseIf language = "English" Then
                         L_Count.Text = "Samples in NAA DB: " + reader(0).ToString
                     End If
                 End If
@@ -475,7 +475,7 @@ Public Class Form_Main
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"Исправлена ошибка при попытке вызова списка партий КЖИ.{vbCrLf}Исправлен баг активности главного окна после создания журнала.{vbCrLf}Поправлена логика отображения партий для облучения ДЖИ и КЖИ{vbCrLf}Добавлена возможность отбора партий, которые не облучались как для ДЖИ так и для КЖИ, а также экспорт списка таких партий в Excel для форматирования и печати.{vbCrLf}Изменена логика отображения закрашенных партий{vbCrLf}Исправлен баг с воспроизведением сообщения об обновлении при закрытии форм журналов.{vbCrLf}Добавлена информация о количестве образцов на каждом этапе работы с образцами.{vbCrLf}Добавлена возможность завершения этапа по необходимости. При этом в комментариях необходимо указать причину."
+            UpdMsg = $"Для выбранной партии можно узнать сгруппированную информацию об образцах: Клиентский номер, Тип, Под тип, Файлы спектров, Планируемая подготовка, Выполненная подготовка, Элементы для определения{vbCrLf}А также загрузить файлы спектров"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
@@ -523,9 +523,9 @@ Public Class Form_Main
             num = DataGridView_Sample_Set.SelectedCells.Item(0).RowIndex ' номер строки с выделенной ячейкой
 
             If DataGridView_Sample_Set.Rows.Item(num).Cells.Item(0).Value = "" Then
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Выберите строку!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Select row!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -658,9 +658,9 @@ Public Class Form_Main
 
             While reader.Read()
                 If reader(0) > 0 Then
-                    If language = "russian" Then
+                    If language = "Русский" Then
                         MsgBox("This SLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf language = "english" Then
+                    ElseIf language = "English" Then
                         MsgBox("Такой журнал КЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     sqlConnection1.Close()
@@ -671,31 +671,29 @@ Public Class Form_Main
 
             ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = MaskedTextBox_SLI_Irradiation_Log.Text
 
-            ' Me.Enabled = False
             ForSliLog.Show()
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
             End If
             ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
             End If
             ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
             End If
             ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
-            '  Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             ForSliLog.Close()
@@ -707,18 +705,18 @@ Public Class Form_Main
         Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
             If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If ListBox_SLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Выберите журнал КЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -736,23 +734,23 @@ Public Class Form_Main
             ' Me.Enabled = False
             ForSliLog.Show()
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
             ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
             ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
             End If
             ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
@@ -827,9 +825,9 @@ Public Class Form_Main
             Try
                 LLI_Irradiation_Log = MaskedTextBox_LLI_Irradiation_Log.Text
             Catch ex As Exception
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Check date!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Проверьте дату!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -863,23 +861,23 @@ Public Class Form_Main
             ' Me.Enabled = False
             FormLLiLog.Show()
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
             End If
             FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
             End If
             FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
             End If
             FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
@@ -896,18 +894,18 @@ Public Class Form_Main
         Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
             If ListBox_LLI_Irradiation_Log_Date.Items.Count < 1 Then
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If ListBox_LLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                If language = "russian" Then
+                If language = "Русский" Then
                     MsgBox("Выберите журнал ДЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "english" Then
+                ElseIf language = "English" Then
                     MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -930,23 +928,23 @@ Public Class Form_Main
             ' Me.Enabled = False))
             FormLLiLog.Show()
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
             End If
             FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
             End If
             FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
             End If
             FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
@@ -1053,9 +1051,9 @@ Public Class Form_Main
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
                         If i = 0 Then
-                            If language = "russian" Then
+                            If language = "Русский" Then
                                 ListBox_Monitor_SRM.Items.Add("Журнал КЖИ: ")
-                            ElseIf language = "english" Then
+                            ElseIf language = "English" Then
                                 ListBox_Monitor_SRM.Items.Add("SLI log: ")
                             End If
                             ListBox_Monitor_SRM.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString)
@@ -1076,9 +1074,9 @@ Public Class Form_Main
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
                         If i = 0 Then
-                            If language = "russian" Then
+                            If language = "Русский" Then
                                 ListBox_Monitor_SRM.Items.Add("Журнал ДЖИ: ")
-                            ElseIf language = "english" Then
+                            ElseIf language = "English" Then
                                 ListBox_Monitor_SRM.Items.Add("LLI log: ")
                             End If
                             ListBox_Monitor_SRM.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString)
@@ -1115,9 +1113,9 @@ Public Class Form_Main
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
                         If i = 0 Then
-                            If language = "russian" Then
+                            If language = "Русский" Then
                                 ListBox_Monitor_Monitor.Items.Add("Журнал КЖИ: ")
-                            ElseIf language = "english" Then
+                            ElseIf language = "English" Then
                                 ListBox_Monitor_Monitor.Items.Add("SLI log: ")
                             End If
                             ListBox_Monitor_Monitor.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString)
@@ -1138,9 +1136,9 @@ Public Class Form_Main
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
                         If i = 0 Then
-                            If language = "russian" Then
+                            If language = "Русский" Then
                                 ListBox_Monitor_Monitor.Items.Add("Журнал ДЖИ: ")
-                            ElseIf language = "english" Then
+                            ElseIf language = "English" Then
                                 ListBox_Monitor_Monitor.Items.Add("LLI log: ")
                             End If
                             ListBox_Monitor_Monitor.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString)
@@ -1249,72 +1247,72 @@ Public Class Form_Main
                 i += 1
             Next
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Columns.Item(0).HeaderText = "Цвет"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Columns.Item(0).HeaderText = "Color"
             End If
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Columns.Item(1).HeaderText = "Описание"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Columns.Item(1).HeaderText = "Description"
             End If
             DataGridView_Description.Rows.Add(7)
             DataGridView_Description.Rows.Item(0).Cells.Item(0).Style.BackColor = Color.LightPink
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(0).Cells.Item(1).Value = "партия принята"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(0).Cells.Item(1).Value = "sample set accepted"
             End If
 
             DataGridView_Description.Rows.Item(1).Cells.Item(0).Style.BackColor = Color.White
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(1).Cells.Item(1).Value = "проведена пробоподготовка"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(1).Cells.Item(1).Value = "sample preparation carried out"
             End If
 
             DataGridView_Description.Rows.Item(2).Cells.Item(0).Style.BackColor = Color.LemonChiffon
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(2).Cells.Item(1).Value = "облучение КЖИ"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(2).Cells.Item(1).Value = "irradiation SLI"
             End If
 
             DataGridView_Description.Rows.Item(3).Cells.Item(0).Style.BackColor = Color.Yellow
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(3).Cells.Item(1).Value = "облучение ДЖИ"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(3).Cells.Item(1).Value = "irradiation LLI"
             End If
 
             DataGridView_Description.Rows.Item(4).Cells.Item(0).Style.BackColor = Color.LightGreen
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(4).Cells.Item(1).Value = "КЖИ или ДЖИ плюс результаты"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(4).Cells.Item(1).Value = "SLI or LLI plus results"
             End If
 
             DataGridView_Description.Rows.Item(5).Cells.Item(0).Style.BackColor = Color.LimeGreen
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(5).Cells.Item(1).Value = "КЖИ и ДЖИ плюс результаты"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(5).Cells.Item(1).Value = "SLI and LLI plus results"
             End If
 
             DataGridView_Description.Rows.Item(6).Cells.Item(0).Style.BackColor = Color.Bisque
-            If language = "russian" Then
+            If language = "Русский" Then
                 DataGridView_Description.Rows.Item(6).Cells.Item(1).Value = "Показать все"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(6).Cells.Item(1).Value = "Show all"
             End If
 
             DataGridView_Description.ClearSelection()
             DataGridViewDescriptionFill = True
 
-            If language = "russian" Then
+            If language = "Русский" Then
                 ComboBox_Journal_Of_Irradiation_View.SelectedItem = "Текущий год"
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
                 ComboBox_Journal_Of_Irradiation_View.SelectedItem = "Current year"
             End If
 
@@ -1328,7 +1326,7 @@ Public Class Form_Main
 
     Public Sub Change_Language()
         Try
-            If language = "russian" Then
+            If language = "Русский" Then
 
                 ' L_Count.Text = "Количество образцов в базе данных:" ' не разкоментить, событие load наступает раньше события shown 
                 B_Refresh.Text = "Обновить"
@@ -1378,7 +1376,7 @@ Public Class Form_Main
 
                 B_Physical_Environment.Text = "Параметры окружающей среды"
 
-            ElseIf language = "english" Then
+            ElseIf language = "English" Then
 
                 ' L_Count.Text = "Samples in NAA DB:" ' не разкоментить, событие load наступает раньше события shown 
                 B_Refresh.Text = "Refresh"
@@ -1611,13 +1609,13 @@ Public Class Form_Main
 
     Private Sub ChangeLang_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangeLang.Click
 
-        If ChangeLang.Text = "russian" Then
-            My.MySettings.Default.languaged = "english"
-            ChangeLang.Text = "english"
+        If ChangeLang.Text = "Русский" Then
+            My.MySettings.Default.language = "English"
+            ChangeLang.Text = "English"
             Application.Restart()
-        ElseIf ChangeLang.Text = "english" Then
-            My.MySettings.Default.languaged = "russian"
-            ChangeLang.Text = "russian"
+        ElseIf ChangeLang.Text = "English" Then
+            My.MySettings.Default.language = "Русский"
+            ChangeLang.Text = "Русский"
             Application.Restart()
         End If
 
@@ -1674,6 +1672,8 @@ Public Class Form_Main
 
                     ComboBox_Sample_Set_View.Items.Clear()
                     cmd.CommandText = "select distinct b.R_Processed_By from (" & qs & fields & ") as b ORDER BY b.R_Processed_By"
+                    Debug.WriteLine(qs)
+                    Debug.WriteLine(fields)
                     Debug.WriteLine(cmd.CommandText)
                     'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
                     cmd.Connection = sqlConnection1
@@ -1690,8 +1690,8 @@ Public Class Form_Main
                     L_Name_Sample_Set_View.Text = "Фамилия " & "Код страны" & vbCrLf & "Код клиента"
 
                     ComboBox_Sample_Set_View.Items.Clear()
-                    cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code" & fields & ") as b ORDER BY b.clientInfo"
-
+                    cmd.CommandText = "select distinct b.clientInfo from (" & qs & " join (select Country_Code as cc, Client_ID as ci, Last_Name + ';' + Country_Code + ';' + Client_ID as clientInfo from table_Client) as cl on cl.ci = sampSet.Client_ID and cl.cc = sampSet.Country_Code " & fields & ") as b ORDER BY b.clientInfo"
+                    Debug.WriteLine(cmd.CommandText)
                     cmd.Connection = sqlConnection1
                     sqlConnection1.Open()
                     reader = cmd.ExecuteReader()
@@ -1793,4 +1793,17 @@ Public Class Form_Main
     Private Sub BackgroundWorkerColorizer_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorkerColorizer.DoWork
         ColorizeAll()
     End Sub
+
+
+    Public Sub ChangeLanguage()
+
+        If My.Settings.language = "Русский" Then
+
+        Else
+
+        End If
+
+
+    End Sub
+
 End Class

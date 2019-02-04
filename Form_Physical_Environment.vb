@@ -7,9 +7,9 @@ Public Class Form_Physical_Environment
     '        Me.Table_Physical_EnvironmentBindingSource.EndEdit()
     '        Me.TableAdapterManager.UpdateAll(Me.NAA_DB_EXPDataSet)
     '    Catch ex As Exception
-    '        If Form_Main.language = "russian" Then
+    '        If Form_Main.language = "Русский" Then
     '            MsgBox("Операция была отменена (ошибка в Table_Physical_EnvironmentBindingNavigatorSaveItem_Click)!", MsgBoxStyle.Critical, Me.Text)
-    '        ElseIf Form_Main.language = "english" Then
+    '        ElseIf Form_Main.language = "English" Then
     '            MsgBox("The operation was cancelled (error in Table_Physical_EnvironmentBindingNavigatorSaveItem_Click)!", MsgBoxStyle.Critical, Me.Text)
     '        End If
     '        Exit Sub
@@ -18,13 +18,13 @@ Public Class Form_Physical_Environment
 
     Private Sub Form_Physical_Environment_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Параметры окружающей среды"
 
                 B_Insert_From_File.Text = "Вставить из файла"
                 B_Close.Text = "Закрыть"
                 OpenFileDialog_Insert_From_file.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "Physical environment"
 
                 B_Insert_From_File.Text = "Insert from file"
@@ -46,9 +46,9 @@ Public Class Form_Physical_Environment
                 '.Columns(0).Frozen = True
                 ''  .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Дата", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                'If Form_Main.language = "russian" Then
+                'If Form_Main.language = "Русский" Then
                 '    .Columns.Add("Time", "Время")
-                'ElseIf Form_Main.language = "english" Then
+                'ElseIf Form_Main.language = "English" Then
                 '    .Columns.Add("Time", "Time")
                 'End If
                 '.Columns(1).DataPropertyName = "Time"
@@ -56,9 +56,9 @@ Public Class Form_Physical_Environment
                 '.Columns(1).Frozen = True
                 '' .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Время", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                'If Form_Main.language = "russian" Then
+                'If Form_Main.language = "Русский" Then
                 '    .Columns.Add("Relative_Humidity", "Относительная влажность, %")
-                'ElseIf Form_Main.language = "english" Then
+                'ElseIf Form_Main.language = "English" Then
                 '    .Columns.Add("Relative_Humidity", "Relative humidity, %")
                 'End If
                 '.Columns(2).DataPropertyName = "Relative_Humidity"
@@ -66,9 +66,9 @@ Public Class Form_Physical_Environment
                 '.Columns(2).Frozen = True
                 ''.Columns(2).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Относительная", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                'If Form_Main.language = "russian" Then
+                'If Form_Main.language = "Русский" Then
                 '    .Columns.Add("TemperatureD", "Температура, C")
-                'ElseIf Form_Main.language = "english" Then
+                'ElseIf Form_Main.language = "English" Then
                 '    .Columns.Add("Temperature", "Temperature, C")
                 'End If
                 '.Columns(3).DataPropertyName = "Temperature"
@@ -91,12 +91,12 @@ Public Class Form_Physical_Environment
                 Table_Physical_EnvironmentDataGridView.DataSource = ds
                 Table_Physical_EnvironmentDataGridView.DataMember = "physEnv"
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(0).HeaderText = "Дата"
                     .Columns(1).HeaderText = "Время"
                     .Columns(2).HeaderText = "Относительная влажность, %"
                     .Columns(3).HeaderText = "Температура, C"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(0).HeaderText = "Date"
                     .Columns(1).HeaderText = "Time"
                     .Columns(2).HeaderText = "Relative humidity, %"
@@ -116,9 +116,9 @@ Public Class Form_Physical_Environment
             End With
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Physical_Environment_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_Physical_Environment_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Me.Close()
@@ -130,9 +130,9 @@ Public Class Form_Physical_Environment
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Close_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -150,9 +150,9 @@ Public Class Form_Physical_Environment
             OpenFileDialog_Insert_From_file.InitialDirectory = "C:\"
             ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
             If OpenFileDialog_Insert_From_file.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -264,9 +264,9 @@ c:              Next
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Insert_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Insert_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -277,9 +277,9 @@ c:              Next
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Physical_Environment_FormClosed)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_Physical_Environment_FormClosed)!", MsgBoxStyle.Critical, Me.Text)
             End If
         End Try

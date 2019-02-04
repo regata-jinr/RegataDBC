@@ -35,6 +35,26 @@ Partial Class Form_SLI_Irradiation_Log
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SLI_Irradiation_Log))
         Me.DataGridView_SLI_Irradiation_Log = New System.Windows.Forms.DataGridView()
+        Me.CountryCodeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClientIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.YearDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SampleSetIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SampleSetIndexDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SampleIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateStartDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimeStartDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChannelDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Detector2DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Detector3DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Detector4DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.FileLastDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IrradiatedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MeasuredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaperLogNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PositionNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Detector1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FileFirstDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Table_SLI_Irradiation_Log_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Close = New System.Windows.Forms.Button()
@@ -168,26 +188,6 @@ Partial Class Form_SLI_Irradiation_Log
         Me.L_Name_SRM_Set_View = New System.Windows.Forms.Label()
         Me.L_Name_Monitor_Set_View = New System.Windows.Forms.Label()
         Me.L_Name_Sample_Set_View = New System.Windows.Forms.Label()
-        Me.CountryCodeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClientIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.YearDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SampleSetIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SampleSetIndexDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SampleIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateStartDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimeStartDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChannelDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Detector2DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Detector3DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Detector4DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.FileLastDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IrradiatedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MeasuredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaperLogNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PositionNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Detector1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FileFirstDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView_SLI_Irradiation_Log, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SLI_Irradiation_Log_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -237,6 +237,147 @@ Partial Class Form_SLI_Irradiation_Log
         Me.DataGridView_SLI_Irradiation_Log.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView_SLI_Irradiation_Log.Size = New System.Drawing.Size(965, 228)
         Me.DataGridView_SLI_Irradiation_Log.TabIndex = 0
+        '
+        'CountryCodeDataGridViewTextBoxColumn1
+        '
+        Me.CountryCodeDataGridViewTextBoxColumn1.DataPropertyName = "Country_Code"
+        Me.CountryCodeDataGridViewTextBoxColumn1.HeaderText = "Country_Code"
+        Me.CountryCodeDataGridViewTextBoxColumn1.MinimumWidth = 20
+        Me.CountryCodeDataGridViewTextBoxColumn1.Name = "CountryCodeDataGridViewTextBoxColumn1"
+        Me.CountryCodeDataGridViewTextBoxColumn1.Width = 48
+        '
+        'ClientIDDataGridViewTextBoxColumn1
+        '
+        Me.ClientIDDataGridViewTextBoxColumn1.DataPropertyName = "Client_ID"
+        Me.ClientIDDataGridViewTextBoxColumn1.HeaderText = "Client_ID"
+        Me.ClientIDDataGridViewTextBoxColumn1.Name = "ClientIDDataGridViewTextBoxColumn1"
+        Me.ClientIDDataGridViewTextBoxColumn1.Width = 48
+        '
+        'YearDataGridViewTextBoxColumn1
+        '
+        Me.YearDataGridViewTextBoxColumn1.DataPropertyName = "Year"
+        Me.YearDataGridViewTextBoxColumn1.HeaderText = "Year"
+        Me.YearDataGridViewTextBoxColumn1.Name = "YearDataGridViewTextBoxColumn1"
+        Me.YearDataGridViewTextBoxColumn1.Width = 48
+        '
+        'SampleSetIDDataGridViewTextBoxColumn1
+        '
+        Me.SampleSetIDDataGridViewTextBoxColumn1.DataPropertyName = "Sample_Set_ID"
+        Me.SampleSetIDDataGridViewTextBoxColumn1.HeaderText = "Sample_Set_ID"
+        Me.SampleSetIDDataGridViewTextBoxColumn1.Name = "SampleSetIDDataGridViewTextBoxColumn1"
+        Me.SampleSetIDDataGridViewTextBoxColumn1.Width = 48
+        '
+        'SampleSetIndexDataGridViewTextBoxColumn1
+        '
+        Me.SampleSetIndexDataGridViewTextBoxColumn1.DataPropertyName = "Sample_Set_Index"
+        Me.SampleSetIndexDataGridViewTextBoxColumn1.HeaderText = "Sample_Set_Index"
+        Me.SampleSetIndexDataGridViewTextBoxColumn1.Name = "SampleSetIndexDataGridViewTextBoxColumn1"
+        Me.SampleSetIndexDataGridViewTextBoxColumn1.Width = 48
+        '
+        'SampleIDDataGridViewTextBoxColumn
+        '
+        Me.SampleIDDataGridViewTextBoxColumn.DataPropertyName = "Sample_ID"
+        Me.SampleIDDataGridViewTextBoxColumn.HeaderText = "Sample_ID"
+        Me.SampleIDDataGridViewTextBoxColumn.Name = "SampleIDDataGridViewTextBoxColumn"
+        Me.SampleIDDataGridViewTextBoxColumn.Width = 49
+        '
+        'DateStartDataGridViewTextBoxColumn
+        '
+        Me.DateStartDataGridViewTextBoxColumn.DataPropertyName = "Date_Start"
+        Me.DateStartDataGridViewTextBoxColumn.HeaderText = "Date_Start"
+        Me.DateStartDataGridViewTextBoxColumn.Name = "DateStartDataGridViewTextBoxColumn"
+        Me.DateStartDataGridViewTextBoxColumn.Width = 48
+        '
+        'TimeStartDataGridViewTextBoxColumn
+        '
+        Me.TimeStartDataGridViewTextBoxColumn.DataPropertyName = "Time_Start"
+        Me.TimeStartDataGridViewTextBoxColumn.HeaderText = "Time_Start"
+        Me.TimeStartDataGridViewTextBoxColumn.Name = "TimeStartDataGridViewTextBoxColumn"
+        Me.TimeStartDataGridViewTextBoxColumn.Width = 48
+        '
+        'ChannelDataGridViewTextBoxColumn
+        '
+        Me.ChannelDataGridViewTextBoxColumn.DataPropertyName = "Channel"
+        Me.ChannelDataGridViewTextBoxColumn.HeaderText = "Channel"
+        Me.ChannelDataGridViewTextBoxColumn.Name = "ChannelDataGridViewTextBoxColumn"
+        Me.ChannelDataGridViewTextBoxColumn.Width = 48
+        '
+        'DurationDataGridViewTextBoxColumn
+        '
+        Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
+        Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
+        Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
+        Me.DurationDataGridViewTextBoxColumn.Width = 48
+        '
+        'Detector2DataGridViewCheckBoxColumn
+        '
+        Me.Detector2DataGridViewCheckBoxColumn.DataPropertyName = "Detector_2"
+        Me.Detector2DataGridViewCheckBoxColumn.HeaderText = "Detector_2"
+        Me.Detector2DataGridViewCheckBoxColumn.Name = "Detector2DataGridViewCheckBoxColumn"
+        Me.Detector2DataGridViewCheckBoxColumn.Width = 48
+        '
+        'Detector3DataGridViewCheckBoxColumn
+        '
+        Me.Detector3DataGridViewCheckBoxColumn.DataPropertyName = "Detector_3"
+        Me.Detector3DataGridViewCheckBoxColumn.HeaderText = "Detector_3"
+        Me.Detector3DataGridViewCheckBoxColumn.Name = "Detector3DataGridViewCheckBoxColumn"
+        Me.Detector3DataGridViewCheckBoxColumn.Width = 48
+        '
+        'Detector4DataGridViewCheckBoxColumn
+        '
+        Me.Detector4DataGridViewCheckBoxColumn.DataPropertyName = "Detector_4"
+        Me.Detector4DataGridViewCheckBoxColumn.HeaderText = "Detector_4"
+        Me.Detector4DataGridViewCheckBoxColumn.Name = "Detector4DataGridViewCheckBoxColumn"
+        Me.Detector4DataGridViewCheckBoxColumn.Width = 48
+        '
+        'FileLastDataGridViewTextBoxColumn
+        '
+        Me.FileLastDataGridViewTextBoxColumn.DataPropertyName = "File_Last"
+        Me.FileLastDataGridViewTextBoxColumn.HeaderText = "File_Last"
+        Me.FileLastDataGridViewTextBoxColumn.Name = "FileLastDataGridViewTextBoxColumn"
+        Me.FileLastDataGridViewTextBoxColumn.Width = 48
+        '
+        'IrradiatedByDataGridViewTextBoxColumn
+        '
+        Me.IrradiatedByDataGridViewTextBoxColumn.DataPropertyName = "Irradiated_By"
+        Me.IrradiatedByDataGridViewTextBoxColumn.HeaderText = "Irradiated_By"
+        Me.IrradiatedByDataGridViewTextBoxColumn.Name = "IrradiatedByDataGridViewTextBoxColumn"
+        Me.IrradiatedByDataGridViewTextBoxColumn.Width = 48
+        '
+        'MeasuredByDataGridViewTextBoxColumn
+        '
+        Me.MeasuredByDataGridViewTextBoxColumn.DataPropertyName = "Measured_By"
+        Me.MeasuredByDataGridViewTextBoxColumn.HeaderText = "Measured_By"
+        Me.MeasuredByDataGridViewTextBoxColumn.Name = "MeasuredByDataGridViewTextBoxColumn"
+        Me.MeasuredByDataGridViewTextBoxColumn.Width = 49
+        '
+        'PaperLogNumberDataGridViewTextBoxColumn
+        '
+        Me.PaperLogNumberDataGridViewTextBoxColumn.DataPropertyName = "Paper_Log_Number"
+        Me.PaperLogNumberDataGridViewTextBoxColumn.HeaderText = "Paper_Log_Number"
+        Me.PaperLogNumberDataGridViewTextBoxColumn.Name = "PaperLogNumberDataGridViewTextBoxColumn"
+        Me.PaperLogNumberDataGridViewTextBoxColumn.Width = 48
+        '
+        'PositionNumberDataGridViewTextBoxColumn
+        '
+        Me.PositionNumberDataGridViewTextBoxColumn.DataPropertyName = "Position_Number"
+        Me.PositionNumberDataGridViewTextBoxColumn.HeaderText = "Position_Number"
+        Me.PositionNumberDataGridViewTextBoxColumn.Name = "PositionNumberDataGridViewTextBoxColumn"
+        Me.PositionNumberDataGridViewTextBoxColumn.Width = 48
+        '
+        'Detector1DataGridViewTextBoxColumn
+        '
+        Me.Detector1DataGridViewTextBoxColumn.DataPropertyName = "Detector_1"
+        Me.Detector1DataGridViewTextBoxColumn.HeaderText = "Detector_1"
+        Me.Detector1DataGridViewTextBoxColumn.Name = "Detector1DataGridViewTextBoxColumn"
+        Me.Detector1DataGridViewTextBoxColumn.Width = 48
+        '
+        'FileFirstDataGridViewTextBoxColumn
+        '
+        Me.FileFirstDataGridViewTextBoxColumn.DataPropertyName = "File_First"
+        Me.FileFirstDataGridViewTextBoxColumn.HeaderText = "File_First"
+        Me.FileFirstDataGridViewTextBoxColumn.Name = "FileFirstDataGridViewTextBoxColumn"
+        Me.FileFirstDataGridViewTextBoxColumn.Width = 48
         '
         'Table_SLI_Irradiation_Log_BindingSource
         '
@@ -1342,147 +1483,6 @@ Partial Class Form_SLI_Irradiation_Log
         Me.L_Name_Sample_Set_View.Size = New System.Drawing.Size(89, 13)
         Me.L_Name_Sample_Set_View.TabIndex = 286
         Me.L_Name_Sample_Set_View.Text = "Sample sets view"
-        '
-        'CountryCodeDataGridViewTextBoxColumn1
-        '
-        Me.CountryCodeDataGridViewTextBoxColumn1.DataPropertyName = "Country_Code"
-        Me.CountryCodeDataGridViewTextBoxColumn1.HeaderText = "Country_Code"
-        Me.CountryCodeDataGridViewTextBoxColumn1.MinimumWidth = 20
-        Me.CountryCodeDataGridViewTextBoxColumn1.Name = "CountryCodeDataGridViewTextBoxColumn1"
-        Me.CountryCodeDataGridViewTextBoxColumn1.Width = 54
-        '
-        'ClientIDDataGridViewTextBoxColumn1
-        '
-        Me.ClientIDDataGridViewTextBoxColumn1.DataPropertyName = "Client_ID"
-        Me.ClientIDDataGridViewTextBoxColumn1.HeaderText = "Client_ID"
-        Me.ClientIDDataGridViewTextBoxColumn1.Name = "ClientIDDataGridViewTextBoxColumn1"
-        Me.ClientIDDataGridViewTextBoxColumn1.Width = 77
-        '
-        'YearDataGridViewTextBoxColumn1
-        '
-        Me.YearDataGridViewTextBoxColumn1.DataPropertyName = "Year"
-        Me.YearDataGridViewTextBoxColumn1.HeaderText = "Year"
-        Me.YearDataGridViewTextBoxColumn1.Name = "YearDataGridViewTextBoxColumn1"
-        Me.YearDataGridViewTextBoxColumn1.Width = 38
-        '
-        'SampleSetIDDataGridViewTextBoxColumn1
-        '
-        Me.SampleSetIDDataGridViewTextBoxColumn1.DataPropertyName = "Sample_Set_ID"
-        Me.SampleSetIDDataGridViewTextBoxColumn1.HeaderText = "Sample_Set_ID"
-        Me.SampleSetIDDataGridViewTextBoxColumn1.Name = "SampleSetIDDataGridViewTextBoxColumn1"
-        Me.SampleSetIDDataGridViewTextBoxColumn1.Width = 63
-        '
-        'SampleSetIndexDataGridViewTextBoxColumn1
-        '
-        Me.SampleSetIndexDataGridViewTextBoxColumn1.DataPropertyName = "Sample_Set_Index"
-        Me.SampleSetIndexDataGridViewTextBoxColumn1.HeaderText = "Sample_Set_Index"
-        Me.SampleSetIndexDataGridViewTextBoxColumn1.Name = "SampleSetIndexDataGridViewTextBoxColumn1"
-        Me.SampleSetIndexDataGridViewTextBoxColumn1.Width = 64
-        '
-        'SampleIDDataGridViewTextBoxColumn
-        '
-        Me.SampleIDDataGridViewTextBoxColumn.DataPropertyName = "Sample_ID"
-        Me.SampleIDDataGridViewTextBoxColumn.HeaderText = "Sample_ID"
-        Me.SampleIDDataGridViewTextBoxColumn.Name = "SampleIDDataGridViewTextBoxColumn"
-        Me.SampleIDDataGridViewTextBoxColumn.Width = 58
-        '
-        'DateStartDataGridViewTextBoxColumn
-        '
-        Me.DateStartDataGridViewTextBoxColumn.DataPropertyName = "Date_Start"
-        Me.DateStartDataGridViewTextBoxColumn.HeaderText = "Date_Start"
-        Me.DateStartDataGridViewTextBoxColumn.Name = "DateStartDataGridViewTextBoxColumn"
-        Me.DateStartDataGridViewTextBoxColumn.Width = 75
-        '
-        'TimeStartDataGridViewTextBoxColumn
-        '
-        Me.TimeStartDataGridViewTextBoxColumn.DataPropertyName = "Time_Start"
-        Me.TimeStartDataGridViewTextBoxColumn.HeaderText = "Time_Start"
-        Me.TimeStartDataGridViewTextBoxColumn.Name = "TimeStartDataGridViewTextBoxColumn"
-        Me.TimeStartDataGridViewTextBoxColumn.Width = 84
-        '
-        'ChannelDataGridViewTextBoxColumn
-        '
-        Me.ChannelDataGridViewTextBoxColumn.DataPropertyName = "Channel"
-        Me.ChannelDataGridViewTextBoxColumn.HeaderText = "Channel"
-        Me.ChannelDataGridViewTextBoxColumn.Name = "ChannelDataGridViewTextBoxColumn"
-        Me.ChannelDataGridViewTextBoxColumn.Width = 56
-        '
-        'DurationDataGridViewTextBoxColumn
-        '
-        Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
-        Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
-        Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
-        Me.DurationDataGridViewTextBoxColumn.Width = 95
-        '
-        'Detector2DataGridViewCheckBoxColumn
-        '
-        Me.Detector2DataGridViewCheckBoxColumn.DataPropertyName = "Detector_2"
-        Me.Detector2DataGridViewCheckBoxColumn.HeaderText = "Detector_2"
-        Me.Detector2DataGridViewCheckBoxColumn.Name = "Detector2DataGridViewCheckBoxColumn"
-        Me.Detector2DataGridViewCheckBoxColumn.Width = 48
-        '
-        'Detector3DataGridViewCheckBoxColumn
-        '
-        Me.Detector3DataGridViewCheckBoxColumn.DataPropertyName = "Detector_3"
-        Me.Detector3DataGridViewCheckBoxColumn.HeaderText = "Detector_3"
-        Me.Detector3DataGridViewCheckBoxColumn.Name = "Detector3DataGridViewCheckBoxColumn"
-        Me.Detector3DataGridViewCheckBoxColumn.Width = 48
-        '
-        'Detector4DataGridViewCheckBoxColumn
-        '
-        Me.Detector4DataGridViewCheckBoxColumn.DataPropertyName = "Detector_4"
-        Me.Detector4DataGridViewCheckBoxColumn.HeaderText = "Detector_4"
-        Me.Detector4DataGridViewCheckBoxColumn.Name = "Detector4DataGridViewCheckBoxColumn"
-        Me.Detector4DataGridViewCheckBoxColumn.Width = 48
-        '
-        'FileLastDataGridViewTextBoxColumn
-        '
-        Me.FileLastDataGridViewTextBoxColumn.DataPropertyName = "File_Last"
-        Me.FileLastDataGridViewTextBoxColumn.HeaderText = "File_Last"
-        Me.FileLastDataGridViewTextBoxColumn.Name = "FileLastDataGridViewTextBoxColumn"
-        Me.FileLastDataGridViewTextBoxColumn.Width = 113
-        '
-        'IrradiatedByDataGridViewTextBoxColumn
-        '
-        Me.IrradiatedByDataGridViewTextBoxColumn.DataPropertyName = "Irradiated_By"
-        Me.IrradiatedByDataGridViewTextBoxColumn.HeaderText = "Irradiated_By"
-        Me.IrradiatedByDataGridViewTextBoxColumn.Name = "IrradiatedByDataGridViewTextBoxColumn"
-        Me.IrradiatedByDataGridViewTextBoxColumn.Width = 187
-        '
-        'MeasuredByDataGridViewTextBoxColumn
-        '
-        Me.MeasuredByDataGridViewTextBoxColumn.DataPropertyName = "Measured_By"
-        Me.MeasuredByDataGridViewTextBoxColumn.HeaderText = "Measured_By"
-        Me.MeasuredByDataGridViewTextBoxColumn.Name = "MeasuredByDataGridViewTextBoxColumn"
-        Me.MeasuredByDataGridViewTextBoxColumn.Width = 49
-        '
-        'PaperLogNumberDataGridViewTextBoxColumn
-        '
-        Me.PaperLogNumberDataGridViewTextBoxColumn.DataPropertyName = "Paper_Log_Number"
-        Me.PaperLogNumberDataGridViewTextBoxColumn.HeaderText = "Paper_Log_Number"
-        Me.PaperLogNumberDataGridViewTextBoxColumn.Name = "PaperLogNumberDataGridViewTextBoxColumn"
-        Me.PaperLogNumberDataGridViewTextBoxColumn.Width = 48
-        '
-        'PositionNumberDataGridViewTextBoxColumn
-        '
-        Me.PositionNumberDataGridViewTextBoxColumn.DataPropertyName = "Position_Number"
-        Me.PositionNumberDataGridViewTextBoxColumn.HeaderText = "Position_Number"
-        Me.PositionNumberDataGridViewTextBoxColumn.Name = "PositionNumberDataGridViewTextBoxColumn"
-        Me.PositionNumberDataGridViewTextBoxColumn.Width = 48
-        '
-        'Detector1DataGridViewTextBoxColumn
-        '
-        Me.Detector1DataGridViewTextBoxColumn.DataPropertyName = "Detector_1"
-        Me.Detector1DataGridViewTextBoxColumn.HeaderText = "Detector_1"
-        Me.Detector1DataGridViewTextBoxColumn.Name = "Detector1DataGridViewTextBoxColumn"
-        Me.Detector1DataGridViewTextBoxColumn.Width = 48
-        '
-        'FileFirstDataGridViewTextBoxColumn
-        '
-        Me.FileFirstDataGridViewTextBoxColumn.DataPropertyName = "File_First"
-        Me.FileFirstDataGridViewTextBoxColumn.HeaderText = "File_First"
-        Me.FileFirstDataGridViewTextBoxColumn.Name = "FileFirstDataGridViewTextBoxColumn"
-        Me.FileFirstDataGridViewTextBoxColumn.Width = 48
         '
         'Form_SLI_Irradiation_Log
         '

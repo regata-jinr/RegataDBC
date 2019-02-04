@@ -17,7 +17,7 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Close.Click
         Try
             Dim response As MsgBoxResult
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 response = MsgBox("Вы уверены? Все необходимые данные сохранены?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
                 If response = MsgBoxResult.Ok Then
                     Me.Close()
@@ -25,7 +25,7 @@ Public Class Form_SLI_Irradiation_Log
                 ElseIf response = MsgBoxResult.Cancel Then
                     Exit Sub
                 End If
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Are you sure? Is all necessary data stored?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
                 If response = MsgBoxResult.Ok Then
                     Me.Close()
@@ -41,9 +41,9 @@ Public Class Form_SLI_Irradiation_Log
     End Sub
 
     Private Sub DataGridView_SLI_Table_DataError(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs)
-        If Form_Main.language = "russian" Then
+        If Form_Main.language = "Русский" Then
             MsgBox("Операция была отменена (ошибка в DataGridView_SLI_Table_DataError)!", MsgBoxStyle.Critical, Me.Text)
-        ElseIf Form_Main.language = "english" Then
+        ElseIf Form_Main.language = "English" Then
             MsgBox("Operation was cancelled (error in DataGridView_SLI_Table_DataError)!", MsgBoxStyle.Critical, Me.Text)
         End If
         Exit Sub
@@ -52,7 +52,7 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub Form_SLI_Irradiation_Log_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
 
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 ' Form_SLI_Irradiation_Log
                 Me.Text = "Журнал облучения КЖИ"
                 L_Name_SLI_Irradiation_Log.Text = "Журнал облучения КЖИ"
@@ -106,7 +106,7 @@ Public Class Form_SLI_Irradiation_Log
                 ComboBox_Monitor_Set_View.Items.Add("Партии мониторов из журнала")
 
                 SaveFileDialog_SLI.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 ' Form_SLI_Irradiation_Log
                 Me.Text = "SLI irradiation log"
                 L_Name_SLI_Irradiation_Log.Text = "SLI irradiation log"
@@ -183,9 +183,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Country_Code", "Код страны")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Country_Code", "Country code")
                 End If
                 .Columns(0).DataPropertyName = "Country_Code" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
@@ -193,9 +193,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(0).Frozen = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Country", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Client_ID", "Клиентский №")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Client_ID", "Client ID")
                 End If
                 .Columns(1).DataPropertyName = "Client_ID"
@@ -203,9 +203,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(1).Frozen = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Клиентский", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Year", "Год")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Year", "Year")
                 End If
                 .Columns(2).DataPropertyName = "Year"
@@ -213,9 +213,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(2).Frozen = True
                 .Columns(2).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Sample_Set_ID", "№ партии образцов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Sample_Set_ID", "Sample set ID")
                 End If
                 .Columns(3).DataPropertyName = "Sample_Set_ID"
@@ -223,9 +223,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(3).Frozen = True
                 .Columns(3).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Sample_Set_Index", "Индекс партии образцов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Sample_Set_Index", "Sample set index")
                 End If
                 .Columns(4).DataPropertyName = "Sample_Set_Index"
@@ -233,9 +233,9 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(4).Frozen = True
                 .Columns(4).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Sample_ID", "Номер образца")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Sample_ID", "Sample ID")
                 End If
                 .Columns(5).DataPropertyName = "Sample_ID"
@@ -243,34 +243,34 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns(5).Frozen = True
                 .Columns(5).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("образца", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Date_Start", "Дата облучения")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Date_Start", "Irradiation date")
                 End If
                 .Columns(6).DataPropertyName = "Date_Start"
                 .Columns(6).ReadOnly = True
                 .Columns(6).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Time_Start", "Время начала облучения")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Time_Start", "Start time")
                 End If
                 .Columns(7).DataPropertyName = "Time_Start"
                 .Columns(7).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("облучения", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset 'этот столб считаем, как и предыдущий, по Irradiation
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Channel", "Канал")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Channel", "Channel")
                 End If
                 .Columns(8).DataPropertyName = "Channel"
                 .Columns(8).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Channel", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Duration", "Длительность, сек")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Duration", "Duration, sec")
                 End If
                 .Columns(9).DataPropertyName = "Duration"
@@ -289,9 +289,9 @@ Public Class Form_SLI_Irradiation_Log
                 '.Columns(13).HeaderText = "Detector 7" 'СКРЫТ
                 '.Columns(13).Visible = False
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("File_First", "Файл спектра")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("File_First", "Spectrum file")
                 End If
                 .Columns(10).DataPropertyName = "File_First" 'ПОКАЗАН, это бывший столб "First file" и бывший столб № 14
@@ -303,9 +303,9 @@ Public Class Form_SLI_Irradiation_Log
                 '.Columns(16).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("number", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
                 '.Columns(16).Visible = False
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Irradiated_By", "Облучён")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Irradiated_By", "Irradiated by")
                 End If
                 .Columns(11).DataPropertyName = "Irradiated_By"
@@ -334,45 +334,45 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Country_Code", "Код страны")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Country_Code", "Country code")
                 End If
                 .Columns(0).DataPropertyName = "Country_Code" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Country", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Client_ID", "Клиентский №")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Client_ID", "Client ID")
                 End If
                 .Columns(1).DataPropertyName = "Client_ID"
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Клиентский", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Year", "Год")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Year", "Year")
                 End If
                 .Columns(2).DataPropertyName = "Year"
                 .Columns(2).ReadOnly = True
                 .Columns(2).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Sample_Set_ID", "№ партии образцов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Sample_Set_ID", "Sample set ID")
                 End If
                 .Columns(3).DataPropertyName = "Sample_Set_ID"
                 .Columns(3).ReadOnly = True
                 .Columns(3).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Sample_Set_Index", "Индекс партии образцов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Sample_Set_Index", "Sample set index")
                 End If
                 .Columns(4).DataPropertyName = "Sample_Set_Index"
@@ -396,45 +396,45 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Set_Name", "Имя партии стандартов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Set_Name", "SRM set name")
                 End If
                 .Columns(0).DataPropertyName = "SRM_Set_Name"
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("стандартов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Set_Number", "№ партии стандартов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Set_Number", "SRM set number")
                 End If
                 .Columns(1).DataPropertyName = "SRM_Set_Number"
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("стандартов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Set_Type", "Тип партии стандартов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Set_Type", "SRM set type")
                 End If
                 .Columns(2).DataPropertyName = "SRM_Set_Type"
                 .Columns(2).ReadOnly = True
                 .Columns(2).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("стандартов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Set_Weight", "Вес партии, гр")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Set_Weight", "Set weight, g")
                 End If
                 .Columns(3).DataPropertyName = "SRM_Set_Weight"
                 .Columns(3).ReadOnly = True
                 .Columns(3).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Weight,", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Set_Purchasing_Date", "Дата покупки")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Set_Purchasing_Date", "Purchasing date")
                 End If
                 .Columns(4).DataPropertyName = "SRM_Set_Purchasing_Date"
@@ -454,117 +454,117 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_Number", "№ стандарта")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_Number", "SRM number")
                 End If
                 .Columns(0).DataPropertyName = "SRM_Number"
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("стандарта", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Weight", "Вес, гр")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Weight", "Weight, g")
                 End If
                 .Columns(1).DataPropertyName = "SRM_SLI_Weight"
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Weight,", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_1", "Дата облучения 1")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_1", "Irradiation date 1")
                 End If
                 .Columns(2).DataPropertyName = "SRM_SLI_Irradiation_Date_1"
                 .Columns(2).ReadOnly = True
                 .Columns(2).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_2", "Дата облучения 2")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_2", "Irradiation date 2")
                 End If
                 .Columns(3).DataPropertyName = "SRM_SLI_Irradiation_Date_2"
                 .Columns(3).ReadOnly = True
                 .Columns(3).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_3", "Дата облучения 3")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_3", "Irradiation date 3")
                 End If
                 .Columns(4).DataPropertyName = "SRM_SLI_Irradiation_Date_3"
                 .Columns(4).ReadOnly = True
                 .Columns(4).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_4", "Дата облучения 4")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_4", "Irradiation date 4")
                 End If
                 .Columns(5).DataPropertyName = "SRM_SLI_Irradiation_Date_4"
                 .Columns(5).ReadOnly = True
                 .Columns(5).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_5", "Дата облучения 5")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_5", "Irradiation date 5")
                 End If
                 .Columns(6).DataPropertyName = "SRM_SLI_Irradiation_Date_5"
                 .Columns(6).ReadOnly = True
                 .Columns(6).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_6", "Дата облучения 6")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_6", "Irradiation date 6")
                 End If
                 .Columns(7).DataPropertyName = "SRM_SLI_Irradiation_Date_6"
                 .Columns(7).ReadOnly = True
                 .Columns(7).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_7", "Дата облучения 7")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_7", "Irradiation date 7")
                 End If
                 .Columns(8).DataPropertyName = "SRM_SLI_Irradiation_Date_7"
                 .Columns(8).ReadOnly = True
                 .Columns(8).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_8", "Дата облучения 8")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_8", "Irradiation date 8")
                 End If
                 .Columns(9).DataPropertyName = "SRM_SLI_Irradiation_Date_8"
                 .Columns(9).ReadOnly = True
                 .Columns(9).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_9", "Дата облучения 9")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_9", "Irradiation date 9")
                 End If
                 .Columns(10).DataPropertyName = "SRM_SLI_Irradiation_Date_9"
                 .Columns(10).ReadOnly = True
                 .Columns(10).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_10", "Дата облучения 10")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Irradiation_Date_10", "Irradiation date 10")
                 End If
                 .Columns(11).DataPropertyName = "SRM_SLI_Irradiation_Date_10"
                 .Columns(11).ReadOnly = True
                 .Columns(11).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Irradiation", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("SRM_SLI_Not_In_Use", "Не используется")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("SRM_SLI_Not_In_Use", "Not in use")
                 End If
                 .Columns(12).DataPropertyName = "SRM_SLI_Not_In_Use"
@@ -591,45 +591,45 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Name", "Имя партии мониторов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Name", "Monitor set name")
                 End If
                 .Columns(0).DataPropertyName = "Monitor_Set_Name"
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("мониторов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Number", "№ партии мониторов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Number", "Monitor set number")
                 End If
                 .Columns(1).DataPropertyName = "Monitor_Set_Number"
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("мониторов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Type", "Тип партии мониторов")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Type", "Monitor set type")
                 End If
                 .Columns(2).DataPropertyName = "Monitor_Set_Type"
                 .Columns(2).ReadOnly = True
                 .Columns(2).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("мониторов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Weight", "Вес партии, гр")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Weight", "Set weight, g")
                 End If
                 .Columns(3).DataPropertyName = "Monitor_Set_Weight"
                 .Columns(3).ReadOnly = True
                 .Columns(3).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("партии", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Set_Purchasing_Date", "Дата покупки")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Set_Purchasing_Date", "Purchasing date")
                 End If
                 .Columns(4).DataPropertyName = "Monitor_Set_Purchasing_Date"
@@ -649,27 +649,27 @@ Public Class Form_SLI_Irradiation_Log
                 .Columns.Clear()
                 .RowHeadersWidth = 21
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_Number", "№ монитора")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_Number", "Monitor number")
                 End If
                 .Columns(0).DataPropertyName = "Monitor_Number"
                 .Columns(0).ReadOnly = True
                 .Columns(0).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("монитора", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_SLI_Weight", "Вес, гр")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_SLI_Weight", "Weight, g")
                 End If
                 .Columns(1).DataPropertyName = "Monitor_SLI_Weight"
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(System.Math.Ceiling(g.MeasureString("Weight,", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns.Add("Monitor_SLI_Date_Start", "Дата облучения")
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns.Add("Monitor_SLI_Date_Start", "Irradiation date")
                 End If
                 .Columns(2).DataPropertyName = "Monitor_SLI_Date_Start"
@@ -763,9 +763,9 @@ Public Class Form_SLI_Irradiation_Log
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
             While reader.Read()
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     If Not IsDBNull(reader(0)) Then L_Monitor.Text = "Страна: " + reader(0).ToString + "; "
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     If Not IsDBNull(reader(0)) Then L_Monitor.Text = "Country: " + reader(0).ToString + "; "
                 End If
             End While
@@ -776,9 +776,9 @@ Public Class Form_SLI_Irradiation_Log
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
             While reader.Read()
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     If Not IsDBNull(reader(0)) Then L_Monitor.Text = L_Monitor.Text + "Организация: " + reader(0).ToString + "; " + "Фамилия: " + reader(1).ToString + "."
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     If Not IsDBNull(reader(0)) Then L_Monitor.Text = L_Monitor.Text + "Organization: " + reader(0).ToString + "; " + "Last name: " + reader(1).ToString + "."
                 End If
             End While
@@ -793,17 +793,17 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Add_Sample_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Add_Sample.Click
         Try
             If DataGridView_SLI_Sample_Set.SelectedCells.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите партию образцов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select sample set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ListBox_Sample_ID.SelectedItems.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите образец!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -925,17 +925,17 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Fill_In_Time_Start_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_Time_Start.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Time.Text = "  :  :" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите время!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type time!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1129,9 +1129,9 @@ Public Class Form_SLI_Irradiation_Log
     End Sub
 
     Private Sub DataGridView_SLI_Irradiation_Log_DataError(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles DataGridView_SLI_Irradiation_Log.DataError
-        If Form_Main.language = "russian" Then
+        If Form_Main.language = "Русский" Then
             MsgBox("Операция была отменена (ошибка в DataGridView_SLI_Irradiation_Log_DataError)!", MsgBoxStyle.Critical, Me.Text)
-        ElseIf Form_Main.language = "english" Then
+        ElseIf Form_Main.language = "English" Then
             MsgBox("Operation was cancelled (error in DataGridView_SLI_Irradiation_Log_DataError)!", MsgBoxStyle.Critical, Me.Text)
         End If
         Exit Sub
@@ -1140,9 +1140,9 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Delete_Sample_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Delete_Sample_From_Log.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_SLI_Irradiation_Log.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1196,17 +1196,17 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Fill_In_Irradiated_By_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_Irradiated_By.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1224,17 +1224,17 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub B_Fill_In_Measured_By_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_Measured_By.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1292,17 +1292,17 @@ Public Class Form_SLI_Irradiation_Log
             cmd.CommandType = System.Data.CommandType.Text
 
             If DataGridView_Table_SRM_Set.SelectedCells.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select SRM set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_SRM.SelectedCells.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите стандарт!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1312,9 +1312,9 @@ Public Class Form_SLI_Irradiation_Log
                 If IsDBNull(DataGridView_Table_SRM.Rows.Item(DataGridView_Table_SRM.CurrentCell.RowIndex).Cells.Item(i + 1).Value) = True Then
                     If i > 1 Then
                         If MaskedTextBox_SLI_Irradiation_Log.Text <= DataGridView_Table_SRM.Rows.Item(DataGridView_Table_SRM.CurrentCell.RowIndex).Cells.Item(i).Value Then
-                            If Form_Main.language = "russian" Then
+                            If Form_Main.language = "Русский" Then
                                 MsgBox("Некорректная дата!", MsgBoxStyle.Exclamation, Me.Text)
-                            ElseIf Form_Main.language = "english" Then
+                            ElseIf Form_Main.language = "English" Then
                                 MsgBox("Incorrect date!", MsgBoxStyle.Exclamation, Me.Text)
                             End If
                             Exit Sub
@@ -1434,17 +1434,17 @@ Public Class Form_SLI_Irradiation_Log
             cmd.CommandType = System.Data.CommandType.Text
 
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_SLI_Irradiation_Log.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_SLI_Irradiation_Log.SelectedCells.Item(0).Value <> "s" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1535,18 +1535,18 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
         'WHERE     (Monitor_Set_Name = @Monitor_Set_Name) AND (Monitor_Set_Number = @Monitor_Set_Number) AND (Monitor_Number = @Monitor_Number)
         Try
             If DataGridView_Table_Monitor_Set.SelectedCells.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If DataGridView_Table_Monitor.SelectedCells.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите монитор!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1594,17 +1594,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Delete_Monitor_From_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Delete_Monitor_From_Log.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_SLI_Irradiation_Log.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_SLI_Irradiation_Log.SelectedCells.Item(0).Value <> "m" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1650,17 +1650,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Set_Monitor_As_Not_In_Use_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Set_Monitor_As_Not_In_Use.Click
         Try
             If DataGridView_Table_Monitor_Set.SelectedRows.Count = 0 Or DataGridView_Table_Monitor_Set.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите одну партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_Monitor.SelectedRows.Count = 0 Or DataGridView_Table_Monitor.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1696,17 +1696,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Set_SRM_As_Not_In_Use_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Set_SRM_As_Not_In_Use.Click
         Try
             If DataGridView_Table_SRM_Set.SelectedRows.Count = 0 Or DataGridView_Table_SRM_Set.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите одну партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one SRM set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_SRM.SelectedRows.Count = 0 Or DataGridView_Table_SRM.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1742,17 +1742,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Find_Sample_Set_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Find_Sample_Set.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_SLI_Irradiation_Log.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_SLI_Irradiation_Log.SelectedCells.Item(0).Value = "m" Or DataGridView_SLI_Irradiation_Log.SelectedCells.Item(0).Value = "s" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1846,9 +1846,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     '        ComboBox_Sample_Set_View.Text = s_var
     '        ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
     '    Catch ex As Exception
-    '        If Form_Main.language = "russian" Then
+    '        If Form_Main.language = "Русский" Then
     '            MsgBox("Операция была отменена (ошибка в B_Find_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
-    '        ElseIf Form_Main.language = "english" Then
+    '        ElseIf Form_Main.language = "English" Then
     '            MsgBox("Operation was cancelled (error in B_Find_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
     '        End If
     '        Exit Sub
@@ -1858,17 +1858,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Fill_In_Channel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_Channel.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Channel.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите канал облучения!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select irradiation channel!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -1886,17 +1886,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Fill_In_Duration_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_Duration.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Duration.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите длительность облучения", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type duration of irradiation!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -2208,9 +2208,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub Button_Auto_Fill_In_Irradiation_Time_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button_Auto_Fill_In_Irradiation_Start_Time.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -2290,17 +2290,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub B_Fill_In_Spectrum_File_Click(sender As System.Object, e As System.EventArgs) Handles B_Fill_In_Spectrum_File.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Spectrum_File.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите имя файла спектра!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type spectrum file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -2314,9 +2314,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
             Me.Table_SLI_Irradiation_Log_BindingSource.EndEdit()
             Me.Table_SLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_In_Spectrum_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_In_Spectrum_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -2338,17 +2338,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub Button_Paper_Log_Number_Click(sender As System.Object, e As System.EventArgs) Handles Button_Paper_Log_Number.Click
         Try
             If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Paper_Log_Number.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите номер бумажного журнала", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type paper log number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub

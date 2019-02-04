@@ -7,9 +7,9 @@ Public Class Form_Samples_Search
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Search_FormClosed)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_Search_FormClosed)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -20,9 +20,9 @@ Public Class Form_Samples_Search
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Close_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -31,7 +31,7 @@ Public Class Form_Samples_Search
 
     Private Sub Form_Search_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Поиск образцов"
 
                 L_Name_Sample_Set.Text = "Партия образцов"
@@ -50,7 +50,7 @@ Public Class Form_Samples_Search
                 B_Close.Text = "Закрыть"
 
                 SaveFileDialog_Search_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "Samples search"
 
                 L_Name_Sample_Set.Text = "Sample set"
@@ -178,57 +178,57 @@ Public Class Form_Samples_Search
                 .Columns.Clear()
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(0).HeaderText = "Страна"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(0).HeaderText = "Country"
                 End If
                 .Columns(0).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(1).HeaderText = "Клиентский номер"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(1).HeaderText = "Client ID"
                 End If
                 .Columns(1).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(2).HeaderText = "Год"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(2).HeaderText = "Year"
                 End If
                 .Columns(2).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(3).HeaderText = "Номер партии"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(3).HeaderText = "Sample set ID"
                 End If
                 .Columns(3).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(4).HeaderText = "Инд. партии образцов"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(4).HeaderText = "Sample set ind."
                 End If
                 .Columns(4).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(5).HeaderText = "№ образца"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(5).HeaderText = "Sample ID"
                 End If
                 .Columns(5).ReadOnly = True
 
                 .Columns.Add(New DataGridViewTextBoxColumn())
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     .Columns(6).HeaderText = "Файл спектра"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     .Columns(6).HeaderText = "File spectrum"
                 End If
                 .Columns(6).ReadOnly = True
@@ -238,23 +238,23 @@ Public Class Form_Samples_Search
                     '.Columns(5 + 4 * i + 2).HeaderText = Separate_Elements(i)
                     '.Columns(5 + 4 * i + 2).ReadOnly = True
                     .Columns.Add(New DataGridViewTextBoxColumn())
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns(5 + 3 * i + 2).HeaderText = Separate_Elements(i) + ", конц., uгр/гр"
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns(5 + 3 * i + 2).HeaderText = Separate_Elements(i) + ", conc., ugr/gr"
                     End If
                     .Columns(5 + 3 * i + 2).ReadOnly = True
                     .Columns.Add(New DataGridViewTextBoxColumn())
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns(5 + 3 * i + 3).HeaderText = Separate_Elements(i) + ", погр., %"
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns(5 + 3 * i + 3).HeaderText = Separate_Elements(i) + ", error, %"
                     End If
                     .Columns(5 + 3 * i + 3).ReadOnly = True
                     .Columns.Add(New DataGridViewTextBoxColumn())
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns(5 + 3 * i + 4).HeaderText = Separate_Elements(i) + ", пр. обн., uгр/гр"
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns(5 + 3 * i + 4).HeaderText = Separate_Elements(i) + ", det. lim., ugr/gr"
                     End If
                     .Columns(5 + 3 * i + 4).ReadOnly = True
@@ -265,9 +265,9 @@ Public Class Form_Samples_Search
             L_Last_Name.Text = "-"
             L_Organization.Text = "-"
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Search_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_Search_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -315,9 +315,9 @@ Public Class Form_Samples_Search
             'If ComboBox_Client_ID.Items.Count > 0 Then ComboBox_Client_ID.Items.Add("")
             sqlConnection1.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в ComboBox_Country_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in ComboBox_Country_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -331,9 +331,9 @@ Public Class Form_Samples_Search
             Dim reader As SqlDataReader
 
             If ComboBox_Country.SelectedItem = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите страну!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select country!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -468,9 +468,9 @@ Public Class Form_Samples_Search
             End While
             sqlConnection1.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Run_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Run_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -530,18 +530,18 @@ Public Class Form_Samples_Search
                     oBook.SaveAs(SaveFileDialog_Search_Results.FileName)
                     oExcel.Quit()
                 Catch ex As Exception
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Закройте файл Excel!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Close the Excel file!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
                 End Try
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -586,9 +586,9 @@ Public Class Form_Samples_Search
             End While
             sqlConnection1.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в CheckedListBox_Sample_Set_Client_SelectedIndexChanged)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in CheckedListBox_Sample_Set_Client_SelectedIndexChanged)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

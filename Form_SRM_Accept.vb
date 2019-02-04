@@ -7,9 +7,9 @@ Public Class Form_SRM_Accept
             Me.Table_SRM_SetBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.NAA_DB_EXPDataSet)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Table_SRM_SetBindingNavigatorSaveItem_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Table_SRM_SetBindingNavigatorSaveItem_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -19,7 +19,7 @@ Public Class Form_SRM_Accept
     Private Sub Form_New_SRM_Accept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Try
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     Me.Text = "Список стандартов"
 
                     L_Name_SRM_Set_Name.Text = "Имя партии стандартов"
@@ -31,7 +31,7 @@ Public Class Form_SRM_Accept
                     B_Close.Text = "Закрыть"
 
                     OpenFileDialog_Weighting_SLI_LLI.Filter = "Весовые файлы (*.ves)|*.ves|Все файлы (*.*)|*.*"
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     Me.Text = "SRM list"
 
                     L_Name_SRM_Set_Name.Text = "SRM set name"
@@ -50,27 +50,27 @@ Public Class Form_SRM_Accept
                     Dim offset As Integer = Convert.ToInt32(Math.Ceiling(g.MeasureString("  ", .ColumnHeadersDefaultCellStyle.Font).Width))
                     .Columns.Clear()
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("SRM_Number", "№ стандарта")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("SRM_Number", "SRM number")
                     End If
                     .Columns(0).DataPropertyName = "SRM_Number" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
                     .Columns(0).ReadOnly = True
                     .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("стандарта", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("SRM_SLI_Weight", "Вес КЖИ, гр")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("SRM_SLI_Weight", "SLI weight, g")
                     End If
                     .Columns(1).DataPropertyName = "SRM_SLI_Weight"
                     .Columns(1).ReadOnly = True
                     .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("weight, g", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         .Columns.Add("SRM_LLI_Weight", "Вес ДЖИ, гр")
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         .Columns.Add("SRM_LLI_Weight", "LLI weight, g")
                     End If
                     .Columns(2).DataPropertyName = "SRM_LLI_Weight"
@@ -148,9 +148,9 @@ Public Class Form_SRM_Accept
             End If
             L_Weight_Balance.Text = (weight_SRM_Set - weight_SRM_Sum).ToString
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_New_SRM_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_New_SRM_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -161,9 +161,9 @@ Public Class Form_SRM_Accept
         Try
             Form_Main.Enabled = True
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_New_SRM_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_New_SRM_Accept_FormClosed!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -174,9 +174,9 @@ Public Class Form_SRM_Accept
         Try
             Me.Close()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -205,23 +205,23 @@ Public Class Form_SRM_Accept
             OpenFileDialog_Weighting_SLI_LLI.FileName = correct_name
             ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
             If OpenFileDialog_Weighting_SLI_LLI.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите весовой файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file with samples's weight!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             Else
                 If OpenFileDialog_Weighting_SLI_LLI.SafeFileName.ToUpper <> correct_name.ToUpper Then
                     Dim response As MsgBoxResult
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         response = MsgBox("Неправильное имя файла! Продолжить?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, Me.Text)
                         If response = System.Windows.Forms.DialogResult.Yes Then
                             GoTo 3
                         Else
                             Exit Sub
                         End If
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         response = MsgBox("Not valid file name! Resume?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, Me.Text)
                         If response = System.Windows.Forms.DialogResult.Yes Then
                             GoTo 3
@@ -317,9 +317,9 @@ Public Class Form_SRM_Accept
             End If
             L_Weight_Balance.Text = (weight_SRM_Set - weight_SRM_Sum).ToString
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_SRM_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in B_Fill_SRM_From_File_Click!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

@@ -15,9 +15,9 @@ Public Class Form_NAA_Results
     Private Sub B_Fill_In_From_File_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_From_File.Click
         Try
             If OpenFileDialog_Fill_In_From_File_NAA_Results.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -163,9 +163,9 @@ Public Class Form_NAA_Results
         Catch ex As Exception
             MsgBox(ex.ToString)
             Me.Enabled = True
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -191,7 +191,7 @@ Public Class Form_NAA_Results
             End While
             sqlConnection1.Close()
 
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Результаты НАА"
 
                 L_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Инд. парт."
@@ -219,11 +219,9 @@ Public Class Form_NAA_Results
                 B_Save_Final_Report.Text = "Сохранить финальный отчёт"
                 B_Close.Text = "Закрыть"
 
-                Label_ProgressBar_Save_File_CON.Text = "Ждите, идет обработка данных!"
-
                 OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
                 SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "NAA results"
 
                 L_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
@@ -236,7 +234,6 @@ Public Class Form_NAA_Results
                 B_Save_Final_Report.Text = "Save final report"
                 B_Close.Text = "Close"
 
-                Label_ProgressBar_Save_File_CON.Text = "Wait, data is processing!"
 
                 OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
                 SaveFileDialog_Final_Report.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
@@ -246,9 +243,9 @@ Public Class Form_NAA_Results
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_NAA_Results_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_NAA_Results_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -259,9 +256,9 @@ Public Class Form_NAA_Results
 
         Try
             If ComboBox_Person.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -318,9 +315,9 @@ Public Class Form_NAA_Results
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -340,9 +337,9 @@ Public Class Form_NAA_Results
             ComboBox_Person.Text = ""
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Clear_Table_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Clear_Table_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -361,9 +358,9 @@ Public Class Form_NAA_Results
 
             Next
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в ComboBox_Person_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in ComboBox_Person_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -477,9 +474,9 @@ Public Class Form_NAA_Results
         Catch ex As Exception
             Me.Enabled = True
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Save_Final_Report_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Save_Final_Report_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

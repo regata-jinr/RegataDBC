@@ -28,10 +28,10 @@ Partial Class Form_Notice
         Me.ButtonFormNoticeCancel = New System.Windows.Forms.Button()
         Me.Form_Notice_Log = New System.Windows.Forms.RichTextBox()
         Me.GroupBoxComplete = New System.Windows.Forms.GroupBox()
+        Me.CheckBoxCompleteProcess = New System.Windows.Forms.CheckBox()
         Me.CheckBoxCompleteLLI = New System.Windows.Forms.CheckBox()
         Me.CheckBoxCompleteSLI = New System.Windows.Forms.CheckBox()
         Me.CheckBoxCompletePrep = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxCompleteProcess = New System.Windows.Forms.CheckBox()
         Me.GroupBoxComplete.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,7 +50,7 @@ Partial Class Form_Notice
         Me.ButtonFormNoticeSave.Name = "ButtonFormNoticeSave"
         Me.ButtonFormNoticeSave.Size = New System.Drawing.Size(129, 32)
         Me.ButtonFormNoticeSave.TabIndex = 1
-        Me.ButtonFormNoticeSave.Text = "Add"
+        Me.ButtonFormNoticeSave.Text = "Добавить"
         Me.ButtonFormNoticeSave.UseVisualStyleBackColor = True
         '
         'ButtonFormNoticeCancel
@@ -59,7 +59,7 @@ Partial Class Form_Notice
         Me.ButtonFormNoticeCancel.Name = "ButtonFormNoticeCancel"
         Me.ButtonFormNoticeCancel.Size = New System.Drawing.Size(129, 32)
         Me.ButtonFormNoticeCancel.TabIndex = 2
-        Me.ButtonFormNoticeCancel.Text = "Cancel"
+        Me.ButtonFormNoticeCancel.Text = "Отменить"
         Me.ButtonFormNoticeCancel.UseVisualStyleBackColor = True
         '
         'Form_Notice_Log
@@ -85,6 +85,16 @@ Partial Class Form_Notice
         Me.GroupBoxComplete.TabIndex = 4
         Me.GroupBoxComplete.TabStop = False
         Me.GroupBoxComplete.Text = "Закончить этап"
+        '
+        'CheckBoxCompleteProcess
+        '
+        Me.CheckBoxCompleteProcess.AutoSize = True
+        Me.CheckBoxCompleteProcess.Location = New System.Drawing.Point(393, 19)
+        Me.CheckBoxCompleteProcess.Name = "CheckBoxCompleteProcess"
+        Me.CheckBoxCompleteProcess.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBoxCompleteProcess.TabIndex = 4
+        Me.CheckBoxCompleteProcess.Text = "Обработки"
+        Me.CheckBoxCompleteProcess.UseVisualStyleBackColor = True
         '
         'CheckBoxCompleteLLI
         '
@@ -115,16 +125,6 @@ Partial Class Form_Notice
         Me.CheckBoxCompletePrep.TabIndex = 0
         Me.CheckBoxCompletePrep.Text = "Пробоподготовки"
         Me.CheckBoxCompletePrep.UseVisualStyleBackColor = True
-        '
-        'CheckBoxCompleteProcess
-        '
-        Me.CheckBoxCompleteProcess.AutoSize = True
-        Me.CheckBoxCompleteProcess.Location = New System.Drawing.Point(393, 19)
-        Me.CheckBoxCompleteProcess.Name = "CheckBoxCompleteProcess"
-        Me.CheckBoxCompleteProcess.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBoxCompleteProcess.TabIndex = 4
-        Me.CheckBoxCompleteProcess.Text = "Обработки"
-        Me.CheckBoxCompleteProcess.UseVisualStyleBackColor = True
         '
         'Form_Notice
         '

@@ -10,8 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=NF-100-205,1433;Initial Catalog=NAA_DB</Value>
     </Setting>
-    <Setting Name="languaged" Type="System.String" Scope="User">
-      <Value Profile="(Default)">russian</Value>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Русский</Value>
     </Setting>
   </Settings>
 </SettingsFile>

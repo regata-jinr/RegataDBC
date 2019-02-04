@@ -10,9 +10,9 @@ Public Class Form_Samples_List
             Me.Table_SampleBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.NAA_DB_EXPDataSet)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Table_SampleBindingNavigatorSaveItem_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Table_SampleBindingNavigatorSaveItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -27,9 +27,9 @@ Public Class Form_Samples_List
             cmd.CommandType = System.Data.CommandType.Text
             With MaskedTextBox_New_Sample_ID
                 If .Text.Trim = "" Or .Text.Trim = "0" Or .Text.Trim = "00" Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Введите номер нового образца!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Type new sample ID!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
@@ -47,9 +47,9 @@ Public Class Form_Samples_List
             reader = cmd.ExecuteReader()
             While reader.Read()
                 If reader(0) > 0 Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Образец с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("This sample ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     sqlConnection1.Close()
@@ -81,9 +81,9 @@ Public Class Form_Samples_List
             Form_Sample_Accept.Show()
 
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Insert_New_Sample_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Insert_New_Sample_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_Sample_Accept.Close()
@@ -98,9 +98,9 @@ Public Class Form_Samples_List
     Private Sub B_Correct_Information_About_Sample_Acceptance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Correct_Information_About_Sample.Click
         Try
             If ListBox_Sample_ID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите существующий образец!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select existing sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -117,9 +117,9 @@ Public Class Form_Samples_List
             Me.Enabled = False
             Form_Sample_Accept.Show()
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Correct_Information_About_Sample_Acceptance_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Correct_Information_About_Sample_Acceptance_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_Sample_Accept.Close()
@@ -130,7 +130,7 @@ Public Class Form_Samples_List
     Private Sub Form_Sample_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             sample_action = ""
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 Me.Text = "Список образцов"
                 Label_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Ин. п."
                 L_Name_New_Sample_ID.Text = "Новый № обр."
@@ -140,9 +140,10 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Изменить информацию об образце"
                 B_Samples_Preparation.Text = "Пробоподготовка"
                 B_NAA_Results.Text = "Результаты НАА"
+                BShowSumAbEls.Text = "Информация по всем образцам"
                 Button_ShowNotice.Text = "Комментарии к партии"
                 B_Close.Text = "Закрыть"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 Me.Text = "Samples list"
                 Label_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
                 L_Name_New_Sample_ID.Text = "New sample ID"
@@ -152,13 +153,14 @@ Public Class Form_Samples_List
                 B_Correct_Information_About_Sample.Text = "Change information about sample"
                 B_Samples_Preparation.Text = "Samples preparation"
                 B_NAA_Results.Text = "NAA results"
+                BShowSumAbEls.Text = "Samples summary"
                 Button_ShowNotice.Text = "Comments for set"
                 B_Close.Text = "Close"
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Sample_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_Sample_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Me.Close()
@@ -169,9 +171,9 @@ Public Class Form_Samples_List
     Private Sub B_Sample_Preparation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Samples_Preparation.Click
         Try
             If ListBox_Sample_ID.Items.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Партия образцов не содержит ни одного образца. Выберите другую партию!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("This sample set has not any sample. Select another sample set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -202,9 +204,9 @@ Public Class Form_Samples_List
                 Form_Sample_Preparation.DataGridView_Table_Sample.Rows.Item(i).Selected = False
             Next
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Sample_Preparation_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Sample_Preparation_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_Sample_Preparation.Close()
@@ -222,9 +224,9 @@ Public Class Form_Samples_List
             Dim timer As New Stopwatch()
             timer.Start()
             If ListBox_Sample_ID.Items.Count = 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Партия образцов не содержит ни одного образца. Выберите другую партию!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("This sample set has not any sample. Select another sample set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -290,9 +292,9 @@ Public Class Form_Samples_List
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_NAA_Results_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_NAA_Results_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_NAA_Results.Close()
@@ -313,9 +315,9 @@ Public Class Form_Samples_List
             Dim row_count As Integer
             With MaskedTextBox_New_Sample_ID
                 If .Text.Trim = "" Or .Text.Trim = "0" Or .Text.Trim = "00" Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Введите номер нового образца!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Type new sample ID!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
@@ -324,9 +326,9 @@ Public Class Form_Samples_List
 
             With MaskedTextBox_New_Sample_ID
                 If .Text.Trim <> "01" Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Партия образцов должна быть пустой!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Sample set must be empty!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
@@ -334,9 +336,9 @@ Public Class Form_Samples_List
             End With
 
             If ListBox_Sample_ID.Items.Count <> 0 Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Партия образцов должна быть пустой!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Sample set must be empty!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -345,9 +347,9 @@ Public Class Form_Samples_List
             sample_action = "new sample"
 
             If Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите партию образцов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -546,9 +548,9 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
 
 
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Insert_All_Samples_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Insert_All_Samples_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_Sample_Accept.Close()
@@ -569,6 +571,18 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
         reader.Read()
         Form_Notice.RichTextBoxFormNotice.Text = reader(0)
         sqlConnection1.Close()
+    End Sub
+
+    'ToDO: translation 
+    Private Sub BShowSumAbEls_Click(sender As Object, e As EventArgs) Handles BShowSumAbEls.Click
+        Dim fels As New Form_ElsSum
+        Debug.WriteLine("Start samples summary creation")
+        fels.LablelElSumCountryCode.Text = L_SS_Country_Code.Text
+        fels.LabelElSumClientId.Text = L_SS_Client_ID.Text
+        fels.LabelElSumYear.Text = L_SS_Year.Text
+        fels.LabelElSumSetId.Text = L_SS_Sample_Set_ID.Text
+        fels.LabelElSumSetIndex.Text = L_SS_Sample_Set_Index.Text
+        fels.Show()
     End Sub
 
 End Class

@@ -39,9 +39,6 @@ Partial Class Form_NAA_Results
         Me.B_Save_Final_Report = New System.Windows.Forms.Button()
         Me.SaveFileDialog_Final_Report = New System.Windows.Forms.SaveFileDialog()
         Me.L_Name_Person = New System.Windows.Forms.Label()
-        Me.ProgressBar_Fill_From_File = New System.Windows.Forms.ProgressBar()
-        Me.Label_ProgressBar_Save_File_CON = New System.Windows.Forms.Label()
-        Me.Panel_ProgressBar_Save_File_CON = New System.Windows.Forms.Panel()
         Me.HidBox = New System.Windows.Forms.GroupBox()
         Me.CBHideAll = New System.Windows.Forms.CheckBox()
         Me.CBCol5 = New System.Windows.Forms.CheckBox()
@@ -53,7 +50,6 @@ Partial Class Form_NAA_Results
         Me.HidEmptEl = New System.Windows.Forms.CheckBox()
         Me.BackgroundWorkerNaaResults = New System.ComponentModel.BackgroundWorker()
         CType(Me.DataGridView_Table_Sample_NAA_Results, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel_ProgressBar_Save_File_CON.SuspendLayout()
         Me.HidBox.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -201,35 +197,6 @@ Partial Class Form_NAA_Results
         Me.L_Name_Person.TabIndex = 204
         Me.L_Name_Person.Text = "Person"
         '
-        'ProgressBar_Fill_From_File
-        '
-        Me.ProgressBar_Fill_From_File.Location = New System.Drawing.Point(19, 28)
-        Me.ProgressBar_Fill_From_File.Name = "ProgressBar_Fill_From_File"
-        Me.ProgressBar_Fill_From_File.Size = New System.Drawing.Size(271, 23)
-        Me.ProgressBar_Fill_From_File.TabIndex = 24
-        Me.ProgressBar_Fill_From_File.Visible = False
-        '
-        'Label_ProgressBar_Save_File_CON
-        '
-        Me.Label_ProgressBar_Save_File_CON.AutoSize = True
-        Me.Label_ProgressBar_Save_File_CON.Location = New System.Drawing.Point(69, 15)
-        Me.Label_ProgressBar_Save_File_CON.Name = "Label_ProgressBar_Save_File_CON"
-        Me.Label_ProgressBar_Save_File_CON.Size = New System.Drawing.Size(169, 13)
-        Me.Label_ProgressBar_Save_File_CON.TabIndex = 25
-        Me.Label_ProgressBar_Save_File_CON.Text = "Ждите, идет обработка данных!"
-        Me.Label_ProgressBar_Save_File_CON.Visible = False
-        '
-        'Panel_ProgressBar_Save_File_CON
-        '
-        Me.Panel_ProgressBar_Save_File_CON.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel_ProgressBar_Save_File_CON.Controls.Add(Me.Label_ProgressBar_Save_File_CON)
-        Me.Panel_ProgressBar_Save_File_CON.Controls.Add(Me.ProgressBar_Fill_From_File)
-        Me.Panel_ProgressBar_Save_File_CON.Location = New System.Drawing.Point(438, 274)
-        Me.Panel_ProgressBar_Save_File_CON.Name = "Panel_ProgressBar_Save_File_CON"
-        Me.Panel_ProgressBar_Save_File_CON.Size = New System.Drawing.Size(313, 68)
-        Me.Panel_ProgressBar_Save_File_CON.TabIndex = 202
-        Me.Panel_ProgressBar_Save_File_CON.Visible = False
-        '
         'HidBox
         '
         Me.HidBox.Controls.Add(Me.CBHideAll)
@@ -338,7 +305,6 @@ Partial Class Form_NAA_Results
         Me.Controls.Add(Me.HidBox)
         Me.Controls.Add(Me.L_Name_Person)
         Me.Controls.Add(Me.B_Save_Final_Report)
-        Me.Controls.Add(Me.Panel_ProgressBar_Save_File_CON)
         Me.Controls.Add(Me.Clear_Table)
         Me.Controls.Add(Me.ComboBox_Person)
         Me.Controls.Add(Me.B_Save)
@@ -358,8 +324,6 @@ Partial Class Form_NAA_Results
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NAA results"
         CType(Me.DataGridView_Table_Sample_NAA_Results, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel_ProgressBar_Save_File_CON.ResumeLayout(False)
-        Me.Panel_ProgressBar_Save_File_CON.PerformLayout()
         Me.HidBox.ResumeLayout(False)
         Me.HidBox.PerformLayout()
         Me.ResumeLayout(False)
@@ -442,9 +406,6 @@ Partial Class Form_NAA_Results
     Friend WithEvents RCrFactDataGridViewCheckBoxColumn As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents RMnFactDataGridViewCheckBoxColumn As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents L_Name_Person As System.Windows.Forms.Label
-    Friend WithEvents ProgressBar_Fill_From_File As System.Windows.Forms.ProgressBar
-    Friend WithEvents Label_ProgressBar_Save_File_CON As System.Windows.Forms.Label
-    Friend WithEvents Panel_ProgressBar_Save_File_CON As System.Windows.Forms.Panel
     Friend WithEvents HidBox As System.Windows.Forms.GroupBox
     Friend WithEvents CBCol5 As System.Windows.Forms.CheckBox
     Friend WithEvents CBCol4 As System.Windows.Forms.CheckBox

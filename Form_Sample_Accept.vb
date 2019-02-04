@@ -46,9 +46,9 @@ Public Class Form_Sample_Accept
                 Next
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в ComboBox_Determined_Elements_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in ComboBox_Determined_Elements_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -257,7 +257,7 @@ Public Class Form_Sample_Accept
                 End If
             End If
 
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 If Form_Samples_List.sample_action = "new sample" Then
                     Me.Text = "Приём нового образца"
                 ElseIf Form_Samples_List.sample_action = "existing sample" Then
@@ -301,7 +301,7 @@ Public Class Form_Sample_Accept
                 B_Fill_In_From_File.Text = "Заполнить из файла"
 
                 OpenFileDialog_Fill_In_From_File.Filter = "Файлы с информацией об образцах (*.nas)|*.nas|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 If Form_Samples_List.sample_action = "new sample" Then
                     Me.Text = "New sample acceptance"
                 ElseIf Form_Samples_List.sample_action = "existing sample" Then
@@ -347,9 +347,9 @@ Public Class Form_Sample_Accept
                 OpenFileDialog_Fill_In_From_File.Filter = "NAA samples info foles (*.nas)|*.nas|All files (*.*)|*.*"
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_NewSampleAccept_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_NewSampleAccept_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Form_Samples_List.Enabled = True
@@ -499,9 +499,9 @@ Public Class Form_Sample_Accept
                 CheckedListBox_Separate_Elements.SetItemChecked(64, True) 'U
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в CheckedListBox_Group_Of_Elements_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in CheckedListBox_Group_Of_Elements_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -533,9 +533,9 @@ Public Class Form_Sample_Accept
                 reader = cmd.ExecuteReader()
                 While reader.Read()
                     If reader(0) > 0 Then
-                        If Form_Main.language = "russian" Then
+                        If Form_Main.language = "Русский" Then
                             MsgBox("Образец с таким номером уже существует", MsgBoxStyle.Exclamation, Me.Text)
-                        ElseIf Form_Main.language = "english" Then
+                        ElseIf Form_Main.language = "English" Then
                             MsgBox("This sample ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
                         End If
                         sqlConnection1.Close()
@@ -599,9 +599,9 @@ Public Class Form_Sample_Accept
                 Me.Close()
 
             Catch ex As Exception
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Операция была отменена (ошибка в Button_Save_Sample_Click, new sample)!", MsgBoxStyle.Critical, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("The operation was cancelled (error in Button_Save_Sample_Click, new sample)!", MsgBoxStyle.Critical, Me.Text)
                 End If
                 Me.Close()
@@ -666,9 +666,9 @@ Public Class Form_Sample_Accept
                 sqlConnection1.Close()
                 Me.Close()
             Catch ex As Exception
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Операция была отменена (ошибка в Button_Save_Sample_Click, existing sample)!", MsgBoxStyle.Critical, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("The operation was cancelled (error in Button_Save_Sample_Click, existing sample)!", MsgBoxStyle.Critical, Me.Text)
                 End If
                 Exit Sub
@@ -682,9 +682,9 @@ Public Class Form_Sample_Accept
             If BooleanVar = True Then BooleanToStringBit = "1"
             If BooleanVar = False Then BooleanToStringBit = "0"
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в BooleanToStringBit)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in BooleanToStringBit)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Function
@@ -705,9 +705,9 @@ Public Class Form_Sample_Accept
                 CheckedListBox_Separate_Elements.SetItemChecked(i, True)
             Next
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Select_All_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Select_All_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -717,9 +717,9 @@ Public Class Form_Sample_Accept
     Public Sub B_Fill_In_From_File_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Fill_In_From_File.Click
         Try
             If TextBox_Client_Sample_ID.Text = "" Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Введите клиентский номер образца!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Type client sample ID!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -734,9 +734,9 @@ Public Class Form_Sample_Accept
             'End If
             ''OpenDialog_Aktivn_Stand_Obr.FileName:="" не разкомментировать, иначе будут ошибки!
             If OpenFileDialog_Fill_In_From_File.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If Form_Main.language = "russian" Then
+                If Form_Main.language = "Русский" Then
                     MsgBox("Выберите файл!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                ElseIf Form_Main.language = "English" Then
                     MsgBox("Select file!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -778,9 +778,9 @@ a:                              array_length_NAS = array_length_NAS + 1
                 End Using
 
                 If array_length_NAS = 0 Then
-                    If Form_Main.language = "russian" Then
+                    If Form_Main.language = "Русский" Then
                         MsgBox("Неправильный формат файла!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "english" Then
+                    ElseIf Form_Main.language = "English" Then
                         MsgBox("Incorrect file format!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
@@ -934,9 +934,9 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
                 Next
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -977,9 +977,9 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
                 ComboBox_Sample_Subtype.Visible = True
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в ComboBox_Sample_Type_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in ComboBox_Sample_Type_SelectionChangeCommitted)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
