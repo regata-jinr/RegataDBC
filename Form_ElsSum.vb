@@ -1,9 +1,11 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Net
 Imports System.IO
 Imports Renci.SshNet
 
 Public Class Form_ElsSum
+
+
+
     Private Sub Form_ElsSum_Load(sender As Object, e As EventArgs) Handles Me.Load
 
 
@@ -18,14 +20,15 @@ Public Class Form_ElsSum
                     dataadapter.Fill(ds, "ElsSum")
                     DataGridViewElsSum.DataSource = ds
                     DataGridViewElsSum.DataMember = "ElsSum"
-                    DataGridViewElsSum.Columns.RemoveAt(0)
-                    DataGridViewElsSum.Columns.RemoveAt(0)
-                    DataGridViewElsSum.Columns.RemoveAt(0)
-                    DataGridViewElsSum.Columns.RemoveAt(0)
-                    DataGridViewElsSum.Columns.RemoveAt(0)
+                    DataGridViewElsSum.Columns(0).Visible = False
+                    DataGridViewElsSum.Columns(1).Visible = False
                     DataGridViewElsSum.Columns(2).Visible = False
                     DataGridViewElsSum.Columns(3).Visible = False
                     DataGridViewElsSum.Columns(4).Visible = False
+                    DataGridViewElsSum.Columns(7).Visible = False
+                    DataGridViewElsSum.Columns(8).Visible = False
+                    DataGridViewElsSum.Columns(9).Visible = False
+                    DataGridViewElsSum.Columns(10).Visible = False
 
                     For Each row As DataGridViewRow In DataGridViewElsSum.Rows
                         If row.Cells("Группа элементов").Value = "'Все элементы" Or String.IsNullOrEmpty(row.Cells("Группа элементов").Value) Then
@@ -81,7 +84,7 @@ Public Class Form_ElsSum
     End Sub
 
 
-    Sub DownloadSpectra(ByVal fileNames As ArrayList, ByVal type As String)
+    Sub DownloadSpectra(ByVal fileNames As Dictionary(Of String, String), ByVal type As String)
         Try
             Dim MissedFiles As String = ""
             ClearProgressBarAndStatusLabel()
@@ -119,9 +122,11 @@ Public Class Form_ElsSum
                     client.Connect()
                     LabelStatus.Text = "OK!"
                     Debug.WriteLine("OK!")
-                    For Each file As String In fileNames
+                    For Each file As String In fileNames.Keys
                         LabelStatus.Text = $"Загрузка файла: {Path.GetFileName(file)}"
-                        Using fileStream As FileStream = IO.File.Create($"{FolderBrowserDialogSpectra.SelectedPath}\{Path.GetFileName(file)}")
+                        Directory.CreateDirectory($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}")
+                        Debug.WriteLine($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}\{Path.GetFileName(file)}")
+                        Using fileStream As FileStream = IO.File.Create($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}\{Path.GetFileName(file)}")
                             If Not client.Exists(file) Then file = Path.ChangeExtension(file, "CNF")
                             If Not client.Exists(file) Then
                                 MissedFiles += $"{Path.GetFileName(file)}, "
@@ -142,7 +147,7 @@ Public Class Form_ElsSum
                     LabelStatus.Text = "Не все файлы были найдены!"
                 Else
                     LabelStatus.Text = "Файлы успешно загружены!"
-
+                    ProgressBarDwld.Value = 0
                 End If
 
             End If
@@ -158,23 +163,34 @@ Public Class Form_ElsSum
     End Sub
 
 
-    Function FormsFilesName(ByVal type As String) As ArrayList
-        Dim FileNames As New ArrayList
+    Private Function FormsFilesName(ByVal type As String) As Dictionary(Of String, String)
+        Dim FileNamesDir As New Dictionary(Of String, String)
         Dim typeFtp As New Dictionary(Of String, String)
         Dim mMonth As String = ""
         Dim mYear As String = ""
         typeFtp.Add("КЖИ", "kji")
         typeFtp.Add("ДЖИ-1", "dji-1")
         typeFtp.Add("ДЖИ-2", "dji-2")
+
         For Each row As DataGridViewRow In DataGridViewElsSum.Rows
             Dim cellFile As DataGridViewCell = row.Cells($"Файлы спектров {type}")
             If String.IsNullOrEmpty(cellFile.Value.ToString) Then Continue For
             Dim cellDate As DataGridViewCell = row.Cells($"{typeFtp(type)}-Date")
             If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
             Dim dt As DateTime = Convert.ToDateTime(cellDate.Value)
-            FileNames.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{typeFtp(type)}/{cellFile.Value}.cnf")
+            If type.Contains("ДЖИ") Then
+                FileNamesDir.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{typeFtp(type)}/{cellFile.Value}.cnf", $"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}/{typeFtp(type)}/c-{row.Cells("Container_Number").Value}/samples")
+            Else
+                FileNamesDir.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{typeFtp(type)}/{cellFile.Value}.cnf", $"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}/{typeFtp(type)}/samples")
+            End If
+
+            Dim srmDict As Dictionary(Of String, String) = GetStandartsFileName($"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}", typeFtp(type), dt, row.Cells("Container_Number").Value.ToString())
+            For Each srm In srmDict.Keys
+                If FileNamesDir.ContainsKey(srm) Then Continue For
+                FileNamesDir.Add(srm, srmDict(srm))
+            Next
         Next
-        Return FileNames
+        Return FileNamesDir
     End Function
 
     Sub ClearProgressBarAndStatusLabel()
@@ -185,5 +201,30 @@ Public Class Form_ElsSum
     Private Sub ClearProgressBarAndStatusLabel(sender As Object, e As EventArgs) Handles RadioButtonDFSLI.CheckedChanged, RadioButtonDFLLI2.CheckedChanged, RadioButtonDFLLI1.CheckedChanged
         ClearProgressBarAndStatusLabel()
     End Sub
+
+
+    Private Function GetStandartsFileName(ByVal setKey As String, ByVal type As String, ByVal dt As DateTime, ByVal conN As String) As Dictionary(Of String, String)
+        Dim typeNum As New Dictionary(Of String, String)
+        Dim StandardsNames As New Dictionary(Of String, String)
+        typeNum.Add("dji-1", "1")
+        typeNum.Add("dji-2", "2")
+        If type.Contains("dji") Then
+            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+                sqlConnection1.Open()
+                Using cmd As New System.Data.SqlClient.SqlCommand($"Select Container_Number, Measured_LLI_{typeNum(type)}_By from table_LLI_Irradiation_Log where Date_Measurement_LLI_{typeNum(type)} = '{dt.ToShortDateString()}' and Client_ID = 's' and Container_Number = {conN}", sqlConnection1)
+                    Using reader = cmd.ExecuteReader()
+                        While reader.Read()
+                            Debug.WriteLine($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{type}/{reader(1)}.cnf")
+                            Debug.WriteLine($"{setKey}/{type}\c-{reader(1)}\SRMs")
+                            StandardsNames.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{type}/{reader(1)}.cnf", $"{setKey}/{type}/c-{reader(0)}/SRMs")
+                        End While
+                    End Using
+                End Using
+                sqlConnection1.Close()
+            End Using
+        End If
+        Return StandardsNames
+    End Function
+
 End Class
 
