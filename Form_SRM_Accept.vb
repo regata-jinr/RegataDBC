@@ -80,7 +80,7 @@ Public Class Form_SRM_Accept
                     '.Columns.Clear()
                     '.Columns.AddRange(SRM_Number, SRM_SLI_Weight, SRM_LLI_Weight) ' это делается, т.к. после загрузки VB добавляются все столбцы
 
-                    'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+                    ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
                     Table_SRMTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
                     Me.Table_SRMTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value)
 
@@ -277,7 +277,7 @@ Public Class Form_SRM_Accept
                 Next
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
             Table_SRMTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_SRMTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_SRM_SetDataGridView.SelectedCells.Item(1).Value)
 

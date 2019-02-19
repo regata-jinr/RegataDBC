@@ -1,15 +1,11 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Linq
 Imports Renci.SshNet
 
 Public Class Form_ElsSum
 
 
-
-    Private Sub Form_ElsSum_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-
-    End Sub
 
     Private Sub Form_ElsSum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
@@ -67,32 +63,43 @@ Public Class Form_ElsSum
     End Function
 
     Private Sub ButtonSpectraDWLD_Click(sender As Object, e As EventArgs) Handles ButtonSpectraDWLD.Click
+
         If Not (RadioButtonDFSLI.Checked Or RadioButtonDFLLI2.Checked Or RadioButtonDFLLI1.Checked) Then
             MessageBox.Show("Выберите тип измерений", "Загрузка файлов спектров", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
             If RadioButtonDFSLI.Checked Then
-                DownloadSpectra(FormsFilesName("КЖИ"), "КЖИ")
+                DownloadSpectra("КЖИ")
             End If
             If RadioButtonDFLLI1.Checked Then
-                DownloadSpectra(FormsFilesName("ДЖИ-1"), "ДЖИ-1")
+                DownloadSpectra("ДЖИ-1")
 
             End If
             If RadioButtonDFLLI2.Checked Then
-                DownloadSpectra(FormsFilesName("ДЖИ-2"), "ДЖИ-2")
+                DownloadSpectra("ДЖИ-2")
             End If
         End If
     End Sub
 
 
-    Sub DownloadSpectra(ByVal fileNames As Dictionary(Of String, String), ByVal type As String)
+    Sub DownloadSpectra(ByVal type As String)
         Try
-            Dim MissedFiles As String = ""
             ClearProgressBarAndStatusLabel()
-            If fileNames.Count = 0 Then
+            LabelStatus.Text = "Инициализация загрузки спектров..."
+
+            Dim fileNames = FormFinalFilesDict(type)
+            Dim fileNamesServer = FindFiles(fileNames.Keys)
+
+            If fileNamesServer.Count = 0 Then
                 LabelStatus.Text = "Файлы спектров отсутствуют"
                 Exit Sub
             End If
-            LabelStatus.Text = "Инициализация скачивания спектров"
+
+            If fileNames.Count <> fileNamesServer.Count Then
+                LabelStatus.Text = "Не все файлы были найдены!"
+            End If
+
+            Dim missedFiles As String = ""
+
             FolderBrowserDialogSpectra.Description = $"Выберите папку для спектров {type}:"
             Dim user As String = ""
             Dim passw As String = ""
@@ -100,21 +107,7 @@ Public Class Form_ElsSum
             If FolderBrowserDialogSpectra.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 Exit Sub
             ElseIf System.Windows.Forms.DialogResult.OK Then
-                Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-                    sqlConnection1.Open()
-                    Using cmd As New System.Data.SqlClient.SqlCommand("select * from privinfo", sqlConnection1)
-                        Using reader = cmd.ExecuteReader()
-                            reader.Read()
-                            If reader.HasRows Then
-                                user = reader(0)
-                                passw = reader(1)
-                                src = reader(2)
-                            End If
-                        End Using
-                    End Using
-                    sqlConnection1.Close()
-                End Using
-
+                GetPswd(src, user, passw)
                 ProgressBarDwld.Maximum = fileNames.Count
                 ProgressBarDwld.Show()
                 LabelStatus.Text = "Соединение с FTP-сервером..."
@@ -123,27 +116,28 @@ Public Class Form_ElsSum
                     LabelStatus.Text = "OK!"
                     Debug.WriteLine("OK!")
                     For Each file As String In fileNames.Keys
-                        LabelStatus.Text = $"Загрузка файла: {Path.GetFileName(file)}"
-                        Directory.CreateDirectory($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}")
-                        Debug.WriteLine($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}\{Path.GetFileName(file)}")
-                        Using fileStream As FileStream = IO.File.Create($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}\{Path.GetFileName(file)}")
-                            If Not client.Exists(file) Then file = Path.ChangeExtension(file, "CNF")
-                            If Not client.Exists(file) Then
-                                MissedFiles += $"{Path.GetFileName(file)}, "
-                                Continue For
-                            End If
-                            client.DownloadFile(file, fileStream)
+                        LabelStatus.Text = $"Загрузка файла: {file}"
+                        Directory.CreateDirectory($"{FolderBrowserDialogSpectra.SelectedPath}\{Path.GetDirectoryName(fileNames(file))}")
+                        Debug.WriteLine($"Will be save to here: {FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}")
+                        If Not fileNamesServer.ContainsKey(file) Then
+                            missedFiles += $"{Path.GetFileName(file)}, "
+                            Continue For
+                        End If
+                        Using fileStream As FileStream = IO.File.Create($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}")
+
+                            Debug.WriteLine($"Will be download from here: {fileNamesServer(file)}")
+                            client.DownloadFile(fileNamesServer(file), fileStream)
                             ProgressBarDwld.Value += 1
                             fileStream.Close()
                             LabelStatus.Text = "OK!"
-                            Debug.WriteLine("OK!")
                         End Using
                     Next
                     client.Disconnect()
                 End Using
 
-                If Not String.IsNullOrEmpty(MissedFiles) Then
-                    MessageBox.Show($"Эти файлы{vbCrLf}{MissedFiles}{vbCrLf}не найдены. Возможно, они еще не загружены на сервер.", "Часть файлов не найдено", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                If Not String.IsNullOrEmpty(missedFiles) Then
+                    MessageBox.Show($"Эти файлы{vbCrLf}{missedFiles}{vbCrLf}не найдены. Возможно, они еще не загружены на сервер.", "Часть файлов не найдено", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Debug.WriteLine($"Missed files: {vbCrLf}{missedFiles}")
                     LabelStatus.Text = "Не все файлы были найдены!"
                 Else
                     LabelStatus.Text = "Файлы успешно загружены!"
@@ -162,15 +156,33 @@ Public Class Form_ElsSum
         End Try
     End Sub
 
+    Sub GetPswd(ByRef host As String, ByRef usr As String, ByRef pswd As String)
+        Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            sqlConnection1.Open()
+            Using cmd As New System.Data.SqlClient.SqlCommand("select * from privinfo", sqlConnection1)
+                Using reader = cmd.ExecuteReader()
+                    reader.Read()
+                    If reader.HasRows Then
+                        usr = reader(0)
+                        pswd = reader(1)
+                        host = reader(2)
+                    End If
+                End Using
+            End Using
+            sqlConnection1.Close()
+        End Using
+    End Sub
 
-    Private Function FormsFilesName(ByVal type As String) As Dictionary(Of String, String)
-        Dim FileNamesDir As New Dictionary(Of String, String)
+    Function FormFinalFilesDict(ByVal type As String) As Dictionary(Of String, String)
+        Debug.WriteLine("Started to form final files array:")
+        LabelStatus.Text = "Формирование имен загружаемых файлов..."
+        Dim finArr = New Dictionary(Of String, String)
+        Dim finSrmsArr = New Dictionary(Of String, String)
         Dim typeFtp As New Dictionary(Of String, String)
-        Dim mMonth As String = ""
-        Dim mYear As String = ""
         typeFtp.Add("КЖИ", "kji")
         typeFtp.Add("ДЖИ-1", "dji-1")
         typeFtp.Add("ДЖИ-2", "dji-2")
+        Dim setKey As String = $"{LablelElSumCountryCode.Text}-{LabelElSumClientId.Text}-{LabelElSumYear.Text}-{LabelElSumSetId.Text}-{LabelElSumSetIndex.Text}"
 
         For Each row As DataGridViewRow In DataGridViewElsSum.Rows
             Dim cellFile As DataGridViewCell = row.Cells($"Файлы спектров {type}")
@@ -179,19 +191,77 @@ Public Class Form_ElsSum
             If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
             Dim dt As DateTime = Convert.ToDateTime(cellDate.Value)
             If type.Contains("ДЖИ") Then
-                FileNamesDir.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{typeFtp(type)}/{cellFile.Value}.cnf", $"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}/{typeFtp(type)}/c-{row.Cells("Container_Number").Value}/samples")
+                Debug.WriteLine($"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                GetRelatedLLISRMs(finSrmsArr, setKey, typeFtp(type), dt)
             Else
-                FileNamesDir.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{typeFtp(type)}/{cellFile.Value}.cnf", $"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}/{typeFtp(type)}/samples")
+                Debug.WriteLine($"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                GetRelatedSLISRMs(finSrmsArr, setKey, dt)
             End If
 
-            Dim srmDict As Dictionary(Of String, String) = GetStandartsFileName($"{row.Cells("CountryCode").Value}-{row.Cells("ClientId").Value}-{row.Cells("Year").Value}-{row.Cells("SampleSetId").Value}-{row.Cells("SampleSetIndex").Value}", typeFtp(type), dt, row.Cells("Container_Number").Value.ToString())
-            For Each srm In srmDict.Keys
-                If FileNamesDir.ContainsKey(srm) Then Continue For
-                FileNamesDir.Add(srm, srmDict(srm))
-            Next
         Next
-        Return FileNamesDir
+        Return finArr.Union(finSrmsArr).ToDictionary(Function(p) p.Key, Function(p) p.Value)
     End Function
+
+    Function FindFiles(ByRef names As Dictionary(Of String, String).KeyCollection) As Dictionary(Of String, String)
+        Debug.WriteLine("Started to searching files")
+        LabelStatus.Text = "Поиск файлов на сервере..."
+        Dim fullFileName = New Dictionary(Of String, String)
+        Dim user As String = ""
+        Dim passw As String = ""
+        Dim src As String = ""
+
+        GetPswd(src, user, passw)
+
+        Using client As New SshClient(src, 22, user, passw)
+            client.Connect()
+            Dim terminal As SshCommand = client.RunCommand($"cd Spectra")
+            For Each name As String In names
+                terminal = client.RunCommand($"find . -name {Path.GetFileNameWithoutExtension(name)}*")
+                If Not String.IsNullOrEmpty(terminal.Result) Then
+                    fullFileName.Add(name, terminal.Result.Substring(2, terminal.Result.Length - 3))
+                    Debug.WriteLine($"The file was found - {fullFileName.Last}")
+                Else
+                    Debug.WriteLine($"The file was not found - {Path.GetFileNameWithoutExtension(name)}")
+                End If
+            Next
+            client.Disconnect()
+        End Using
+        Return fullFileName
+    End Function
+
+    Sub GetQueryResult(ByRef srmarr As Dictionary(Of String, String), ByVal query As String)
+        Debug.WriteLine("Send query to DB:")
+        Debug.WriteLine(query)
+        Debug.WriteLine("Query result is:")
+        Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            sqlConnection1.Open()
+            Using cmd As New System.Data.SqlClient.SqlCommand(query, sqlConnection1)
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If srmarr.ContainsKey(reader(0)) Then Continue While
+                        srmarr.Add(reader(0), reader(1))
+                        Debug.WriteLine($"{reader(0)}")
+                    End While
+                End Using
+            End Using
+            sqlConnection1.Close()
+        End Using
+    End Sub
+
+
+    Sub GetRelatedLLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal type As String, ByVal dt As DateTime)
+        GetQueryResult(srmarr, $"select distinct  Measured_LLI_{type.Replace("dji-", "")}_By, '{setKey}\' +'{type}\'+ 'c-'+ CONVERT(varchar(2),Container_Number) +'\' + 'SRMs\' + Measured_LLI_{type.Replace("dji-", "")}_By + '.cnf' from table_LLI_Irradiation_Log where Date_Measurement_LLI_{type.Replace("dji-", "")} = '{dt.ToShortDateString()}' and Client_ID = 's' and Container_Number in (select Container_Number from table_LLI_Irradiation_Log where Date_Measurement_LLI_{type.Replace("dji-", "")} = '{dt.ToShortDateString()}' and Country_Code + '-' + Client_ID + '-' + Year + '-' + Sample_Set_ID  + '-' + Sample_Set_Index = '{setKey}')")
+    End Sub
+
+    Sub GetRelatedSLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal dt As DateTime)
+        GetQueryResult(srmarr, $"Select  distinct File_First, '{setKey}\kji\SRMs\' + File_First + '.cnf' from table_SLI_Irradiation_Log where Country_Code = 's' and Date_Start between (select max(DateStart) from IBR2MCycles where DateStart <= '{dt.ToShortDateString()}') and (select min(DateFinish) from IBR2MCycles where DateFinish >= '{dt.ToShortDateString()}')")
+    End Sub
+
+    'TODO implement interface with datarow
+    'TODO split srm and sample in different functions
+    'TODO implement this function with taking into account that you should also download spectra by selected datagridrows is journals forms
 
     Sub ClearProgressBarAndStatusLabel()
         LabelStatus.Text = ""
@@ -203,28 +273,7 @@ Public Class Form_ElsSum
     End Sub
 
 
-    Private Function GetStandartsFileName(ByVal setKey As String, ByVal type As String, ByVal dt As DateTime, ByVal conN As String) As Dictionary(Of String, String)
-        Dim typeNum As New Dictionary(Of String, String)
-        Dim StandardsNames As New Dictionary(Of String, String)
-        typeNum.Add("dji-1", "1")
-        typeNum.Add("dji-2", "2")
-        If type.Contains("dji") Then
-            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-                sqlConnection1.Open()
-                Using cmd As New System.Data.SqlClient.SqlCommand($"Select Container_Number, Measured_LLI_{typeNum(type)}_By from table_LLI_Irradiation_Log where Date_Measurement_LLI_{typeNum(type)} = '{dt.ToShortDateString()}' and Client_ID = 's' and Container_Number = {conN}", sqlConnection1)
-                    Using reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            Debug.WriteLine($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{type}/{reader(1)}.cnf")
-                            Debug.WriteLine($"{setKey}/{type}\c-{reader(1)}\SRMs")
-                            StandardsNames.Add($"Spectra/{dt.Year}/{dt.Month.ToString("D2")}/{type}/{reader(1)}.cnf", $"{setKey}/{type}/c-{reader(0)}/SRMs")
-                        End While
-                    End Using
-                End Using
-                sqlConnection1.Close()
-            End Using
-        End If
-        Return StandardsNames
-    End Function
+
 
 End Class
 

@@ -427,7 +427,7 @@ Public Class Form_Sample_Set_Accept
                 cmd.ExecuteNonQuery()
                 sqlConnection1.Close()
 
-                'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSetID". При необходимости она может быть перемещена или удалена.
+                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSetID". При необходимости она может быть перемещена или удалена.
                 ' Form_Main.Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
                 'Form_Main.Table_Sample_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Sample_Set)
                 Form_Main.DataSampleSetLoad("")
@@ -438,7 +438,7 @@ Public Class Form_Sample_Set_Accept
                 'Next
                 'Form_Main.DataGridView_Sample_Set.Rows.Item(Form_Main.DataGridView_Sample_Set.RowCount - 1).Selected = True
 
-                'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
+                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
                 '  Table_Sample_SetTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
                 '   Me.Table_Sample_SetTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Sample_Set)
                 '  Table_Sample_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_Sample_SetDataGridView.RowCount - 1

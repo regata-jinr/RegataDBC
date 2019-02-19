@@ -146,7 +146,7 @@ Public Class Form_Sample_Accept
             ComboBox_Table_ReceivedBy.Text = ""
             TextBox_New_Sample_Accept_Notes.Text = ""
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_ReceivedBy". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_ReceivedBy". При необходимости она может быть перемещена или удалена.
             Table_Received_ByTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_ByTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
             ComboBox_Table_ReceivedBy.Text = ""

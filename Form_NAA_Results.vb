@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class Form_NAA_Results
     Public HidColumnsDict As New Dictionary(Of Integer, String)
@@ -28,30 +29,42 @@ Public Class Form_NAA_Results
                     Dim workSheet As ClosedXML.Excel.IXLWorksheet = workbook.Worksheet(1)
                     Dim dti As New DataTable
 
-                    Dim cntColumns As Integer = 6
-                    Dim cntRows As Integer = 1
+                    Dim StartColumn As Integer = 6 'start column for final table
+                    Dim StartRow As Integer = 4 ' start row for final table
+                    Dim ColumnForCountingNumber As Integer = 3 ' columns with headers such as Conc,... in final table 
+                    Dim StartColumnForCounting As Integer = 6 ' columns with non empty value in final table
+                    Dim cntRows As Integer = 0
+                    If workSheet.Row(2).Cell(1).Value = "sample" Then
+                        StartRow = 3 ' start row for final report
+                        StartColumn = 9 'start column for final report
+                        ColumnForCountingNumber = 2 ' columns with headers such as Conc,... in final report
+                        StartColumnForCounting = 0
+                    End If
+                    Dim cntColumns As Integer = 0
 
-                    Dim a As Integer = 2
+                    ' doesnt work for finaltable
+                    ' cntRows = workSheet.LastRowUsed.RowNumber 
+                    ' cntColumns = workSheet.LastColumnUsed.ColumnNumber
 
                     For Each row As ClosedXML.Excel.IXLRow In workSheet.Rows()
-                        If cntRows > 4 And row.Cell(1).Value = "" Then Exit For
+                        If cntRows >= StartRow And row.Cell(1).Value = "" Then Exit For
                         cntRows += 1
                     Next
 
+                    cntRows = cntRows - StartRow 'we have displacment in excel from 0,0
+
+                    If cntRows <= 0 Then Debug.WriteLine("File doesn't contain data")
                     For Each column As ClosedXML.Excel.IXLColumn In workSheet.Columns()
-                        If workSheet.Row(a).Cell(cntColumns).Value.ToString <> "" Then
+                        If workSheet.Row(ColumnForCountingNumber).Cell(StartColumnForCounting + cntColumns + 1).Value.ToString <> "" Then
                             cntColumns += 1
                         Else
                             Exit For
                         End If
                     Next
+                    cntColumns += StartColumnForCounting
 
-                    cntRows = cntRows - 4
-                    cntColumns = cntColumns - 1
 
-                    'Debug.WriteLine(DataGridView_Table_Sample_NAA_Results.Rows.Count() & "  " & cntRows)
-
-                    Dim headerRng = workSheet.Range(1, 1, 2, cntColumns)
+                    Debug.WriteLine($"StartRow - {StartRow}{vbCrLf}cntRows - {cntRows}{vbCrLf}StartColumn - {StartColumn}{vbCrLf}cntColumns - {cntColumns}")
                     Dim elem As String = ""
 
                     dti.Columns.Add("Номер образца", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(0).ValueType)
@@ -63,41 +76,32 @@ Public Class Form_NAA_Results
                     dti.Columns.Add("Файлы спектров", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(6).ValueType)
                     dti.Columns.Add("Обработано", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(7).ValueType)
 
-                    Dim StartNum As Integer
-                    If workSheet.Row(a).Cell(1).Value <> "sample" Then a = 3
-
-                    For k As Integer = 1 To 9
-                        If workSheet.Row(a).Cell(k).Value = "Conc, mg/kg" Then
-                            StartNum = k
-                            Exit For
-                        End If
-                    Next
-
-                    For i = StartNum To cntColumns
+                    For i = StartColumn To cntColumns
                         If i Mod 3 = 0 Then
                             elem = workSheet.Row(1).Cell(i).Value & ", "
                         End If
 
-                        If workSheet.Row(a).Cell(i).Value = "Conc, mg/kg" Then
+                        If workSheet.Row(StartRow - 1).Cell(i).Value = "Conc, mg/kg" Then
                             dti.Columns.Add(elem & "концентрация, uгр/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(9).ValueType)
-                        ElseIf workSheet.Row(a).Cell(i).Value = "Err, %" Then
+                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "Err, %" Then
                             dti.Columns.Add(elem & "погрешность, %", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(10).ValueType)
-                        ElseIf workSheet.Row(a).Cell(i).Value = "MDC, mg/kg" Then
+                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "MDC, mg/kg" Then
                             dti.Columns.Add(elem & "предел обнаружения, uгр/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(11).ValueType)
                         End If
                     Next
 
-                    Dim bodyRng = workSheet.Range(3, 1, cntRows, cntColumns)
+                    Debug.WriteLine($"Temp table columns count is {dti.Columns.Count}")
 
-                    If a = 2 Then
-                        For rown As Integer = 0 To cntRows - 1
+                    Dim bodyRng = workSheet.Range(StartRow - 1, 1, cntRows, cntColumns)
+
+                    If StartRow = 3 Then
+                        For rown As Integer = 0 To cntRows
                             dti.Rows.Add()
                             For coln As Integer = 0 To cntColumns - 1
-
-                                If workSheet.Row(rown + 3).Cell(coln + 1).Value.ToString = "" Then
+                                If workSheet.Row(rown + StartRow).Cell(coln + 1).Value.ToString = "" Then
                                     dti.Rows(rown)(coln) = DBNull.Value
                                 Else
-                                    dti.Rows(rown)(coln) = workSheet.Row(rown + 3).Cell(coln + 1).Value
+                                    dti.Rows(rown)(coln) = workSheet.Row(rown + StartRow).Cell(coln + 1).Value
                                 End If
                             Next
                         Next
@@ -106,44 +110,40 @@ Public Class Form_NAA_Results
                         Dim tempstr As String = ""
                         Dim filespect As String = ""
 
-                        For rown As Integer = 0 To cntRows - 1
+                        For rown As Integer = 0 To cntRows
                             dti.Rows.Add()
                             For coln As Integer = 0 To 7
                                 If coln = 6 Then
                                     For n As Integer = 2 To 5
-                                        tempstr = workSheet.Row(rown + 4).Cell(n).Value
-
+                                        tempstr = Path.GetFileNameWithoutExtension(workSheet.Row(rown + StartRow).Cell(n).Value)
                                         If tempstr = "" Then
                                             tempstr = "-------"
                                         End If
                                         filespect += tempstr + ","
                                     Next
-                                    '  Debug.WriteLine((rown + 4).ToString & "  " & tempstr)
-                                    filespect = Replace(filespect.Substring(0, filespect.Length - 1), ".CON", "")
-                                    dti.Rows(rown)(coln) = filespect + "."
-
+                                    ' Debug.WriteLine((rown + 4).ToString & "  " & tempstr)
+                                    dti.Rows(rown)(coln) = filespect.Substring(0, filespect.Length - 1)
                                     filespect = ""
                                 Else
-                                    '   MsgBox(DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value
+                                    ' MsgBox(DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value
                                     ' Debug.WriteLine(DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value)
                                     dti.Rows(rown)(coln) = DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value
-                                    '  MsgBox(dti.Rows(rown)(coln))
+                                    ' MsgBox(dti.Rows(rown)(coln))
                                 End If
                             Next
                         Next
-                        For rown As Integer = 0 To cntRows - 1
-                            For coln As Integer = 5 To cntColumns - 1
-                                If workSheet.Row(rown + 4).Cell(coln + 1).Value.ToString = "" Then
-                                    dti.Rows(rown)(coln + 3) = DBNull.Value
+                        For rown As Integer = 0 To cntRows
+                            For coln As Integer = 8 To dti.Columns.Count - 1
+                                If workSheet.Row(rown + StartRow).Cell(coln - 2).Value.ToString = "" Then
+                                    dti.Rows(rown)(coln) = DBNull.Value
                                 Else
-                                    dti.Rows(rown)(coln + 3) = workSheet.Row(rown + 4).Cell(coln + 1).Value
+                                    dti.Rows(rown)(coln) = workSheet.Row(rown + StartRow).Cell(coln - 2).Value
                                 End If
                             Next
                         Next
 
                     End If
 
-                    Dim IsHeader As Boolean = True
                     Dim dt As New DataTable()
 
                     For Each column As DataGridViewColumn In DataGridView_Table_Sample_NAA_Results.Columns
@@ -160,18 +160,23 @@ Public Class Form_NAA_Results
                 End Using
             End If
 
+        Catch ex As System.IO.IOException
+            If Form_Main.language = "Русский" Then
+                MsgBox("Файл уже открыт. Закройте его.", MsgBoxStyle.Critical, Me.Text)
+            ElseIf Form_Main.language = "English" Then
+                MsgBox("The file Is Using. Please, Close it.", MsgBoxStyle.Critical, Me.Text)
+            End If
         Catch ex As Exception
             MsgBox(ex.ToString)
             Me.Enabled = True
             If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "English" Then
+                    ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
     End Sub
-
     Private Sub Form_NAA_Results_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try

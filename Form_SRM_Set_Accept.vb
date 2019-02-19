@@ -99,7 +99,7 @@ Public Class Form_SRM_Set_Accept
             cmd.ExecuteNonQuery()
             sqlConnection1.Close()
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
             'Form_Main.Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             'Form_Main.Table_SRM_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_SRM_Set)
 
@@ -170,7 +170,7 @@ Public Class Form_SRM_Set_Accept
                 .Columns(1).ReadOnly = True
                 .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Number", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
+                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
                 Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
                 Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
 

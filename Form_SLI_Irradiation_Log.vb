@@ -162,11 +162,11 @@ Public Class Form_SLI_Irradiation_Log
                 SaveFileDialog_SLI.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_SLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_SLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
 
             Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, MaskedTextBox_SLI_Irradiation_Log.Text)
@@ -326,7 +326,7 @@ Public Class Form_SLI_Irradiation_Log
                 End If
             End With
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample_Set". При необходимости она может быть перемещена или удалена.
             Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
 
@@ -388,7 +388,7 @@ Public Class Form_SLI_Irradiation_Log
                 End If
             End With
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
             Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
 
@@ -583,7 +583,7 @@ Public Class Form_SLI_Irradiation_Log
                 'End If
             End With
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
             Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
 
@@ -1252,7 +1252,7 @@ Public Class Form_SLI_Irradiation_Log
     Private Sub DataGridView_Table_SRM_Set_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Table_SRM_Set.CellMouseUp
         Try
             If DataGridView_Table_SRM_Set.SelectedRows.Count = 0 Then Exit Sub
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
             Table_SRM_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_SRM_TableAdapter.Fill_In_Use_SLI(Me.NAA_DB_EXPDataSet.table_SRM, DataGridView_Table_SRM_Set.SelectedCells.Item(0).Value, DataGridView_Table_SRM_Set.SelectedCells.Item(1).Value)
 
@@ -1510,7 +1510,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
     Private Sub DataGridView_Table_Monitor_Set_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Table_Monitor_Set.CellMouseUp
         Try
             If DataGridView_Table_Monitor_Set.SelectedRows.Count = 0 Then Exit Sub
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
             Table_Monitor_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Monitor_TableAdapter.Fill_In_Use_Date_SLI(Me.NAA_DB_EXPDataSet.table_Monitor, DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value, DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value, MaskedTextBox_SLI_Irradiation_Log.Text)
 

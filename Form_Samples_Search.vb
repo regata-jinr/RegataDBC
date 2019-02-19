@@ -71,12 +71,12 @@ Public Class Form_Samples_Search
                 SaveFileDialog_Search_Results.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Me.Table_Received_ByTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_ByTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
-            ''TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Client". При необходимости она может быть перемещена или удалена.
+            '' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Client". При необходимости она может быть перемещена или удалена.
             'Me.Table_ClientTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Client)
-            ''TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Country". При необходимости она может быть перемещена или удалена.
+            '' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Country". При необходимости она может быть перемещена или удалена.
             'Me.Table_CountryTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Country)
             'DataGridView_Table_Sample.Columns.Count = 6
 

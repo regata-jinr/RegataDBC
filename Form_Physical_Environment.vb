@@ -76,7 +76,7 @@ Public Class Form_Physical_Environment
                 '.Columns(3).Frozen = True
                 ' .Columns(3).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Температура,", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Physical_Environment". При необходимости она может быть перемещена или удалена.
+                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Physical_Environment". При необходимости она может быть перемещена или удалена.
 
                 Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
                 Dim cmd As New System.Data.SqlClient.SqlCommand
@@ -238,7 +238,7 @@ b:                          currentRow = currentRow.Trim 'удаляем про�
                             cmd.ExecuteNonQuery()
                             sqlConnection1.Close()
 
-                            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Physical_Environment". При необходимости она может быть перемещена или удалена.
+                            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Physical_Environment". При необходимости она может быть перемещена или удалена.
                             sqlConnection1.Open()
                             cmd.CommandType = System.Data.CommandType.Text
 

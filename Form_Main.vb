@@ -57,11 +57,8 @@ Public Class Form_Main
             DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
             DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
 
-            If BackgroundWorkerColorizer.IsBusy Then
-                BackgroundWorkerColorizer.CancelAsync()
-            End If
+            If Not BackgroundWorkerColorizer.IsBusy Then BackgroundWorkerColorizer.RunWorkerAsync()
 
-            BackgroundWorkerColorizer.RunWorkerAsync()
         Catch backgroundWorker As InvalidOperationException
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -71,9 +68,14 @@ Public Class Form_Main
     End Sub
 
     Private Sub ColorizeAll()
-        For Each row As DataGridViewRow In DataGridView_Sample_Set.Rows
-            Colorize(row)
-        Next
+        Try
+            For Each row As DataGridViewRow In DataGridView_Sample_Set.Rows
+                Colorize(row)
+            Next
+        Catch ex As ArgumentOutOfRangeException
+            Debug.WriteLine("Too much activities in sorting")
+        End Try
+
     End Sub
 
 
@@ -90,11 +92,11 @@ Public Class Form_Main
     Private Sub B_New_Sample_Set_Accept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_NewSampleSetIDAccept.Click
         Try
             Form_Sample_Set_Accept.Notes_Number = 1
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_ReceivedBy". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_ReceivedBy". При необходимости она может быть перемещена или удалена.
             Form_Sample_Set_Accept.Table_Received_ByTableAdapter.Connection.ConnectionString = MyConnectionString
             Form_Sample_Set_Accept.Table_Received_ByTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Received_By)
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
             Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Connection.ConnectionString = MyConnectionString
             Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Sample_Set)
 
@@ -438,7 +440,7 @@ Public Class Form_Main
                 End Try
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
             Table_Monitor_Set_TableAdapter.Connection.ConnectionString = MyConnectionString
             Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
 
@@ -475,7 +477,7 @@ Public Class Form_Main
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"Для выбранной партии можно узнать сгруппированную информацию об образцах: Клиентский номер, Тип, Под тип, Файлы спектров, Планируемая подготовка, Выполненная подготовка, Элементы для определения{vbCrLf}А также загрузить файлы спектров. Обратите внимание на иерархию директорий при скачивании спектров:{vbCrLf}{vbCrLf}В выбранной Вами папке будет создана директория с именем партии, затем диреткория с типом образцов(джи1,джи2,кжи), затем (пока только для ДЖИ) директории с именами контейнеров, в которых облучалась загружаемая партия: 'c-1', 'c-2' и так далее. Дальше папки 'SRMs' - содержит файлы стандартов, котоыре облучались в одном контейнере с образцами загружаемой партии и 'Samples' - содержит файлы спектров образцов."
+            UpdMsg = $"Для выбранной партии можно узнать сгруппированную информацию об образцах: Клиентский номер, Тип, Под тип, Файлы спектров, Планируемая подготовка, Выполненная подготовка, Элементы для определения{vbCrLf}А также загрузить файлы спектров. Обратите внимание на иерархию директорий при скачивании спектров:{vbCrLf}{vbCrLf}В выбранной Вами папке будет создана директория с именем партии, затем диреткория с типом образцов(джи1,джи2,кжи), затем директории с именами контейнеров, в которых облучалась загружаемая партия: 'c-1', 'c-2' и так далее. Дальше папки 'SRMs' - содержит файлы стандартов, котоыре облучались в одном контейнере с образцами загружаемой партии и 'Samples' - содержит файлы спектров образцов.{vbCrLf}{vbCrLf}Исправлена ошибка, возникающая при сортировке партий.{vbCrLf}{vbCrLf}После удаления образца из журнала, он снова появлется в списке для добавления.{vbCrLf}{vbCrLf}Исправлена ошибка в загрузке финального отчета{vbCrLf}{vbCrLf}Повышена стабильность приложения{vbCrLf}{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
@@ -723,7 +725,7 @@ Public Class Form_Main
             End If
 
             'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
             ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim s As String
             s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
@@ -912,7 +914,7 @@ Public Class Form_Main
             End If
 
             'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
             FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim jDate As String
             Dim number As String
@@ -1192,11 +1194,10 @@ Public Class Form_Main
             DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
             DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
 
-            If BackgroundWorkerColorizer.IsBusy Then
-                BackgroundWorkerColorizer.CancelAsync()
+            If Not BackgroundWorkerColorizer.IsBusy Then
+                BackgroundWorkerColorizer.RunWorkerAsync()
             End If
 
-            BackgroundWorkerColorizer.RunWorkerAsync()
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub
@@ -1792,18 +1793,6 @@ Public Class Form_Main
 
     Private Sub BackgroundWorkerColorizer_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorkerColorizer.DoWork
         ColorizeAll()
-    End Sub
-
-
-    Public Sub ChangeLanguage()
-
-        If My.Settings.language = "Русский" Then
-
-        Else
-
-        End If
-
-
     End Sub
 
 End Class

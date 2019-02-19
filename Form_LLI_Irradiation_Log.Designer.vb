@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_LLI_Irradiation_Log
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_LLI_Irradiation_Log
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -1323,9 +1323,9 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'Button_Save_LLI_Log_To_File
         '
-        Me.Button_Save_LLI_Log_To_File.Location = New System.Drawing.Point(798, 9)
+        Me.Button_Save_LLI_Log_To_File.Location = New System.Drawing.Point(838, 9)
         Me.Button_Save_LLI_Log_To_File.Name = "Button_Save_LLI_Log_To_File"
-        Me.Button_Save_LLI_Log_To_File.Size = New System.Drawing.Size(178, 23)
+        Me.Button_Save_LLI_Log_To_File.Size = New System.Drawing.Size(138, 23)
         Me.Button_Save_LLI_Log_To_File.TabIndex = 268
         Me.Button_Save_LLI_Log_To_File.Text = "Save LLI log to file"
         Me.Button_Save_LLI_Log_To_File.UseVisualStyleBackColor = True
@@ -1403,9 +1403,9 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'Button_Samples_By_Detectors
         '
-        Me.Button_Samples_By_Detectors.Location = New System.Drawing.Point(614, 9)
+        Me.Button_Samples_By_Detectors.Location = New System.Drawing.Point(690, 9)
         Me.Button_Samples_By_Detectors.Name = "Button_Samples_By_Detectors"
-        Me.Button_Samples_By_Detectors.Size = New System.Drawing.Size(178, 23)
+        Me.Button_Samples_By_Detectors.Size = New System.Drawing.Size(142, 23)
         Me.Button_Samples_By_Detectors.TabIndex = 277
         Me.Button_Samples_By_Detectors.Text = "Samples by detectors"
         Me.Button_Samples_By_Detectors.UseVisualStyleBackColor = True
@@ -1479,14 +1479,14 @@ Partial Class Form_LLI_Irradiation_Log
         Me.ComboBox_Sample_Geometry.Enabled = False
         Me.ComboBox_Sample_Geometry.FormattingEnabled = True
         Me.ComboBox_Sample_Geometry.Items.AddRange(New Object() {"2,5", "5", "10", "20"})
-        Me.ComboBox_Sample_Geometry.Location = New System.Drawing.Point(544, 9)
+        Me.ComboBox_Sample_Geometry.Location = New System.Drawing.Point(414, 7)
         Me.ComboBox_Sample_Geometry.Name = "ComboBox_Sample_Geometry"
         Me.ComboBox_Sample_Geometry.Size = New System.Drawing.Size(48, 21)
         Me.ComboBox_Sample_Geometry.TabIndex = 286
         '
         'L_Name_Sample_Geometry
         '
-        Me.L_Name_Sample_Geometry.Location = New System.Drawing.Point(472, 11)
+        Me.L_Name_Sample_Geometry.Location = New System.Drawing.Point(342, 9)
         Me.L_Name_Sample_Geometry.Name = "L_Name_Sample_Geometry"
         Me.L_Name_Sample_Geometry.Size = New System.Drawing.Size(66, 16)
         Me.L_Name_Sample_Geometry.TabIndex = 285
@@ -1495,7 +1495,7 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'TextBox_Download
         '
-        Me.TextBox_Download.Location = New System.Drawing.Point(398, 9)
+        Me.TextBox_Download.Location = New System.Drawing.Point(291, 9)
         Me.TextBox_Download.Name = "TextBox_Download"
         Me.TextBox_Download.ReadOnly = True
         Me.TextBox_Download.Size = New System.Drawing.Size(34, 20)
@@ -1504,7 +1504,7 @@ Partial Class Form_LLI_Irradiation_Log
         'L_Name_Download
         '
         Me.L_Name_Download.AutoSize = True
-        Me.L_Name_Download.Location = New System.Drawing.Point(338, 13)
+        Me.L_Name_Download.Location = New System.Drawing.Point(231, 13)
         Me.L_Name_Download.Name = "L_Name_Download"
         Me.L_Name_Download.Size = New System.Drawing.Size(54, 13)
         Me.L_Name_Download.TabIndex = 287

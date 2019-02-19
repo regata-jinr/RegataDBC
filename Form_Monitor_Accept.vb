@@ -65,7 +65,7 @@ Public Class Form_Monitor_Accept
                     '.Columns.Clear()
                     '.Columns.AddRange(Monitor_Number, Monitor_SLI_Weight, Monitor_LLI_Weight) ' это делается, т.к. после загрузки VB добавляются все столбцы
 
-                    'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
+                    ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
                     Table_MonitorTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
                     Me.Table_MonitorTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(1).Value)
 
@@ -350,7 +350,7 @@ b1:                                 currentRow = currentRow.Trim 'удаляем
 c1:             Next
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
             Table_MonitorTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_MonitorTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(1).Value)
 
@@ -568,7 +568,7 @@ c1:             Next
     'c2:             Next
     '            End If
 
-    '            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
+    '            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
     '            Table_MonitorTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
     '            Me.Table_MonitorTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(1).Value)
 
@@ -729,7 +729,7 @@ c1:             Next
 c2:             Next
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor". При необходимости она может быть перемещена или удалена.
             Table_MonitorTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_MonitorTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(0).Value, Form_Main.Table_Monitor_SetDataGridView.SelectedCells.Item(1).Value)
 

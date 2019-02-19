@@ -142,11 +142,11 @@ Public Class Form_LLI_Irradiation_Log
             ComboBox_Time_Field_Name.Text = ""
             ComboBox_Person_Field_Name.Text = ""
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
+            'данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text, Convert.ToInt32(TextBox_Download.Text))
             ListBox_Sample_ID.Items.Clear()
@@ -433,7 +433,7 @@ Public Class Form_LLI_Irradiation_Log
                 'DataGridView_LLI_Table.Rows.Item(DataGridView_LLI_Sample_Set.RowCount - 1).Selected = True
             End If
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
             Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
 
@@ -495,7 +495,7 @@ Public Class Form_LLI_Irradiation_Log
                 End If
             End With
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
             Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
 
@@ -690,7 +690,7 @@ Public Class Form_LLI_Irradiation_Log
                 'End If
             End With
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
             Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
 
@@ -1163,7 +1163,7 @@ Public Class Form_LLI_Irradiation_Log
 
     Private Sub DataGridView_Table_SRM_Set_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Table_SRM_Set.CellMouseUp
         Try  'это для отображения списка стандартов
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
             Table_SRM_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_SRM_TableAdapter.Fill_In_Use_LLI(Me.NAA_DB_EXPDataSet.table_SRM, DataGridView_Table_SRM_Set.SelectedCells.Item(0).Value, DataGridView_Table_SRM_Set.SelectedCells.Item(1).Value)
 
@@ -1186,7 +1186,7 @@ Public Class Form_LLI_Irradiation_Log
 
     Private Sub DataGridView_Table_Monitor_Set_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView_Table_Monitor_Set.CellMouseUp
         Try 'это для отображения списка мониторов
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM". При необходимости она может быть перемещена или удалена.
             'Table_Monitor_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             'Me.Table_Monitor_TableAdapter.Fill_In_Use_Date_LLI(Me.NAA_DB_EXPDataSet.table_Monitor, DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value, DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value, MaskedTextBox_LLI_Irradiation_Log.Text)
 
@@ -1357,44 +1357,31 @@ Public Class Form_LLI_Irradiation_Log
                 DataGridView_LLI_Irradiation_Log.Rows.RemoveAt(row.Index)
             Next
 
-
-            'Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            ''Dim reader As SqlDataReader
-            'Dim cmd As New System.Data.SqlClient.SqlCommand
-            'cmd.CommandType = System.Data.CommandType.Text
-
-            'cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log" +
-            '   " WHERE Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
-            '   "' and Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
-            '   "' and Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
-            '   "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
-            '   "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
-            '   "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
-            '   "' and Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
-            'cmd.Connection = sqlConnection1
-            'sqlConnection1.Open()
-            'cmd.ExecuteNonQuery()
-            'sqlConnection1.Close()
-
-            'cmd.CommandText = "UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL" +
-            '   " WHERE F_Country_Code='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value +
-            '   "' and F_Client_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value +
-            '   "' and F_Year='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value +
-            '   "' and F_Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
-            '   "' and F_Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value +
-            '   "' and A_Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value +
-            '   "' and I_LLI_Date_Start='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
-            'cmd.Connection = sqlConnection1
-            'sqlConnection1.Open()
-            'cmd.ExecuteNonQuery()
-            'sqlConnection1.Close()
-
+            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+                sqlConnection1.Open()
+                Using cmd As New System.Data.SqlClient.SqlCommand($"DELETE FROM dbo.table_LLI_Irradiation_Log WHERE
+                                                                    Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}'
+                                                                    and Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}'
+                                                                    and Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}'
+                                                                    and Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}'
+                                                                    and Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}'
+                                                                    and Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}'
+                                                                    and Date_Start='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}';
+                                                                    UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
+                                                                    F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
+                                                                    F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
+                                                                    F_Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}' and
+                                                                    F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
+                                                                    F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
+                                                                    A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
+                                                                    I_LLI_Date_Start='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}';",
+                                                                    sqlConnection1)
+                    Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
+                    cmd.ExecuteNonQuery()
+                End Using
+                sqlConnection1.Close()
+            End Using
             Save_And_Update_LLI_Click(sender, e)
-
-            'Me.Validate()
-            'Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-            'Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-            'Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Delete_Sample_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)

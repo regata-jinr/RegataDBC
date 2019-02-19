@@ -188,10 +188,10 @@ Public Class Form_Samples_List
             Form_Sample_Preparation.L_SS_Sample_Set_ID.Text = L_SS_Sample_Set_ID.Text
             Form_Sample_Preparation.L_SS_Sample_Set_Index.Text = L_SS_Sample_Set_Index.Text
 
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Form_Sample_Preparation.Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Form_Sample_Preparation.Table_Received_By_TableAdapter.Fill(Form_Sample_Preparation.NAA_DB_EXPDataSet.table_Received_By)
-            'TODO: данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
             Form_Sample_Preparation.Table_Sample_Sample_Preparation_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Form_Sample_Preparation.Table_Sample_Sample_Preparation_TableAdapter.Fill_Sample_Sample_Preparation(Form_Sample_Preparation.NAA_DB_EXPDataSet.table_Sample_Sample_Preparation, L_SS_Country_Code.Text, L_SS_Client_ID.Text, L_SS_Year.Text, L_SS_Sample_Set_ID.Text, L_SS_Sample_Set_Index.Text)
 
@@ -573,7 +573,7 @@ c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, 
         sqlConnection1.Close()
     End Sub
 
-    'ToDO: translation 
+    'TODO: translation 
     Private Sub BShowSumAbEls_Click(sender As Object, e As EventArgs) Handles BShowSumAbEls.Click
         Dim fels As New Form_ElsSum
         Debug.WriteLine("Start samples summary creation")
