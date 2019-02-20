@@ -86,8 +86,10 @@ Public Class Form_ElsSum
             ClearProgressBarAndStatusLabel()
             LabelStatus.Text = "Инициализация загрузки спектров..."
 
-            Dim fileNames = FormFinalFilesDict(type)
-            Dim fileNamesServer = FindFiles(fileNames.Keys)
+            Dim gYear As String = ""
+
+            Dim fileNames = FormFinalFilesDict(type, gYear)
+            Dim fileNamesServer = FindFiles(fileNames.Keys, gYear)
 
             If fileNamesServer.Count = 0 Then
                 LabelStatus.Text = "Файлы спектров отсутствуют"
@@ -124,7 +126,6 @@ Public Class Form_ElsSum
                             Continue For
                         End If
                         Using fileStream As FileStream = IO.File.Create($"{FolderBrowserDialogSpectra.SelectedPath}\{fileNames(file)}")
-
                             Debug.WriteLine($"Will be download from here: {fileNamesServer(file)}")
                             client.DownloadFile(fileNamesServer(file), fileStream)
                             ProgressBarDwld.Value += 1
@@ -150,6 +151,7 @@ Public Class Form_ElsSum
             LabelStatus.Text = "Ошибка подключения к FTP-серверу"
         Catch ex As Renci.SshNet.Common.SftpPathNotFoundException
             MsgBox("Запрашиваемый файл не найден. Возможно, спектры еще не перебросили или не набрали.", MsgBoxStyle.Exclamation)
+            LabelStatus.Text += " - файл не найден"
         Catch ex As SqlException
             MsgBox($"Some problems with SQL-connection:\n{ex.Message}", MsgBoxStyle.Exclamation)
             LabelStatus.Text = "Ошибка получение данных аутентификации"
@@ -173,7 +175,7 @@ Public Class Form_ElsSum
         End Using
     End Sub
 
-    Function FormFinalFilesDict(ByVal type As String) As Dictionary(Of String, String)
+    Function FormFinalFilesDict(ByVal type As String, ByRef gYear As String) As Dictionary(Of String, String)
         Debug.WriteLine("Started to form final files array:")
         LabelStatus.Text = "Формирование имен загружаемых файлов..."
         Dim finArr = New Dictionary(Of String, String)
@@ -201,10 +203,12 @@ Public Class Form_ElsSum
             End If
 
         Next
+        gYear = Convert.ToDateTime(DataGridViewElsSum.Rows(0).Cells($"{typeFtp(type)}-Date").Value).Year.ToString()
+        Debug.WriteLine($"Guessed year: {gYear}")
         Return finArr.Union(finSrmsArr).ToDictionary(Function(p) p.Key, Function(p) p.Value)
     End Function
 
-    Function FindFiles(ByRef names As Dictionary(Of String, String).KeyCollection) As Dictionary(Of String, String)
+    Function FindFiles(ByRef names As Dictionary(Of String, String).KeyCollection, ByVal gYear As String) As Dictionary(Of String, String)
         Debug.WriteLine("Started to searching files")
         LabelStatus.Text = "Поиск файлов на сервере..."
         Dim fullFileName = New Dictionary(Of String, String)
@@ -216,11 +220,12 @@ Public Class Form_ElsSum
 
         Using client As New SshClient(src, 22, user, passw)
             client.Connect()
-            Dim terminal As SshCommand = client.RunCommand($"cd Spectra")
+            Dim terminal As SshCommand ' = client.RunCommand($"cd Spectra")
             For Each name As String In names
-                terminal = client.RunCommand($"find . -name {Path.GetFileNameWithoutExtension(name)}*")
+                terminal = client.RunCommand($"find /home/FTP/Spectra/{gYear} -name {Path.GetFileNameWithoutExtension(name)}*")
+                If String.IsNullOrEmpty(terminal.Result) Then terminal = client.RunCommand($"find /home/FTP/Spectra/ -name {Path.GetFileNameWithoutExtension(name)}*")
                 If Not String.IsNullOrEmpty(terminal.Result) Then
-                    fullFileName.Add(name, terminal.Result.Substring(2, terminal.Result.Length - 3))
+                    fullFileName.Add(name, terminal.Result.Substring(0, terminal.Result.Length - 1)) 'delete \n
                     Debug.WriteLine($"The file was found - {fullFileName.Last}")
                 Else
                     Debug.WriteLine($"The file was not found - {Path.GetFileNameWithoutExtension(name)}")
