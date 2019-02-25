@@ -181,6 +181,8 @@ Public Class Form_ElsSum
         Dim finArr = New Dictionary(Of String, String)
         Dim finSrmsArr = New Dictionary(Of String, String)
         Dim typeFtp As New Dictionary(Of String, String)
+        Dim dtStrCont As String = ""
+        Dim dt As New DateTime()
         typeFtp.Add("КЖИ", "kji")
         typeFtp.Add("ДЖИ-1", "dji-1")
         typeFtp.Add("ДЖИ-2", "dji-2")
@@ -191,18 +193,23 @@ Public Class Form_ElsSum
             If String.IsNullOrEmpty(cellFile.Value.ToString) Then Continue For
             Dim cellDate As DataGridViewCell = row.Cells($"{typeFtp(type)}-Date")
             If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
-            Dim dt As DateTime = Convert.ToDateTime(cellDate.Value)
+            dt = Convert.ToDateTime(cellDate.Value)
+            If (Not dtStrCont.Contains($"{dt.ToShortDateString}-{row.Cells("Container_Number").Value}")) Then dtStrCont += $"'{dt.ToShortDateString}-{row.Cells("Container_Number").Value}',"
+
             If type.Contains("ДЖИ") Then
                 Debug.WriteLine($"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
                 finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-                GetRelatedLLISRMs(finSrmsArr, setKey, typeFtp(type), dt)
             Else
                 Debug.WriteLine($"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
                 finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
                 GetRelatedSLISRMs(finSrmsArr, setKey, dt)
             End If
-
         Next
+
+        If type.Contains("ДЖИ") Then
+            GetRelatedLLISRMs(finSrmsArr, setKey, typeFtp(type), dtStrCont.Substring(0, dtStrCont.Length - 1))
+        End If
+
         gYear = Convert.ToDateTime(DataGridViewElsSum.Rows(0).Cells($"{typeFtp(type)}-Date").Value).Year.ToString()
         Debug.WriteLine($"Guessed year: {gYear}")
         Return finArr.Union(finSrmsArr).ToDictionary(Function(p) p.Key, Function(p) p.Value)
@@ -256,12 +263,12 @@ Public Class Form_ElsSum
     End Sub
 
 
-    Sub GetRelatedLLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal type As String, ByVal dt As DateTime)
-        GetQueryResult(srmarr, $"select distinct  Measured_LLI_{type.Replace("dji-", "")}_By, '{setKey}\' +'{type}\'+ 'c-'+ CONVERT(varchar(2),Container_Number) +'\' + 'SRMs\' + Measured_LLI_{type.Replace("dji-", "")}_By + '.cnf' from table_LLI_Irradiation_Log where Date_Measurement_LLI_{type.Replace("dji-", "")} = '{dt.ToShortDateString()}' and Client_ID = 's' and Container_Number in (select Container_Number from table_LLI_Irradiation_Log where Date_Measurement_LLI_{type.Replace("dji-", "")} = '{dt.ToShortDateString()}' and Country_Code + '-' + Client_ID + '-' + Year + '-' + Sample_Set_ID  + '-' + Sample_Set_Index = '{setKey}')")
+    Sub GetRelatedLLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal type As String, ByVal dt As String)
+        GetQueryResult(srmarr, $"select distinct  Measured_LLI_{type.Replace("dji-", "")}_By, '{setKey}\' +'{type}\'+ 'c-'+ CONVERT(varchar(2),Container_Number) +'\' + 'SRMs\' + Measured_LLI_{type.Replace("dji-", "")}_By + '.cnf' from table_LLI_Irradiation_Log where Client_ID = 's' and  CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) in (select CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) as date_con from table_LLI_Irradiation_Log where Country_Code + '-' + Client_ID + '-' + Year + '-' + Sample_Set_ID  + '-' + Sample_Set_Index = '{setKey}')")
     End Sub
 
     Sub GetRelatedSLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal dt As DateTime)
-        GetQueryResult(srmarr, $"Select  distinct File_First, '{setKey}\kji\SRMs\' + File_First + '.cnf' from table_SLI_Irradiation_Log where Country_Code = 's' and Date_Start between (select max(DateStart) from IBR2MCycles where DateStart <= '{dt.ToShortDateString()}') and (select min(DateFinish) from IBR2MCycles where DateFinish >= '{dt.ToShortDateString()}')")
+        GetQueryResult(srmarr, $"Select  distinct File_First, '{setKey}\kji\SRMs\' + File_First + '.cnf' from table_SLI_Irradiation_Log where Country_Code = 's' and Date_Start between (select max(DateStart) from IBR2MCycles where DateStart <= '{dt.ToShortDateString()}') and (select min(DateFinish) from IBR2MCycles where DateFinish >= '{dt.ToShortDateString()}') and File_First is not null")
     End Sub
 
     'TODO implement interface with datarow
