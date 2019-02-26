@@ -25,6 +25,7 @@ Public Class Form_ElsSum
                     DataGridViewElsSum.Columns(8).Visible = False
                     DataGridViewElsSum.Columns(9).Visible = False
                     DataGridViewElsSum.Columns(10).Visible = False
+                    DataGridViewElsSum.Columns(11).Visible = False
 
                     For Each row As DataGridViewRow In DataGridViewElsSum.Rows
                         If row.Cells("Группа элементов").Value = "'Все элементы" Or String.IsNullOrEmpty(row.Cells("Группа элементов").Value) Then
@@ -192,13 +193,14 @@ Public Class Form_ElsSum
             Dim cellFile As DataGridViewCell = row.Cells($"Файлы спектров {type}")
             If String.IsNullOrEmpty(cellFile.Value.ToString) Then Continue For
             Dim cellDate As DataGridViewCell = row.Cells($"{typeFtp(type)}-Date")
+            Dim loadNumCell As DataGridViewCell = row.Cells($"loadNumber")
             If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
             dt = Convert.ToDateTime(cellDate.Value)
             If (Not dtStrCont.Contains($"{dt.ToShortDateString}-{row.Cells("Container_Number").Value}")) Then dtStrCont += $"'{dt.ToShortDateString}-{row.Cells("Container_Number").Value}',"
 
             If type.Contains("ДЖИ") Then
-                Debug.WriteLine($"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                Debug.WriteLine($"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
             Else
                 Debug.WriteLine($"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
                 finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
@@ -264,7 +266,7 @@ Public Class Form_ElsSum
 
 
     Sub GetRelatedLLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal type As String, ByVal dt As String)
-        GetQueryResult(srmarr, $"select distinct  Measured_LLI_{type.Replace("dji-", "")}_By, '{setKey}\' +'{type}\'+ 'c-'+ CONVERT(varchar(2),Container_Number) +'\' + 'SRMs\' + Measured_LLI_{type.Replace("dji-", "")}_By + '.cnf' from table_LLI_Irradiation_Log where Client_ID = 's' and  CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) in (select CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) as date_con from table_LLI_Irradiation_Log where Country_Code + '-' + Client_ID + '-' + Year + '-' + Sample_Set_ID  + '-' + Sample_Set_Index = '{setKey}')")
+        GetQueryResult(srmarr, $"select distinct  Measured_LLI_{type.Replace("dji-", "")}_By, '{setKey}\' + CONVERT(varchar(3),loadNumber) +'\{type}\'+ 'c-'+ CONVERT(varchar(2),Container_Number) +'\' + 'SRMs\' + Measured_LLI_{type.Replace("dji-", "")}_By + '.cnf' from table_LLI_Irradiation_Log where Client_ID = 's' and  CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) in (select CONVERT(varchar(10),Date_Measurement_LLI_{type.Replace("dji-", "")}) + '-' + CONVERT(varchar(1),Container_Number) as date_con from table_LLI_Irradiation_Log where Country_Code + '-' + Client_ID + '-' + Year + '-' + Sample_Set_ID  + '-' + Sample_Set_Index = '{setKey}')")
     End Sub
 
     Sub GetRelatedSLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal dt As DateTime)
