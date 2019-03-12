@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Math
+Imports Renci.SshNet
+Imports System.IO
 
 
 Public Class Form_SLI_Irradiation_Log
@@ -106,6 +107,9 @@ Public Class Form_SLI_Irradiation_Log
                 ComboBox_Monitor_Set_View.Items.Add("Партии мониторов из журнала")
 
                 SaveFileDialog_SLI.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+
+                ButtonSaveSpectra.Text = "Загрузить спектры"
+
             ElseIf Form_Main.language = "English" Then
                 ' Form_SLI_Irradiation_Log
                 Me.Text = "SLI irradiation log"
@@ -160,6 +164,9 @@ Public Class Form_SLI_Irradiation_Log
                 ComboBox_Monitor_Set_View.Items.Add("Monitor sets from log")
 
                 SaveFileDialog_SLI.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+
+                ButtonSaveSpectra.Text = "Download spectra"
+
             End If
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
@@ -2365,5 +2372,62 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
             Form_Main.LangException(Form_Main.language, ex.Message & ex.ToString)
             Exit Sub
         End Try
+    End Sub
+
+    Private Sub ButtonSaveSpectra_Click(sender As Object, e As EventArgs) Handles ButtonSaveSpectra.Click
+
+        FolderBrowserDialogSaveSpectra.Description = $"Выберите папку для сохранения спектров:"
+        Dim fName As String = ""
+        Dim fDate As New DateTime()
+        Dim FileNamesDict As New Dictionary(Of String, String)
+        Dim ftpPath As String = "/home/FTP/Spectra/"
+
+        If FolderBrowserDialogSaveSpectra.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
+            Exit Sub
+        ElseIf System.Windows.Forms.DialogResult.OK Then
+
+            If DataGridView_SLI_Irradiation_Log.SelectedRows.Count = 0 Then
+                MsgBox("Выберите спетры для скачивания!")
+                Exit Sub
+            End If
+            For Each row As DataGridViewRow In DataGridView_SLI_Irradiation_Log.SelectedRows
+                If IsDBNull(row.Cells(10).Value) Then Continue For
+                fName = row.Cells(10).Value
+                fDate = row.Cells(6).Value
+                FileNamesDict.Add($"Spectra/{fDate.Year}/{fDate.Month.ToString("D2")}/kji/{fName}.cnf", $"{FolderBrowserDialogSaveSpectra.SelectedPath}\kji\{fName}.cnf")
+                Next
+            SaveFile(FileNamesDict)
+        End If
+
+    End Sub
+
+
+    Sub SaveFile(ByVal fNames As Dictionary(Of String, String))
+        If fNames.Count = 0 Then Exit Sub
+        Dim user As String = ""
+        Dim passw As String = ""
+        Dim src As String = ""
+        Dim ftpPath As String = "/home/FTP/Spectra/"
+        Form_ElsSum.GetPswd(src, user, passw)
+
+        Using client As New SftpClient(src, 22, user, passw)
+            client.Connect()
+            Debug.WriteLine($"Connection is OK")
+            For Each fName As String In fNames.Keys
+                Debug.WriteLine($"Will save here - ${fNames(fName)}")
+                Directory.CreateDirectory(Path.GetDirectoryName(fNames(fName)))
+                Using fileStream As FileStream = IO.File.Create(fNames(fName))
+                    Debug.WriteLine($"Will download from here: {fName}")
+                    If Not client.Exists(fName) Then fName = fName.Replace("cnf", "CNF")
+                    If client.Exists(fName) Then
+                        client.DownloadFile(fName, fileStream)
+                    Else
+                        Debug.WriteLine($"{fName} doesn't exist")
+                    End If
+
+                    fileStream.Close()
+                End Using
+            Next
+        End Using
     End Sub
 End Class

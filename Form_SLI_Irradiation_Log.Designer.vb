@@ -188,6 +188,8 @@ Partial Class Form_SLI_Irradiation_Log
         Me.L_Name_SRM_Set_View = New System.Windows.Forms.Label()
         Me.L_Name_Monitor_Set_View = New System.Windows.Forms.Label()
         Me.L_Name_Sample_Set_View = New System.Windows.Forms.Label()
+        Me.ButtonSaveSpectra = New System.Windows.Forms.Button()
+        Me.FolderBrowserDialogSaveSpectra = New System.Windows.Forms.FolderBrowserDialog()
         CType(Me.DataGridView_SLI_Irradiation_Log, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SLI_Irradiation_Log_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1484,11 +1486,21 @@ Partial Class Form_SLI_Irradiation_Log
         Me.L_Name_Sample_Set_View.TabIndex = 286
         Me.L_Name_Sample_Set_View.Text = "Sample sets view"
         '
+        'ButtonSaveSpectra
+        '
+        Me.ButtonSaveSpectra.Location = New System.Drawing.Point(624, 10)
+        Me.ButtonSaveSpectra.Name = "ButtonSaveSpectra"
+        Me.ButtonSaveSpectra.Size = New System.Drawing.Size(142, 23)
+        Me.ButtonSaveSpectra.TabIndex = 290
+        Me.ButtonSaveSpectra.Text = "Save Spectra"
+        Me.ButtonSaveSpectra.UseVisualStyleBackColor = True
+        '
         'Form_SLI_Irradiation_Log
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(989, 837)
+        Me.Controls.Add(Me.ButtonSaveSpectra)
         Me.Controls.Add(Me.L_Name_Sample_Set_View)
         Me.Controls.Add(Me.L_Name_Monitor_Set_View)
         Me.Controls.Add(Me.L_Name_SRM_Set_View)
@@ -1726,4 +1738,6 @@ Partial Class Form_SLI_Irradiation_Log
     Friend WithEvents PositionNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Detector1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents FileFirstDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ButtonSaveSpectra As Button
+    Friend WithEvents FolderBrowserDialogSaveSpectra As FolderBrowserDialog
 End Class

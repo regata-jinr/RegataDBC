@@ -196,6 +196,8 @@ Partial Class Form_LLI_Irradiation_Log
         Me.L_Name_Sample_Geometry = New System.Windows.Forms.Label()
         Me.TextBox_Download = New System.Windows.Forms.TextBox()
         Me.L_Name_Download = New System.Windows.Forms.Label()
+        Me.ButtonSaveSpectra = New System.Windows.Forms.Button()
+        Me.FolderBrowserDialogSaveSpectra = New System.Windows.Forms.FolderBrowserDialog()
         CType(Me.DataGridView_Table_Monitor, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1510,11 +1512,21 @@ Partial Class Form_LLI_Irradiation_Log
         Me.L_Name_Download.TabIndex = 287
         Me.L_Name_Download.Text = "Загрузка"
         '
+        'ButtonSaveSpectra
+        '
+        Me.ButtonSaveSpectra.Location = New System.Drawing.Point(542, 8)
+        Me.ButtonSaveSpectra.Name = "ButtonSaveSpectra"
+        Me.ButtonSaveSpectra.Size = New System.Drawing.Size(142, 23)
+        Me.ButtonSaveSpectra.TabIndex = 289
+        Me.ButtonSaveSpectra.Text = "Save Spectra"
+        Me.ButtonSaveSpectra.UseVisualStyleBackColor = True
+        '
         'Form_LLI_Irradiation_Log
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(985, 919)
+        Me.Controls.Add(Me.ButtonSaveSpectra)
         Me.Controls.Add(Me.TextBox_Download)
         Me.Controls.Add(Me.L_Name_Download)
         Me.Controls.Add(Me.ComboBox_Sample_Geometry)
@@ -1774,4 +1786,6 @@ Partial Class Form_LLI_Irradiation_Log
     Friend WithEvents L_Name_Sample_Geometry As System.Windows.Forms.Label
     Friend WithEvents TextBox_Download As System.Windows.Forms.TextBox
     Friend WithEvents L_Name_Download As System.Windows.Forms.Label
+    Friend WithEvents ButtonSaveSpectra As Button
+    Friend WithEvents FolderBrowserDialogSaveSpectra As FolderBrowserDialog
 End Class
