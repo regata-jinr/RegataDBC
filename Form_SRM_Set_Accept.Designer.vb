@@ -23,7 +23,8 @@ Partial Class Form_SRM_Set_Accept
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SRM_Set_Accept))
         Me.ComboBox_SRM_Set_Type = New System.Windows.Forms.ComboBox()
         Me.L_Name_SRM_Set_Type = New System.Windows.Forms.Label()
         Me.L_Name_New_SRM_Set_Name = New System.Windows.Forms.Label()
@@ -139,6 +140,7 @@ Partial Class Form_SRM_Set_Accept
         'NAA_DB_EXPDataSet
         '
         Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
+        Me.NAA_DB_EXPDataSet.EnforceConstraints = False
         Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Table_SRM_Set_BindingSource
@@ -178,19 +180,21 @@ Partial Class Form_SRM_Set_Accept
         Me.Table_SRM_SetDataGridView.AllowUserToResizeColumns = False
         Me.Table_SRM_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_SRM_SetDataGridView.AutoGenerateColumns = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.Table_SRM_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.Table_SRM_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_SRM_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn5})
         Me.Table_SRM_SetDataGridView.DataSource = Me.Table_SRM_Set_BindingSource
         Me.Table_SRM_SetDataGridView.Location = New System.Drawing.Point(18, 12)
         Me.Table_SRM_SetDataGridView.Name = "Table_SRM_SetDataGridView"
+        Me.Table_SRM_SetDataGridView.RowHeadersVisible = False
         Me.Table_SRM_SetDataGridView.RowHeadersWidth = 21
         Me.Table_SRM_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Table_SRM_SetDataGridView.Size = New System.Drawing.Size(237, 83)
@@ -202,7 +206,6 @@ Partial Class Form_SRM_Set_Accept
         Me.DataGridViewTextBoxColumn1.HeaderText = "Name"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 65
         '
         'DataGridViewTextBoxColumn5
         '
@@ -210,7 +213,6 @@ Partial Class Form_SRM_Set_Accept
         Me.DataGridViewTextBoxColumn5.HeaderText = "Number"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Width = 65
         '
         'L_Name_New_SRM_Set_Number
         '
@@ -248,6 +250,7 @@ Partial Class Form_SRM_Set_Accept
         Me.Controls.Add(Me.L_Name_SRM_Set_Type)
         Me.Controls.Add(Me.ComboBox_SRM_Set_Type)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form_SRM_Set_Accept"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

@@ -186,6 +186,7 @@ Public Class Form_SRM_Set_Accept
                 End If
             End With
         Catch ex As Exception
+            Debug.WriteLine($"Form_New_SRM_Set_Accept_Load exception: {ex.ToString}")
             If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_New_SRM_Set_Accept_Load!", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
