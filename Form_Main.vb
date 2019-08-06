@@ -400,84 +400,95 @@ Public Class Form_Main
 
     Public Sub Form_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = "База данных НАА - " & Application.ProductVersion & "  " & us
-
-
         Try
-
             Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.InitialDirectory = "C:\"
             CBFilter.Text = "Показать все"
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim reader As SqlDataReader
-            Dim cmd As New System.Data.SqlClient.SqlCommand
-            cmd.CommandType = System.Data.CommandType.Text
 
-            ComboBox_Journal_Of_Irradiation_View_SelectedIndexChanged(sender, e)
+            Using sqlConnection1 As New SqlConnection(MyConnectionString)
+                Using cmd As New System.Data.SqlClient.SqlCommand
+                    cmd.CommandType = System.Data.CommandType.Text
+                    ComboBox_Journal_Of_Irradiation_View_SelectedIndexChanged(sender, e)
+                    cmd.CommandText = "select * from SRM_Set_Last"
+                    Using dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+                        Using ds As New DataSet()
+                            dataadapter.Fill(ds, "SrmSetLast")
+                            Table_SRM_SetDataGridView.DataSource = ds
+                            Table_SRM_SetDataGridView.DataMember = "SrmSetLast"
+                            Table_SRM_SetDataGridView.ReadOnly = True
+                            Table_SRM_SetDataGridView.AllowUserToAddRows = False
+                            Table_SRM_SetDataGridView.ClearSelection()
+                            Table_SRM_SetDataGridView.Columns.Item(6).Visible = False
 
-            cmd.CommandText = "select * from SRM_Set_Last"
+                            If Table_SRM_SetDataGridView.RowCount > 1 Then
+                                Table_SRM_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_SRM_SetDataGridView.RowCount - 1
+                                For i = 0 To Table_SRM_SetDataGridView.RowCount - 1
+                                    Table_SRM_SetDataGridView.Rows.Item(i).Selected = False
+                                Next
+                                Try
+                                    Table_SRM_SetDataGridView.Rows.Item(Table_SRM_SetDataGridView.RowCount - 1).Selected = True
 
-            Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-            Dim ds As New DataSet()
+                                    fill_in_monitor_SRM()
+                                Catch ex As Exception
+                                    LangException(language, ex.Message & ex.ToString)
+                                End Try
+                            End If
+                        End Using
+                    End Using
+                    Dim reader As SqlDataReader
+                    cmd.CommandText = "SELECT Count(*) FROM table_Sample"
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then
+                            If language = "Русский" Then
+                                L_Count.Text = "Количество образцов в базе данных: " + reader(0).ToString
+                            ElseIf language = "English" Then
+                                L_Count.Text = "Samples in NAA DB: " + reader(0).ToString
+                            End If
+                        End If
+                    End While
+                End Using
+            End Using
 
-            dataadapter.Fill(ds, "SrmSetLast")
-            Table_SRM_SetDataGridView.DataSource = ds
-            Table_SRM_SetDataGridView.DataMember = "SrmSetLast"
-            Table_SRM_SetDataGridView.ReadOnly = True
-            Table_SRM_SetDataGridView.AllowUserToAddRows = False
-            Table_SRM_SetDataGridView.ClearSelection()
-            Table_SRM_SetDataGridView.Columns.Item(6).Visible = False
+            Using sqlConnection1 As New SqlConnection(MyConnectionString)
+                Using cmd As New System.Data.SqlClient.SqlCommand
+                    cmd.CommandType = System.Data.CommandType.Text
+                    ComboBox_Journal_Of_Irradiation_View_SelectedIndexChanged(sender, e)
+                    cmd.CommandText = "select * from table_Monitor_Set"
+                    Using dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+                        Using ds As New DataSet()
+                            dataadapter.Fill(ds, "MonitorSet")
+                            Table_Monitor_SetDataGridView.DataSource = ds
+                            Table_Monitor_SetDataGridView.DataMember = "MonitorSet"
+                            Table_Monitor_SetDataGridView.ReadOnly = True
+                            Table_Monitor_SetDataGridView.AllowUserToAddRows = False
+                            Table_Monitor_SetDataGridView.ClearSelection()
 
-            If Table_SRM_SetDataGridView.RowCount > 1 Then
-                Table_SRM_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_SRM_SetDataGridView.RowCount - 1
-                For i = 0 To Table_SRM_SetDataGridView.RowCount - 1
-                    Table_SRM_SetDataGridView.Rows.Item(i).Selected = False
-                Next
-                Try
-                    Table_SRM_SetDataGridView.Rows.Item(Table_SRM_SetDataGridView.RowCount - 1).Selected = True
+                            If Table_Monitor_SetDataGridView.RowCount > 1 Then
+                                Table_Monitor_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_Monitor_SetDataGridView.RowCount - 1
+                                For i = 0 To Table_Monitor_SetDataGridView.RowCount - 1
+                                    Table_Monitor_SetDataGridView.Rows.Item(i).Selected = False
+                                Next
+                                Try
+                                    Table_Monitor_SetDataGridView.Rows.Item(Table_Monitor_SetDataGridView.RowCount - 1).Selected = True
 
-                    fill_in_monitor_SRM()
-                Catch ex As Exception
-                    LangException(language, ex.Message & ex.ToString)
-                End Try
-            End If
-
-            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
-            Table_Monitor_Set_TableAdapter.Connection.ConnectionString = MyConnectionString
-            Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
-
-            If Table_Monitor_SetDataGridView.RowCount > 1 Then
-                Table_Monitor_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_Monitor_SetDataGridView.RowCount - 1
-                For i = 0 To Table_Monitor_SetDataGridView.RowCount - 1
-                    Table_Monitor_SetDataGridView.Rows.Item(i).Selected = False
-                Next
-                Try
-                    Table_Monitor_SetDataGridView.Rows.Item(Table_Monitor_SetDataGridView.RowCount - 1).Selected = True
-
-                    fill_in_monitor_monitor()
-                Catch ex As Exception
-                    LangException(language, ex.Message & ex.ToString)
-                End Try
-            End If
+                                    fill_in_monitor_monitor()
+                                Catch ex As Exception
+                                    LangException(language, ex.Message & ex.ToString)
+                                End Try
+                            End If
+                        End Using
+                    End Using
+                End Using
+            End Using
 
             fill_in_monitor_monitor()
 
-            cmd.CommandText = "SELECT Count(*) FROM table_Sample"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then
-                    If language = "Русский" Then
-                        L_Count.Text = "Количество образцов в базе данных: " + reader(0).ToString
-                    ElseIf language = "English" Then
-                        L_Count.Text = "Samples in NAA DB: " + reader(0).ToString
-                    End If
-                End If
-            End While
-            sqlConnection1.Close()
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             Dim UpdMsg As String
-            UpdMsg = $"В окнах журналов доступно скачивание выбранных спектров{vbCrLf}{vbCrLf}{vbCrLf}Для выбранной партии можно узнать сгруппированную информацию об образцах: Клиентский номер, Тип, Под тип, Файлы спектров, Планируемая подготовка, Выполненная подготовка, Элементы для определения{vbCrLf}А также загрузить файлы спектров. Обратите внимание на иерархию директорий при скачивании спектров:{vbCrLf}{vbCrLf}В выбранной Вами папке будет создана директория с именем партии, затем диреткория с типом образцов(джи1,джи2,кжи), затем директории с именами контейнеров, в которых облучалась загружаемая партия: 'c-1', 'c-2' и так далее. Дальше папки 'SRMs' - содержит файлы стандартов, котоыре облучались в одном контейнере с образцами загружаемой партии и 'Samples' - содержит файлы спектров образцов.{vbCrLf}{vbCrLf}Исправлена ошибка, возникающая при сортировке партий.{vbCrLf}{vbCrLf}После удаления образца из журнала, он снова появлется в списке для добавления.{vbCrLf}{vbCrLf}Исправлена ошибка в загрузке финального отчета{vbCrLf}{vbCrLf}Исправлена ошибка возникающая при загрузке файлов. Повышена скорость загрузки файлов.{vbCrLf}{vbCrLf}Теперь для партий, измеренных в разные даты, загружаются все спектры эталонов.{vbCrLf}Также добавлена разбивка по номерам загрузок.{vbCrLf}Унифицированы единицы измерения концентраций в мк. гр. / гр.{vbCrLf}{vbCrLf}Исправлена ошибка, возникающая при открытии формы заведения новых стандартов.{vbCrLf}{vbCrLf}Акутализирован список обработчиков партий. Теперь показаны только те обработчики, у которых была активность за последние два года."
+            UpdMsg = $"{vbTab}Теперь база данных располагается на облачном сервере в ЛИТе.{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
 
@@ -497,27 +508,9 @@ Public Class Form_Main
         'conn.Open()
     End Sub
 
-    Private Sub Table_Sample_Set_IDBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Try
-            Me.Validate()
-            Me.Table_Sample_Set_BindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.NAA_DB_EXPDataSet)
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-            Exit Sub
-        End Try
-    End Sub
 
-    Private Sub Table_Sample_SetBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Try
-            Me.Validate()
-            Me.Table_Sample_Set_BindingSource.EndEdit()
-            Me.TableAdapterManager.UpdateAll(Me.NAA_DB_EXPDataSet)
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-            Exit Sub
-        End Try
-    End Sub
+
+
 
     Public Sub B_Select_Sample_Set_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_Sample_Set.Click
         Try

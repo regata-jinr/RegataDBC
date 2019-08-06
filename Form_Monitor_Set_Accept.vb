@@ -190,8 +190,8 @@ Public Class Form_Monitor_Set_Accept
             sqlConnection1.Close()
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
-            Form_Main.Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Form_Main.Table_Monitor_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Monitor_Set)
+            'Form_Main.Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
+            'Form_Main.Table_Monitor_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Monitor_Set)
 
             Form_Main.Table_Monitor_SetDataGridView.FirstDisplayedScrollingRowIndex = Form_Main.Table_Monitor_SetDataGridView.RowCount - 1
             For i = 0 To Form_Main.Table_Monitor_SetDataGridView.RowCount - 1

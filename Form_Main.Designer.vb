@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Main
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,15 @@ Partial Class Form_Main
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Main))
         Me.B_NewSampleSetIDAccept = New System.Windows.Forms.Button()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,13 +50,6 @@ Partial Class Form_Main
         Me.L_Name_SRM_Set = New System.Windows.Forms.Label()
         Me.L_Name_Monitor_Set = New System.Windows.Forms.Label()
         Me.Table_Monitor_SetDataGridView = New System.Windows.Forms.DataGridView()
-        Me.MonitorSetNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetWeightDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Table_Monitor_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Monitor_Set = New System.Windows.Forms.Button()
         Me.B_New_Monitor_Set_Accept = New System.Windows.Forms.Button()
         Me.MaskedTextBox_LLI_Irradiation_Log = New System.Windows.Forms.MaskedTextBox()
@@ -85,23 +78,15 @@ Partial Class Form_Main
         Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
         Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Table_Sample_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TableAdapterManager = New NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager()
-        Me.Table_Sample_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter()
         Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
         Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'B_NewSampleSetIDAccept
@@ -152,14 +137,14 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Sample_Set.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridView_Sample_Set.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Sample_Set.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.DataGridView_Sample_Set.Location = New System.Drawing.Point(6, 39)
@@ -283,25 +268,25 @@ Partial Class Form_Main
         Me.Table_SRM_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_SRM_SetDataGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Table_SRM_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
         Me.Table_SRM_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_SRM_SetDataGridView.Location = New System.Drawing.Point(6, 478)
         Me.Table_SRM_SetDataGridView.Name = "Table_SRM_SetDataGridView"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_SRM_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_SRM_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle21
         Me.Table_SRM_SetDataGridView.RowHeadersVisible = False
         Me.Table_SRM_SetDataGridView.RowHeadersWidth = 21
         Me.Table_SRM_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -335,79 +320,31 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView.AllowUserToResizeColumns = False
         Me.Table_Monitor_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_Monitor_SetDataGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Table_Monitor_SetDataGridView.AutoGenerateColumns = False
         Me.Table_Monitor_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Monitor_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Monitor_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.Table_Monitor_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Table_Monitor_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MonitorSetNameDataGridViewTextBoxColumn, Me.MonitorSetNumberDataGridViewTextBoxColumn, Me.MonitorSetTypeDataGridViewTextBoxColumn, Me.MonitorSetWeightDataGridViewTextBoxColumn, Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn})
-        Me.Table_Monitor_SetDataGridView.DataSource = Me.Table_Monitor_Set_BindingSource
         Me.Table_Monitor_SetDataGridView.Location = New System.Drawing.Point(520, 478)
         Me.Table_Monitor_SetDataGridView.Name = "Table_Monitor_SetDataGridView"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Monitor_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Monitor_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle23
         Me.Table_Monitor_SetDataGridView.RowHeadersVisible = False
         Me.Table_Monitor_SetDataGridView.RowHeadersWidth = 21
         Me.Table_Monitor_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Table_Monitor_SetDataGridView.Size = New System.Drawing.Size(429, 144)
         Me.Table_Monitor_SetDataGridView.TabIndex = 161
-        '
-        'MonitorSetNameDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetNameDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Name"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.HeaderText = "Name"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.Name = "MonitorSetNameDataGridViewTextBoxColumn"
-        Me.MonitorSetNameDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetNumberDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Number"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.HeaderText = "Number"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.Name = "MonitorSetNumberDataGridViewTextBoxColumn"
-        Me.MonitorSetNumberDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetTypeDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Type"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.HeaderText = "Type"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.Name = "MonitorSetTypeDataGridViewTextBoxColumn"
-        Me.MonitorSetTypeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetWeightDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Weight"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.HeaderText = "Weight, g"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.Name = "MonitorSetWeightDataGridViewTextBoxColumn"
-        Me.MonitorSetWeightDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'MonitorSetPurchasingDateDataGridViewTextBoxColumn
-        '
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.DataPropertyName = "Monitor_Set_Purchasing_Date"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.HeaderText = "Purchasing date"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.Name = "MonitorSetPurchasingDateDataGridViewTextBoxColumn"
-        Me.MonitorSetPurchasingDateDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'Table_Monitor_Set_BindingSource
-        '
-        Me.Table_Monitor_Set_BindingSource.DataMember = "table_Monitor_Set"
-        Me.Table_Monitor_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'NAA_DB_EXPDataSet
-        '
-        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
-        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'B_Select_Monitor_Set
         '
@@ -525,14 +462,14 @@ Partial Class Form_Main
         Me.DataGridView_Description.AllowUserToResizeRows = False
         Me.DataGridView_Description.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Description.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
         Me.DataGridView_Description.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Description.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cell_Color, Me.Description})
         Me.DataGridView_Description.Location = New System.Drawing.Point(6, 283)
@@ -692,43 +629,6 @@ Partial Class Form_Main
         'Table_SRM_Set_BindingSource
         '
         Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
-        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'Table_Sample_Set_BindingSource
-        '
-        Me.Table_Sample_Set_BindingSource.DataMember = "table_Sample_Set"
-        Me.Table_Sample_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'Table_Sample_BindingSource
-        '
-        Me.Table_Sample_BindingSource.DataMember = "table_Sample"
-        Me.Table_Sample_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.Connection = Nothing
-        Me.TableAdapterManager.table_ClientTableAdapter = Nothing
-        Me.TableAdapterManager.table_CountryTableAdapter = Nothing
-        Me.TableAdapterManager.table_Determined_ElementsTableAdapter = Nothing
-        Me.TableAdapterManager.table_LLI_Irradiation_LogTableAdapter = Nothing
-        Me.TableAdapterManager.table_Monitor_SetTableAdapter = Nothing
-        Me.TableAdapterManager.table_MonitorTableAdapter = Nothing
-        Me.TableAdapterManager.table_Physical_EnvironmentTableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_NAA_Results_TableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_PreparationTableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_Sample_Preparation_TableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_SetTableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_TableAdapter = Nothing
-        Me.TableAdapterManager.table_Sample_TypeTableAdapter = Nothing
-        Me.TableAdapterManager.table_SLI_Irradiation_LogTableAdapter = Nothing
-        Me.TableAdapterManager.table_SRM_SetTableAdapter = Nothing
-        Me.TableAdapterManager.table_SRMTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        '
-        'Table_Sample_Set_TableAdapter
-        '
-        Me.Table_Sample_Set_TableAdapter.ClearBeforeFill = True
         '
         'Table_SRM_TableAdapter
         '
@@ -786,35 +686,26 @@ Partial Class Form_Main
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Table_Monitor_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBFilters.ResumeLayout(False)
         Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Table_Sample_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Table_Sample_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents B_NewSampleSetIDAccept As System.Windows.Forms.Button
-    Friend WithEvents NAA_DB_EXPDataSet As NaaDB.NAA_DB_EXPDataSet
-    Friend WithEvents TableAdapterManager As NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Table_Sample_Set_BindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents Table_Sample_Set_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Sample_SetTableAdapter
     Friend WithEvents DataGridView_Sample_Set As System.Windows.Forms.DataGridView
     Friend WithEvents B_Select_Sample_Set As System.Windows.Forms.Button
     Friend WithEvents B_Physical_Environment As System.Windows.Forms.Button
     Friend WithEvents ISLILogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ILLI1LogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ILLI2LogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Table_Sample_BindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents L_Name_SLI_Irradiation_Log As System.Windows.Forms.Label
     Friend WithEvents L_Name_LLI_Irradiation_Log As System.Windows.Forms.Label
     Friend WithEvents B_Select_SLI_Irradiation_Log As System.Windows.Forms.Button
@@ -829,15 +720,9 @@ Partial Class Form_Main
     Friend WithEvents L_Name_SRM_Set As System.Windows.Forms.Label
     Friend WithEvents L_Name_Monitor_Set As System.Windows.Forms.Label
     Friend WithEvents Table_Monitor_SetDataGridView As System.Windows.Forms.DataGridView
-    Friend WithEvents Table_Monitor_Set_BindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Table_Monitor_Set_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter
     Friend WithEvents B_Select_Monitor_Set As System.Windows.Forms.Button
     Friend WithEvents B_New_Monitor_Set_Accept As System.Windows.Forms.Button
-    Friend WithEvents MonitorSetNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MonitorSetNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MonitorSetTypeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MonitorSetWeightDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MonitorSetPurchasingDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MaskedTextBox_LLI_Irradiation_Log As System.Windows.Forms.MaskedTextBox
     Friend WithEvents B_Select_LLI_Irradiation_Log As System.Windows.Forms.Button
     Friend WithEvents B_New_LLI_Irradiation_Log As System.Windows.Forms.Button

@@ -592,7 +592,6 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.NaaDB.My.Resources.Resources.jinr_embl1
         Me.PictureBox1.Location = New System.Drawing.Point(84, 26)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(151, 103)
@@ -601,7 +600,6 @@ Partial Class Form_Sample_Set_Accept_Print_Form
         '
         'PictureBox_IBR
         '
-        Me.PictureBox_IBR.Image = Global.NaaDB.My.Resources.Resources.ibr12
         Me.PictureBox_IBR.Location = New System.Drawing.Point(390, 26)
         Me.PictureBox_IBR.Name = "PictureBox_IBR"
         Me.PictureBox_IBR.Size = New System.Drawing.Size(152, 106)
