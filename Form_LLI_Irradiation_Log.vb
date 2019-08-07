@@ -839,9 +839,7 @@ Public Class Form_LLI_Irradiation_Log
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
 
-                cmd.CommandText = "SELECT DISTINCT Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index FROM dbo.table_LLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
-                         "'  and Country_Code<>'m' and Country_Code<>'s' and loadNumber = '" + TextBox_Download.Text + "'"
+                cmd.CommandText = $"SELECT DISTINCT Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index FROM dbo.table_LLI_Irradiation_Log WHERE Date_Start=convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104) and Country_Code<>'m' and Country_Code<>'s' and loadNumber = '{TextBox_Download.Text}'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -901,7 +899,7 @@ Public Class Form_LLI_Irradiation_Log
                 Dim reader1 As SqlDataReader
                 Dim cmd1 As New System.Data.SqlClient.SqlCommand
                 cmd1.CommandType = System.Data.CommandType.Text
-                cmd1.CommandText = "SELECT distinct loadNumber from table_LLI_Irradiation_Log where Date_Start = '" & MaskedTextBox_LLI_Irradiation_Log.Text & "' order by loadNumber desc"
+                cmd1.CommandText = $"SELECT distinct loadNumber from table_LLI_Irradiation_Log where Date_Start = convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104) order by loadNumber desc"
 
                 cmd1.Connection = sqlConnection2
                 sqlConnection2.Open()
@@ -919,9 +917,9 @@ Public Class Form_LLI_Irradiation_Log
 
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в ComboBox_Sample_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в ComboBox_Sample_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in ComboBox_Sample_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in ComboBox_Sample_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -933,7 +931,7 @@ Public Class Form_LLI_Irradiation_Log
         Try
             Dim response As MsgBoxResult
             If Form_Main.language = "Русский" Then
-                response = MsgBox("Вы уверены? Все необходимые данные сохранены?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
+                response = MsgBox($"Вы уверены? Все необходимые данные сохранены?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
                 If response = MsgBoxResult.Ok Then
                     Me.Close()
                     Exit Sub
@@ -941,7 +939,7 @@ Public Class Form_LLI_Irradiation_Log
                     Exit Sub
                 End If
             ElseIf Form_Main.language = "English" Then
-                response = MsgBox("Are you sure? Is all necessary data stored?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
+                response = MsgBox($"Are you sure? Is all necessary data stored?", MsgBoxStyle.Question Or MsgBoxStyle.OkCancel, Me.Text)
                 If response = MsgBoxResult.Ok Then
                     Me.Close()
                     Exit Sub
@@ -951,9 +949,9 @@ Public Class Form_LLI_Irradiation_Log
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Close_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Close_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Close_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -985,9 +983,9 @@ Public Class Form_LLI_Irradiation_Log
             'Form_Main.Enabled = True
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Form_LLI_Irradiation_Log_FormClosed!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Form_LLI_Irradiation_Log_FormClosed!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Form_LLI_Irradiation_Log_FormClosed!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Form_LLI_Irradiation_Log_FormClosed!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -997,17 +995,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Sample_Set.SelectedCells.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите партию образцов!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите партию образцов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select sample set!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select sample set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ListBox_Sample_ID.SelectedItems.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите образец!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите образец!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select sample!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1043,8 +1041,7 @@ Public Class Form_LLI_Irradiation_Log
             cmd.ExecuteNonQuery()
             sqlConnection1.Close()
 
-            cmd.CommandText = "UPDATE dbo.table_Sample SET I_LLI_Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
-                "' WHERE F_Country_Code='" + DataGridView_LLI_Sample_Set.SelectedCells.Item(0).Value +
+            cmd.CommandText = $"UPDATE dbo.table_Sample SET I_LLI_Date_Start=convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104) WHERE F_Country_Code='" + DataGridView_LLI_Sample_Set.SelectedCells.Item(0).Value +
                 "' and F_Client_ID='" + DataGridView_LLI_Sample_Set.SelectedCells.Item(1).Value +
                 "' and F_Year='" + DataGridView_LLI_Sample_Set.SelectedCells.Item(2).Value +
                 "' and F_Sample_Set_ID='" + DataGridView_LLI_Sample_Set.SelectedCells.Item(3).Value +
@@ -1061,9 +1058,9 @@ Public Class Form_LLI_Irradiation_Log
             'Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Add_Sample_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Add_Sample_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Add_Sample_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Add_Sample_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1122,9 +1119,9 @@ Public Class Form_LLI_Irradiation_Log
             Fill_In_Monitor()
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в DataGridView_LLI_Sample_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в DataGridView_LLI_Sample_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in DataGridView_LLI_Sample_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in DataGridView_LLI_Sample_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1157,9 +1154,9 @@ Public Class Form_LLI_Irradiation_Log
             sqlConnection1.Close()
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Fill_In_Monitor!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Fill_In_Monitor!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Fill_In_Monitor!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Fill_In_Monitor!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Me.Close()
             Exit Sub
@@ -1181,9 +1178,9 @@ Public Class Form_LLI_Irradiation_Log
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в DataGridView_Table_SRM_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в DataGridView_Table_SRM_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in DataGridView_Table_SRM_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in DataGridView_Table_SRM_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1220,9 +1217,9 @@ Public Class Form_LLI_Irradiation_Log
         Catch ex As Exception
             MsgBox(ex.ToString)
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в DataGridView_Table_Monitor_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в DataGridView_Table_Monitor_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in DataGridView_Table_Monitor_Set_CellMouseUp!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in DataGridView_Table_Monitor_Set_CellMouseUp!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1232,17 +1229,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Time.Text = "  :  :" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите время!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите время!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type time!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type time!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1257,9 +1254,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Time_Start_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Time_Start_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Time_Start_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Time_Start_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1269,17 +1266,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1294,9 +1291,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Irradiated_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Irradiated_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Irradiated_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Irradiated_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1306,17 +1303,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1331,9 +1328,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Measured_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Measured_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Measured_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Measured_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1343,17 +1340,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_LLI_Irradiation_Log.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value = "m" Or DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value = "s" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1371,7 +1368,8 @@ Public Class Form_LLI_Irradiation_Log
                                                                     and Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}'
                                                                     and Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}'
                                                                     and Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}'
-                                                                    and Date_Start='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}';
+                                                                    
+                                                                    and Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);
                                                                     UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
                                                                     F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
                                                                     F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
@@ -1379,7 +1377,7 @@ Public Class Form_LLI_Irradiation_Log
                                                                     F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
                                                                     F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
                                                                     A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
-                                                                    I_LLI_Date_Start='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}';",
+                                                                    I_LLI_Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);",
                                                                     sqlConnection1)
                     Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
                     cmd.ExecuteNonQuery()
@@ -1389,9 +1387,9 @@ Public Class Form_LLI_Irradiation_Log
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Delete_Sample_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Delete_Sample_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Delete_Sample_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Delete_Sample_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1401,17 +1399,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1426,9 +1424,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Rehandled_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Rehandled_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Rehandled_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Rehandled_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1438,17 +1436,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1463,9 +1461,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Measured_LLI2_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Measured_LLI2_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Measured_LLI2_By_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Measured_LLI2_By_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1475,17 +1473,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Time.Text = "  :  :" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите время!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите время!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type time!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type time!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1500,9 +1498,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Time_Finish_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Time_Finish_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Time_Finish_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Time_Finish_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1512,17 +1510,17 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Date.Text = "  .  ." Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите дату!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите дату!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type date!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type date!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1537,9 +1535,9 @@ Public Class Form_LLI_Irradiation_Log
             Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Date_Finish_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Date_Finish_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Date_Finish_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Date_Finish_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1549,25 +1547,25 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Date.Text = "  .  ." Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите дату!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите дату!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type date!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type date!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Date_Field_Name.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите имя поля с датой", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите имя поля с датой", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select date field name!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select date field name!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1600,9 +1598,9 @@ Public Class Form_LLI_Irradiation_Log
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Date_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Date_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Date_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Date_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1612,25 +1610,25 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If MaskedTextBox_Time.Text = "  :  :" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите время!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите время!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type time!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type time!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Time_Field_Name.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите имя поля со временем!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите имя поля со временем!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select time field name!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select time field name!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1656,9 +1654,9 @@ Public Class Form_LLI_Irradiation_Log
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Time_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Time_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Time_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Time_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1668,25 +1666,25 @@ Public Class Form_LLI_Irradiation_Log
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Person_Field_Name.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите имя поля с ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите имя поля с ФИО!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select person field name!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select person field name!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1706,9 +1704,9 @@ Public Class Form_LLI_Irradiation_Log
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Person_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Person_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Person_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Person_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -1926,7 +1924,7 @@ Public Class Form_LLI_Irradiation_Log
         '        End If
         '    End If
         'Catch ex As Exception
-        '    MsgBox("The operation was cancelled!")
+        '    MsgBox($"The operation was cancelled!")
         'End Try
     End Sub
 
@@ -1937,7 +1935,7 @@ Public Class Form_LLI_Irradiation_Log
         '    Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
         '    Form_LLI_Irradiation_Log_Load(sender, e)
         'Catch ex As Exception
-        '    MsgBox("The operation was cancelled!")
+        '    MsgBox($"The operation was cancelled!")
         'End Try
     End Sub
 
@@ -1950,17 +1948,17 @@ Public Class Form_LLI_Irradiation_Log
 
             If DataGridView_Table_SRM_Set.SelectedCells.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select SRM set!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select SRM set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_SRM.SelectedCells.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите стандарт!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите стандарт!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select SRM!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -1971,9 +1969,9 @@ Public Class Form_LLI_Irradiation_Log
                         If MaskedTextBox_LLI_Irradiation_Log.Text <= DataGridView_Table_SRM.Rows.Item(DataGridView_Table_SRM.CurrentCell.RowIndex).Cells.Item(i).Value Then
                             i = 11
                             If Form_Main.language = "Русский" Then
-                                MsgBox("Неправильная дата!", MsgBoxStyle.Exclamation, Me.Text)
+                                MsgBox($"Неправильная дата!", MsgBoxStyle.Exclamation, Me.Text)
                             ElseIf Form_Main.language = "English" Then
-                                MsgBox("Incorrect date!", MsgBoxStyle.Exclamation, Me.Text)
+                                MsgBox($"Incorrect date!", MsgBoxStyle.Exclamation, Me.Text)
                             End If
                             Exit Sub
                         End If
@@ -2080,9 +2078,9 @@ Public Class Form_LLI_Irradiation_Log
             'Form_LLI_Irradiation_Log_Load(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Add_SRM_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Add_SRM_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Add_SRM_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Add_SRM_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2097,17 +2095,17 @@ Public Class Form_LLI_Irradiation_Log
 
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_LLI_Irradiation_Log.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value <> "s" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2151,7 +2149,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                  "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
                  "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value.ToString +
                  "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value.ToString +
-                 "' and Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text + "'"
+                 $"' and Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)"
+
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -2165,9 +2164,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Delete_Last_Irradiation_Date_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Delete_Last_Irradiation_Date_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Delete_Last_Irradiation_Date_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Delete_Last_Irradiation_Date_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2177,17 +2176,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_Table_SRM_Set.SelectedRows.Count = 0 Or DataGridView_Table_SRM_Set.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите одну партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите одну партию стандартов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one SRM set!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one SRM set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_SRM.SelectedRows.Count = 0 Or DataGridView_Table_SRM.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один стандарт!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one SRM!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2215,9 +2214,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Set_SRM_As_Not_In_Use_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Set_SRM_As_Not_In_Use_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Set_SRM_As_Not_In_Use_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Set_SRM_As_Not_In_Use_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2227,18 +2226,18 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_Table_Monitor_Set.SelectedCells.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select monitor set!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If DataGridView_Table_Monitor.SelectedCells.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите монитор!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите монитор!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select monitor!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2248,7 +2247,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
-            cmd.CommandText = "UPDATE dbo.table_Monitor SET Monitor_LLI_Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
+            cmd.CommandText = $"UPDATE dbo.table_Monitor SET Monitor_LLI_Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)" +
                  "' WHERE Monitor_Set_Name='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value +
                  "' and Monitor_Set_Number='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString +
                  "' and Monitor_Number='" + DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "'"
@@ -2263,7 +2262,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value + "', '" +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString + "', '" +
                  DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "', '" +
-                 MaskedTextBox_LLI_Irradiation_Log.Text + "')"
+                 $"convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104);"
 
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
@@ -2278,9 +2277,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Add_Monitor_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Add_Monitor_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Add_Monitor_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Add_Monitor_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2290,17 +2289,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_LLI_Irradiation_Log.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value <> "m" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2315,7 +2314,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                  "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
                  "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value.ToString +
                  "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value.ToString +
-                 "' and Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text + "'"
+                 $"' and Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -2338,9 +2337,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Delete_Monitor_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Delete_Monitor_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Delete_Monitor_From_Log_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Delete_Monitor_From_Log_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2350,17 +2349,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_Table_Monitor_Set.SelectedRows.Count = 0 Or DataGridView_Table_Monitor_Set.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите одну партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите одну партию мониторов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one monitor set!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one monitor set!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_Table_Monitor.SelectedRows.Count = 0 Or DataGridView_Table_Monitor.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один монитор!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one monitor!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2388,9 +2387,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Set_Monitor_As_Not_In_Use_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Set_Monitor_As_Not_In_Use_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Set_Monitor_As_Not_In_Use_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Set_Monitor_As_Not_In_Use_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2406,7 +2405,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             cmd.CommandType = System.Data.CommandType.Text
 
 
-            cmd.CommandText = $"update  table_LLI_Irradiation_Log set loadNumber = '{TextBox_Download.Text}' where Date_Start = '{MaskedTextBox_LLI_Irradiation_Log.Text}' and loadNumber is null"
+            cmd.CommandText = $"update  table_LLI_Irradiation_Log set loadNumber = '{TextBox_Download.Text}' where Date_Start = convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104) and loadNumber is null"
 
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
@@ -2450,17 +2449,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Or DataGridView_LLI_Irradiation_Log.SelectedRows.Count > 1 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value = "m" Or DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value = "s" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите один образец!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select one sample!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2479,9 +2478,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Find_Sample_Set_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Find_Sample_Set_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Find_Sample_Set_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (Error In B_Find_Sample_Set_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2491,17 +2490,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If ComboBox_Channel.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите канал!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите канал!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select channel!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select channel!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2511,9 +2510,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Channel_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Channel_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Channel_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (Error In B_Fill_In_Channel_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2523,17 +2522,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Container_Number.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер контейнера!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер контейнера!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type container's number!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type container's number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2543,9 +2542,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Fill_In_Container_Number_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в B_Fill_In_Container_Number_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in B_Fill_In_Container_Number_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in B_Fill_In_Container_Number_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2555,17 +2554,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Paper_Log_LLI1.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер бумажного журнала ДЖИ1!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер бумажного журнала ДЖИ1!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type paper log LLI1's number!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type paper log LLI1's number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2575,9 +2574,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Button_Paper_Log_LLI1_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Button_Paper_Log_LLI1_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Button_Paper_Log_LLI1_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Button_Paper_Log_LLI1_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2587,17 +2586,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_Paper_Log_LLI2.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер бумажного журнала ДЖИ2!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер бумажного журнала ДЖИ2!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type paper log LLI2's number!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type paper log LLI2's number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2607,9 +2606,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Button_Paper_Log_LLI2_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Button_Paper_Log_LLI2_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Button_Paper_Log_LLI2_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Button_Paper_Log_LLI2_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2641,8 +2640,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 cmd.CommandType = System.Data.CommandType.Text
 
                 cmd.CommandText = "SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_LLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
-                         "' and Country_Code='s'"
+                         $" WHERE Date_Start = convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)" +
+                         " and Country_Code='s'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -2694,11 +2693,12 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                     'DataGridView_LLI_Table.Rows.Item(DataGridView_LLI_SRM_Set.RowCount - 1).Selected = True
                 End If
             End If
+
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в ComboBox_SRM_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена(ошибка в ComboBox_SRM_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in ComboBox_SRM_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in ComboBox_SRM_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2731,8 +2731,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 cmd.CommandType = System.Data.CommandType.Text
 
                 cmd.CommandText = "SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_LLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_LLI_Irradiation_Log.Text +
-                         "' and Country_Code='m'"
+                         $" WHERE Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)" +
+                         " and Country_Code='m'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -2786,9 +2786,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в ComboBox_Monitor_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в ComboBox_Monitor_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in ComboBox_Monitor_Set_View_SelectionChangeCommitted!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in ComboBox_Monitor_Set_View_SelectionChangeCommitted!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2883,9 +2883,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Catch ex As Exception
             MsgBox(ex.ToString)
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Button_Save_LLI_Log_To_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Button_Save_LLI_Log_To_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Button_Save_LLI_Log_To_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Button_Save_LLI_Log_To_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2902,9 +2902,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в column_letters!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в column_letters!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in column_letters!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in column_letters!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Function
         End Try
@@ -2914,18 +2914,18 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_LLI1_Spectrum_File.Text = "" Then
-                MsgBox("Type number of LLI1 spectrum file!")
+                MsgBox($"Type number of LLI1 spectrum file!")
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер бумажного журнала ДЖИ1!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер бумажного журнала ДЖИ1!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type paper log LLI1's number!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type paper log LLI1's number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2935,9 +2935,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Button_LLI1_Spectrum_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Button_LLI1_Spectrum_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Button_LLI1_Spectrum_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Button_LLI1_Spectrum_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2947,17 +2947,17 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
         Try
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите строку(и)!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select row(s)!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
             If TextBox_LLI2_Spectrum_File.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер бумажного журнала ДЖИ2!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер бумажного журнала ДЖИ2!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Type paper log LLI2's number!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Type paper log LLI2's number!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -2967,9 +2967,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Button_LLI2_Spectrum_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Button_LLI2_Spectrum_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in Button_LLI2_Spectrum_File_Click!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in Button_LLI2_Spectrum_File_Click!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2983,9 +2983,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Clipboard.SetText(s)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в ListBox_Sample_ID_All_LLI_Weight_SelectedValueChanged!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в ListBox_Sample_ID_All_LLI_Weight_SelectedValueChanged!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
-                MsgBox("Operation was cancelled (error in ListBox_Sample_ID_All_LLI_Weight_SelectedValueChanged!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Operation was cancelled (error in ListBox_Sample_ID_All_LLI_Weight_SelectedValueChanged!{vbCrLf}{ex.ToString()}", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
@@ -2999,18 +2999,18 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
 
             If TextBox_Download.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Введите номер загрузки!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Введите номер загрузки!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Fill in the number of download!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Fill in the number of download!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
 
             If ComboBox_Sample_Geometry.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите высоту!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Выберите высоту!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("Select height!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox($"Select height!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
             End If
@@ -3041,9 +3041,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 Exit Sub
             ElseIf Container_Count > 6 Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Число контейнеров превышает допустимое (6)!", MsgBoxStyle.Critical, Me.Text)
+                    MsgBox($"Число контейнеров превышает допустимое (6)!", MsgBoxStyle.Critical, Me.Text)
                 ElseIf Form_Main.language = "English" Then
-                    MsgBox("The quantity of containers is more then the valid number (6)!", MsgBoxStyle.Critical, Me.Text)
+                    MsgBox($"The quantity of containers is more then the valid number (6)!", MsgBoxStyle.Critical, Me.Text)
                 End If
                 'Exit Sub
             End If
@@ -3575,7 +3575,7 @@ Label_Exit:     oSheet.Range("B" + (maximum_i + 1).ToString + ":D" + (maximum_i 
         ElseIf System.Windows.Forms.DialogResult.OK Then
 
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                MsgBox("Выберите спетры для скачивания!")
+                MsgBox($"Выберите спетры для скачивания!")
                 Exit Sub
             End If
             For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows

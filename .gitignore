@@ -265,3 +265,4 @@ app.config
 *.docx
 *.pptx
 *.xlsx
+*.xs*

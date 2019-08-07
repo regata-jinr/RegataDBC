@@ -9,16 +9,6 @@
         _BackColor = Listbackcolor
     End Sub
 
-    Public Sub New(ByVal name As String)
-        _Name = name
-        _ForeColor = Color.Black
-        _BackColor = Color.White
-    End Sub
-    Public Sub New()
-        _Name = ""
-        _ForeColor = Color.Black
-        _BackColor = Color.White
-    End Sub
     Public Property Name() As String
         Get
             Return _Name

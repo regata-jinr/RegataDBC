@@ -1980,9 +1980,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
 
-                cmd.CommandText = "SELECT DISTINCT Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text +
-                         "' and Country_Code<>'m' and Country_Code<>'s'"
+                cmd.CommandText = $"SELECT DISTINCT Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log WHERE Date_Start=convert(datetime, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104) and Country_Code<>'m' and Country_Code<>'s'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -2065,10 +2063,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                 Dim reader As SqlDataReader
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
-
-                cmd.CommandText = "SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text +
-                         "' and Country_Code='s'"
+                cmd.CommandText = $"SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log WHERE Date_Start=convert(datetime, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104) and Country_Code='s'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -2152,9 +2147,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
 
-                cmd.CommandText = "SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log" +
-                         " WHERE Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text +
-                         "' and Country_Code='m'"
+                cmd.CommandText = $"SELECT DISTINCT Sample_Set_ID, Sample_Set_Index FROM dbo.table_SLI_Irradiation_Log WHERE Date_Start=convert(datetime, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104) and Country_Code='m'"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
