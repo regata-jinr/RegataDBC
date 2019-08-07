@@ -9,7 +9,7 @@ Public Class Form_Main
     Public MyConnectionString As String
     Public arr() As Single
     Public Table_Elements(64) As String ' всего 65 элементов
-    Public language = My.MySettings.Default.language
+    Public language = My.Settings.language
     Public SampleSetFormLoadFlag As Boolean = False
     Public fields As String = ""
     Public DataGridViewDescriptionFill As Boolean = False
@@ -387,8 +387,6 @@ Public Class Form_Main
 
             End If
 
-
-
             DataGridView_Description.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             DataGridView_Description.Columns(0).DefaultCellStyle.Font = New Font("Tahoma", 12, FontStyle.Regular)
             Colorize(DataGridView_Sample_Set.SelectedRows.Item(0))
@@ -399,7 +397,11 @@ Public Class Form_Main
     End Sub
 
     Public Sub Form_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = "База данных НАА - " & Application.ProductVersion & "  " & us
+        If My.Settings.language = "Русский" Then
+            Me.Text = $"Клиент базы данных эксперимента РЕГАТА - {Application.ProductVersion}   {us}"
+        ElseIf My.Settings.language = "English" Then
+            Me.Text = $"Regata experiment data base client - {Application.ProductVersion}   {us}"
+        End If
         Try
             Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.InitialDirectory = "C:\"
             CBFilter.Text = "Показать все"
@@ -1604,11 +1606,11 @@ Public Class Form_Main
     Private Sub ChangeLang_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangeLang.Click
 
         If ChangeLang.Text = "Русский" Then
-            My.MySettings.Default.language = "English"
+            My.Settings.language = "English"
             ChangeLang.Text = "English"
             Application.Restart()
         ElseIf ChangeLang.Text = "English" Then
-            My.MySettings.Default.language = "Русский"
+            My.Settings.language = "Русский"
             ChangeLang.Text = "Русский"
             Application.Restart()
         End If

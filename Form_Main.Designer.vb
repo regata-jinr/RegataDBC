@@ -542,7 +542,7 @@ Partial Class Form_Main
         Me.ChangeLang.Name = "ChangeLang"
         Me.ChangeLang.Size = New System.Drawing.Size(120, 24)
         Me.ChangeLang.TabIndex = 182
-        Me.ChangeLang.Text = Global.NaaDB.My.MySettings.Default.language
+        Me.ChangeLang.Text = Global.NaaDB.My.Settings.language
         Me.ChangeLang.UseVisualStyleBackColor = True
         '
         'GBFilters
