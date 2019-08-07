@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{267A5F21-1741-43FC-910A-4B8DA71F9104}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>NaaDB.My.MyApplication</StartupObject>
+    <RootNamespace>NaaDB</RootNamespace>
+    <AssemblyName>NaaDB</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>NaaDB</ProductName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>78</ApplicationRevision>
+    <ApplicationVersion>5.9.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Text</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>NaaDBIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>1AF59FC25CDF18E5A1B7A317AF6164ED7EC12EE4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NAA_DB_2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\NaaDB.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\NaaDB.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ClosedXML.0.94.2\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FastMember.1.3.0\lib\net40\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="ClosedXML" />
+    <Import Include="ClosedXML.Excel" />
+    <Import Include="ClosedXML.Excel.CalcEngine" />
+    <Import Include="ClosedXML.Excel.CalcEngine.Functions" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Form_Add_New_Client.Designer.vb">
+      <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Add_New_Client.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ElsSum.Designer.vb">
+      <DependentUpon>Form_ElsSum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ElsSum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Fill_Notes.Designer.vb">
+      <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Fill_Notes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_LLI_Irradiation_Log.Designer.vb">
+      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_LLI_Irradiation_Log.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Main.Designer.vb">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Monitor_Accept.Designer.vb">
+      <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Monitor_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Monitor_Set_Accept.Designer.vb">
+      <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Monitor_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_NAA_Results.Designer.vb">
+      <DependentUpon>Form_NAA_Results.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_NAA_Results.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Notice.Designer.vb">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Notice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Samples_Search.Designer.vb">
+      <DependentUpon>Form_Samples_Search.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Samples_Search.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Sample_Accept.Designer.vb">
+      <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Sample_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Sample_Set_Accept.Designer.vb">
+      <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Sample_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Sample_Set_Accept_Print_Form.Designer.vb">
+      <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Sample_Set_Accept_Print_Form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SLI_Irradiation_Log.Designer.vb">
+      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SLI_Irradiation_Log.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SRM_Accept.Designer.vb">
+      <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SRM_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SRM_Set_Accept.Designer.vb">
+      <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SRM_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Physical_Environment.Designer.vb">
+      <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Physical_Environment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Samples_List.Designer.vb">
+      <DependentUpon>Form_Samples_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Samples_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Login.Designer.vb">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Sample_Preparation.Designer.vb">
+      <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Sample_Preparation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListItem.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="NAA_DBDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NAA_DB_EXPDataSet.Designer.vb">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="NAA_DB_EXPDataSet.vb">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="OpenSampleForm.Designer.vb">
+      <DependentUpon>OpenSampleForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OpenSampleForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.vb" />
+    <Compile Include="Workbook.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form_Add_New_Client.resx">
+      <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ElsSum.resx">
+      <DependentUpon>Form_ElsSum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Fill_Notes.resx">
+      <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_LLI_Irradiation_Log.resx">
+      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Monitor_Accept.resx">
+      <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Monitor_Set_Accept.resx">
+      <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_NAA_Results.resx">
+      <DependentUpon>Form_NAA_Results.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Notice.resx">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Samples_Search.resx">
+      <DependentUpon>Form_Samples_Search.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Sample_Accept.resx">
+      <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Sample_Set_Accept.resx">
+      <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Sample_Set_Accept_Print_Form.resx">
+      <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SLI_Irradiation_Log.resx">
+      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SRM_Accept.resx">
+      <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SRM_Set_Accept.resx">
+      <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Physical_Environment.resx">
+      <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Samples_List.resx">
+      <DependentUpon>Form_Samples_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Login.resx">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Sample_Preparation.resx">
+      <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenSampleForm.resx">
+      <DependentUpon>OpenSampleForm.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="NAA_DBDataSet.xsc">
+      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NAA_DBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NAA_DBDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NAA_DBDataSet.xss">
+      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NAA_DB_EXPDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NAA_DB_EXPDataSet.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Resources\headerDict.txt" />
+    <None Include="bin\Debug\ClosedXML.dll" />
+    <None Include="bin\Debug\DocumentFormat.OpenXml.dll" />
+    <Content Include="NaaDBIcon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
