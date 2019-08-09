@@ -46,8 +46,6 @@ Public Class Form_Main
                 Colorize(DataGridView_Sample_Set.Rows.Item(i))
             Next
 
-
-
             If DataGridView_Sample_Set.RowCount = 0 Then
                 MsgBox("Таких значений нет")
                 DataSampleSetLoad("")
@@ -77,8 +75,6 @@ Public Class Form_Main
         End Try
 
     End Sub
-
-
 
     Public Sub LangException(ByVal language As String, ByVal msg As String)
         If language = "Русский" Then

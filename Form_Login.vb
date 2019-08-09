@@ -4,6 +4,7 @@ Imports Squirrel
 Imports System.Net
 Imports System.Linq
 Imports System.IO
+Imports Extensions
 
 Public Class Form_Login
 
@@ -47,8 +48,9 @@ Public Class Form_Login
         Try
 
             If CheckBoxKeep.Checked Then
-                My.Settings.user = UsernameTextBox.Text
-                My.Settings.password = PasswordTextBox.Text
+                If Not PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", UsernameTextBox.Text, PasswordTextBox.Text) Then
+                    Debug.WriteLine("Сохранение пароля не произошло")
+                End If
             End If
 
             Form_Main.MyConnectionString = $"{My.Settings.NAA_DB_EXPConnectionString}User ID={UsernameTextBox.Text};Password={PasswordTextBox.Text}"
@@ -72,6 +74,7 @@ Public Class Form_Login
     End Sub
 
     Private Async Sub Form_Login_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         If My.Settings.language = "Русский" Then
             Me.Text = "Клиент базы данных эксперимента РЕГАТА - " & Application.ProductVersion
             CheckBoxKeep.Text = "Запомнить"
@@ -82,14 +85,13 @@ Public Class Form_Login
 
         Await GetUpdate()
 
-        If Not String.IsNullOrEmpty(My.Settings.user) And Not String.IsNullOrEmpty(My.Settings.password) Then
-            UsernameTextBox.Text = My.Settings.user
-            PasswordTextBox.Text = My.Settings.password
+        If PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC") IsNot Nothing Then
+            Dim uc As Extensions.UserCredential = PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
+            UsernameTextBox.Text = uc.Login
+            PasswordTextBox.Text = uc.Password
             CheckBoxKeep.Checked = True
             OK_Click(sender, e)
         End If
-
-
 
     End Sub
 End Class

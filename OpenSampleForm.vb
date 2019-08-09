@@ -7,9 +7,9 @@ Public Class OpenSampleForm
         Try
             '   SaveFileDialogExportToExcel.InitialDirectory = "C:\GENIE2K\"
             SaveFileDialogExportToExcel.FileName = $"Список партий для печати"
-            If SaveFileDialogExportToExcel.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then ' Эта строчка открывает диалог и сравнивает результат с cancel 
+            If SaveFileDialogExportToExcel.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 Exit Sub
-            ElseIf System.Windows.Forms.DialogResult.OK Then ' Эта строчка только сравнивает результат с OK 
+            ElseIf System.Windows.Forms.DialogResult.OK Then
                 Me.Enabled = False
 
                 Dim dt As New DataTable()
@@ -28,29 +28,33 @@ Public Class OpenSampleForm
                         dt.Rows(dt.Rows.Count - 1)(cell.ColumnIndex) = cell.Value
                     Next
                 Next
-                dt.TableName = If(String.IsNullOrEmpty(Form_Main.DataGridView_Description.SelectedRows.Count = 0), "ListOfSamples", Form_Main.DataGridView_Description.SelectedRows(0).Cells(1).Value)
-                Dim inum As Integer = 1
-                Using wb As New ClosedXML.Excel.XLWorkbook()
-                    Dim ws = wb.Worksheets.Add(dt)
 
-                    'Dim rngbord = ws.Range(1, 1, dt.Rows.Count + 2, dt.Columns.Count)
-                    'rngbord.Style.Border.OutsideBorder = ClosedXML.Excel.XLBorderStyleValues.Thin
-                    'rngbord.Style.Border.InsideBorder = ClosedXML.Excel.XLBorderStyleValues.Thin
-                    'rngbord.Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center
-                    'ws.Columns().Style.Alignment.WrapText = True
-                    'ws.Columns().AdjustToContents()
-                    wb.SaveAs(SaveFileDialogExportToExcel.FileName)
-                    Dim result As Integer = MessageBox.Show("Готово! Хотите открыть файл?", "Экспорт в excel", MessageBoxButtons.YesNo)
-                    If result = DialogResult.No Then
-                        Me.Enabled = True
-                        Exit Sub
-                    ElseIf result = DialogResult.Yes Then
-                        Me.Close()
-                        System.Diagnostics.Process.Start(SaveFileDialogExportToExcel.FileName)
-                    End If
-                End Using
-            End If
-            Me.Close()
+                dt.TableName = "ListOfSamples"
+
+                'If (String.IsNullOrEmpty(Form_Main.DataGridView_Description.SelectedRows.Count = 0), "ListOfSamples", Form_Main.DataGridView_Description.SelectedRows(0).Cells(1).Value) Then
+
+                Dim inum As Integer = 1
+                    Using wb As New ClosedXML.Excel.XLWorkbook()
+                        Dim ws = wb.Worksheets.Add(dt)
+
+                        'Dim rngbord = ws.Range(1, 1, dt.Rows.Count + 2, dt.Columns.Count)
+                        'rngbord.Style.Border.OutsideBorder = ClosedXML.Excel.XLBorderStyleValues.Thin
+                        'rngbord.Style.Border.InsideBorder = ClosedXML.Excel.XLBorderStyleValues.Thin
+                        'rngbord.Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center
+                        'ws.Columns().Style.Alignment.WrapText = True
+                        'ws.Columns().AdjustToContents()
+                        wb.SaveAs(SaveFileDialogExportToExcel.FileName)
+                        Dim result As Integer = MessageBox.Show("Готово! Хотите открыть файл?", "Экспорт в excel", MessageBoxButtons.YesNo)
+                        If result = DialogResult.No Then
+                            Me.Enabled = True
+                            Exit Sub
+                        ElseIf result = DialogResult.Yes Then
+                            Me.Close()
+                            System.Diagnostics.Process.Start(SaveFileDialogExportToExcel.FileName)
+                        End If
+                    End Using
+                End If
+                Me.Close()
         Catch ex As Exception
             Me.Enabled = True
             MsgBox(ex.ToString)
