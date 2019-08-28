@@ -23,8 +23,8 @@ Partial Class Form_Sample_Set_Accept
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.B_Close = New System.Windows.Forms.Button()
         Me.B_SaveNewSampleAcceptance = New System.Windows.Forms.Button()
         Me.TextBox_Notes_1 = New System.Windows.Forms.TextBox()
@@ -115,6 +115,8 @@ Partial Class Form_Sample_Set_Accept
         Me.L_Name_E_mail_2 = New System.Windows.Forms.Label()
         Me.L_Name_Notes = New System.Windows.Forms.Label()
         Me.L_Name_Country_Code = New System.Windows.Forms.Label()
+        Me.ComboBoxSetTypes = New System.Windows.Forms.ComboBox()
+        Me.LabelSetType = New System.Windows.Forms.Label()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_CountryBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Received_By_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,7 +126,7 @@ Partial Class Form_Sample_Set_Accept
         '
         'B_Close
         '
-        Me.B_Close.Location = New System.Drawing.Point(455, 616)
+        Me.B_Close.Location = New System.Drawing.Point(453, 572)
         Me.B_Close.Name = "B_Close"
         Me.B_Close.Size = New System.Drawing.Size(176, 23)
         Me.B_Close.TabIndex = 70
@@ -133,7 +135,7 @@ Partial Class Form_Sample_Set_Accept
         '
         'B_SaveNewSampleAcceptance
         '
-        Me.B_SaveNewSampleAcceptance.Location = New System.Drawing.Point(93, 616)
+        Me.B_SaveNewSampleAcceptance.Location = New System.Drawing.Point(91, 572)
         Me.B_SaveNewSampleAcceptance.Name = "B_SaveNewSampleAcceptance"
         Me.B_SaveNewSampleAcceptance.Size = New System.Drawing.Size(174, 23)
         Me.B_SaveNewSampleAcceptance.TabIndex = 69
@@ -142,7 +144,7 @@ Partial Class Form_Sample_Set_Accept
         '
         'TextBox_Notes_1
         '
-        Me.TextBox_Notes_1.Location = New System.Drawing.Point(12, 449)
+        Me.TextBox_Notes_1.Location = New System.Drawing.Point(10, 506)
         Me.TextBox_Notes_1.MaxLength = 400
         Me.TextBox_Notes_1.Multiline = True
         Me.TextBox_Notes_1.Name = "TextBox_Notes_1"
@@ -152,7 +154,7 @@ Partial Class Form_Sample_Set_Accept
         'L_Name_Notes_1
         '
         Me.L_Name_Notes_1.AutoSize = True
-        Me.L_Name_Notes_1.Location = New System.Drawing.Point(279, 433)
+        Me.L_Name_Notes_1.Location = New System.Drawing.Point(306, 490)
         Me.L_Name_Notes_1.Name = "L_Name_Notes_1"
         Me.L_Name_Notes_1.Size = New System.Drawing.Size(35, 13)
         Me.L_Name_Notes_1.TabIndex = 67
@@ -161,7 +163,7 @@ Partial Class Form_Sample_Set_Accept
         'L_Name_ReceivedBy
         '
         Me.L_Name_ReceivedBy.AutoSize = True
-        Me.L_Name_ReceivedBy.Location = New System.Drawing.Point(301, 512)
+        Me.L_Name_ReceivedBy.Location = New System.Drawing.Point(536, 450)
         Me.L_Name_ReceivedBy.Name = "L_Name_ReceivedBy"
         Me.L_Name_ReceivedBy.Size = New System.Drawing.Size(67, 13)
         Me.L_Name_ReceivedBy.TabIndex = 66
@@ -263,7 +265,7 @@ Partial Class Form_Sample_Set_Accept
         Me.ComboBox_Table_ReceivedBy.DisplayMember = "Received_By"
         Me.ComboBox_Table_ReceivedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox_Table_ReceivedBy.FormattingEnabled = True
-        Me.ComboBox_Table_ReceivedBy.Location = New System.Drawing.Point(256, 527)
+        Me.ComboBox_Table_ReceivedBy.Location = New System.Drawing.Point(491, 465)
         Me.ComboBox_Table_ReceivedBy.Name = "ComboBox_Table_ReceivedBy"
         Me.ComboBox_Table_ReceivedBy.Size = New System.Drawing.Size(170, 21)
         Me.ComboBox_Table_ReceivedBy.TabIndex = 71
@@ -278,7 +280,7 @@ Partial Class Form_Sample_Set_Accept
         '
         Me.L_NSSID_Country_Code.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.L_NSSID_Country_Code.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Table_CountryBindingSource, "Country_Code", True))
-        Me.L_NSSID_Country_Code.Location = New System.Drawing.Point(273, 573)
+        Me.L_NSSID_Country_Code.Location = New System.Drawing.Point(271, 462)
         Me.L_NSSID_Country_Code.Name = "L_NSSID_Country_Code"
         Me.L_NSSID_Country_Code.Size = New System.Drawing.Size(26, 14)
         Me.L_NSSID_Country_Code.TabIndex = 72
@@ -286,7 +288,7 @@ Partial Class Form_Sample_Set_Accept
         'L_NSSID_Year
         '
         Me.L_NSSID_Year.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_NSSID_Year.Location = New System.Drawing.Point(335, 573)
+        Me.L_NSSID_Year.Location = New System.Drawing.Point(333, 462)
         Me.L_NSSID_Year.Name = "L_NSSID_Year"
         Me.L_NSSID_Year.Size = New System.Drawing.Size(24, 14)
         Me.L_NSSID_Year.TabIndex = 74
@@ -294,7 +296,7 @@ Partial Class Form_Sample_Set_Accept
         'L_NSSID_Client_ID
         '
         Me.L_NSSID_Client_ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_NSSID_Client_ID.Location = New System.Drawing.Point(305, 573)
+        Me.L_NSSID_Client_ID.Location = New System.Drawing.Point(303, 462)
         Me.L_NSSID_Client_ID.Name = "L_NSSID_Client_ID"
         Me.L_NSSID_Client_ID.Size = New System.Drawing.Size(24, 14)
         Me.L_NSSID_Client_ID.TabIndex = 75
@@ -334,7 +336,7 @@ Partial Class Form_Sample_Set_Accept
         'L_NSSID_New_Sample_Set_ID
         '
         Me.L_NSSID_New_Sample_Set_ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_NSSID_New_Sample_Set_ID.Location = New System.Drawing.Point(365, 573)
+        Me.L_NSSID_New_Sample_Set_ID.Location = New System.Drawing.Point(363, 462)
         Me.L_NSSID_New_Sample_Set_ID.Name = "L_NSSID_New_Sample_Set_ID"
         Me.L_NSSID_New_Sample_Set_ID.Size = New System.Drawing.Size(24, 14)
         Me.L_NSSID_New_Sample_Set_ID.TabIndex = 87
@@ -359,7 +361,7 @@ Partial Class Form_Sample_Set_Accept
         'Label_Name_Code
         '
         Me.Label_Name_Code.AutoSize = True
-        Me.Label_Name_Code.Location = New System.Drawing.Point(253, 560)
+        Me.Label_Name_Code.Location = New System.Drawing.Point(251, 449)
         Me.Label_Name_Code.Name = "Label_Name_Code"
         Me.Label_Name_Code.Size = New System.Drawing.Size(177, 13)
         Me.Label_Name_Code.TabIndex = 91
@@ -422,14 +424,14 @@ Partial Class Form_Sample_Set_Accept
         Me.Table_Sample_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_Sample_SetDataGridView.AutoGenerateColumns = False
         Me.Table_Sample_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.Table_Sample_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_Sample_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Sample_Set_Index})
         Me.Table_Sample_SetDataGridView.DataSource = Me.Table_Sample_SetBindingSource
@@ -460,15 +462,15 @@ Partial Class Form_Sample_Set_Accept
         'Sample_Set_Index
         '
         Me.Sample_Set_Index.DataPropertyName = "Sample_Set_Index"
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle6
         Me.Sample_Set_Index.HeaderText = "Sample set index"
         Me.Sample_Set_Index.Name = "Sample_Set_Index"
         Me.Sample_Set_Index.ReadOnly = True
         '
         'B_Print_Preview_Form
         '
-        Me.B_Print_Preview_Form.Location = New System.Drawing.Point(273, 616)
+        Me.B_Print_Preview_Form.Location = New System.Drawing.Point(271, 572)
         Me.B_Print_Preview_Form.Name = "B_Print_Preview_Form"
         Me.B_Print_Preview_Form.Size = New System.Drawing.Size(176, 23)
         Me.B_Print_Preview_Form.TabIndex = 113
@@ -661,9 +663,9 @@ Partial Class Form_Sample_Set_Accept
         '
         'B_Fill_Notes_1
         '
-        Me.B_Fill_Notes_1.Location = New System.Drawing.Point(579, 449)
+        Me.B_Fill_Notes_1.Location = New System.Drawing.Point(577, 506)
         Me.B_Fill_Notes_1.Name = "B_Fill_Notes_1"
-        Me.B_Fill_Notes_1.Size = New System.Drawing.Size(97, 60)
+        Me.B_Fill_Notes_1.Size = New System.Drawing.Size(84, 60)
         Me.B_Fill_Notes_1.TabIndex = 159
         Me.B_Fill_Notes_1.Text = "Quick fill in notes"
         Me.B_Fill_Notes_1.UseVisualStyleBackColor = True
@@ -699,9 +701,9 @@ Partial Class Form_Sample_Set_Accept
         '
         Me.L_NSSID_New_Sample_Set_Index.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.L_NSSID_New_Sample_Set_Index.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.L_NSSID_New_Sample_Set_Index.Location = New System.Drawing.Point(395, 573)
+        Me.L_NSSID_New_Sample_Set_Index.Location = New System.Drawing.Point(393, 462)
         Me.L_NSSID_New_Sample_Set_Index.Name = "L_NSSID_New_Sample_Set_Index"
-        Me.L_NSSID_New_Sample_Set_Index.Size = New System.Drawing.Size(24, 22)
+        Me.L_NSSID_New_Sample_Set_Index.Size = New System.Drawing.Size(24, 14)
         Me.L_NSSID_New_Sample_Set_Index.TabIndex = 170
         '
         'L_District
@@ -900,11 +902,33 @@ Partial Class Form_Sample_Set_Accept
         Me.L_Name_Country_Code.TabIndex = 194
         Me.L_Name_Country_Code.Text = "Country code:"
         '
+        'ComboBoxSetTypes
+        '
+        Me.ComboBoxSetTypes.DisplayMember = "ReceivedBy"
+        Me.ComboBoxSetTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxSetTypes.FormattingEnabled = True
+        Me.ComboBoxSetTypes.Location = New System.Drawing.Point(10, 465)
+        Me.ComboBoxSetTypes.Name = "ComboBoxSetTypes"
+        Me.ComboBoxSetTypes.Size = New System.Drawing.Size(170, 21)
+        Me.ComboBoxSetTypes.TabIndex = 196
+        Me.ComboBoxSetTypes.ValueMember = "ReceivedBy"
+        '
+        'LabelSetType
+        '
+        Me.LabelSetType.AutoSize = True
+        Me.LabelSetType.Location = New System.Drawing.Point(39, 449)
+        Me.LabelSetType.Name = "LabelSetType"
+        Me.LabelSetType.Size = New System.Drawing.Size(95, 13)
+        Me.LabelSetType.TabIndex = 195
+        Me.LabelSetType.Text = "Choose type of set"
+        '
         'Form_Sample_Set_Accept
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(681, 642)
+        Me.ClientSize = New System.Drawing.Size(681, 599)
+        Me.Controls.Add(Me.ComboBoxSetTypes)
+        Me.Controls.Add(Me.LabelSetType)
         Me.Controls.Add(Me.L_Name_Country_Code)
         Me.Controls.Add(Me.L_Name_Notes)
         Me.Controls.Add(Me.L_Name_E_mail_2)
@@ -1090,4 +1114,6 @@ Partial Class Form_Sample_Set_Accept
     Friend WithEvents L_Name_E_mail_2 As System.Windows.Forms.Label
     Friend WithEvents L_Name_Notes As System.Windows.Forms.Label
     Friend WithEvents L_Name_Country_Code As System.Windows.Forms.Label
+    Friend WithEvents ComboBoxSetTypes As ComboBox
+    Friend WithEvents LabelSetType As Label
 End Class

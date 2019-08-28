@@ -23,12 +23,12 @@ Partial Class Form_Main
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Main))
         Me.B_NewSampleSetIDAccept = New System.Windows.Forms.Button()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,18 +68,21 @@ Partial Class Form_Main
         Me.ComboBox_Sample_Set_View = New System.Windows.Forms.ComboBox()
         Me.ComboBox_Journal_Of_Irradiation_View = New System.Windows.Forms.ComboBox()
         Me.OpenSet = New System.Windows.Forms.Button()
-        Me.ChangeLang = New System.Windows.Forms.Button()
         Me.GBFilters = New System.Windows.Forms.GroupBox()
         Me.LFilterField = New System.Windows.Forms.Label()
         Me.CBFilter = New System.Windows.Forms.ComboBox()
         Me.SampleSetInfo = New System.Windows.Forms.GroupBox()
         Me.ButtonshowAll = New System.Windows.Forms.Button()
-        Me.B_Refresh = New System.Windows.Forms.Button()
         Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
         Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
         Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.МенюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
+        Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,12 +90,13 @@ Partial Class Form_Main
         Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'B_NewSampleSetIDAccept
         '
         Me.B_NewSampleSetIDAccept.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(4, 254)
+        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(4, 297)
         Me.B_NewSampleSetIDAccept.Name = "B_NewSampleSetIDAccept"
         Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(84, 23)
         Me.B_NewSampleSetIDAccept.TabIndex = 0
@@ -137,17 +141,17 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Sample_Set.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView_Sample_Set.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Sample_Set.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DataGridView_Sample_Set.Location = New System.Drawing.Point(6, 39)
+        Me.DataGridView_Sample_Set.Location = New System.Drawing.Point(6, 40)
         Me.DataGridView_Sample_Set.MultiSelect = False
         Me.DataGridView_Sample_Set.Name = "DataGridView_Sample_Set"
         Me.DataGridView_Sample_Set.ReadOnly = True
@@ -155,13 +159,13 @@ Partial Class Form_Main
         Me.DataGridView_Sample_Set.RowHeadersWidth = 10
         Me.DataGridView_Sample_Set.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.DataGridView_Sample_Set.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 209)
+        Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 251)
         Me.DataGridView_Sample_Set.TabIndex = 2
         '
         'B_Select_Sample_Set
         '
         Me.B_Select_Sample_Set.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(272, 254)
+        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(272, 297)
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
         Me.B_Select_Sample_Set.Size = New System.Drawing.Size(90, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
@@ -171,7 +175,7 @@ Partial Class Form_Main
         'B_Physical_Environment
         '
         Me.B_Physical_Environment.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Physical_Environment.Location = New System.Drawing.Point(4, 690)
+        Me.B_Physical_Environment.Location = New System.Drawing.Point(4, 733)
         Me.B_Physical_Environment.Name = "B_Physical_Environment"
         Me.B_Physical_Environment.Size = New System.Drawing.Size(226, 23)
         Me.B_Physical_Environment.TabIndex = 144
@@ -182,7 +186,7 @@ Partial Class Form_Main
         '
         Me.L_Name_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Name_SLI_Irradiation_Log.AutoSize = True
-        Me.L_Name_SLI_Irradiation_Log.Location = New System.Drawing.Point(678, 3)
+        Me.L_Name_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 27)
         Me.L_Name_SLI_Irradiation_Log.Name = "L_Name_SLI_Irradiation_Log"
         Me.L_Name_SLI_Irradiation_Log.Size = New System.Drawing.Size(88, 13)
         Me.L_Name_SLI_Irradiation_Log.TabIndex = 148
@@ -192,7 +196,7 @@ Partial Class Form_Main
         '
         Me.L_Name_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Name_LLI_Irradiation_Log.AutoSize = True
-        Me.L_Name_LLI_Irradiation_Log.Location = New System.Drawing.Point(817, 3)
+        Me.L_Name_LLI_Irradiation_Log.Location = New System.Drawing.Point(815, 27)
         Me.L_Name_LLI_Irradiation_Log.Name = "L_Name_LLI_Irradiation_Log"
         Me.L_Name_LLI_Irradiation_Log.Size = New System.Drawing.Size(87, 13)
         Me.L_Name_LLI_Irradiation_Log.TabIndex = 150
@@ -201,7 +205,7 @@ Partial Class Form_Main
         'B_Select_SLI_Irradiation_Log
         '
         Me.B_Select_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 366)
+        Me.B_Select_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 420)
         Me.B_Select_SLI_Irradiation_Log.Name = "B_Select_SLI_Irradiation_Log"
         Me.B_Select_SLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_Select_SLI_Irradiation_Log.TabIndex = 154
@@ -211,7 +215,7 @@ Partial Class Form_Main
         'B_New_SLI_Irradiation_Log
         '
         Me.B_New_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 421)
+        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 479)
         Me.B_New_SLI_Irradiation_Log.Name = "B_New_SLI_Irradiation_Log"
         Me.B_New_SLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_New_SLI_Irradiation_Log.TabIndex = 153
@@ -221,7 +225,7 @@ Partial Class Form_Main
         'MaskedTextBox_SLI_Irradiation_Log
         '
         Me.MaskedTextBox_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MaskedTextBox_SLI_Irradiation_Log.Location = New System.Drawing.Point(711, 395)
+        Me.MaskedTextBox_SLI_Irradiation_Log.Location = New System.Drawing.Point(711, 449)
         Me.MaskedTextBox_SLI_Irradiation_Log.Mask = "00/00/0000"
         Me.MaskedTextBox_SLI_Irradiation_Log.Name = "MaskedTextBox_SLI_Irradiation_Log"
         Me.MaskedTextBox_SLI_Irradiation_Log.Size = New System.Drawing.Size(74, 20)
@@ -234,7 +238,7 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Name_Sample_Set.AutoSize = True
-        Me.L_Name_Sample_Set.Location = New System.Drawing.Point(128, 9)
+        Me.L_Name_Sample_Set.Location = New System.Drawing.Point(128, 24)
         Me.L_Name_Sample_Set.Name = "L_Name_Sample_Set"
         Me.L_Name_Sample_Set.Size = New System.Drawing.Size(64, 13)
         Me.L_Name_Sample_Set.TabIndex = 156
@@ -243,7 +247,7 @@ Partial Class Form_Main
         'B_Select_SRM_Set
         '
         Me.B_Select_SRM_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_SRM_Set.Location = New System.Drawing.Point(176, 657)
+        Me.B_Select_SRM_Set.Location = New System.Drawing.Point(176, 700)
         Me.B_Select_SRM_Set.Name = "B_Select_SRM_Set"
         Me.B_Select_SRM_Set.Size = New System.Drawing.Size(321, 23)
         Me.B_Select_SRM_Set.TabIndex = 159
@@ -253,7 +257,7 @@ Partial Class Form_Main
         'B_New_SRM_Set_Accept
         '
         Me.B_New_SRM_Set_Accept.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.B_New_SRM_Set_Accept.Location = New System.Drawing.Point(176, 628)
+        Me.B_New_SRM_Set_Accept.Location = New System.Drawing.Point(176, 671)
         Me.B_New_SRM_Set_Accept.Name = "B_New_SRM_Set_Accept"
         Me.B_New_SRM_Set_Accept.Size = New System.Drawing.Size(321, 23)
         Me.B_New_SRM_Set_Accept.TabIndex = 158
@@ -268,25 +272,25 @@ Partial Class Form_Main
         Me.Table_SRM_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_SRM_SetDataGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Table_SRM_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_SRM_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.Table_SRM_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Table_SRM_SetDataGridView.Location = New System.Drawing.Point(6, 478)
+        Me.Table_SRM_SetDataGridView.Location = New System.Drawing.Point(6, 521)
         Me.Table_SRM_SetDataGridView.Name = "Table_SRM_SetDataGridView"
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_SRM_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_SRM_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.Table_SRM_SetDataGridView.RowHeadersVisible = False
         Me.Table_SRM_SetDataGridView.RowHeadersWidth = 21
         Me.Table_SRM_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -297,7 +301,7 @@ Partial Class Form_Main
         '
         Me.L_Name_SRM_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.L_Name_SRM_Set.AutoSize = True
-        Me.L_Name_SRM_Set.Location = New System.Drawing.Point(156, 462)
+        Me.L_Name_SRM_Set.Location = New System.Drawing.Point(156, 505)
         Me.L_Name_SRM_Set.Name = "L_Name_SRM_Set"
         Me.L_Name_SRM_Set.Size = New System.Drawing.Size(53, 13)
         Me.L_Name_SRM_Set.TabIndex = 160
@@ -307,7 +311,7 @@ Partial Class Form_Main
         '
         Me.L_Name_Monitor_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Name_Monitor_Set.AutoSize = True
-        Me.L_Name_Monitor_Set.Location = New System.Drawing.Point(746, 462)
+        Me.L_Name_Monitor_Set.Location = New System.Drawing.Point(746, 505)
         Me.L_Name_Monitor_Set.Name = "L_Name_Monitor_Set"
         Me.L_Name_Monitor_Set.Size = New System.Drawing.Size(64, 13)
         Me.L_Name_Monitor_Set.TabIndex = 162
@@ -321,25 +325,25 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_Monitor_SetDataGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Table_Monitor_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Monitor_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Monitor_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.Table_Monitor_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Table_Monitor_SetDataGridView.Location = New System.Drawing.Point(520, 478)
+        Me.Table_Monitor_SetDataGridView.Location = New System.Drawing.Point(520, 521)
         Me.Table_Monitor_SetDataGridView.Name = "Table_Monitor_SetDataGridView"
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Monitor_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Monitor_SetDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.Table_Monitor_SetDataGridView.RowHeadersVisible = False
         Me.Table_Monitor_SetDataGridView.RowHeadersWidth = 21
         Me.Table_Monitor_SetDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -349,7 +353,7 @@ Partial Class Form_Main
         'B_Select_Monitor_Set
         '
         Me.B_Select_Monitor_Set.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_Monitor_Set.Location = New System.Drawing.Point(671, 661)
+        Me.B_Select_Monitor_Set.Location = New System.Drawing.Point(671, 733)
         Me.B_Select_Monitor_Set.Name = "B_Select_Monitor_Set"
         Me.B_Select_Monitor_Set.Size = New System.Drawing.Size(278, 23)
         Me.B_Select_Monitor_Set.TabIndex = 164
@@ -359,7 +363,7 @@ Partial Class Form_Main
         'B_New_Monitor_Set_Accept
         '
         Me.B_New_Monitor_Set_Accept.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_Monitor_Set_Accept.Location = New System.Drawing.Point(671, 628)
+        Me.B_New_Monitor_Set_Accept.Location = New System.Drawing.Point(671, 671)
         Me.B_New_Monitor_Set_Accept.Name = "B_New_Monitor_Set_Accept"
         Me.B_New_Monitor_Set_Accept.Size = New System.Drawing.Size(278, 23)
         Me.B_New_Monitor_Set_Accept.TabIndex = 163
@@ -369,7 +373,7 @@ Partial Class Form_Main
         'MaskedTextBox_LLI_Irradiation_Log
         '
         Me.MaskedTextBox_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MaskedTextBox_LLI_Irradiation_Log.Location = New System.Drawing.Point(850, 395)
+        Me.MaskedTextBox_LLI_Irradiation_Log.Location = New System.Drawing.Point(850, 449)
         Me.MaskedTextBox_LLI_Irradiation_Log.Mask = "00/00/0000"
         Me.MaskedTextBox_LLI_Irradiation_Log.Name = "MaskedTextBox_LLI_Irradiation_Log"
         Me.MaskedTextBox_LLI_Irradiation_Log.Size = New System.Drawing.Size(74, 20)
@@ -379,7 +383,7 @@ Partial Class Form_Main
         'B_Select_LLI_Irradiation_Log
         '
         Me.B_Select_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_Select_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 366)
+        Me.B_Select_LLI_Irradiation_Log.Location = New System.Drawing.Point(820, 420)
         Me.B_Select_LLI_Irradiation_Log.Name = "B_Select_LLI_Irradiation_Log"
         Me.B_Select_LLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_Select_LLI_Irradiation_Log.TabIndex = 166
@@ -389,7 +393,7 @@ Partial Class Form_Main
         'B_New_LLI_Irradiation_Log
         '
         Me.B_New_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 421)
+        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 479)
         Me.B_New_LLI_Irradiation_Log.Name = "B_New_LLI_Irradiation_Log"
         Me.B_New_LLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_New_LLI_Irradiation_Log.TabIndex = 165
@@ -402,7 +406,7 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Count.AutoSize = True
-        Me.L_Count.Location = New System.Drawing.Point(12, 9)
+        Me.L_Count.Location = New System.Drawing.Point(12, 24)
         Me.L_Count.Name = "L_Count"
         Me.L_Count.Size = New System.Drawing.Size(104, 13)
         Me.L_Count.TabIndex = 168
@@ -414,7 +418,7 @@ Partial Class Form_Main
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.L_Monitor.Location = New System.Drawing.Point(6, 20)
         Me.L_Monitor.Name = "L_Monitor"
-        Me.L_Monitor.Size = New System.Drawing.Size(290, 321)
+        Me.L_Monitor.Size = New System.Drawing.Size(290, 345)
         Me.L_Monitor.TabIndex = 169
         Me.L_Monitor.Text = "Monitor"
         '
@@ -422,25 +426,25 @@ Partial Class Form_Main
         '
         Me.ListBox_SLI_Irradiation_Log_Date.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListBox_SLI_Irradiation_Log_Date.FormattingEnabled = True
-        Me.ListBox_SLI_Irradiation_Log_Date.Location = New System.Drawing.Point(681, 16)
+        Me.ListBox_SLI_Irradiation_Log_Date.Location = New System.Drawing.Point(681, 42)
         Me.ListBox_SLI_Irradiation_Log_Date.Name = "ListBox_SLI_Irradiation_Log_Date"
-        Me.ListBox_SLI_Irradiation_Log_Date.Size = New System.Drawing.Size(129, 316)
+        Me.ListBox_SLI_Irradiation_Log_Date.Size = New System.Drawing.Size(129, 342)
         Me.ListBox_SLI_Irradiation_Log_Date.TabIndex = 170
         '
         'ListBox_LLI_Irradiation_Log_Date
         '
         Me.ListBox_LLI_Irradiation_Log_Date.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListBox_LLI_Irradiation_Log_Date.FormattingEnabled = True
-        Me.ListBox_LLI_Irradiation_Log_Date.Location = New System.Drawing.Point(820, 16)
+        Me.ListBox_LLI_Irradiation_Log_Date.Location = New System.Drawing.Point(820, 42)
         Me.ListBox_LLI_Irradiation_Log_Date.Name = "ListBox_LLI_Irradiation_Log_Date"
-        Me.ListBox_LLI_Irradiation_Log_Date.Size = New System.Drawing.Size(129, 316)
+        Me.ListBox_LLI_Irradiation_Log_Date.Size = New System.Drawing.Size(129, 342)
         Me.ListBox_LLI_Irradiation_Log_Date.TabIndex = 171
         '
         'ListBox_Monitor_SRM
         '
         Me.ListBox_Monitor_SRM.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ListBox_Monitor_SRM.FormattingEnabled = True
-        Me.ListBox_Monitor_SRM.Location = New System.Drawing.Point(6, 628)
+        Me.ListBox_Monitor_SRM.Location = New System.Drawing.Point(6, 671)
         Me.ListBox_Monitor_SRM.Name = "ListBox_Monitor_SRM"
         Me.ListBox_Monitor_SRM.Size = New System.Drawing.Size(164, 56)
         Me.ListBox_Monitor_SRM.TabIndex = 174
@@ -449,9 +453,9 @@ Partial Class Form_Main
         '
         Me.ListBox_Monitor_Monitor.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListBox_Monitor_Monitor.FormattingEnabled = True
-        Me.ListBox_Monitor_Monitor.Location = New System.Drawing.Point(520, 628)
+        Me.ListBox_Monitor_Monitor.Location = New System.Drawing.Point(520, 671)
         Me.ListBox_Monitor_Monitor.Name = "ListBox_Monitor_Monitor"
-        Me.ListBox_Monitor_Monitor.Size = New System.Drawing.Size(145, 56)
+        Me.ListBox_Monitor_Monitor.Size = New System.Drawing.Size(145, 82)
         Me.ListBox_Monitor_Monitor.TabIndex = 175
         '
         'DataGridView_Description
@@ -462,17 +466,17 @@ Partial Class Form_Main
         Me.DataGridView_Description.AllowUserToResizeRows = False
         Me.DataGridView_Description.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Description.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView_Description.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Description.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cell_Color, Me.Description})
-        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 283)
+        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 326)
         Me.DataGridView_Description.MultiSelect = False
         Me.DataGridView_Description.Name = "DataGridView_Description"
         Me.DataGridView_Description.ReadOnly = True
@@ -521,7 +525,7 @@ Partial Class Form_Main
         Me.ComboBox_Journal_Of_Irradiation_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ComboBox_Journal_Of_Irradiation_View.FormattingEnabled = True
         Me.ComboBox_Journal_Of_Irradiation_View.Items.AddRange(New Object() {"Current year", "All years"})
-        Me.ComboBox_Journal_Of_Irradiation_View.Location = New System.Drawing.Point(681, 339)
+        Me.ComboBox_Journal_Of_Irradiation_View.Location = New System.Drawing.Point(681, 393)
         Me.ComboBox_Journal_Of_Irradiation_View.Name = "ComboBox_Journal_Of_Irradiation_View"
         Me.ComboBox_Journal_Of_Irradiation_View.Size = New System.Drawing.Size(268, 21)
         Me.ComboBox_Journal_Of_Irradiation_View.TabIndex = 180
@@ -529,21 +533,12 @@ Partial Class Form_Main
         'OpenSet
         '
         Me.OpenSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.OpenSet.Location = New System.Drawing.Point(94, 254)
+        Me.OpenSet.Location = New System.Drawing.Point(94, 297)
         Me.OpenSet.Name = "OpenSet"
         Me.OpenSet.Size = New System.Drawing.Size(76, 23)
         Me.OpenSet.TabIndex = 181
         Me.OpenSet.Text = "Просмотр"
         Me.OpenSet.UseVisualStyleBackColor = True
-        '
-        'ChangeLang
-        '
-        Me.ChangeLang.Location = New System.Drawing.Point(244, 9)
-        Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(120, 24)
-        Me.ChangeLang.TabIndex = 182
-        Me.ChangeLang.Text = Global.NaaDB.My.Settings.language
-        Me.ChangeLang.UseVisualStyleBackColor = True
         '
         'GBFilters
         '
@@ -553,7 +548,7 @@ Partial Class Form_Main
         Me.GBFilters.Controls.Add(Me.L_Name_Sample_Set_View)
         Me.GBFilters.Controls.Add(Me.ComboBox_Sample_Set_View)
         Me.GBFilters.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.GBFilters.Location = New System.Drawing.Point(370, 3)
+        Me.GBFilters.Location = New System.Drawing.Point(370, 27)
         Me.GBFilters.Name = "GBFilters"
         Me.GBFilters.Size = New System.Drawing.Size(305, 101)
         Me.GBFilters.TabIndex = 189
@@ -574,7 +569,7 @@ Partial Class Form_Main
         '
         Me.CBFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CBFilter.FormattingEnabled = True
-        Me.CBFilter.Items.AddRange(New Object() {"Обработано", "Страна", "Год", "Код клиента", "Показать все"})
+        Me.CBFilter.Items.AddRange(New Object() {"Обработано", "Страна", "Год", "Код клиента", "Показать все", "Тип работ"})
         Me.CBFilter.Location = New System.Drawing.Point(6, 59)
         Me.CBFilter.Name = "CBFilter"
         Me.CBFilter.Size = New System.Drawing.Size(121, 26)
@@ -586,9 +581,9 @@ Partial Class Form_Main
         Me.SampleSetInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SampleSetInfo.Controls.Add(Me.L_Monitor)
         Me.SampleSetInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.SampleSetInfo.Location = New System.Drawing.Point(370, 110)
+        Me.SampleSetInfo.Location = New System.Drawing.Point(370, 134)
         Me.SampleSetInfo.Name = "SampleSetInfo"
-        Me.SampleSetInfo.Size = New System.Drawing.Size(302, 357)
+        Me.SampleSetInfo.Size = New System.Drawing.Size(302, 368)
         Me.SampleSetInfo.TabIndex = 190
         Me.SampleSetInfo.TabStop = False
         Me.SampleSetInfo.Text = "Информация о выбранной партии"
@@ -596,27 +591,17 @@ Partial Class Form_Main
         'ButtonshowAll
         '
         Me.ButtonshowAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonshowAll.Location = New System.Drawing.Point(176, 254)
+        Me.ButtonshowAll.Location = New System.Drawing.Point(176, 297)
         Me.ButtonshowAll.Name = "ButtonshowAll"
         Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
         Me.ButtonshowAll.TabIndex = 192
         Me.ButtonshowAll.Text = "Показать все"
         Me.ButtonshowAll.UseVisualStyleBackColor = True
         '
-        'B_Refresh
-        '
-        Me.B_Refresh.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Refresh.Location = New System.Drawing.Point(520, 690)
-        Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(429, 23)
-        Me.B_Refresh.TabIndex = 179
-        Me.B_Refresh.Text = "Refresh"
-        Me.B_Refresh.UseVisualStyleBackColor = True
-        '
         'ButtonShowAllSrms
         '
         Me.ButtonShowAllSrms.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 690)
+        Me.ButtonShowAllSrms.Location = New System.Drawing.Point(244, 733)
         Me.ButtonShowAllSrms.Name = "ButtonShowAllSrms"
         Me.ButtonShowAllSrms.Size = New System.Drawing.Size(253, 23)
         Me.ButtonShowAllSrms.TabIndex = 195
@@ -638,19 +623,51 @@ Partial Class Form_Main
         '
         Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(955, 24)
+        Me.MenuStrip1.TabIndex = 196
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'МенюToolStripMenuItem
+        '
+        Me.МенюToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangeLang, Me.B_Refresh, Me.ResetLoginButton})
+        Me.МенюToolStripMenuItem.Name = "МенюToolStripMenuItem"
+        Me.МенюToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
+        Me.МенюToolStripMenuItem.Text = "Меню"
+        '
+        'ChangeLang
+        '
+        Me.ChangeLang.Name = "ChangeLang"
+        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeLang.Text = "Lang"
+        '
+        'B_Refresh
+        '
+        Me.B_Refresh.Name = "B_Refresh"
+        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
+        Me.B_Refresh.Text = "Обновить"
+        '
+        'ResetLoginButton
+        '
+        Me.ResetLoginButton.Name = "ResetLoginButton"
+        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
+        Me.ResetLoginButton.Text = "Reset login"
+        '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(955, 718)
+        Me.ClientSize = New System.Drawing.Size(955, 761)
         Me.Controls.Add(Me.ButtonShowAllSrms)
         Me.Controls.Add(Me.ButtonshowAll)
         Me.Controls.Add(Me.SampleSetInfo)
         Me.Controls.Add(Me.GBFilters)
-        Me.Controls.Add(Me.ChangeLang)
         Me.Controls.Add(Me.OpenSet)
         Me.Controls.Add(Me.ComboBox_Journal_Of_Irradiation_View)
-        Me.Controls.Add(Me.B_Refresh)
         Me.Controls.Add(Me.DataGridView_Description)
         Me.Controls.Add(Me.ListBox_Monitor_Monitor)
         Me.Controls.Add(Me.ListBox_Monitor_SRM)
@@ -678,8 +695,10 @@ Partial Class Form_Main
         Me.Controls.Add(Me.B_Select_Sample_Set)
         Me.Controls.Add(Me.DataGridView_Sample_Set)
         Me.Controls.Add(Me.B_NewSampleSetIDAccept)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form_Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -691,6 +710,8 @@ Partial Class Form_Main
         Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
         CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -739,7 +760,6 @@ Partial Class Form_Main
     Friend WithEvents ComboBox_Sample_Set_View As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox_Journal_Of_Irradiation_View As System.Windows.Forms.ComboBox
     Friend WithEvents OpenSet As System.Windows.Forms.Button
-    Friend WithEvents ChangeLang As System.Windows.Forms.Button
     Friend WithEvents SRMSetNameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SRMSetNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SRMSetTypeDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -750,7 +770,11 @@ Partial Class Form_Main
     Friend WithEvents LFilterField As System.Windows.Forms.Label
     Friend WithEvents CBFilter As System.Windows.Forms.ComboBox
     Friend WithEvents ButtonshowAll As Button
-    Friend WithEvents B_Refresh As Button
     Friend WithEvents ButtonShowAllSrms As Button
     Friend WithEvents BackgroundWorkerColorizer As System.ComponentModel.BackgroundWorker
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents МенюToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeLang As ToolStripMenuItem
+    Friend WithEvents B_Refresh As ToolStripMenuItem
+    Friend WithEvents ResetLoginButton As ToolStripMenuItem
 End Class

@@ -37,7 +37,7 @@ Public Class Form_Login
 
         Catch empty As InvalidOperationException
             ' in case of updates files don't exist
-            MsgBox("Обновление не доступно. Обратитесть к администратору.", MsgBoxStyle.Critical)
+            MsgBox("Обновление не доступно. Обратитесь к администратору.", MsgBoxStyle.Critical)
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
@@ -90,7 +90,9 @@ Public Class Form_Login
             UsernameTextBox.Text = uc.Login
             PasswordTextBox.Text = uc.Password
             CheckBoxKeep.Checked = True
-            OK_Click(sender, e)
+            If Not String.IsNullOrEmpty(uc.Password) Then
+                OK_Click(sender, e)
+            End If
         End If
 
     End Sub

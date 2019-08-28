@@ -7,12 +7,13 @@ Public Class Form_Sample_Set_Accept
 
     Private Sub Form_NewSampleAccept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+            ComboBoxSetTypes.Items.Clear()
             If Form_Main.language = "Русский" Then
                 Me.Text = "Приём новой партии образцов"
                 L_Name_Country.Text = "Страна"
                 L_Name_Client_ID.Text = "Номер клиента"
 
-                L_Name_Country_Code.Text = "Код страны:"
+                L_Name_Country_Code.Text = "Код страны:Тип"
                 L_Name_Postal_Code.Text = "Индекс:"
                 L_Name_Republic.Text = "Республика:"
                 L_Name_Region.Text = "Область:"
@@ -50,6 +51,11 @@ Public Class Form_Sample_Set_Accept
                 L_Name_New_Sample_Set_Index.Text = "Индекс новой партии"
                 L_Name_SampleSetReceiptDate.Text = "Дата приёма партии образцов"
                 L_Name_SampleSetReportDate.Text = "Дата возврата партии образцов"
+
+                LabelSetType.Text = "Тип работ"
+                ComboBoxSetTypes.Items.Add("Гранты")
+                ComboBoxSetTypes.Items.Add("Совместные работы")
+                ComboBoxSetTypes.Items.Add("Собственные работы")
 
                 L_Name_Notes_1.Text = "Примечания"
                 B_Fill_Notes_1.Text = "Заполнить примечания"
@@ -103,6 +109,10 @@ Public Class Form_Sample_Set_Accept
                 L_Name_SampleSetReceiptDate.Text = "Sample set acceptance date"
                 L_Name_SampleSetReportDate.Text = "Sample set report date"
 
+                LabelSetType.Text = "Work type"
+                ComboBoxSetTypes.Items.Add("Grants")
+                ComboBoxSetTypes.Items.Add("Collaboration")
+                ComboBoxSetTypes.Items.Add("Internal work")
                 L_Name_Notes_1.Text = "Notes"
                 B_Fill_Notes_1.Text = "Fill the notes "
 
@@ -164,7 +174,7 @@ Public Class Form_Sample_Set_Accept
             End With
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Form_NewSampleAccept_Load!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Form_NewSampleAccept_Load!{vbCrLf}{ex.ToString}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
                 MsgBox("Operation was cancelled (error in Form_NewSampleAccept_Load!", MsgBoxStyle.Critical, Me.Text)
             End If
@@ -416,12 +426,8 @@ Public Class Form_Sample_Set_Accept
                 End While
                 sqlConnection1.Close()
 
-            cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Note) " +
-                     "VALUES ('" + Country_Code + "', '" + ComboBox_Client_ID.Text + "', '" + L_NSSID_Year.Text + "', '" +
-                     MaskedTextBox_New_Sample_Set_ID.Text + "', '" + MaskedTextBox_New_Sample_Set_Index.Text + "', '" +
-                     MaskedTextBox_Sample_Set_Receipt_Date.Text + "', '" +
-                     MaskedTextBox_Sample_Set_Report_Date.Text + "', '" + ComboBox_Table_ReceivedBy.Text + "', '" +
-                     TextBox_Notes_1.Text + "')"
+            cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Notes_3, Note) " +
+                     $"VALUES ('{Country_Code}', '{ComboBox_Client_ID.Text}', '{L_NSSID_Year.Text}', '{MaskedTextBox_New_Sample_Set_ID.Text} ', '{MaskedTextBox_New_Sample_Set_Index.Text}', '{MaskedTextBox_Sample_Set_Receipt_Date.Text}', '{MaskedTextBox_Sample_Set_Report_Date.Text}', '{ComboBox_Table_ReceivedBy.Text}', '{ComboBoxSetTypes.Text}', '{TextBox_Notes_1.Text}')"
             cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 cmd.ExecuteNonQuery()

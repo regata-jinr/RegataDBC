@@ -18,6 +18,7 @@ Public Class Form_Main
 
     Sub DataSampleSetLoad(ByVal Field As String)
         Try
+            ChangeLang.Text = language
             Debug.WriteLine("DataSampleSetLoad:")
             SampleSetFormLoadFlag = False
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
@@ -261,7 +262,7 @@ Public Class Form_Main
         Try
             L_Monitor.Text = ""
             Dim i As Integer
-            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, Notice, NoticeMod As String
+            Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, Notice, NoticeMod, WorkType, Note As String
             Dim ProcessedBy As String = ""
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
@@ -279,6 +280,8 @@ Public Class Form_Main
             LLIDateString = ""
             Notice = ""
             NoticeMod = ""
+            WorkType = ""
+            Note = ""
             Dim TypeSet As HashSet(Of String) = New HashSet(Of String)
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New System.Data.SqlClient.SqlCommand
@@ -354,7 +357,12 @@ Public Class Form_Main
                 If Not IsDBNull(reader(20)) Then
                     ProcessedSample = reader(20)
                 End If
-
+                If Not IsDBNull(reader(21)) Then
+                    WorkType = reader(21)
+                End If
+                If Not IsDBNull(reader(22)) Then
+                    Note = reader(22)
+                End If
                 i += 1
             End While
             reader.Close()
@@ -368,7 +376,7 @@ Public Class Form_Main
                 SampleType += $"{TypeSet.ToArray().GetValue(k)},"
             Next
             If Not String.IsNullOrEmpty(SampleType) Then SampleType = SampleType.Substring(0, SampleType.Length - 1)
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice + vbCrLf + "Тип работ: " + WorkType + vbCrLf + "Примечание к партии: " + vbCrLf + Note
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
@@ -1320,6 +1328,7 @@ Public Class Form_Main
         Try
             If language = "Русский" Then
 
+                ResetLoginButton.Text = "Выйти"
                 ' L_Count.Text = "Количество образцов в базе данных:" ' не разкоментить, событие load наступает раньше события shown 
                 B_Refresh.Text = "Обновить"
                 L_Name_Sample_Set.Text = "Партии образцов"
@@ -1371,6 +1380,7 @@ Public Class Form_Main
             ElseIf language = "English" Then
 
                 ' L_Count.Text = "Samples in NAA DB:" ' не разкоментить, событие load наступает раньше события shown 
+                ResetLoginButton.Text = "Sign out"
                 B_Refresh.Text = "Refresh"
                 L_Name_Sample_Set.Text = "Sample sets"
                 DataGridView_Sample_Set.Columns.Item(0).HeaderText = "Country code"
@@ -1600,7 +1610,6 @@ Public Class Form_Main
     End Sub
 
     Private Sub ChangeLang_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangeLang.Click
-
         If ChangeLang.Text = "Русский" Then
             My.Settings.language = "English"
             ChangeLang.Text = "English"
@@ -1610,7 +1619,6 @@ Public Class Form_Main
             ChangeLang.Text = "Русский"
             Application.Restart()
         End If
-
     End Sub
 
     Private Sub ButtonshowAll_Click(sender As Object, e As EventArgs) Handles ButtonshowAll.Click
@@ -1639,6 +1647,11 @@ Public Class Form_Main
         Table_SRM_SetDataGridView.DataSource = ds
         Table_SRM_SetDataGridView.DataMember = "SrmSetAll"
         Change_Language()
+    End Sub
+
+    Private Sub ResetLoginButton_Click(sender As Object, e As EventArgs) Handles ResetLoginButton.Click
+        Extensions.PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", us, "")
+        Application.Restart()
     End Sub
 
     Public firstFlag As Integer = 0
@@ -1723,6 +1736,21 @@ Public Class Form_Main
                         If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
 
                     End While
+
+                ElseIf CBFilter.SelectedItem = "Тип работ" Then
+                    ComboBox_Sample_Set_View.Text = ""
+                    L_Name_Sample_Set_View.Text = "Тип работ"
+
+                    ComboBox_Sample_Set_View.Items.Clear()
+                    cmd.CommandText = "select distinct b.Notes_3 from (" & qs & fields & ") as b ORDER BY b.Notes_3"
+                    '"select distinct Year from SampleSetForNaaDB ORDER BY Year"
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then ComboBox_Sample_Set_View.Items.Add(reader(0))
+
+                    End While
                     sqlConnection1.Close()
 
                 End If
@@ -1773,6 +1801,14 @@ Public Class Form_Main
                     hist = hist & " where sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
                 Else
                     hist = hist & " and sampSet.Year = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+                End If
+                If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
+
+            ElseIf L_Name_Sample_Set_View.Text = "Тип работ" Then
+                If hist = "" Then
+                    hist = hist & " where sampSet.Notes_3 = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
+                Else
+                    hist = hist & " and sampSet.Notes_3 = '" + ComboBox_Sample_Set_View.SelectedItem + "'"
                 End If
                 If SampleSetFormLoadFlag Then DataSampleSetLoad(hist)
             End If
