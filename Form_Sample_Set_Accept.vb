@@ -392,6 +392,14 @@ Public Class Form_Sample_Set_Accept
                 End If
                 Exit Sub
             End If
+            If ComboBoxSetTypes.Text = "" Then
+                If Form_Main.language = "Русский" Then
+                    MsgBox("Укажите тип работ", MsgBoxStyle.Exclamation, Me.Text)
+                ElseIf Form_Main.language = "English" Then
+                    MsgBox("Fill the type of work", MsgBoxStyle.Exclamation, Me.Text)
+                End If
+                Exit Sub
+            End If
 
 
             'If ComboBox_Table_ReceivedBy.Text.Equals("Chepurchenko O.E.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Alekseenok Yu.V.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Vergel K.N.") Then
@@ -403,7 +411,7 @@ Public Class Form_Sample_Set_Accept
             '    Exit Sub
             'End If
 
-                Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
                 Dim reader As SqlDataReader
                 Dim cmd As New System.Data.SqlClient.SqlCommand
                 cmd.CommandType = System.Data.CommandType.Text
