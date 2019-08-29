@@ -37,7 +37,9 @@ Public Class Form_Login
 
         Catch empty As InvalidOperationException
             ' in case of updates files don't exist
-            MsgBox("Обновление не доступно. Обратитесь к администратору.", MsgBoxStyle.Critical)
+            'TODO: add handle running setup.exe from latest release page
+            MsgBox("Обновление не доступно. Пожалуйста, обратитесь к администратору", MsgBoxStyle.Critical)
+
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
@@ -54,6 +56,10 @@ Public Class Form_Login
             End If
 
             Form_Main.MyConnectionString = $"{My.Settings.NAA_DB_EXPConnectionString}User ID={UsernameTextBox.Text};Password={PasswordTextBox.Text}"
+#If DEBUG Then
+            Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True"
+            CreateObject("WScript.Shell").Popup("You are in the debug mode. Don't forget switch to release before publishing.", 3, "D E B U G   M O D E")
+#End If
             Form_Main.us = UsernameTextBox.Text
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
             sqlConnection1.Open()
