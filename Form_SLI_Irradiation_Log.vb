@@ -335,7 +335,7 @@ Public Class Form_SLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample_Set". При необходимости она может быть перемещена или удалена.
             Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
+            'Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
 
             With DataGridView_SLI_Sample_Set
                 .Columns.Clear()
