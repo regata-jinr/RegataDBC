@@ -122,21 +122,26 @@ Public Class Form_Sample_Set_Accept
                 B_Print_Preview_Form.Text = "Form for printing"
                 B_Close.Text = "Close"
             End If
+
+
+            Using SqlCon As New SqlConnection(Form_Main.MyConnectionString)
+                SqlCon.Open()
+                Using sqlCommand As New SqlCommand($"select oldId from Staff where login = '{Form_Main.us}'", SqlCon)
+                    LabelSign.Text = sqlCommand.ExecuteScalar().ToString()
+
+                    Dim SampleSetDataSet As New DataSet()
+                    Dim DataAdapter As New SqlDataAdapter("select top 5 Year, Sample_Set_ID, Sample_Set_Index from table_Sample_Set order by Year desc, Sample_Set_ID desc, Sample_Set_Index desc", SqlCon)
+                    DataAdapter.Fill(SampleSetDataSet, "SampleSets")
+                    Table_Sample_SetDataGridView.DataSource = SampleSetDataSet
+                    Table_Sample_SetDataGridView.DataMember = "SampleSets"
+
+                End Using
+            End Using
+
             With Table_Sample_SetDataGridView
                 Dim g As Graphics = .CreateGraphics()
                 Dim offset As Integer = Convert.ToInt32(Math.Ceiling(g.MeasureString("  ", .ColumnHeadersDefaultCellStyle.Font).Width))
 
-                '.Columns.Clear()
-                '.RowHeadersWidth = 21
-
-                '    If Form_Main.language = "Русский" Then
-                '        .Columns.Add("A_Year", "Год")
-                '    ElseIf Form_Main.language = "English" Then
-                '        .Columns.Add("A_Year", "Year")
-                '    End If
-                '    .Columns(0).DataPropertyName = "A_Year" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
-                '    .Columns(0).ReadOnly = True
-                '    .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
                 If Form_Main.language = "Русский" Then
                     .Columns(0).HeaderText = "Год"
                 ElseIf Form_Main.language = "English" Then
@@ -144,13 +149,6 @@ Public Class Form_Sample_Set_Accept
                 End If
                 .Columns(0).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("Year", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                '    If Form_Main.language = "Русский" Then
-                '        .Columns.Add("A_Sample_Set_ID", "Номер партии образцов")
-                '    ElseIf Form_Main.language = "English" Then
-                '        .Columns.Add("A_Sample_Set_ID", "Sample set ID")
-                '    End If
-                '    .Columns(1).DataPropertyName = "A_Sample_Set_ID" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
-                '    .Columns(1).ReadOnly = True
                 If Form_Main.language = "Русский" Then
                     .Columns(1).HeaderText = "Номер партии образцов"
                 ElseIf Form_Main.language = "English" Then
@@ -158,13 +156,6 @@ Public Class Form_Sample_Set_Accept
                 End If
                 .Columns(1).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
 
-                '    If Form_Main.language = "Русский" Then
-                '        .Columns.Add("A_Sample_Set_Index", "Индекс партии образцов")
-                '    ElseIf Form_Main.language = "English" Then
-                '        .Columns.Add("A_Sample_Set_Index", "Sample set index")
-                '    End If
-                '    .Columns(2).DataPropertyName = "A_Sample_Set_Index" ' задаём соответсвие между столбцом таблицы datagridview и столбцом базы данных
-                '    .Columns(2).ReadOnly = True
                 If Form_Main.language = "Русский" Then
                     .Columns(2).HeaderText = "Индекс партии образцов"
                 ElseIf Form_Main.language = "English" Then
@@ -172,6 +163,8 @@ Public Class Form_Sample_Set_Accept
                 End If
                 .Columns(2).Width = Convert.ToInt32(Math.Ceiling(g.MeasureString("образцов", .ColumnHeadersDefaultCellStyle.Font).Width)) + offset + offset
             End With
+
+
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
                 MsgBox($"Операция была отменена (ошибка в Form_NewSampleAccept_Load!{vbCrLf}{ex.ToString}", MsgBoxStyle.Critical, Me.Text)
@@ -384,9 +377,9 @@ Public Class Form_Sample_Set_Accept
             If value < 10 Then
                 MaskedTextBox_New_Sample_Set_ID.Text = "0" + value.ToString
             End If
-            If ComboBox_Table_ReceivedBy.Text = "" Then
+            If LabelSign.Text = "" Then
                 If Form_Main.language = "Русский" Then
-                    MsgBox("Выберите ФИО!", MsgBoxStyle.Exclamation, Me.Text)
+                    MsgBox("Похоже, для Вас не проставлено соответствие пользователь - ФИО. Обратитесь к администратору.", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf Form_Main.language = "English" Then
                     MsgBox("Select person!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
@@ -402,7 +395,7 @@ Public Class Form_Sample_Set_Accept
             End If
 
 
-            'If ComboBox_Table_ReceivedBy.Text.Equals("Chepurchenko O.E.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Alekseenok Yu.V.") Or (ComboBox_Table_ReceivedBy.Text.ToString <> "Vergel K.N.") Then
+            'If LabelSign.Text.Equals("Chepurchenko O.E.") Or (LabelSign.Text.ToString <> "Alekseenok Yu.V.") Or (LabelSign.Text.ToString <> "Vergel K.N.") Then
             '    If Form_Main.language = "Русский" Then
             '        MsgBox("Вы не можете добавлять партии. Обратитесь к Чепурченко О.Е.", MsgBoxStyle.Exclamation, Me.Text)
             '    ElseIf Form_Main.language = "English" Then
@@ -412,62 +405,62 @@ Public Class Form_Sample_Set_Accept
             'End If
 
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-                Dim reader As SqlDataReader
-                Dim cmd As New System.Data.SqlClient.SqlCommand
-                cmd.CommandType = System.Data.CommandType.Text
+            Dim reader As SqlDataReader
+            Dim cmd As New System.Data.SqlClient.SqlCommand
+            cmd.CommandType = System.Data.CommandType.Text
 
-                cmd.CommandText = "SELECT COUNT (*) FROM dbo.table_Sample_Set WHERE Sample_Set_ID='" + MaskedTextBox_New_Sample_Set_ID.Text +
+            cmd.CommandText = "SELECT COUNT (*) FROM dbo.table_Sample_Set WHERE Sample_Set_ID='" + MaskedTextBox_New_Sample_Set_ID.Text +
                                   "' and Sample_Set_Index='" + MaskedTextBox_New_Sample_Set_Index.Text + "' and Year='" + L_NSSID_Year.Text + "'"
-                cmd.Connection = sqlConnection1
-                sqlConnection1.Open()
-                reader = cmd.ExecuteReader()
-                While reader.Read()
-                    If reader(0) > 0 Then
-                        If Form_Main.language = "Русский" Then
-                            MsgBox("Партия образцов с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                        ElseIf Form_Main.language = "English" Then
-                            MsgBox("This sample set ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
-                        End If
-                        sqlConnection1.Close()
-                        Exit Sub
+            cmd.Connection = sqlConnection1
+            sqlConnection1.Open()
+            reader = cmd.ExecuteReader()
+            While reader.Read()
+                If reader(0) > 0 Then
+                    If Form_Main.language = "Русский" Then
+                        MsgBox("Партия образцов с таким номером уже существует!", MsgBoxStyle.Exclamation, Me.Text)
+                    ElseIf Form_Main.language = "English" Then
+                        MsgBox("This sample set ID already exist!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
-                End While
-                sqlConnection1.Close()
+                    sqlConnection1.Close()
+                    Exit Sub
+                End If
+            End While
+            sqlConnection1.Close()
 
             cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Notes_3, Note) " +
-                     $"VALUES ('{Country_Code}', '{ComboBox_Client_ID.Text}', '{L_NSSID_Year.Text}', '{MaskedTextBox_New_Sample_Set_ID.Text} ', '{MaskedTextBox_New_Sample_Set_Index.Text}',  convert(date, '{MaskedTextBox_Sample_Set_Receipt_Date.Text}',104),  convert(date, '{MaskedTextBox_Sample_Set_Report_Date.Text}',104), '{ComboBox_Table_ReceivedBy.Text}', '{ComboBoxSetTypes.Text}', '{TextBox_Notes_1.Text}')"
+                     $"VALUES ('{Country_Code}', '{ComboBox_Client_ID.Text}', '{L_NSSID_Year.Text}', '{MaskedTextBox_New_Sample_Set_ID.Text} ', '{MaskedTextBox_New_Sample_Set_Index.Text}',  convert(date, '{MaskedTextBox_Sample_Set_Receipt_Date.Text}',104),  convert(date, '{MaskedTextBox_Sample_Set_Report_Date.Text}',104), '{LabelSign.Text}', '{ComboBoxSetTypes.Text}', '{TextBox_Notes_1.Text}')"
             cmd.Connection = sqlConnection1
-                sqlConnection1.Open()
-                cmd.ExecuteNonQuery()
-                sqlConnection1.Close()
+            sqlConnection1.Open()
+            cmd.ExecuteNonQuery()
+            sqlConnection1.Close()
 
-                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSetID". При необходимости она может быть перемещена или удалена.
-                ' Form_Main.Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-                'Form_Main.Table_Sample_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Sample_Set)
-                Form_Main.DataSampleSetLoad("")
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSetID". При необходимости она может быть перемещена или удалена.
+            'Form_Main.Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
+            'Form_Main.Table_Sample_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Sample_Set)
+            Form_Main.DataSampleSetLoad("")
 
-                'Form_Main.DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = Form_Main.DataGridView_Sample_Set.RowCount - 1
-                'For i = 0 To Form_Main.DataGridView_Sample_Set.RowCount - 1
-                '    Form_Main.DataGridView_Sample_Set.Rows.Item(i).Selected = False
-                'Next
-                'Form_Main.DataGridView_Sample_Set.Rows.Item(Form_Main.DataGridView_Sample_Set.RowCount - 1).Selected = True
+            'Form_Main.DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = Form_Main.DataGridView_Sample_Set.RowCount - 1
+            'For i = 0 To Form_Main.DataGridView_Sample_Set.RowCount - 1
+            '    Form_Main.DataGridView_Sample_Set.Rows.Item(i).Selected = False
+            'Next
+            'Form_Main.DataGridView_Sample_Set.Rows.Item(Form_Main.DataGridView_Sample_Set.RowCount - 1).Selected = True
 
-                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
-                '  Table_Sample_SetTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-                '   Me.Table_Sample_SetTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Sample_Set)
-                '  Table_Sample_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_Sample_SetDataGridView.RowCount - 1
-                '   For i = 0 To Table_Sample_SetDataGridView.RowCount - 1
-                'Table_Sample_SetDataGridView.Rows.Item(i).Selected = False
-                '  Next
-                '  Table_Sample_SetDataGridView.Rows.Item(Table_Sample_SetDataGridView.RowCount - 1).Selected = True
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
+            'Table_Sample_SetTableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
+            'Me.Table_Sample_SetTableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Sample_Set)
+            '  Table_Sample_SetDataGridView.FirstDisplayedScrollingRowIndex = Table_Sample_SetDataGridView.RowCount - 1
+            '   For i = 0 To Table_Sample_SetDataGridView.RowCount - 1
+            'Table_Sample_SetDataGridView.Rows.Item(i).Selected = False
+            '  Next
+            '  Table_Sample_SetDataGridView.Rows.Item(Table_Sample_SetDataGridView.RowCount - 1).Selected = True
 
 
-                If Form_Main.language = "Русский" Then
-                    MsgBox("Сделано!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "English" Then
-                    MsgBox("Done!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Me.Close()
+            If Form_Main.language = "Русский" Then
+                MsgBox("Сделано!", MsgBoxStyle.Exclamation, Me.Text)
+            ElseIf Form_Main.language = "English" Then
+                MsgBox("Done!", MsgBoxStyle.Exclamation, Me.Text)
+            End If
+            Me.Close()
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
                 MsgBox($"Операция была отменена (ошибка в B_SaveNewSampleAcceptance_Click!){vbCrLf}{ex.ToString}", MsgBoxStyle.Critical, Me.Text)
@@ -562,7 +555,7 @@ Public Class Form_Sample_Set_Accept
     Private Sub B_Print_Preview_Form_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Print_Preview_Form.Click
         Try
             'очищаем форму печати 
-            
+
             Form_Sample_Set_Accept_Print_Form.L_Country.Text = ""
             Form_Sample_Set_Accept_Print_Form.L_Postal_Code.Text = ""
             Form_Sample_Set_Accept_Print_Form.L_Republic.Text = ""
@@ -637,7 +630,7 @@ Public Class Form_Sample_Set_Accept
             Form_Sample_Set_Accept_Print_Form.L_Sample_Set_Report_Date.Text = MaskedTextBox_Sample_Set_Report_Date.Text
             Form_Sample_Set_Accept_Print_Form.L_Notes_1.Text = TextBox_Notes_1.Text
 
-            Form_Sample_Set_Accept_Print_Form.L_Received_By.Text = ComboBox_Table_ReceivedBy.Text
+            Form_Sample_Set_Accept_Print_Form.L_Received_By.Text = LabelSign.Text
             Form_Sample_Set_Accept_Print_Form.L_NSSID_Country_Code.Text = L_NSSID_Country_Code.Text
             Form_Sample_Set_Accept_Print_Form.L_NSSID_Client_ID.Text = L_NSSID_Client_ID.Text
             Form_Sample_Set_Accept_Print_Form.L_NSSID_Year.Text = L_NSSID_Year.Text

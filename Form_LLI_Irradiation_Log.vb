@@ -149,7 +149,7 @@ Public Class Form_LLI_Irradiation_Log
 
             'данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
+            'Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
@@ -502,7 +502,7 @@ Public Class Form_LLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
             Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
+            'Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
 
             With DataGridView_Table_SRM_Set
                 .Columns.Clear()
@@ -697,7 +697,7 @@ Public Class Form_LLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
             Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
+            'Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
 
             With DataGridView_Table_Monitor_Set
                 .Columns.Clear()
@@ -818,7 +818,7 @@ Public Class Form_LLI_Irradiation_Log
 
             If ComboBox_Sample_Set_View.SelectedItem = "All sample sets" Or ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов" Then
                 Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-                Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
+                'Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
                 If DataGridView_LLI_Sample_Set.RowCount > 0 Then
                     For i = 0 To DataGridView_LLI_Sample_Set.RowCount - 1
                         DataGridView_LLI_Sample_Set.Rows.Item(i).Visible = True
@@ -2619,7 +2619,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             'ListBox_SRM_ID.Items.Clear()
             If ComboBox_SRM_Set_View.SelectedItem = "All SRM sets" Or ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов" Then
                 Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-                Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
+                'Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
                 If DataGridView_Table_SRM_Set.RowCount > 0 Then
                     For i = 0 To DataGridView_Table_SRM_Set.RowCount - 1
                         DataGridView_Table_SRM_Set.Rows.Item(i).Visible = True
@@ -2709,7 +2709,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             'ListBox_Monitor_ID.Items.Clear()
             If ComboBox_Monitor_Set_View.SelectedItem = "All Monitor sets" Or ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов" Then
                 Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-                Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
+                'Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
                 If DataGridView_Table_Monitor_Set.RowCount > 0 Then
                     For i = 0 To DataGridView_Table_Monitor_Set.RowCount - 1
                         DataGridView_Table_Monitor_Set.Rows.Item(i).Visible = True

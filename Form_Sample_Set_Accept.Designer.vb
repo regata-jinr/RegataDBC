@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Sample_Set_Accept
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class Form_Sample_Set_Accept
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.B_Close = New System.Windows.Forms.Button()
         Me.B_SaveNewSampleAcceptance = New System.Windows.Forms.Button()
         Me.TextBox_Notes_1 = New System.Windows.Forms.TextBox()
@@ -40,7 +40,6 @@ Partial Class Form_Sample_Set_Accept
         Me.TableAdapterManager = New NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager()
         Me.ComboBox_Country = New System.Windows.Forms.ComboBox()
         Me.ComboBox_Client_ID = New System.Windows.Forms.ComboBox()
-        Me.ComboBox_Table_ReceivedBy = New System.Windows.Forms.ComboBox()
         Me.Table_Received_By_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.L_NSSID_Country_Code = New System.Windows.Forms.Label()
         Me.L_NSSID_Year = New System.Windows.Forms.Label()
@@ -117,12 +116,13 @@ Partial Class Form_Sample_Set_Accept
         Me.L_Name_Country_Code = New System.Windows.Forms.Label()
         Me.ComboBoxSetTypes = New System.Windows.Forms.ComboBox()
         Me.LabelSetType = New System.Windows.Forms.Label()
+        Me.LabelSign = New System.Windows.Forms.Label()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_CountryBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Received_By_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_SetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.SuspendLayout
         '
         'B_Close
         '
@@ -163,7 +163,7 @@ Partial Class Form_Sample_Set_Accept
         'L_Name_ReceivedBy
         '
         Me.L_Name_ReceivedBy.AutoSize = True
-        Me.L_Name_ReceivedBy.Location = New System.Drawing.Point(536, 450)
+        Me.L_Name_ReceivedBy.Location = New System.Drawing.Point(468, 462)
         Me.L_Name_ReceivedBy.Name = "L_Name_ReceivedBy"
         Me.L_Name_ReceivedBy.Size = New System.Drawing.Size(67, 13)
         Me.L_Name_ReceivedBy.TabIndex = 66
@@ -258,18 +258,6 @@ Partial Class Form_Sample_Set_Accept
         Me.ComboBox_Client_ID.Size = New System.Drawing.Size(86, 21)
         Me.ComboBox_Client_ID.Sorted = True
         Me.ComboBox_Client_ID.TabIndex = 112
-        '
-        'ComboBox_Table_ReceivedBy
-        '
-        Me.ComboBox_Table_ReceivedBy.DataSource = Me.Table_Received_By_BindingSource
-        Me.ComboBox_Table_ReceivedBy.DisplayMember = "Received_By"
-        Me.ComboBox_Table_ReceivedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox_Table_ReceivedBy.FormattingEnabled = True
-        Me.ComboBox_Table_ReceivedBy.Location = New System.Drawing.Point(491, 465)
-        Me.ComboBox_Table_ReceivedBy.Name = "ComboBox_Table_ReceivedBy"
-        Me.ComboBox_Table_ReceivedBy.Size = New System.Drawing.Size(170, 21)
-        Me.ComboBox_Table_ReceivedBy.TabIndex = 71
-        Me.ComboBox_Table_ReceivedBy.ValueMember = "ReceivedBy"
         '
         'Table_Received_By_BindingSource
         '
@@ -424,14 +412,14 @@ Partial Class Form_Sample_Set_Accept
         Me.Table_Sample_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_Sample_SetDataGridView.AutoGenerateColumns = False
         Me.Table_Sample_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.Table_Sample_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_Sample_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Sample_Set_Index})
         Me.Table_Sample_SetDataGridView.DataSource = Me.Table_Sample_SetBindingSource
@@ -462,8 +450,8 @@ Partial Class Form_Sample_Set_Accept
         'Sample_Set_Index
         '
         Me.Sample_Set_Index.DataPropertyName = "Sample_Set_Index"
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle2
         Me.Sample_Set_Index.HeaderText = "Sample set index"
         Me.Sample_Set_Index.Name = "Sample_Set_Index"
         Me.Sample_Set_Index.ReadOnly = True
@@ -922,11 +910,21 @@ Partial Class Form_Sample_Set_Accept
         Me.LabelSetType.TabIndex = 195
         Me.LabelSetType.Text = "Choose type of set"
         '
+        'LabelSign
+        '
+        Me.LabelSign.AutoSize = True
+        Me.LabelSign.Location = New System.Drawing.Point(541, 462)
+        Me.LabelSign.Name = "LabelSign"
+        Me.LabelSign.Size = New System.Drawing.Size(67, 13)
+        Me.LabelSign.TabIndex = 197
+        Me.LabelSign.Text = "Received by"
+        '
         'Form_Sample_Set_Accept
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(681, 599)
+        Me.Controls.Add(Me.LabelSign)
         Me.Controls.Add(Me.ComboBoxSetTypes)
         Me.Controls.Add(Me.LabelSetType)
         Me.Controls.Add(Me.L_Name_Country_Code)
@@ -999,7 +997,6 @@ Partial Class Form_Sample_Set_Accept
         Me.Controls.Add(Me.L_NSSID_Client_ID)
         Me.Controls.Add(Me.L_NSSID_Year)
         Me.Controls.Add(Me.L_NSSID_Country_Code)
-        Me.Controls.Add(Me.ComboBox_Table_ReceivedBy)
         Me.Controls.Add(Me.B_Close)
         Me.Controls.Add(Me.B_SaveNewSampleAcceptance)
         Me.Controls.Add(Me.TextBox_Notes_1)
@@ -1019,7 +1016,7 @@ Partial Class Form_Sample_Set_Accept
         CType(Me.Table_Sample_SetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.PerformLayout
 
     End Sub
     Friend WithEvents B_Close As System.Windows.Forms.Button
@@ -1037,8 +1034,6 @@ Partial Class Form_Sample_Set_Accept
     Friend WithEvents TableAdapterManager As NaaDB.NAA_DB_EXPDataSetTableAdapters.TableAdapterManager
     Friend WithEvents ComboBox_Country As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox_Client_ID As System.Windows.Forms.ComboBox
-    'Friend WithEvents Table_SamplePreparationTableAdapter As WindowsApplication1.NAA_DB_EXPDataSetTableAdapters.table_SamplePreparationTableAdapter
-    Friend WithEvents ComboBox_Table_ReceivedBy As System.Windows.Forms.ComboBox
     Friend WithEvents L_NSSID_Country_Code As System.Windows.Forms.Label
     Friend WithEvents L_NSSID_Year As System.Windows.Forms.Label
     Friend WithEvents L_NSSID_Client_ID As System.Windows.Forms.Label
@@ -1116,4 +1111,5 @@ Partial Class Form_Sample_Set_Accept
     Friend WithEvents L_Name_Country_Code As System.Windows.Forms.Label
     Friend WithEvents ComboBoxSetTypes As ComboBox
     Friend WithEvents LabelSetType As Label
+    Friend WithEvents LabelSign As Label
 End Class

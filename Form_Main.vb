@@ -91,11 +91,11 @@ Public Class Form_Main
             Form_Sample_Set_Accept.Notes_Number = 1
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_ReceivedBy". При необходимости она может быть перемещена или удалена.
             Form_Sample_Set_Accept.Table_Received_ByTableAdapter.Connection.ConnectionString = MyConnectionString
-            Form_Sample_Set_Accept.Table_Received_ByTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Received_By)
+            'Form_Sample_Set_Accept.Table_Received_ByTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Received_By)
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSet". При необходимости она может быть перемещена или удалена.
-            Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Connection.ConnectionString = MyConnectionString
-            Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Sample_Set)
+            'Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Connection.ConnectionString = MyConnectionString
+            'Form_Sample_Set_Accept.Table_Sample_SetTableAdapter.Fill(Form_Sample_Set_Accept.NAA_DB_EXPDataSet.table_Sample_Set)
 
             If Form_Sample_Set_Accept.Table_Sample_SetDataGridView.RowCount > 0 Then
                 Form_Sample_Set_Accept.Table_Sample_SetDataGridView.FirstDisplayedScrollingRowIndex = Form_Sample_Set_Accept.Table_Sample_SetDataGridView.RowCount - 1
@@ -125,7 +125,7 @@ Public Class Form_Main
             Form_Sample_Set_Accept.ComboBox_Country.Text = ""
             Form_Sample_Set_Accept.ComboBox_Client_ID.Text = ""
 
-            Form_Sample_Set_Accept.ComboBox_Table_ReceivedBy.Text = ""
+            Form_Sample_Set_Accept.LabelSign.Text = ""
 
             Form_Sample_Set_Accept.L_NSSID_Country_Code.Text = ""
 
@@ -639,6 +639,14 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
+
+
+
+        MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        Exit Sub
+
+
+
         Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
             Dim SLI_Irradiation_Log As Date
@@ -652,7 +660,7 @@ Public Class Form_Main
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
-            cmd.CommandText = "SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text + "'"
+            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start= convert(datetime, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104);"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
@@ -820,6 +828,14 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_New_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_LLI_Irradiation_Log.Click
+
+
+
+        MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+        Exit Sub
+
+
+
         Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
             Dim LLI_Irradiation_Log As Date
@@ -838,7 +854,7 @@ Public Class Form_Main
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
 
-            cmd.CommandText = "declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  '" & MaskedTextBox_LLI_Irradiation_Log.Text & "';"
+            cmd.CommandText = $"declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104);"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()

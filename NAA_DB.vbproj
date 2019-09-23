@@ -394,7 +394,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings.vb" />
-    <Compile Include="Workbook.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form_Add_New_Client.resx">

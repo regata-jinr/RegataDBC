@@ -8,7 +8,6 @@ Imports Extensions
 
 Public Class Form_Login
 
-
     Async Function GetUpdate() As Task
         Try
             Dim restart As Boolean = False
