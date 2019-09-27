@@ -203,6 +203,8 @@ Public Class Form_Samples_List
                 End If
                 Form_Sample_Preparation.DataGridView_Table_Sample.Rows.Item(i).Selected = False
             Next
+        Catch dataEx As System.Data.ConstraintException
+
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Sample_Preparation_Click)!", MsgBoxStyle.Critical, Me.Text)

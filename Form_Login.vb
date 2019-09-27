@@ -18,9 +18,17 @@ Public Class Form_Login
                 Dim upd As UpdateInfo = Await manager.CheckForUpdate()
 
                 If upd.ReleasesToApply.Any() Then
-                    System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC/releases/latest")
 
                     Dim LatestVersion = upd.ReleasesToApply.OrderBy(Function(x) x.Version).Last()
+
+                    Dim verR As String = LatestVersion.Version.Version.ToString()
+                    Dim verL As String = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()
+
+                    If verR = verL Then Throw New ArgumentException()
+
+                    System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC/releases/latest")
+
+
                     Await manager.DownloadReleases(upd.ReleasesToApply)
                     Await manager.ApplyReleases(upd)
                     Await manager.UpdateApp()
@@ -33,6 +41,7 @@ Public Class Form_Login
             If restart Then
                 UpdateManager.RestartApp(latestExe)
             End If
+        Catch empty As ArgumentException
 
         Catch empty As InvalidOperationException
             ' in case of updates files don't exist
@@ -56,8 +65,8 @@ Public Class Form_Login
 
             Form_Main.MyConnectionString = $"{My.Settings.NAA_DB_EXPConnectionString}User ID={UsernameTextBox.Text};Password={PasswordTextBox.Text}"
 #If DEBUG Then
-            Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True"
-            CreateObject("WScript.Shell").Popup("You are in the debug mode. Don't forget switch to release before publishing.", 3, "D E B U G   M O D E")
+                        Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True"
+                        CreateObject("WScript.Shell").Popup("You are in the debug mode. Don't forget switch to release before publishing.", 3, "D E B U G   M O D E")
 #End If
             Form_Main.us = UsernameTextBox.Text
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)

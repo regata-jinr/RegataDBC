@@ -364,8 +364,11 @@ Public Class Form_Sample_Preparation
                 Exit Sub
             End If
             For i = 0 To DataGridView_Table_Sample.RowCount - 1
-                'Table_SampleDataGridView.Rows.Item(i).Cells.Item(11).Value = "" '11 - Maked By
-                If DataGridView_Table_Sample.Rows.Item(i).Selected = True Then DataGridView_Table_Sample.Rows.Item(i).Cells.Item(12).Value = Received_ByComboBox.Text
+                If DataGridView_Table_Sample.Rows.Item(i).Selected = True Then
+                    DataGridView_Table_Sample.Rows.Item(i).Cells.Item(11).Value = DateTime.Now.Date
+                    DataGridView_Table_Sample.Rows.Item(i).Cells.Item(12).Value = Received_ByComboBox.Text
+                End If
+
             Next
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
