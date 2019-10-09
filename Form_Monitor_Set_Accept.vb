@@ -183,7 +183,7 @@ Public Class Form_Monitor_Set_Accept
             cmd.CommandText = "INSERT dbo.table_Monitor_Set (Monitor_Set_Name, Monitor_Set_Number, Monitor_Set_Type, Monitor_Set_Weight, Monitor_Set_Purchasing_Date) " +
                  "VALUES ('" + ComboBox_New_Monitor_Set_Name.Text + "', '" + MaskedTextBox_New_Monitor_Set_Number.Text + "', '" +
                              ComboBox_Monitor_Set_Type.Text + "', " +
-                            Replace(MaskedTextBox_New_Monitor_Set_Weight.Text, ",", ".") + ", '" + MaskedTextBox_New_Monitor_Set_Purchasing_Date.Text + "')"
+                            Replace(MaskedTextBox_New_Monitor_Set_Weight.Text, ",", ".") + "," + $"convert(datetime,'{MaskedTextBox_New_Monitor_Set_Purchasing_Date.Text}', 104))"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()

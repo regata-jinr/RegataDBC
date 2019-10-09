@@ -2149,7 +2149,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                  "' and Sample_Set_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value +
                  "' and Sample_Set_Index='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value.ToString +
                  "' and Sample_ID='" + DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value.ToString +
-                 $"' and Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)"
+                 $"' and Date_Start = convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)"
 
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()

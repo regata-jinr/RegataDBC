@@ -93,7 +93,8 @@ Public Class Form_SRM_Set_Accept
             cmd.CommandText = "INSERT dbo.table_SRM_Set (SRM_Set_Name, SRM_Set_Number, SRM_Set_Type, SRM_Set_Weight, SRM_Set_Purchasing_Date) " +
                  "VALUES ('" + TextBox_New_Monitor_Set_Name.Text + "', '" + MaskedTextBox_New_SRM_Set_Number.Text + "', '" +
                              ComboBox_SRM_Set_Type.Text + "', " +
-                            Replace(MaskedTextBox_New_SRM_Set_Weight.Text, ",", ".") + ", '" + MaskedTextBox_New_SRM_Set_Purchasing_Date.Text + "')"
+                            Replace(MaskedTextBox_New_SRM_Set_Weight.Text, ",", ".") + "," + $"convert(datetime,'{MaskedTextBox_New_SRM_Set_Purchasing_Date.Text}', 104))"
+
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()

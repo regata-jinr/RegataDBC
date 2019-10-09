@@ -192,6 +192,11 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
@@ -549,6 +554,10 @@
     <ProjectReference Include="Extensions\Extensions.csproj">
       <Project>{93857a67-5872-4789-8ff2-217d92cae0ec}</Project>
       <Name>Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="NewForms\NewForms.csproj">
+      <Project>{1380e3fd-4545-4ca3-b20a-2f620192933f}</Project>
+      <Name>NewForms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

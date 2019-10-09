@@ -641,8 +641,13 @@ Public Class Form_Main
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
 
 
+        Dim ij As New NewForms.IrradiationJournal(DateTime.Now, "SLI", MyConnectionString)
+        ij.Show()
 
-        MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+
+        'MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+
+
         Exit Sub
 
 
@@ -711,6 +716,13 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
+
+        Dim ij As New NewForms.IrradiationJournal(DateTime.Parse(ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name), "SLI", MyConnectionString)
+        ij.Show()
+
+
+        Exit Sub
+
         Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
             If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
