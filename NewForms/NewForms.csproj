@@ -137,20 +137,21 @@
     <Compile Include="Classes\AdvancedBindingSource.cs" />
     <Compile Include="Classes\InfoContext.cs" />
     <Compile Include="Classes\IrradiationInfo.cs" />
+    <Compile Include="Classes\SampleInfo.cs" />
     <Compile Include="Classes\SampleSetInfo.cs" />
-    <Compile Include="IrradiationJournalBasic.cs">
+    <Compile Include="IrradiationJournalMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IrradiationJournalLLI.cs">
-      <DependentUpon>IrradiationJournalBasic.cs</DependentUpon>
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IrradiationJournalBasic.Designer.cs">
-      <DependentUpon>IrradiationJournalBasic.cs</DependentUpon>
+    <Compile Include="IrradiationJournalMain.Designer.cs">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="IrradiationJournalBasic.resx">
-      <DependentUpon>IrradiationJournalBasic.cs</DependentUpon>
+    <EmbeddedResource Include="IrradiationJournalMain.resx">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

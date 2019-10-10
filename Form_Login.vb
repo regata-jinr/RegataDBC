@@ -96,8 +96,9 @@ Public Class Form_Login
             Me.Text = "Regata experiment data base client - " & Application.ProductVersion
             CheckBoxKeep.Text = "Keep fields"
         End If
-
+#If Not DEBUG Then
         Await GetUpdate()
+#End If
 
         If PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC") IsNot Nothing Then
             Dim uc As Extensions.UserCredential = PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")

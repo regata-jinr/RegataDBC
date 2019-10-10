@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewForms.Models
 {
+    [Table("table_Sample_Set")]
     public class SampleSetInfo
     {
         public string Country_Code { get; set; } // "RU"

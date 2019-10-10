@@ -6,7 +6,8 @@ namespace NewForms.Models
     {
         public static string ConnectionString;
         public DbSet<IrradiationInfo> Irradiations { get; set; }
-        public DbSet<SampleSetInfo> table_Sample_set { get; set; }
+        public DbSet<SampleSetInfo> SampleSets { get; set; }
+        public DbSet<SampleInfo> Samples { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,6 +18,9 @@ namespace NewForms.Models
         {
             modelBuilder.Entity<SampleSetInfo>()
                 .HasKey(ssk => new { ssk.Country_Code,  ssk.Client_Id, ssk.Year, ssk.Sample_Set_Id, ssk.Sample_Set_Index});
+
+            modelBuilder.Entity<SampleInfo>()
+                .HasKey(sk => new { sk.F_Country_Code, sk.F_Client_Id, sk.F_Year, sk.F_Sample_Set_Id, sk.F_Sample_Set_Index, sk.A_Sample_ID });
         }
     }
 }
