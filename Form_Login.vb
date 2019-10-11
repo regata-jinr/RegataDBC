@@ -65,7 +65,7 @@ Public Class Form_Login
 
             Form_Main.MyConnectionString = $"{My.Settings.NAA_DB_EXPConnectionString}User ID={UsernameTextBox.Text};Password={PasswordTextBox.Text}"
 #If DEBUG Then
-            Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True"
+            Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True;User ID=bdrum"
             CreateObject("WScript.Shell").Popup("You are in the debug mode. Don't forget switch to release before publishing.", 3, "D E B U G   M O D E")
 #End If
             Form_Main.us = UsernameTextBox.Text

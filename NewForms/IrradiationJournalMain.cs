@@ -10,7 +10,6 @@ using NewForms.Models;
 
 namespace NewForms
 {
-    //SLI
     public partial class IrradiationJournal : Form
     {
         private BindingSource _bindingSource;
@@ -18,25 +17,75 @@ namespace NewForms
         private List<string> ChosenSets;
         private List<IrradiationInfo> _irradiationList;
         private readonly string _type;
+        private string _user;
+        private DateTime _currentJournalDateTime;
 
         public IrradiationJournal(DateTime dateTime, string type, string connectionString)
         {
+            _currentJournalDateTime = dateTime;
             _type = type;
             var conStrBuild = new SqlConnectionStringBuilder(connectionString);
             InfoContext.ConnectionString = connectionString;
+            _user = conStrBuild.UserID;
             InitializeComponent();
-            Text = $"Журнал облучений {type} от {dateTime.ToShortDateString()} | {conStrBuild.UserID}";
-            InitializeMainTable(dateTime, type);
+
+            IrradiationJournalNumericUpDownSeconds.ValueChanged += DurationHandler;
+            IrradiationJournalNumericUpDownMinutes.ValueChanged += DurationHandler;
+            IrradiationJournalNumericUpDownHours.ValueChanged   += DurationHandler;
+
+            Text = $"Журнал облучений {type} от {dateTime.ToShortDateString()} | {_user}";
+            InitializeMainTable();
+
+
+            _tabSamplesCheckBox = IrradiationJournalTabs.TabPages["IrradiationJournalTabPageSamples"].Controls["IrradiationJournalСheckBoxSetsFromJournal"] as CheckBox;
+
+            if (_irradiationList.Any())
+                _tabSamplesCheckBox.Checked = true;
+            else
+                _tabSamplesCheckBox.Checked = false;
+
+            _tabSamplesCheckBox.CheckedChanged += _tabSamplesCheckBox_CheckedChanged;
+
             InitializeSampleSetTable();
+            IrradiationJournalADGV.CellValueChanged += UpdateIrradiationJournal;
         }
 
-        private void InitializeMainTable(DateTime dateTime, string type)
+        private short Channel
+        {
+            get
+            {
+                return short.Parse(IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Where(r => r.Checked).First().Text);
+            }
+        }
+
+        private int Duration
+        {
+            get
+            {
+                var ts = new TimeSpan((int)IrradiationJournalNumericUpDownHours.Value, (int)IrradiationJournalNumericUpDownMinutes.Value, (int)IrradiationJournalNumericUpDownSeconds.Value);
+
+                return (int)ts.TotalSeconds;
+            }
+        }
+
+        private void DurationHandler(object sender, EventArgs e)
+        {
+            var ts = new TimeSpan((int)IrradiationJournalNumericUpDownHours.Value, (int)IrradiationJournalNumericUpDownMinutes.Value, (int)IrradiationJournalNumericUpDownSeconds.Value);
+            IrradiationJournalNumericUpDownSeconds.Value = ts.Seconds;
+            IrradiationJournalNumericUpDownMinutes.Value = ts.Minutes;
+            IrradiationJournalNumericUpDownHours.Value = ts.Hours;
+        }
+
+        private void InitializeMainTable()
         {
             ChosenSets = new List<string>();
             using(var ic = new InfoContext())
             {
-                _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue && ir.DateTimeStart.Value.Date == dateTime.Date && ir.Type == type).ToList();
+                _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue && ir.DateTimeStart.Value.Date == _currentJournalDateTime.Date && ir.Type == _type).ToList();
             }
+
+            if (_irradiationList == null)
+                _irradiationList = new List<IrradiationInfo>();
 
             ChosenSets.AddRange(_irradiationList.Select(ir => ir.SetKey).Distinct().ToList());
             
@@ -45,19 +94,13 @@ namespace NewForms
             _bindingSource = advbindSource.GetBindingSource();
             IrradiationJournalADGV.DataSource = _bindingSource;
 
-            _tabSamplesCheckBox = IrradiationJournalTabs.TabPages["IrradiationJournalTabPageSamples"].Controls["IrradiationJournalСheckBoxSetsFromJournal"] as CheckBox;
 
-            if (_irradiationList != null)
-                _tabSamplesCheckBox.Checked = true;
-            else
-                _tabSamplesCheckBox.Checked = false;
-
-            _tabSamplesCheckBox.CheckedChanged += _tabSamplesCheckBox_CheckedChanged;
-
-            SetColumnVisibles(type);
+            SetColumnVisibles(_type);
             IrradiationJournalADGVSearchToolBar.SetColumns(IrradiationJournalADGV.Columns);
 
             var r = IrradiationJournalADGVSearchToolBar.Items[0];
+
+            ShowSamples();
 
         }
 
@@ -91,6 +134,7 @@ namespace NewForms
 
         }
 
+
         private void ShowSamples()
         {
             IrradiationJournalADGVSamples.DataSource = null;
@@ -103,11 +147,11 @@ namespace NewForms
             using (var ic = new InfoContext())
             {
                 SampleList = ic.Samples.Where(s =>
-                                            s.F_Country_Code == selCells["Country_Code"].Value.ToString() &&
-                                            s.F_Client_Id == selCells["Client_ID"].Value.ToString() &&
-                                            s.F_Year == selCells["Year"].Value.ToString() &&
-                                            s.F_Sample_Set_Id == selCells["Sample_Set_ID"].Value.ToString() &&
-                                            s.F_Sample_Set_Index == selCells["Sample_Set_Index"].Value.ToString() &&
+                                            s.F_Country_Code           == selCells["Country_Code"].Value.ToString() &&
+                                            s.F_Client_Id              == selCells["Client_ID"].Value.ToString() &&
+                                            s.F_Year                   == selCells["Year"].Value.ToString() &&
+                                            s.F_Sample_Set_Id          == selCells["Sample_Set_ID"].Value.ToString() &&
+                                            s.F_Sample_Set_Index       == selCells["Sample_Set_Index"].Value.ToString() &&
                                             !_irradiationList.Select(i => i.ToString()).Contains(s.SampleKey)
                                             ).ToList();
             }
@@ -121,12 +165,12 @@ namespace NewForms
             IrradiationJournalADGVSamples.DataSource = bindingSource;
 
             SetColumnsProperties(ref IrradiationJournalADGVSamples,
-                new string[] { "F_Country_Code", "F_Client_Id", "F_Year", "F_Sample_Set_Id", "F_Sample_Set_Index", "SetKey", "SampleKey" },
+                new string[] { "F_Country_Code", "F_Client_Id", "F_Year", "F_Sample_Set_Id", "F_Sample_Set_Index", "SetKey", "SampleKey", "P_Weighting_LLI", "P_Weighting_SLI" },
                 new Dictionary<string, string>() 
                 {
-                    { "A_Sample_ID",       "Номер" },
-                    { "A_Client_Sample_ID", "Клиентский номер" },
-                    { "A_Sample_Type", "Тип" }
+                    { "A_Sample_ID",          "Номер" },
+                    { "A_Client_Sample_ID",   "Клиентский номер" },
+                    { "A_Sample_Type",        "Тип" }
                 },
                 new string[] { "A_Sample_ID", "A_Client_Sample_ID", "A_Sample_Type" }
 
@@ -246,39 +290,89 @@ namespace NewForms
             ShowSamples();
         }
 
+
+        private void AddSLIIrradiationInfo()
+        {
+            foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
+            {
+                var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
+
+                var newIrr = new IrradiationInfo()
+                {
+                    CountryCode  = drvSet.Cells["Country_Code"].Value.ToString(),
+                    ClientNumber = drvSet.Cells["Client_Id"].Value.ToString(),
+                    Year         = drvSet.Cells["Year"].Value.ToString(),
+                    SetNumber    = drvSet.Cells["Sample_Set_Id"].Value.ToString(),
+                    SetIndex     = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
+                    SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
+                    Type         = _type,
+                    DateTimeStart = _currentJournalDateTime,
+                    Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
+                    Duration     = Duration,
+                    Channel      = this.Channel,
+                    Assistant    =  _user
+                };
+
+                using (var ic = new InfoContext())
+                {
+                    ic.Irradiations.Add(newIrr);
+                    ic.SaveChanges();
+                }
+            }
+        }
+
         private void IrradiationJournalButtonAddSelectedToJournal_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("The function is not implemented yet.");
+            //throw new NotImplementedException("The function is not implemented yet.");
             if (IrradiationJournalADGVSamplesSets.SelectedRows.Count != 1)
                 throw new InvalidOperationException("Не выбрана ни одна партия!");
 
             if (IrradiationJournalADGVSamples.SelectedRows.Count == 0)
                 throw new ArgumentException("Не выбран ни один образец для добавления в журнал облучений!");
 
-            foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
+            if (_type == "SLI")
+                AddSLIIrradiationInfo();
+            //if (_type.Contains("LLI"))
+            //AddLLIIrradiationInfo();
+
+            InitializeMainTable();
+
+        }
+
+        private void IrradiationJournalButtonRemoveSelectedFromJournal_Click(object sender, EventArgs e)
+        {
+            if (IrradiationJournalADGV.SelectedCells.Count == 0)
+                throw new ArgumentException("Не выбран ни один образец для удаления из журнала облучений!");
+
+            foreach (DataGridViewRow row in IrradiationJournalADGV.SelectedRows)
             {
-                var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
-                //var newIrr = new IrradiationInfo()
-                //{
-                //    CountryCode = drvSet.Cells["Country_Code"].Value.ToString(),
-                //    ClientNumber = drvSet.Cells["Client_Id"].Value.ToString(),
-                //    Year = drvSet.Cells["Year"].Value.ToString(),
-                //    SetNumber = drvSet.Cells["Sample_Set_Id"].Value.ToString(),
-                //    SetIndex = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
-                //    SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
-                //    Type = _type,
-                //    Weight = ,
-                //    Duration = ,
-                //    Container = ,
-                //    Position = ,
-                //    Channel = ,
-                //    LoadNumber = ,
-                //    Assistant =
-                //};
+                var irr = _irradiationList.Where(ir => ir.Id == (int)row.Cells["Id"].Value).First();
+
+                using (var ic = new InfoContext())
+                {
+                    ic.Irradiations.Remove(irr);
+                    ic.SaveChanges();
+                }
             }
 
+            InitializeMainTable();
+        }
 
+        private void UpdateIrradiationJournal(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= IrradiationJournalADGV.Rows.Count) return;
 
+            using (var ic = new InfoContext())
+            {
+                var currentIrr = ic.Irradiations.Where(ir => ir.Id == (int)IrradiationJournalADGV.Rows[e.RowIndex].Cells["Id"].Value).First();
+
+                System.Type irrInfo = typeof(IrradiationInfo);
+                var prop = irrInfo.GetProperty(IrradiationJournalADGV.Columns[e.ColumnIndex].Name);
+                prop.SetValue(currentIrr, IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
+                ic.Irradiations.Update(currentIrr);
+                ic.SaveChanges();
+            }
         }
     }
 }

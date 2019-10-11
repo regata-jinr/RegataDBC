@@ -15,6 +15,8 @@ namespace NewForms.Models
         public string A_Sample_ID { get; set; }
         public string A_Client_Sample_ID {get; set; }
         public string A_Sample_Type { get; set; }
+        public Single? P_Weighting_LLI { get; set; }
+        public Single? P_Weighting_SLI { get; set; }
 
         [NotMapped]
         public string SetKey => $"{F_Country_Code}-{F_Client_Id}-{F_Year}-{F_Sample_Set_Id}-{F_Sample_Set_Index}";
