@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.IrradiationJournalADGV = new Zuby.ADGV.AdvancedDataGridView();
             this.IrradiationJournalTabs = new System.Windows.Forms.TabControl();
             this.IrradiationJournalTabPageSamples = new System.Windows.Forms.TabPage();
@@ -58,9 +58,7 @@
             this.IrradiationJournalLabelMinutes = new System.Windows.Forms.Label();
             this.IrradiationJournalNumericUpDownMinutes = new System.Windows.Forms.NumericUpDown();
             this.IrradiationJournalGroupBoxDuration = new System.Windows.Forms.GroupBox();
-            this.IrradiationJournalButtonFillDuration = new System.Windows.Forms.Button();
             this.IrradiationJournalGroupBoxChannel = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.IrradiationJournalRadioButtonChannel2 = new System.Windows.Forms.RadioButton();
             this.IrradiationJournalRadioButtonChannel1 = new System.Windows.Forms.RadioButton();
             this.IrradiationJournalButtonRemoveSelectedFromJournal = new System.Windows.Forms.Button();
@@ -87,6 +85,8 @@
             // 
             this.IrradiationJournalADGV.AllowUserToAddRows = false;
             this.IrradiationJournalADGV.AllowUserToDeleteRows = false;
+            this.IrradiationJournalADGV.AllowUserToResizeColumns = false;
+            this.IrradiationJournalADGV.AllowUserToResizeRows = false;
             this.IrradiationJournalADGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -94,29 +94,29 @@
             this.IrradiationJournalADGV.BackgroundColor = System.Drawing.Color.White;
             this.IrradiationJournalADGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IrradiationJournalADGV.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.IrradiationJournalADGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.IrradiationJournalADGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.IrradiationJournalADGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.IrradiationJournalADGV.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.IrradiationJournalADGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.IrradiationJournalADGV.FilterAndSortEnabled = true;
             this.IrradiationJournalADGV.Location = new System.Drawing.Point(12, 30);
             this.IrradiationJournalADGV.Name = "IrradiationJournalADGV";
             this.IrradiationJournalADGV.RowHeadersVisible = false;
             this.IrradiationJournalADGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.IrradiationJournalADGV.Size = new System.Drawing.Size(1471, 445);
+            this.IrradiationJournalADGV.Size = new System.Drawing.Size(1471, 459);
             this.IrradiationJournalADGV.TabIndex = 0;
             // 
             // IrradiationJournalTabs
@@ -126,10 +126,10 @@
             this.IrradiationJournalTabs.Controls.Add(this.tabPage2);
             this.IrradiationJournalTabs.Controls.Add(this.tabPage3);
             this.IrradiationJournalTabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalTabs.Location = new System.Drawing.Point(12, 481);
+            this.IrradiationJournalTabs.Location = new System.Drawing.Point(12, 495);
             this.IrradiationJournalTabs.Name = "IrradiationJournalTabs";
             this.IrradiationJournalTabs.SelectedIndex = 0;
-            this.IrradiationJournalTabs.Size = new System.Drawing.Size(787, 212);
+            this.IrradiationJournalTabs.Size = new System.Drawing.Size(787, 219);
             this.IrradiationJournalTabs.TabIndex = 1;
             // 
             // IrradiationJournalTabPageSamples
@@ -142,7 +142,7 @@
             this.IrradiationJournalTabPageSamples.Location = new System.Drawing.Point(4, 25);
             this.IrradiationJournalTabPageSamples.Name = "IrradiationJournalTabPageSamples";
             this.IrradiationJournalTabPageSamples.Padding = new System.Windows.Forms.Padding(3);
-            this.IrradiationJournalTabPageSamples.Size = new System.Drawing.Size(779, 183);
+            this.IrradiationJournalTabPageSamples.Size = new System.Drawing.Size(779, 190);
             this.IrradiationJournalTabPageSamples.TabIndex = 0;
             this.IrradiationJournalTabPageSamples.Text = "Образцы";
             this.IrradiationJournalTabPageSamples.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             this.IrradiationJournalADGVSamples.Name = "IrradiationJournalADGVSamples";
             this.IrradiationJournalADGVSamples.RowHeadersVisible = false;
             this.IrradiationJournalADGVSamples.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.IrradiationJournalADGVSamples.Size = new System.Drawing.Size(320, 147);
+            this.IrradiationJournalADGVSamples.Size = new System.Drawing.Size(320, 154);
             this.IrradiationJournalADGVSamples.TabIndex = 3;
             // 
             // IrradiationJournalADGVSamplesSets
@@ -212,7 +212,7 @@
             this.IrradiationJournalADGVSamplesSets.Name = "IrradiationJournalADGVSamplesSets";
             this.IrradiationJournalADGVSamplesSets.RowHeadersVisible = false;
             this.IrradiationJournalADGVSamplesSets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.IrradiationJournalADGVSamplesSets.Size = new System.Drawing.Size(415, 147);
+            this.IrradiationJournalADGVSamplesSets.Size = new System.Drawing.Size(415, 154);
             this.IrradiationJournalADGVSamplesSets.TabIndex = 2;
             // 
             // tabPage2
@@ -360,18 +360,19 @@
             // 
             this.IrradiationJournalButtonAddStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IrradiationJournalButtonAddStartTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalButtonAddStartTime.Location = new System.Drawing.Point(1319, 506);
+            this.IrradiationJournalButtonAddStartTime.Location = new System.Drawing.Point(1055, 594);
             this.IrradiationJournalButtonAddStartTime.Name = "IrradiationJournalButtonAddStartTime";
-            this.IrradiationJournalButtonAddStartTime.Size = new System.Drawing.Size(164, 49);
+            this.IrradiationJournalButtonAddStartTime.Size = new System.Drawing.Size(258, 36);
             this.IrradiationJournalButtonAddStartTime.TabIndex = 7;
             this.IrradiationJournalButtonAddStartTime.Text = "Заполнить время начала измерения";
             this.IrradiationJournalButtonAddStartTime.UseVisualStyleBackColor = true;
+            this.IrradiationJournalButtonAddStartTime.Click += new System.EventHandler(this.IrradiationJournalButtonAddStartTime_Click);
             // 
             // IrradiationJournalButtonAddSelectedToJournal
             // 
             this.IrradiationJournalButtonAddSelectedToJournal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IrradiationJournalButtonAddSelectedToJournal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalButtonAddSelectedToJournal.Location = new System.Drawing.Point(805, 506);
+            this.IrradiationJournalButtonAddSelectedToJournal.Location = new System.Drawing.Point(805, 520);
             this.IrradiationJournalButtonAddSelectedToJournal.Name = "IrradiationJournalButtonAddSelectedToJournal";
             this.IrradiationJournalButtonAddSelectedToJournal.Size = new System.Drawing.Size(231, 23);
             this.IrradiationJournalButtonAddSelectedToJournal.TabIndex = 6;
@@ -461,7 +462,6 @@
             // IrradiationJournalGroupBoxDuration
             // 
             this.IrradiationJournalGroupBoxDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalButtonFillDuration);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalNumericUpDownMinutes);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalLabelMinutes);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalNumericUpDownSeconds);
@@ -469,53 +469,32 @@
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalLabelHours);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalNumericUpDownHours);
             this.IrradiationJournalGroupBoxDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalGroupBoxDuration.Location = new System.Drawing.Point(1055, 500);
+            this.IrradiationJournalGroupBoxDuration.Location = new System.Drawing.Point(1055, 514);
             this.IrradiationJournalGroupBoxDuration.Name = "IrradiationJournalGroupBoxDuration";
-            this.IrradiationJournalGroupBoxDuration.Size = new System.Drawing.Size(258, 99);
+            this.IrradiationJournalGroupBoxDuration.Size = new System.Drawing.Size(258, 74);
             this.IrradiationJournalGroupBoxDuration.TabIndex = 15;
             this.IrradiationJournalGroupBoxDuration.TabStop = false;
             this.IrradiationJournalGroupBoxDuration.Text = "Продолжительность облучения";
             // 
-            // IrradiationJournalButtonFillDuration
-            // 
-            this.IrradiationJournalButtonFillDuration.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.IrradiationJournalButtonFillDuration.Location = new System.Drawing.Point(10, 70);
-            this.IrradiationJournalButtonFillDuration.Name = "IrradiationJournalButtonFillDuration";
-            this.IrradiationJournalButtonFillDuration.Size = new System.Drawing.Size(237, 23);
-            this.IrradiationJournalButtonFillDuration.TabIndex = 17;
-            this.IrradiationJournalButtonFillDuration.Text = "Заполнить выделенные";
-            this.IrradiationJournalButtonFillDuration.UseVisualStyleBackColor = true;
-            // 
             // IrradiationJournalGroupBoxChannel
             // 
             this.IrradiationJournalGroupBoxChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.IrradiationJournalGroupBoxChannel.Controls.Add(this.button6);
             this.IrradiationJournalGroupBoxChannel.Controls.Add(this.IrradiationJournalRadioButtonChannel2);
             this.IrradiationJournalGroupBoxChannel.Controls.Add(this.IrradiationJournalRadioButtonChannel1);
             this.IrradiationJournalGroupBoxChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalGroupBoxChannel.Location = new System.Drawing.Point(1055, 607);
+            this.IrradiationJournalGroupBoxChannel.Location = new System.Drawing.Point(1332, 514);
             this.IrradiationJournalGroupBoxChannel.Name = "IrradiationJournalGroupBoxChannel";
-            this.IrradiationJournalGroupBoxChannel.Size = new System.Drawing.Size(258, 82);
+            this.IrradiationJournalGroupBoxChannel.Size = new System.Drawing.Size(103, 74);
             this.IrradiationJournalGroupBoxChannel.TabIndex = 16;
             this.IrradiationJournalGroupBoxChannel.TabStop = false;
-            this.IrradiationJournalGroupBoxChannel.Text = "Канал";
-            // 
-            // button6
-            // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button6.Location = new System.Drawing.Point(92, 25);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(155, 48);
-            this.button6.TabIndex = 18;
-            this.button6.Text = "Заполнить\r\nвыделенные";
-            this.button6.UseVisualStyleBackColor = true;
+            this.IrradiationJournalGroupBoxChannel.Text = "Канал облучения";
             // 
             // IrradiationJournalRadioButtonChannel2
             // 
             this.IrradiationJournalRadioButtonChannel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalRadioButtonChannel2.Location = new System.Drawing.Point(51, 25);
+            this.IrradiationJournalRadioButtonChannel2.Location = new System.Drawing.Point(62, 33);
             this.IrradiationJournalRadioButtonChannel2.Name = "IrradiationJournalRadioButtonChannel2";
-            this.IrradiationJournalRadioButtonChannel2.Size = new System.Drawing.Size(35, 48);
+            this.IrradiationJournalRadioButtonChannel2.Size = new System.Drawing.Size(35, 35);
             this.IrradiationJournalRadioButtonChannel2.TabIndex = 1;
             this.IrradiationJournalRadioButtonChannel2.Text = "2";
             this.IrradiationJournalRadioButtonChannel2.UseVisualStyleBackColor = true;
@@ -524,9 +503,9 @@
             // 
             this.IrradiationJournalRadioButtonChannel1.Checked = true;
             this.IrradiationJournalRadioButtonChannel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalRadioButtonChannel1.Location = new System.Drawing.Point(10, 25);
+            this.IrradiationJournalRadioButtonChannel1.Location = new System.Drawing.Point(10, 33);
             this.IrradiationJournalRadioButtonChannel1.Name = "IrradiationJournalRadioButtonChannel1";
-            this.IrradiationJournalRadioButtonChannel1.Size = new System.Drawing.Size(35, 48);
+            this.IrradiationJournalRadioButtonChannel1.Size = new System.Drawing.Size(35, 35);
             this.IrradiationJournalRadioButtonChannel1.TabIndex = 0;
             this.IrradiationJournalRadioButtonChannel1.TabStop = true;
             this.IrradiationJournalRadioButtonChannel1.Text = "1";
@@ -536,7 +515,7 @@
             // 
             this.IrradiationJournalButtonRemoveSelectedFromJournal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IrradiationJournalButtonRemoveSelectedFromJournal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalButtonRemoveSelectedFromJournal.Location = new System.Drawing.Point(805, 565);
+            this.IrradiationJournalButtonRemoveSelectedFromJournal.Location = new System.Drawing.Point(805, 579);
             this.IrradiationJournalButtonRemoveSelectedFromJournal.Name = "IrradiationJournalButtonRemoveSelectedFromJournal";
             this.IrradiationJournalButtonRemoveSelectedFromJournal.Size = new System.Drawing.Size(231, 23);
             this.IrradiationJournalButtonRemoveSelectedFromJournal.TabIndex = 17;
@@ -548,18 +527,19 @@
             // 
             this.IrradiationJournalButtonRestoreSelectedFromJournal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IrradiationJournalButtonRestoreSelectedFromJournal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalButtonRestoreSelectedFromJournal.Location = new System.Drawing.Point(805, 536);
+            this.IrradiationJournalButtonRestoreSelectedFromJournal.Location = new System.Drawing.Point(805, 550);
             this.IrradiationJournalButtonRestoreSelectedFromJournal.Name = "IrradiationJournalButtonRestoreSelectedFromJournal";
             this.IrradiationJournalButtonRestoreSelectedFromJournal.Size = new System.Drawing.Size(231, 23);
             this.IrradiationJournalButtonRestoreSelectedFromJournal.TabIndex = 18;
             this.IrradiationJournalButtonRestoreSelectedFromJournal.Text = "Восстановить";
             this.IrradiationJournalButtonRestoreSelectedFromJournal.UseVisualStyleBackColor = true;
+            this.IrradiationJournalButtonRestoreSelectedFromJournal.Visible = false;
             // 
             // IrradiationJournal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1495, 705);
+            this.ClientSize = new System.Drawing.Size(1495, 719);
             this.Controls.Add(this.IrradiationJournalButtonRestoreSelectedFromJournal);
             this.Controls.Add(this.IrradiationJournalButtonRemoveSelectedFromJournal);
             this.Controls.Add(this.IrradiationJournalGroupBoxChannel);
@@ -624,8 +604,6 @@
         private System.Windows.Forms.GroupBox IrradiationJournalGroupBoxChannel;
         private System.Windows.Forms.RadioButton IrradiationJournalRadioButtonChannel2;
         private System.Windows.Forms.RadioButton IrradiationJournalRadioButtonChannel1;
-        private System.Windows.Forms.Button IrradiationJournalButtonFillDuration;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button IrradiationJournalButtonRemoveSelectedFromJournal;
         private System.Windows.Forms.Button IrradiationJournalButtonRestoreSelectedFromJournal;
         private System.Windows.Forms.Label label1;

@@ -10,6 +10,13 @@ using NewForms.Models;
 
 namespace NewForms
 {
+    // TODO: addings:
+    //          1. standards
+    //          2. monitors
+    //          3. lli
+    //          4. split code to main - sli - lli parts
+    //          5. add exceptions handling
+    //          6. add tests
     public partial class IrradiationJournal : Form
     {
         private BindingSource _bindingSource;
@@ -17,7 +24,7 @@ namespace NewForms
         private List<string> ChosenSets;
         private List<IrradiationInfo> _irradiationList;
         private readonly string _type;
-        private string _user;
+        private readonly string _user;
         private DateTime _currentJournalDateTime;
 
         public IrradiationJournal(DateTime dateTime, string type, string connectionString)
@@ -48,6 +55,41 @@ namespace NewForms
 
             InitializeSampleSetTable();
             IrradiationJournalADGV.CellValueChanged += UpdateIrradiationJournal;
+            IrradiationJournalADGV.SelectionChanged += IrradiationJournalADGV_SelectionChanged;
+           
+            foreach (var rb in IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Select(r => r).ToArray())
+                rb.CheckedChanged += ChannelRadioButtonCheckedChanged;
+
+        }
+
+        private void ChannelRadioButtonCheckedChanged(object sender, EventArgs e)
+        {
+
+            if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+            var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+            if (colName != "Channel") return;
+
+            foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                cell.Value = short.Parse(IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Where(r => r.Checked).First().Text);
+
+        }
+
+        private void IrradiationJournalADGV_SelectionChanged(object sender, EventArgs e)
+        {
+            if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+
+            var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+            var firstCell =  IrradiationJournalADGV.SelectedCells[0];
+
+            if (colName == "Duration")
+                Duration = (int)firstCell.Value;
+
+            if (colName == "Channel")
+            {
+                if(short.TryParse(firstCell.Value.ToString(), out _) && (short)firstCell.Value <= 2 && (short)firstCell.Value >= 1)
+                    Channel = (short)firstCell.Value;
+            }
+
         }
 
         private short Channel
@@ -55,6 +97,10 @@ namespace NewForms
             get
             {
                 return short.Parse(IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Where(r => r.Checked).First().Text);
+            }
+            set
+            {
+                IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Where(r => r.Text == value.ToString()).First().Checked = true;
             }
         }
 
@@ -66,14 +112,30 @@ namespace NewForms
 
                 return (int)ts.TotalSeconds;
             }
+            set
+            {
+                var ts = TimeSpan.FromSeconds(value);
+                IrradiationJournalNumericUpDownSeconds.Value = ts.Seconds;
+                IrradiationJournalNumericUpDownMinutes.Value = ts.Minutes;
+                IrradiationJournalNumericUpDownHours.Value = ts.Hours;
+            }
         }
 
         private void DurationHandler(object sender, EventArgs e)
         {
             var ts = new TimeSpan((int)IrradiationJournalNumericUpDownHours.Value, (int)IrradiationJournalNumericUpDownMinutes.Value, (int)IrradiationJournalNumericUpDownSeconds.Value);
+
             IrradiationJournalNumericUpDownSeconds.Value = ts.Seconds;
             IrradiationJournalNumericUpDownMinutes.Value = ts.Minutes;
-            IrradiationJournalNumericUpDownHours.Value = ts.Hours;
+            IrradiationJournalNumericUpDownHours.Value   = ts.Hours;
+
+            if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+            var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+            if (colName != "Duration") return;
+
+            foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                cell.Value = ts.TotalSeconds;
+
         }
 
         private void InitializeMainTable()
@@ -81,7 +143,10 @@ namespace NewForms
             ChosenSets = new List<string>();
             using(var ic = new InfoContext())
             {
-                _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue && ir.DateTimeStart.Value.Date == _currentJournalDateTime.Date && ir.Type == _type).ToList();
+                _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue &&
+                                                         ir.DateTimeStart.Value.Date == _currentJournalDateTime.Date &&
+                                                         ir.Type == _type)
+                                                  .ToList();
             }
 
             if (_irradiationList == null)
@@ -344,8 +409,10 @@ namespace NewForms
             if (IrradiationJournalADGV.SelectedCells.Count == 0)
                 throw new ArgumentException("Не выбран ни один образец для удаления из журнала облучений!");
 
-            foreach (DataGridViewRow row in IrradiationJournalADGV.SelectedRows)
+            foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
             {
+
+                var row = cell.OwningRow;
                 var irr = _irradiationList.Where(ir => ir.Id == (int)row.Cells["Id"].Value).First();
 
                 using (var ic = new InfoContext())
@@ -373,6 +440,20 @@ namespace NewForms
                 ic.Irradiations.Update(currentIrr);
                 ic.SaveChanges();
             }
+        }
+
+        private void IrradiationJournalButtonAddStartTime_Click(object sender, EventArgs e)
+        {
+            if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+            var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+            if (colName != "DateTimeStart" && colName != "DateTimeFinish") return;
+
+            var firstCell = IrradiationJournalADGV.SelectedCells[0];
+
+            _currentJournalDateTime = _currentJournalDateTime.Date.AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute).AddSeconds(DateTime.Now.Second);
+
+            firstCell.Value = _currentJournalDateTime;
+
         }
     }
 }
