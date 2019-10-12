@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.IrradiationJournalADGV = new Zuby.ADGV.AdvancedDataGridView();
             this.IrradiationJournalTabs = new System.Windows.Forms.TabControl();
             this.IrradiationJournalTabPageSamples = new System.Windows.Forms.TabPage();
@@ -94,23 +94,23 @@
             this.IrradiationJournalADGV.BackgroundColor = System.Drawing.Color.White;
             this.IrradiationJournalADGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IrradiationJournalADGV.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.IrradiationJournalADGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.IrradiationJournalADGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.IrradiationJournalADGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.IrradiationJournalADGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.IrradiationJournalADGV.DefaultCellStyle = dataGridViewCellStyle2;
             this.IrradiationJournalADGV.FilterAndSortEnabled = true;
             this.IrradiationJournalADGV.Location = new System.Drawing.Point(12, 30);
             this.IrradiationJournalADGV.Name = "IrradiationJournalADGV";
@@ -131,6 +131,7 @@
             this.IrradiationJournalTabs.SelectedIndex = 0;
             this.IrradiationJournalTabs.Size = new System.Drawing.Size(787, 219);
             this.IrradiationJournalTabs.TabIndex = 1;
+            this.IrradiationJournalTabs.Tag = "";
             // 
             // IrradiationJournalTabPageSamples
             // 
@@ -144,6 +145,7 @@
             this.IrradiationJournalTabPageSamples.Padding = new System.Windows.Forms.Padding(3);
             this.IrradiationJournalTabPageSamples.Size = new System.Drawing.Size(779, 190);
             this.IrradiationJournalTabPageSamples.TabIndex = 0;
+            this.IrradiationJournalTabPageSamples.Tag = "Samples";
             this.IrradiationJournalTabPageSamples.Text = "Образцы";
             this.IrradiationJournalTabPageSamples.UseVisualStyleBackColor = true;
             // 
@@ -224,8 +226,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(779, 183);
+            this.tabPage2.Size = new System.Drawing.Size(779, 190);
             this.tabPage2.TabIndex = 1;
+            this.tabPage2.Tag = "Standards";
             this.tabPage2.Text = "Стандарты";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -263,8 +266,8 @@
             this.IrradiationJournalADGVStandards.Location = new System.Drawing.Point(453, 30);
             this.IrradiationJournalADGVStandards.Name = "IrradiationJournalADGVStandards";
             this.IrradiationJournalADGVStandards.RowHeadersVisible = false;
-            this.IrradiationJournalADGVStandards.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.IrradiationJournalADGVStandards.Size = new System.Drawing.Size(206, 312);
+            this.IrradiationJournalADGVStandards.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.IrradiationJournalADGVStandards.Size = new System.Drawing.Size(320, 154);
             this.IrradiationJournalADGVStandards.TabIndex = 5;
             // 
             // IrradiationJournalADGVStandardsSets
@@ -282,8 +285,8 @@
             this.IrradiationJournalADGVStandardsSets.Location = new System.Drawing.Point(6, 30);
             this.IrradiationJournalADGVStandardsSets.Name = "IrradiationJournalADGVStandardsSets";
             this.IrradiationJournalADGVStandardsSets.RowHeadersVisible = false;
-            this.IrradiationJournalADGVStandardsSets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.IrradiationJournalADGVStandardsSets.Size = new System.Drawing.Size(415, 312);
+            this.IrradiationJournalADGVStandardsSets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.IrradiationJournalADGVStandardsSets.Size = new System.Drawing.Size(415, 154);
             this.IrradiationJournalADGVStandardsSets.TabIndex = 4;
             // 
             // tabPage3
@@ -294,8 +297,9 @@
             this.tabPage3.Controls.Add(this.IrradiationJournalADGVMonitorsSets);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(779, 183);
+            this.tabPage3.Size = new System.Drawing.Size(779, 190);
             this.tabPage3.TabIndex = 2;
+            this.tabPage3.Tag = "Monitors";
             this.tabPage3.Text = "Мониторы";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -333,8 +337,8 @@
             this.IrradiationJournalADGVMonitors.Location = new System.Drawing.Point(453, 30);
             this.IrradiationJournalADGVMonitors.Name = "IrradiationJournalADGVMonitors";
             this.IrradiationJournalADGVMonitors.RowHeadersVisible = false;
-            this.IrradiationJournalADGVMonitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.IrradiationJournalADGVMonitors.Size = new System.Drawing.Size(206, 147);
+            this.IrradiationJournalADGVMonitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.IrradiationJournalADGVMonitors.Size = new System.Drawing.Size(320, 154);
             this.IrradiationJournalADGVMonitors.TabIndex = 5;
             // 
             // IrradiationJournalADGVMonitorsSets
@@ -352,8 +356,8 @@
             this.IrradiationJournalADGVMonitorsSets.Location = new System.Drawing.Point(6, 30);
             this.IrradiationJournalADGVMonitorsSets.Name = "IrradiationJournalADGVMonitorsSets";
             this.IrradiationJournalADGVMonitorsSets.RowHeadersVisible = false;
-            this.IrradiationJournalADGVMonitorsSets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.IrradiationJournalADGVMonitorsSets.Size = new System.Drawing.Size(415, 147);
+            this.IrradiationJournalADGVMonitorsSets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.IrradiationJournalADGVMonitorsSets.Size = new System.Drawing.Size(415, 154);
             this.IrradiationJournalADGVMonitorsSets.TabIndex = 4;
             // 
             // IrradiationJournalButtonAddStartTime

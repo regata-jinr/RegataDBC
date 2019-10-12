@@ -136,21 +136,41 @@
   <ItemGroup>
     <Compile Include="Classes\AdvancedBindingSource.cs" />
     <Compile Include="Classes\InfoContext.cs" />
-    <Compile Include="Classes\IrradiationInfo.cs" />
-    <Compile Include="Classes\SampleInfo.cs" />
-    <Compile Include="Classes\SampleSetInfo.cs" />
-    <Compile Include="IrradiationJournalMain.cs">
+    <Compile Include="Journals\Irradiations\Models\IrradiationInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\MonitorInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\MonitorSetInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\StandardSetInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\StandardInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\SampleInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\SampleSetInfo.cs" />
+    <Compile Include="Journals\Irradiations\IrradiationJournalMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IrradiationJournalLLI.cs">
+    <Compile Include="Journals\Irradiations\IrradiationJournalSamples.cs">
       <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IrradiationJournalMain.Designer.cs">
+    <Compile Include="Journals\Irradiations\IrradiationJournalStandards.cs">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Journals\Irradiations\IrradiationJournalMonitors.cs">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Journals\Irradiations\IrradiationJournalSLI.cs">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Journals\Irradiations\IrradiationJournalLLI.cs">
+      <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Journals\Irradiations\IrradiationJournalMain.Designer.cs">
       <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="IrradiationJournalMain.resx">
+    <EmbeddedResource Include="Journals\Irradiations\IrradiationJournalMain.resx">
       <DependentUpon>IrradiationJournalMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NewForms.Models;
 
 namespace NewForms
 {
-    // TODO: addings:
-    //          1. standards
-    //          2. monitors
-    //          3. lli
-    //          4. split code to main - sli - lli parts
-    //          5. add exceptions handling
-    //          6. add tests
+    // TODO: developments:
+    //          1. lli
+    //          2. creation of new journals
+    //          3. split code to main - sli - lli parts
+    //          4. add exceptions handling
+    //          5. add tests
     public partial class IrradiationJournal : Form
     {
         private BindingSource _bindingSource;
@@ -59,6 +56,10 @@ namespace NewForms
            
             foreach (var rb in IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Select(r => r).ToArray())
                 rb.CheckedChanged += ChannelRadioButtonCheckedChanged;
+
+
+            InitializeStandardSetTable();
+            InitializeMonitorSetTable();
 
         }
 
@@ -166,6 +167,9 @@ namespace NewForms
             var r = IrradiationJournalADGVSearchToolBar.Items[0];
 
             ShowSamples();
+            ShowStandards();
+            ShowMonitors();
+
 
         }
 
@@ -199,65 +203,48 @@ namespace NewForms
 
         }
 
-
-        private void ShowSamples()
+        private void InitializeStandardSetTable()
         {
-            IrradiationJournalADGVSamples.DataSource = null;
-
-            if (IrradiationJournalADGVSamplesSets.SelectedRows.Count == 0)
-                return;
-
-            var selCells = IrradiationJournalADGVSamplesSets.SelectedRows[0].Cells;
-            List<SampleInfo> SampleList = null;
+            List<StandardSetInfo> standardSetsList = null;
             using (var ic = new InfoContext())
             {
-                SampleList = ic.Samples.Where(s =>
-                                            s.F_Country_Code           == selCells["Country_Code"].Value.ToString() &&
-                                            s.F_Client_Id              == selCells["Client_ID"].Value.ToString() &&
-                                            s.F_Year                   == selCells["Year"].Value.ToString() &&
-                                            s.F_Sample_Set_Id          == selCells["Sample_Set_ID"].Value.ToString() &&
-                                            s.F_Sample_Set_Index       == selCells["Sample_Set_Index"].Value.ToString() &&
-                                            !_irradiationList.Select(i => i.ToString()).Contains(s.SampleKey)
-                                            ).ToList();
+                standardSetsList = ic.StandardSets.Select(ss => ss).OrderBy(ss => ss.SRM_Set_Name).ThenByDescending(ss => ss.SRM_Set_Number).ToList();
             }
 
-            if (SampleList == null)
-                SampleList = new List<SampleInfo>();
-
-            var advbindSource = new  AdvancedBindingSource<SampleInfo>(SampleList);
-            IrradiationJournalADGVSamples.SetDoubleBuffered();
-            var bindingSource = advbindSource.GetBindingSource();
-            IrradiationJournalADGVSamples.DataSource = bindingSource;
-
-            SetColumnsProperties(ref IrradiationJournalADGVSamples,
-                new string[] { "F_Country_Code", "F_Client_Id", "F_Year", "F_Sample_Set_Id", "F_Sample_Set_Index", "SetKey", "SampleKey", "P_Weighting_LLI", "P_Weighting_SLI" },
-                new Dictionary<string, string>() 
-                {
-                    { "A_Sample_ID",          "Номер" },
-                    { "A_Client_Sample_ID",   "Клиентский номер" },
-                    { "A_Sample_Type",        "Тип" }
-                },
-                new string[] { "A_Sample_ID", "A_Client_Sample_ID", "A_Sample_Type" }
-
-                );
-
+           
+            var advbindSource = new  AdvancedBindingSource<StandardSetInfo>(standardSetsList);
+            IrradiationJournalADGVStandardsSets.SetDoubleBuffered();
+            var _SSbindingSource = advbindSource.GetBindingSource();
+            IrradiationJournalADGVStandardsSets.DataSource = _SSbindingSource;
+            SetColumnVisiblesForStandardsSet();
+            IrradiationJournalADGVStandardsSets.SelectionChanged += SelectStandardsSetHandler;
         }
 
-        private void SetColumnVisiblesForSampleSet()
+        private void SelectStandardsSetHandler(object sender, EventArgs e)
         {
-            SetColumnsProperties(ref IrradiationJournalADGVSamplesSets,
-                               new string[]
-                               { "Sample_Set_Receipt_Date", "Sample_Set_Report_Date", "Received_By", "Notes_1", "Notes_2", "Notes_3", "Note", "Loggs", "PrepCompl", "SLICompl", "LLICompl", "ResCompl"},
-                               new Dictionary<string, string>() {
-                                    { "Country_Code",       "Код страны" },
-                                    { "Client_Id",          "Номер клиента" },
-                                    { "Year",               "Год" },
-                                    { "Sample_Set_Id",      "Номер партии" },
-                                    { "Sample_Set_Index",   "Индекс партии" }
-                               },
-                               new string[]{ "Country_Code", "Client_Id", "Year", "Sample_Set_Id", "Sample_Set_Index" }
-                               );
+            ShowStandards();
+        }
 
+        private void InitializeMonitorSetTable()
+        {
+            List<MonitorSetInfo> MonitorSetsList = null;
+            using (var ic = new InfoContext())
+            {
+                MonitorSetsList = ic.MonitorSets.Select(ms => ms).OrderBy(ms => ms.Monitor_Set_Name).ThenByDescending(ms => ms.Monitor_Set_Number).ToList();
+            }
+
+
+            var advbindSource = new  AdvancedBindingSource<MonitorSetInfo>(MonitorSetsList);
+            IrradiationJournalADGVMonitorsSets.SetDoubleBuffered();
+            var _SSbindingSource = advbindSource.GetBindingSource();
+            IrradiationJournalADGVMonitorsSets.DataSource = _SSbindingSource;
+            SetColumnVisiblesForMonitorsSet();
+            IrradiationJournalADGVMonitorsSets.SelectionChanged += SelectMonitorsSetHandler;
+        }
+
+        private void SelectMonitorsSetHandler(object sender, EventArgs e)
+        {
+            ShowMonitors();
         }
 
         private void SetColumnVisibles(string type)
@@ -266,36 +253,6 @@ namespace NewForms
                 SetColumnProperties4SLI();
             if (type.Contains("LLI"))
                 SetColumnProperties4LLI();
-        }
-
-        private void SetColumnProperties4SLI()
-        {
-            SetColumnProperties4SLIAndMainTable();
-        }
-        private void SetColumnProperties4SLIAndMainTable()
-        {
-
-            SetColumnsProperties(ref IrradiationJournalADGV, 
-                                new string[] 
-                                { "Id", "SetKey", "SampleKey", "Type", "Container", "Position", "LoadNumber", "Rehandler" },
-                                new Dictionary<string, string>() { 
-                                    { "CountryCode",    "Код страны" },
-                                    { "ClientNumber",   "Номер клиента" },
-                                    { "Year",           "Год" },
-                                    { "SetNumber",      "Номер партии" },
-                                    { "SetIndex",       "Индекс партии" },
-                                    { "SampleNumber",   "Номер образца" },
-                                    { "Weight",         "Вес" },
-                                    { "DateTimeStart",  "Дата и время начала облучения" },
-                                    { "Duration",       "Продолжительность облучения" },
-                                    { "DateTimeFinish", "Дата и время конца облучения" },
-                                    { "Channel",        "Канал" },
-                                    { "Assistant",      "Облучил" },
-                                    { "Note",           "Примечание" } },
-                                new string[] 
-                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Assistant" }
-                                );
-
         }
 
         private void IrradiationJournalADGVSearchToolBar_Search(object sender, Zuby.ADGV.AdvancedDataGridViewSearchToolBarSearchEventArgs e)
@@ -343,8 +300,16 @@ namespace NewForms
             foreach(var colName in invisibles)
                 adgv.Columns[colName].Visible = false;
 
-            foreach (var colName in readonlies)
-                adgv.Columns[colName].ReadOnly = true;
+            if (readonlies.Any())
+            {
+                foreach (var colName in readonlies)
+                    adgv.Columns[colName].ReadOnly = true;
+            }
+            else
+            {
+                foreach (DataGridViewColumn col in adgv.Columns)
+                    col.ReadOnly = true;
+            }
 
             foreach (var colName in columnHeaders.Keys)
                 adgv.Columns[colName].HeaderText = columnHeaders[colName];
@@ -355,52 +320,23 @@ namespace NewForms
             ShowSamples();
         }
 
-
-        private void AddSLIIrradiationInfo()
-        {
-            foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
-            {
-                var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
-
-                var newIrr = new IrradiationInfo()
-                {
-                    CountryCode  = drvSet.Cells["Country_Code"].Value.ToString(),
-                    ClientNumber = drvSet.Cells["Client_Id"].Value.ToString(),
-                    Year         = drvSet.Cells["Year"].Value.ToString(),
-                    SetNumber    = drvSet.Cells["Sample_Set_Id"].Value.ToString(),
-                    SetIndex     = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
-                    SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
-                    Type         = _type,
-                    DateTimeStart = _currentJournalDateTime,
-                    Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
-                    Duration     = Duration,
-                    Channel      = this.Channel,
-                    Assistant    =  _user
-                };
-
-                using (var ic = new InfoContext())
-                {
-                    ic.Irradiations.Add(newIrr);
-                    ic.SaveChanges();
-                }
-            }
-        }
-
+      
         private void IrradiationJournalButtonAddSelectedToJournal_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException("The function is not implemented yet.");
-            if (IrradiationJournalADGVSamplesSets.SelectedRows.Count != 1)
-                throw new InvalidOperationException("Не выбрана ни одна партия!");
+            if (IrradiationJournalTabs.SelectedTab.Tag.ToString() == "Samples")
+                AddIrradiationInfoFromSamples();
 
-            if (IrradiationJournalADGVSamples.SelectedRows.Count == 0)
-                throw new ArgumentException("Не выбран ни один образец для добавления в журнал облучений!");
+            if (IrradiationJournalTabs.SelectedTab.Tag.ToString() == "Standards")
+                AddIrradiationInfoFromStandards();
 
-            if (_type == "SLI")
-                AddSLIIrradiationInfo();
-            //if (_type.Contains("LLI"))
-            //AddLLIIrradiationInfo();
+            if (IrradiationJournalTabs.SelectedTab.Tag.ToString() == "Monitors")
+                AddIrradiationInfoFromMonitors();
 
             InitializeMainTable();
+
+            IrradiationJournalADGV.FirstDisplayedScrollingRowIndex = IrradiationJournalADGV.RowCount - 1;
+
+
 
         }
 
