@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 
 namespace NewForms
 {
@@ -24,41 +22,62 @@ namespace NewForms
 
         public AdvancedBindingSource(List<T> list)
         {
-            _sourceList = list;
-            _bindingSource = new BindingSource();
-            
-            _basicType = typeof(T);
-            _propertiesList = _basicType.GetProperties();
-            _dataset = new DataSet();
-            _datatable = new DataTable();
-            CreateColumns();
-            FillData();
+            try
+            {
+                _sourceList = list;
+                _bindingSource = new BindingSource();
 
-            _bindingSource.DataSource = _dataset;
+                _basicType = typeof(T);
+                _propertiesList = _basicType.GetProperties();
+                _dataset = new DataSet();
+                _datatable = new DataTable();
+                CreateColumns();
+                FillData();
+
+                _bindingSource.DataSource = _dataset;
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
 
         }
 
         private void CreateColumns()
         {
-            _datatable = _dataset.Tables.Add(_basicType.Name);
+            try
+            {
+                _datatable = _dataset.Tables.Add(_basicType.Name);
 
-            foreach (var pi in _propertiesList)
-                _datatable.Columns.Add(pi.Name, Nullable.GetUnderlyingType(
-            pi.PropertyType) ?? pi.PropertyType);
+                foreach (var pi in _propertiesList)
+                    _datatable.Columns.Add(pi.Name, Nullable.GetUnderlyingType(
+                pi.PropertyType) ?? pi.PropertyType);
 
-            _bindingSource.DataMember = _datatable.TableName;
+                _bindingSource.DataMember = _datatable.TableName;
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
         }
 
         private void FillData()
         {
-            foreach (var ent in _sourceList)
+            try
             {
-                object[] newrow = new object[_propertiesList.Length];
+                foreach (var ent in _sourceList)
+                {
+                    object[] newrow = new object[_propertiesList.Length];
 
-                for (int i = 0; i < _propertiesList.Length; ++i)
-                    newrow[i] = _propertiesList[i].GetValue(ent);
+                    for (int i = 0; i < _propertiesList.Length; ++i)
+                        newrow[i] = _propertiesList[i].GetValue(ent);
 
-                _datatable.Rows.Add(newrow);
+                    _datatable.Rows.Add(newrow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() {exception = ex, Level = ExceptionLevel.Error });
             }
         }
     }

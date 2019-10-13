@@ -28,46 +28,53 @@ namespace NewForms
 
         private void ShowMonitors()
         {
-            IrradiationJournalADGVMonitors.DataSource = null;
-
-            if (IrradiationJournalADGVMonitorsSets.SelectedRows.Count == 0)
-                return;
-
-            var selCells = IrradiationJournalADGVMonitorsSets.SelectedRows[0].Cells;
-            List<MonitorInfo> MonitorList = null;
-            using (var ic = new InfoContext())
+            try
             {
-                MonitorList = ic.Monitors.Where(s =>
-                                            s.Monitor_Set_Name == selCells["Monitor_Set_Name"].Value.ToString() &&
-                                            s.Monitor_Set_Number == selCells["Monitor_Set_Number"].Value.ToString() &&
-                                            !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
-                                            ).ToList();
-            }
+                IrradiationJournalADGVMonitors.DataSource = null;
 
-            if (MonitorList == null)
-                MonitorList = new List<MonitorInfo>();
+                if (IrradiationJournalADGVMonitorsSets.SelectedRows.Count == 0)
+                    return;
 
-            var advbindSource = new  AdvancedBindingSource<MonitorInfo>(MonitorList);
-            IrradiationJournalADGVMonitors.SetDoubleBuffered();
-            var bindingSource = advbindSource.GetBindingSource();
-            IrradiationJournalADGVMonitors.DataSource = bindingSource;
-
-            _currentWeightMonitorColumnName = _type.Contains("LLI") ? "Monitor_LLI_Weight" : "Monitor_SLI_Weight";
-
-            var restWeightColumn = new List<string>(){ "Monitor_LLI_Weight", "Monitor_SLI_Weight" };
-            restWeightColumn.Remove(_currentWeightMonitorColumnName);
-
-            
-
-            SetColumnsProperties(ref IrradiationJournalADGVMonitors,
-                new string[] { "Monitor_Set_Name", "Monitor_Set_Number", "Monitor_Set_Weight", restWeightColumn.First() },
-                new Dictionary<string, string>()
+                var selCells = IrradiationJournalADGVMonitorsSets.SelectedRows[0].Cells;
+                List<MonitorInfo> MonitorList = null;
+                using (var ic = new InfoContext())
                 {
+                    MonitorList = ic.Monitors.Where(s =>
+                                                s.Monitor_Set_Name == selCells["Monitor_Set_Name"].Value.ToString() &&
+                                                s.Monitor_Set_Number == selCells["Monitor_Set_Number"].Value.ToString() &&
+                                                !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
+                                                ).ToList();
+                }
+
+                if (MonitorList == null)
+                    MonitorList = new List<MonitorInfo>();
+
+                var advbindSource = new  AdvancedBindingSource<MonitorInfo>(MonitorList);
+                IrradiationJournalADGVMonitors.SetDoubleBuffered();
+                var bindingSource = advbindSource.GetBindingSource();
+                IrradiationJournalADGVMonitors.DataSource = bindingSource;
+
+                _currentWeightMonitorColumnName = _type.Contains("LLI") ? "Monitor_LLI_Weight" : "Monitor_SLI_Weight";
+
+                var restWeightColumn = new List<string>(){ "Monitor_LLI_Weight", "Monitor_SLI_Weight" };
+                restWeightColumn.Remove(_currentWeightMonitorColumnName);
+
+
+
+                SetColumnsProperties(ref IrradiationJournalADGVMonitors,
+                    new string[] { "Monitor_Set_Name", "Monitor_Set_Number", "Monitor_Set_Weight", restWeightColumn.First() },
+                    new Dictionary<string, string>()
+                    {
                     { "Monitor_Number",             "Номер"   },
                     { _currentWeightMonitorColumnName, "Вес"     }
-                },
-                new string[0]
-                );
+                    },
+                    new string[0]
+                    );
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
         }
 
         private void AddIrradiationInfoFromMonitors()
@@ -86,33 +93,39 @@ namespace NewForms
 
         private void AddMonitorsIrradiationInfoSLI()
         {
-            foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows)
+            try
             {
-                var drvSet = IrradiationJournalADGVMonitorsSets.SelectedRows[0];
-
-                var newIrr = new IrradiationInfo()
+                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows)
                 {
-                    CountryCode   = "m",
-                    ClientNumber  = "m",
-                    Year          = "m",
-                    SetNumber     = drvSet.Cells["Monitor_Set_Name"].Value.ToString(),
-                    SetIndex      = drvSet.Cells["Monitor_Set_Number"].Value.ToString(),
-                    SampleNumber  = row.Cells["Monitor_Number"].Value.ToString(),
-                    Type          = _type,
-                    DateTimeStart = _currentJournalDateTime,
-                    Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightMonitorColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightMonitorColumnName].Value.ToString()),
-                    Duration      = Duration,
-                    Channel       = this.Channel,
-                    Assistant     =  _user
-                };
+                    var drvSet = IrradiationJournalADGVMonitorsSets.SelectedRows[0];
 
-                using (var ic = new InfoContext())
-                {
-                    ic.Irradiations.Add(newIrr);
-                    ic.SaveChanges();
+                    var newIrr = new IrradiationInfo()
+                    {
+                        CountryCode   = "m",
+                        ClientNumber  = "m",
+                        Year          = "m",
+                        SetNumber     = drvSet.Cells["Monitor_Set_Name"].Value.ToString(),
+                        SetIndex      = drvSet.Cells["Monitor_Set_Number"].Value.ToString(),
+                        SampleNumber  = row.Cells["Monitor_Number"].Value.ToString(),
+                        Type          = _type,
+                        DateTimeStart = _currentJournalDateTime,
+                        Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightMonitorColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightMonitorColumnName].Value.ToString()),
+                        Duration      = Duration,
+                        Channel       = this.Channel,
+                        Assistant     =  _user
+                    };
+
+                    using (var ic = new InfoContext())
+                    {
+                        ic.Irradiations.Add(newIrr);
+                        ic.SaveChanges();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
         }
-
     }
 }

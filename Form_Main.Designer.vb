@@ -524,7 +524,7 @@ Partial Class Form_Main
         '
         Me.ComboBox_Journal_Of_Irradiation_View.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ComboBox_Journal_Of_Irradiation_View.FormattingEnabled = True
-        Me.ComboBox_Journal_Of_Irradiation_View.Items.AddRange(New Object() {"Current year", "All years"})
+        Me.ComboBox_Journal_Of_Irradiation_View.Items.AddRange(New Object() {"Current year", "All time"})
         Me.ComboBox_Journal_Of_Irradiation_View.Location = New System.Drawing.Point(681, 393)
         Me.ComboBox_Journal_Of_Irradiation_View.Name = "ComboBox_Journal_Of_Irradiation_View"
         Me.ComboBox_Journal_Of_Irradiation_View.Size = New System.Drawing.Size(268, 21)
@@ -642,19 +642,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'Form_Main

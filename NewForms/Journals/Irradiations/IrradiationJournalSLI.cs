@@ -28,7 +28,7 @@ namespace NewForms
                                     { "Assistant",      "Облучил" },
                                     { "Note",           "Примечание" } },
                                 new string[]
-                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Assistant" }
+                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "Duration", "Channel", "Assistant" }
                                 );
 
         }
@@ -37,33 +37,39 @@ namespace NewForms
 
         private void AddSLIIrradiationInfo()
         {
-            foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
+            try
             {
-                var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
-
-                var newIrr = new IrradiationInfo()
+                foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
                 {
-                    CountryCode  = drvSet.Cells["Country_Code"].Value.ToString(),
-                    ClientNumber = drvSet.Cells["Client_Id"].Value.ToString(),
-                    Year         = drvSet.Cells["Year"].Value.ToString(),
-                    SetNumber    = drvSet.Cells["Sample_Set_Id"].Value.ToString(),
-                    SetIndex     = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
-                    SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
-                    Type         = _type,
-                    DateTimeStart = _currentJournalDateTime,
-                    Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
-                    Duration     = Duration,
-                    Channel      = this.Channel,
-                    Assistant    =  _user
-                };
+                    var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
 
-                using (var ic = new InfoContext())
-                {
-                    ic.Irradiations.Add(newIrr);
-                    ic.SaveChanges();
+                    var newIrr = new IrradiationInfo()
+                    {
+                        CountryCode  = drvSet.Cells["Country_Code"].Value.ToString(),
+                        ClientNumber = drvSet.Cells["Client_Id"].Value.ToString(),
+                        Year         = drvSet.Cells["Year"].Value.ToString(),
+                        SetNumber    = drvSet.Cells["Sample_Set_Id"].Value.ToString(),
+                        SetIndex     = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
+                        SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
+                        Type         = _type,
+                        DateTimeStart = _currentJournalDateTime,
+                        Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
+                        Duration     = Duration,
+                        Channel      = this.Channel,
+                        Assistant    =  _user
+                    };
+
+                    using (var ic = new InfoContext())
+                    {
+                        ic.Irradiations.Add(newIrr);
+                        ic.SaveChanges();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
         }
-
     }
 }

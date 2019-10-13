@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="Classes\AdvancedBindingSource.cs" />
     <Compile Include="Classes\InfoContext.cs" />
+    <Compile Include="Classes\MessageBoxTemplates.cs" />
     <Compile Include="Journals\Irradiations\Models\IrradiationInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\MonitorInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\MonitorSetInfo.cs" />
