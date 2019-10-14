@@ -78,9 +78,9 @@ namespace NewForms
                 throw new ArgumentException("Не выбран ни один образец для добавления в журнал облучений!");
 
             if (_type == "SLI")
-                AddSLIIrradiationInfo();
-            if (_type.Contains("LLI"))
-                AddLLIIrradiationInfo();
+                AddSLIIrradiationInfoToMainTable();
+            else
+                AddLLIIrradiationInfoToMainTable();
         }
 
     }

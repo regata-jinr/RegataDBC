@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports System.Threading
-Imports System.Threading.Tasks
 Imports System.Deployment.Application
 
 Public Class Form_Main
@@ -718,153 +716,36 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_New_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_LLI_Irradiation_Log.Click
-
-
-
-        MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
-        Exit Sub
-
-
-
-        Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
-            Dim LLI_Irradiation_Log As Date
-            Try
-                LLI_Irradiation_Log = MaskedTextBox_LLI_Irradiation_Log.Text
-            Catch ex As Exception
-                If language = "Русский" Then
-                    MsgBox("Check date!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Проверьте дату!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End Try
+            Dim maxLoadNumber As Integer = 0
+            Using conn As New SqlConnection(MyConnectionString)
 
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim cmd As New SqlCommand
-            Dim reader As SqlDataReader
+                Dim cmd As New SqlCommand("select max(LoadNumber) from NAA_DB_TEST.dbo.Irradiations", conn)
+                conn.Open()
+                maxLoadNumber = cmd.ExecuteScalar()
+            End Using
+            maxLoadNumber += 1
+            Dim ij As New NewForms.IrradiationJournal(DateTime.Now.Date, "LLI-1", MyConnectionString, maxLoadNumber)
+            ij.Show()
 
-            cmd.CommandText = $"declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104);"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            sqlConnection1.Close()
-
-            cmd.CommandText = " SELECT max(loadNumber) from table_LLI_Irradiation_Log"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            ' по-хорошему надо добавить проверку на число 
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then
-                    FormLLiLog.TextBox_Download.Text = reader(0) + 1
-                Else
-                    FormLLiLog.TextBox_Download.Text = InputBox("Программа не может определить номер загрузки, пожалуйста, введите его самостоятельно.", "Ввод номера загрузки", "0")
-                End If
-            End While
-
-            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = MaskedTextBox_LLI_Irradiation_Log.Text
-
-            ' Me.Enabled = False
-            FormLLiLog.Show()
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
-            End If
-            FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
-            End If
-            FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
-            End If
-            FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
-            '  Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            FormLLiLog.Close()
             Exit Sub
         End Try
     End Sub
 
     Private Sub B_Select_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_LLI_Irradiation_Log.Click
-
-
-        MessageBox.Show("В связи с работами над новой программой измерений данная функция пока не доступна.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
-        Exit Sub
-
-        Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
-            If ListBox_LLI_Irradiation_Log_Date.Items.Count < 1 Then
-                If language = "Русский" Then
-                    MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            If ListBox_LLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                If language = "Русский" Then
-                    MsgBox("Выберите журнал ДЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim jDate As String
             Dim number As String
 
             jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
             number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
-            's1 = s(s.Count - 4) + s(s.Count - 3) + s(s.Count - 2) + s(s.Count - 1)
-            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormLLiLog.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
+            Dim ij As New NewForms.IrradiationJournal(DateTime.Parse(jDate), "LLI-1", MyConnectionString, Integer.Parse(number))
+            ij.Show()
 
-            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
-            FormLLiLog.TextBox_Download.Text = number
-
-            ' Me.Enabled = False))
-            FormLLiLog.Show()
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
-            End If
-            FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
-            End If
-            FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
-            ' Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            FormLLiLog.Close()
             Exit Sub
         End Try
     End Sub
@@ -1399,7 +1280,6 @@ Public Class Form_Main
                     ListBox_SLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_SLI_Irradiation_Log_Date.SetSelected(ListBox_SLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If
-                MaskedTextBox_SLI_Irradiation_Log.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
 
@@ -1417,7 +1297,6 @@ Public Class Form_Main
                     ListBox_LLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_LLI_Irradiation_Log_Date.SetSelected(ListBox_LLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If
-                MaskedTextBox_LLI_Irradiation_Log.Text = Format(Now(), "dd.MM.yyyy")
 
                 ' все года
             ElseIf ComboBox_Journal_Of_Irradiation_View.SelectedItem = "За все время" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = "All time" Then
@@ -1442,7 +1321,6 @@ Public Class Form_Main
                     ListBox_SLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_SLI_Irradiation_Log_Date.SetSelected(ListBox_SLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If
-                MaskedTextBox_SLI_Irradiation_Log.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
                 cmd.CommandText = "SELECT DISTINCT convert(varchar, DateTimeStart,4), loadNumber FROM Irradiations where DateTimeStart is not null and Type like 'LLI%' ORDER BY LoadNumber"
@@ -1459,7 +1337,6 @@ Public Class Form_Main
                     ListBox_LLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_LLI_Irradiation_Log_Date.SetSelected(ListBox_LLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If
-                MaskedTextBox_LLI_Irradiation_Log.Text = Format(Now(), "dd.MM.yyyy")
             End If
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)

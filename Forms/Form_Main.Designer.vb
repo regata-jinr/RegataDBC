@@ -42,7 +42,6 @@ Partial Class Form_Main
         Me.L_Name_LLI_Irradiation_Log = New System.Windows.Forms.Label()
         Me.B_Select_SLI_Irradiation_Log = New System.Windows.Forms.Button()
         Me.B_New_SLI_Irradiation_Log = New System.Windows.Forms.Button()
-        Me.MaskedTextBox_SLI_Irradiation_Log = New System.Windows.Forms.MaskedTextBox()
         Me.L_Name_Sample_Set = New System.Windows.Forms.Label()
         Me.B_Select_SRM_Set = New System.Windows.Forms.Button()
         Me.B_New_SRM_Set_Accept = New System.Windows.Forms.Button()
@@ -52,7 +51,6 @@ Partial Class Form_Main
         Me.Table_Monitor_SetDataGridView = New System.Windows.Forms.DataGridView()
         Me.B_Select_Monitor_Set = New System.Windows.Forms.Button()
         Me.B_New_Monitor_Set_Accept = New System.Windows.Forms.Button()
-        Me.MaskedTextBox_LLI_Irradiation_Log = New System.Windows.Forms.MaskedTextBox()
         Me.B_Select_LLI_Irradiation_Log = New System.Windows.Forms.Button()
         Me.B_New_LLI_Irradiation_Log = New System.Windows.Forms.Button()
         Me.L_Count = New System.Windows.Forms.Label()
@@ -215,22 +213,12 @@ Partial Class Form_Main
         'B_New_SLI_Irradiation_Log
         '
         Me.B_New_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 479)
+        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 449)
         Me.B_New_SLI_Irradiation_Log.Name = "B_New_SLI_Irradiation_Log"
         Me.B_New_SLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_New_SLI_Irradiation_Log.TabIndex = 153
         Me.B_New_SLI_Irradiation_Log.Text = "New SLI irradiation log"
         Me.B_New_SLI_Irradiation_Log.UseVisualStyleBackColor = True
-        '
-        'MaskedTextBox_SLI_Irradiation_Log
-        '
-        Me.MaskedTextBox_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MaskedTextBox_SLI_Irradiation_Log.Location = New System.Drawing.Point(711, 449)
-        Me.MaskedTextBox_SLI_Irradiation_Log.Mask = "00/00/0000"
-        Me.MaskedTextBox_SLI_Irradiation_Log.Name = "MaskedTextBox_SLI_Irradiation_Log"
-        Me.MaskedTextBox_SLI_Irradiation_Log.Size = New System.Drawing.Size(74, 20)
-        Me.MaskedTextBox_SLI_Irradiation_Log.TabIndex = 155
-        Me.MaskedTextBox_SLI_Irradiation_Log.ValidatingType = GetType(Date)
         '
         'L_Name_Sample_Set
         '
@@ -370,16 +358,6 @@ Partial Class Form_Main
         Me.B_New_Monitor_Set_Accept.Text = "New monitor set acceptance"
         Me.B_New_Monitor_Set_Accept.UseVisualStyleBackColor = True
         '
-        'MaskedTextBox_LLI_Irradiation_Log
-        '
-        Me.MaskedTextBox_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MaskedTextBox_LLI_Irradiation_Log.Location = New System.Drawing.Point(850, 449)
-        Me.MaskedTextBox_LLI_Irradiation_Log.Mask = "00/00/0000"
-        Me.MaskedTextBox_LLI_Irradiation_Log.Name = "MaskedTextBox_LLI_Irradiation_Log"
-        Me.MaskedTextBox_LLI_Irradiation_Log.Size = New System.Drawing.Size(74, 20)
-        Me.MaskedTextBox_LLI_Irradiation_Log.TabIndex = 167
-        Me.MaskedTextBox_LLI_Irradiation_Log.ValidatingType = GetType(Date)
-        '
         'B_Select_LLI_Irradiation_Log
         '
         Me.B_Select_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -393,7 +371,7 @@ Partial Class Form_Main
         'B_New_LLI_Irradiation_Log
         '
         Me.B_New_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 479)
+        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 449)
         Me.B_New_LLI_Irradiation_Log.Name = "B_New_LLI_Irradiation_Log"
         Me.B_New_LLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
         Me.B_New_LLI_Irradiation_Log.TabIndex = 165
@@ -674,7 +652,6 @@ Partial Class Form_Main
         Me.Controls.Add(Me.ListBox_LLI_Irradiation_Log_Date)
         Me.Controls.Add(Me.ListBox_SLI_Irradiation_Log_Date)
         Me.Controls.Add(Me.L_Count)
-        Me.Controls.Add(Me.MaskedTextBox_LLI_Irradiation_Log)
         Me.Controls.Add(Me.B_Select_LLI_Irradiation_Log)
         Me.Controls.Add(Me.B_New_LLI_Irradiation_Log)
         Me.Controls.Add(Me.B_Select_Monitor_Set)
@@ -686,7 +663,6 @@ Partial Class Form_Main
         Me.Controls.Add(Me.B_New_SRM_Set_Accept)
         Me.Controls.Add(Me.Table_SRM_SetDataGridView)
         Me.Controls.Add(Me.L_Name_Sample_Set)
-        Me.Controls.Add(Me.MaskedTextBox_SLI_Irradiation_Log)
         Me.Controls.Add(Me.B_Select_SLI_Irradiation_Log)
         Me.Controls.Add(Me.B_New_SLI_Irradiation_Log)
         Me.Controls.Add(Me.L_Name_LLI_Irradiation_Log)
@@ -731,7 +707,6 @@ Partial Class Form_Main
     Friend WithEvents L_Name_LLI_Irradiation_Log As System.Windows.Forms.Label
     Friend WithEvents B_Select_SLI_Irradiation_Log As System.Windows.Forms.Button
     Friend WithEvents B_New_SLI_Irradiation_Log As System.Windows.Forms.Button
-    Friend WithEvents MaskedTextBox_SLI_Irradiation_Log As System.Windows.Forms.MaskedTextBox
     Friend WithEvents L_Name_Sample_Set As System.Windows.Forms.Label
     Friend WithEvents Table_SRM_Set_BindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Table_SRM_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter
@@ -744,7 +719,6 @@ Partial Class Form_Main
     Friend WithEvents Table_Monitor_Set_TableAdapter As NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter
     Friend WithEvents B_Select_Monitor_Set As System.Windows.Forms.Button
     Friend WithEvents B_New_Monitor_Set_Accept As System.Windows.Forms.Button
-    Friend WithEvents MaskedTextBox_LLI_Irradiation_Log As System.Windows.Forms.MaskedTextBox
     Friend WithEvents B_Select_LLI_Irradiation_Log As System.Windows.Forms.Button
     Friend WithEvents B_New_LLI_Irradiation_Log As System.Windows.Forms.Button
     Friend WithEvents L_Count As System.Windows.Forms.Label

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System;
 using NewForms.Models;
+using System.Linq;
 
 namespace NewForms
 {
@@ -35,7 +36,7 @@ namespace NewForms
 
 
 
-        private void AddSLIIrradiationInfo()
+        private void AddSLIIrradiationInfoToMainTable()
         {
             try
             {
@@ -59,6 +60,7 @@ namespace NewForms
                         Assistant    =  _user
                     };
 
+                    _irradiationList.Add(newIrr);
                     using (var ic = new InfoContext())
                     {
                         ic.Irradiations.Add(newIrr);
@@ -70,6 +72,11 @@ namespace NewForms
             {
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
+        }
+
+        private void SetSLIVisibilities()
+        {
+            IrradiationJournalGoupBoxContainer.Visible = false;
         }
     }
 }

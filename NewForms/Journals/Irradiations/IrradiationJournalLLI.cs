@@ -2,6 +2,7 @@
 using NewForms.Models;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace NewForms
 {
@@ -11,10 +12,9 @@ namespace NewForms
 
         private void SetColumnProperties4LLI()
         {
-            throw new NotImplementedException("The function is not implemented yet.");
             SetColumnsProperties(ref IrradiationJournalADGV,
                                 new string[]
-                                { "Id", "SetKey", "SampleKey", "Type", "Container", "Position", "LoadNumber", "Rehandler" },
+                                { "Id", "SetKey", "SampleKey", "Type", "LoadNumber", "Rehandler" },
                                 new Dictionary<string, string>() {
                                     { "CountryCode",    "Код страны" },
                                     { "ClientNumber",   "Номер клиента" },
@@ -26,21 +26,23 @@ namespace NewForms
                                     { "DateTimeStart",  "Дата и время начала облучения" },
                                     { "Duration",       "Продолжительность облучения" },
                                     { "DateTimeFinish", "Дата и время конца облучения" },
+                                    { "Container",      "Контейнер" },
+                                    { "Position",       "Позиция" },
                                     { "Channel",        "Канал" },
                                     { "Assistant",      "Облучил" },
                                     { "Note",           "Примечание" } },
                                 new string[]
-                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Assistant" }
+                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Container", "Position", "Assistant" }
                                 );
 
         }
 
-        private void AddLLIIrradiationInfo()
+        private void AddLLIIrradiationInfoToMainTable()
         {
-            throw new NotImplementedException("The function is not implemented yet.");
             foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
             {
                 var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
+              
 
                 var newIrr = new IrradiationInfo()
                 {
@@ -55,8 +57,12 @@ namespace NewForms
                     Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
                     Duration     = Duration,
                     Channel      = this.Channel,
-                    Assistant    =  _user
+                    Container    = ContainerNumber,
+                    Position     = PositionInContainer,
+                    LoadNumber   = _loadNumber,
+                    Assistant    = _user
                 };
+                _irradiationList.Add(newIrr);
 
                 using (var ic = new InfoContext())
                 {

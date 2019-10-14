@@ -12,7 +12,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>NaaDB.My.MyApplication</StartupObject>
     <RootNamespace>NaaDB</RootNamespace>
-    <AssemblyName>NaaDB</AssemblyName>
+    <AssemblyName>RegataDBC</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
@@ -46,7 +46,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <DocumentationFile>RegataDBC.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
@@ -58,7 +58,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <DocumentationFile>RegataDBC.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -95,7 +95,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <DocumentationFile>RegataDBC.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -110,7 +110,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DocumentationFile>NaaDB.xml</DocumentationFile>
+    <DocumentationFile>RegataDBC.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -241,125 +241,112 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Form_Add_New_Client.Designer.vb">
+    <Compile Include="Forms\Form_Add_New_Client.Designer.vb">
       <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Add_New_Client.vb">
+    <Compile Include="Forms\Form_Add_New_Client.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ElsSum.Designer.vb">
+    <Compile Include="Forms\Form_ElsSum.Designer.vb">
       <DependentUpon>Form_ElsSum.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_ElsSum.vb">
+    <Compile Include="Forms\Form_ElsSum.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Fill_Notes.Designer.vb">
+    <Compile Include="Forms\Form_Fill_Notes.Designer.vb">
       <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Fill_Notes.vb">
+    <Compile Include="Forms\Form_Fill_Notes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_LLI_Irradiation_Log.Designer.vb">
-      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_LLI_Irradiation_Log.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Main.Designer.vb">
+    <Compile Include="Forms\Form_Main.Designer.vb">
       <DependentUpon>Form_Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Main.vb">
+    <Compile Include="Forms\Form_Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Monitor_Accept.Designer.vb">
+    <Compile Include="Forms\Form_Monitor_Accept.Designer.vb">
       <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Monitor_Accept.vb">
+    <Compile Include="Forms\Form_Monitor_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Monitor_Set_Accept.Designer.vb">
+    <Compile Include="Forms\Form_Monitor_Set_Accept.Designer.vb">
       <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Monitor_Set_Accept.vb">
+    <Compile Include="Forms\Form_Monitor_Set_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_NAA_Results.Designer.vb">
+    <Compile Include="Forms\Form_NAA_Results.Designer.vb">
       <DependentUpon>Form_NAA_Results.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_NAA_Results.vb">
+    <Compile Include="Forms\Form_NAA_Results.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Notice.Designer.vb">
+    <Compile Include="Forms\Form_Notice.Designer.vb">
       <DependentUpon>Form_Notice.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Notice.vb">
+    <Compile Include="Forms\Form_Notice.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Samples_Search.Designer.vb">
+    <Compile Include="Forms\Form_Samples_Search.Designer.vb">
       <DependentUpon>Form_Samples_Search.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Samples_Search.vb">
+    <Compile Include="Forms\Form_Samples_Search.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Sample_Accept.Designer.vb">
+    <Compile Include="Forms\Form_Sample_Accept.Designer.vb">
       <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Sample_Accept.vb">
+    <Compile Include="Forms\Form_Sample_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Sample_Set_Accept.Designer.vb">
+    <Compile Include="Forms\Form_Sample_Set_Accept.Designer.vb">
       <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Sample_Set_Accept.vb">
+    <Compile Include="Forms\Form_Sample_Set_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Sample_Set_Accept_Print_Form.Designer.vb">
+    <Compile Include="Forms\Form_Sample_Set_Accept_Print_Form.Designer.vb">
       <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Sample_Set_Accept_Print_Form.vb">
+    <Compile Include="Forms\Form_Sample_Set_Accept_Print_Form.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_SLI_Irradiation_Log.Designer.vb">
-      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form_SLI_Irradiation_Log.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_SRM_Accept.Designer.vb">
+    <Compile Include="Forms\Form_SRM_Accept.Designer.vb">
       <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_SRM_Accept.vb">
+    <Compile Include="Forms\Form_SRM_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_SRM_Set_Accept.Designer.vb">
+    <Compile Include="Forms\Form_SRM_Set_Accept.Designer.vb">
       <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_SRM_Set_Accept.vb">
+    <Compile Include="Forms\Form_SRM_Set_Accept.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Physical_Environment.Designer.vb">
+    <Compile Include="Forms\Form_Physical_Environment.Designer.vb">
       <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Physical_Environment.vb">
+    <Compile Include="Forms\Form_Physical_Environment.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Samples_List.Designer.vb">
+    <Compile Include="Forms\Form_Samples_List.Designer.vb">
       <DependentUpon>Form_Samples_List.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Samples_List.vb">
+    <Compile Include="Forms\Form_Samples_List.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Login.Designer.vb">
+    <Compile Include="Forms\Form_Login.Designer.vb">
       <DependentUpon>Form_Login.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Login.vb">
+    <Compile Include="Forms\Form_Login.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Sample_Preparation.Designer.vb">
+    <Compile Include="Forms\Form_Sample_Preparation.Designer.vb">
       <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form_Sample_Preparation.vb">
+    <Compile Include="Forms\Form_Sample_Preparation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ListItem.vb" />
@@ -392,79 +379,72 @@
       <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
       <SubType>code</SubType>
     </Compile>
-    <Compile Include="OpenSampleForm.Designer.vb">
+    <Compile Include="Forms\OpenSampleForm.Designer.vb">
       <DependentUpon>OpenSampleForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="OpenSampleForm.vb">
+    <Compile Include="Forms\OpenSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form_Add_New_Client.resx">
+    <EmbeddedResource Include="Forms\Form_Add_New_Client.resx">
       <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ElsSum.resx">
+    <EmbeddedResource Include="Forms\Form_ElsSum.resx">
       <DependentUpon>Form_ElsSum.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Fill_Notes.resx">
+    <EmbeddedResource Include="Forms\Form_Fill_Notes.resx">
       <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_LLI_Irradiation_Log.resx">
-      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Main.resx">
+    <EmbeddedResource Include="Forms\Form_Main.resx">
       <DependentUpon>Form_Main.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Monitor_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_Monitor_Accept.resx">
       <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Monitor_Set_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_Monitor_Set_Accept.resx">
       <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_NAA_Results.resx">
+    <EmbeddedResource Include="Forms\Form_NAA_Results.resx">
       <DependentUpon>Form_NAA_Results.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Notice.resx">
+    <EmbeddedResource Include="Forms\Form_Notice.resx">
       <DependentUpon>Form_Notice.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Samples_Search.resx">
+    <EmbeddedResource Include="Forms\Form_Samples_Search.resx">
       <DependentUpon>Form_Samples_Search.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Sample_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_Sample_Accept.resx">
       <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Sample_Set_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_Sample_Set_Accept.resx">
       <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Sample_Set_Accept_Print_Form.resx">
+    <EmbeddedResource Include="Forms\Form_Sample_Set_Accept_Print_Form.resx">
       <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_SLI_Irradiation_Log.resx">
-      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_SRM_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_SRM_Accept.resx">
       <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_SRM_Set_Accept.resx">
+    <EmbeddedResource Include="Forms\Form_SRM_Set_Accept.resx">
       <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Physical_Environment.resx">
+    <EmbeddedResource Include="Forms\Form_Physical_Environment.resx">
       <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Samples_List.resx">
+    <EmbeddedResource Include="Forms\Form_Samples_List.resx">
       <DependentUpon>Form_Samples_List.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Login.resx">
+    <EmbeddedResource Include="Forms\Form_Login.resx">
       <DependentUpon>Form_Login.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Sample_Preparation.resx">
+    <EmbeddedResource Include="Forms\Form_Sample_Preparation.resx">
       <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -472,7 +452,7 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="OpenSampleForm.resx">
+    <EmbeddedResource Include="Forms\OpenSampleForm.resx">
       <DependentUpon>OpenSampleForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

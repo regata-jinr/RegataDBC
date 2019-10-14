@@ -87,8 +87,8 @@ namespace NewForms
 
             if (_type == "SLI")
                 AddMonitorsIrradiationInfoSLI();
-            //if (_type.Contains("LLI"))
-                //AddMonitorsIrradiationInfoLLI();
+            if (_type.Contains("LLI"))
+                AddMonitorsIrradiationInfoLLI();
         }
 
         private void AddMonitorsIrradiationInfoSLI()
@@ -115,6 +115,7 @@ namespace NewForms
                         Assistant     =  _user
                     };
 
+                    _irradiationList.Add(newIrr);
                     using (var ic = new InfoContext())
                     {
                         ic.Irradiations.Add(newIrr);
@@ -127,5 +128,48 @@ namespace NewForms
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
         }
+
+
+        private void AddMonitorsIrradiationInfoLLI()
+        {
+            try
+            {
+                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows)
+                {
+                    var drvSet = IrradiationJournalADGVMonitorsSets.SelectedRows[0];
+
+                    var newIrr = new IrradiationInfo()
+                    {
+                        CountryCode   = "m",
+                        ClientNumber  = "m",
+                        Year          = "m",
+                        SetNumber     = drvSet.Cells["Monitor_Set_Name"].Value.ToString(),
+                        SetIndex      = drvSet.Cells["Monitor_Set_Number"].Value.ToString(),
+                        SampleNumber  = row.Cells["Monitor_Number"].Value.ToString(),
+                        Type          = _type,
+                        DateTimeStart = _currentJournalDateTime,
+                        Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightMonitorColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightMonitorColumnName].Value.ToString()),
+                        Duration      = Duration,
+                        Container     = ContainerNumber,
+                        Position      = PositionInContainer,
+                        Channel       = this.Channel,
+                        LoadNumber    = _loadNumber,
+                        Assistant     =  _user
+                    };
+
+                    _irradiationList.Add(newIrr);
+                    using (var ic = new InfoContext())
+                    {
+                        ic.Irradiations.Add(newIrr);
+                        ic.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
+        }
+
     }
 }

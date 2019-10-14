@@ -18,37 +18,75 @@ namespace NewForms
         private List<string> ChosenSets;
         private List<IrradiationInfo> _irradiationList;
         private readonly string _type;
-        private readonly string _user;
+        private readonly int _loadNumber;
+        private string _user;
         private DateTime _currentJournalDateTime;
         private readonly Dictionary<string,string> typeEngRus;
-        private readonly bool _IsAccessible;
+        private readonly string[] AllowNullColumnsNames;
+        private readonly ComboBox ContainerComboBox;
 
-        public IrradiationJournal(DateTime dateTime, string type, string connectionString)
+        private string[] _rolesOfUser;
+
+
+        private void SetRoles(string conString)
+        {
+            using (SqlConnection conn = new SqlConnection(conString))
+            {
+                var ListOfRoles = new List<string>();
+                var cmd = new SqlCommand("select IS_Rolemember('operator')", conn);
+                conn.Open();
+                object o = cmd.ExecuteScalar();
+                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                    ListOfRoles.Add("operator");
+
+                cmd.CommandText = "select IS_Rolemember('db_owner')";
+                o = cmd.ExecuteScalar();
+                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                    ListOfRoles.Add("admin");
+
+                cmd.CommandText = "select IS_Rolemember('rehanlder')";
+                o = cmd.ExecuteScalar();
+                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                    ListOfRoles.Add("rehanlder");
+
+                _rolesOfUser = ListOfRoles.ToArray();
+            }
+        }
+
+        public IrradiationJournal(DateTime dateTime, string type, string connectionString, int? loadNumber = null)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    var cmd = new SqlCommand("select IS_Rolemember('operator') + IS_Rolemember('db_owner')", conn);
-                    conn.Open();
-                    object o = cmd.ExecuteScalar();
-                    _IsAccessible = (o == null || DBNull.Value == o) ? false : ((int)o != 0);
-                }
+                AllowNullColumnsNames = new string[] { "Note" };
+                // { "DateTimeStart", "Duration", "DateTimeFinish", "Container", "Position", "Channel", "LoadNumber", "Rehandler", "Assistant", "Note" };
 
-                typeEngRus = new Dictionary<string, string>() { { "SLI", "КЖИ" }, { "LLI", "ДЖИ" } };
+                InfoContext.ConnectionString = connectionString;
+
+                typeEngRus = new Dictionary<string, string>() { { "SLI", "КЖИ" }, { "LLI-1", "ДЖИ" }, { "LLI-2", "ДЖИ" } };
                 _currentJournalDateTime = dateTime;
                 _type = type;
+                
+                if (loadNumber.HasValue)
+                    _loadNumber = loadNumber.Value;
+
                 var conStrBuild = new SqlConnectionStringBuilder(connectionString);
-                InfoContext.ConnectionString = connectionString;
                 _user = conStrBuild.UserID;
+                SetRoles(connectionString);
                 InitializeComponent();
-                SetPrivileges();
+                SetVisibilities();
+
+
+                ContainerComboBox = IrradiationJournalGoupBoxContainer.Controls[0] as ComboBox;
+                ContainerComboBox.SelectedValueChanged += ContainerComboBox_SelectedValueChanged;
+                ContainerNumber = 1;
+
 
                 IrradiationJournalNumericUpDownSeconds.ValueChanged += DurationHandler;
                 IrradiationJournalNumericUpDownMinutes.ValueChanged += DurationHandler;
-                IrradiationJournalNumericUpDownHours.ValueChanged += DurationHandler;
+                IrradiationJournalNumericUpDownHours.ValueChanged   += DurationHandler;
+                IrradiationJournalNumericUpDownDays.ValueChanged    += DurationHandler;
 
-                Text = $"Журнал облучений {typeEngRus[type]} от {dateTime.ToShortDateString()} | {_user}";
+                Text = $"Журнал облучений {typeEngRus[type]} от {dateTime.ToShortDateString()} {(loadNumber.HasValue ? loadNumber.Value.ToString() : "")} | {_user}";
                 InitializeMainTable();
 
 
@@ -71,6 +109,8 @@ namespace NewForms
 
                 InitializeStandardSetTable();
                 InitializeMonitorSetTable();
+
+                IrradiationJournalADGV.KeyDown += IrradiationJournal_KeyDown;
             }
             catch (Exception ex)
             {
@@ -78,18 +118,59 @@ namespace NewForms
             }
         }
 
-        private void SetPrivileges()
+        private void ContainerComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (_IsAccessible) return;
+            try
+            {
+                if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+                var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+                if (colName != "Container") return;
+
+                foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                    cell.Value = short.Parse(ContainerComboBox.SelectedItem.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
+        }
+
+        private void IrradiationJournal_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Delete)
+                {
+                    if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+
+                    foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                    {
+                        if (AllowNullColumnsNames.Contains(cell.OwningColumn.Name))
+                            cell.Value = DBNull.Value;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
+        }
+
+        private void SetVisibilities()
+        {
+            if (_type == "SLI")
+                SetSLIVisibilities();
+
+            if (_rolesOfUser.Contains("operator") || _rolesOfUser.Contains("admin")) return;
 
             IrradiationJournalADGV.ReadOnly = true;
-            IrradiationJournalGroupBoxDuration.Enabled = false;
-            IrradiationJournalGroupBoxChannel.Enabled = false;
-            IrradiationJournalButtonAddSelectedToJournal.Enabled = false;
-            IrradiationJournalButtonAddStartTime.Enabled = false;
-            IrradiationJournalButtonRemoveSelectedFromJournal.Enabled = false;
-            IrradiationJournalButtonRestoreSelectedFromJournal.Enabled = false;
-            IrradiationJournalTabs.Enabled = false;
+            IrradiationJournalGroupBoxDuration.Visible = false;
+            IrradiationJournalGroupBoxChannel.Visible = false;
+            IrradiationJournalGroupBoxEditMainTable.Visible = false;
+            IrradiationJournalButtonAddTime.Visible = false;
+            IrradiationJournalTabs.Visible = false;
+            IrradiationJournalGoupBoxContainer.Visible = false;
         }
 
         private void ChannelRadioButtonCheckedChanged(object sender, EventArgs e)
@@ -114,19 +195,38 @@ namespace NewForms
         {
             try
             {
-                if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+                if (IrradiationJournalADGV.SelectedCells.Count == 0 || IrradiationJournalADGV.SelectedCells.Count > 1) return;
 
                 var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
                 var firstCell =  IrradiationJournalADGV.SelectedCells[0];
 
+                IrradiationJournalButtonAddTime.Text = "Заполнить время измерения";
+
                 if (colName == "Duration")
-                    Duration = (int)firstCell.Value;
+                {
+                    if (firstCell.Value != null && !string.IsNullOrEmpty(firstCell.Value.ToString()) && firstCell.Value != DBNull.Value)
+                        Duration = (int)firstCell.Value;
+                    else
+                        Duration = 0;
+                }
 
                 if (colName == "Channel")
                 {
                     if (short.TryParse(firstCell.Value.ToString(), out _) && (short)firstCell.Value <= 2 && (short)firstCell.Value >= 1)
                         Channel = (short)firstCell.Value;
                 }
+
+                if (colName == "Container")
+                {
+                    if (short.TryParse(firstCell.Value.ToString(), out _) && (short)firstCell.Value <= 9 && (short)firstCell.Value >= 1)
+                        ContainerNumber = (short)firstCell.Value;
+                }
+
+                if (colName == "DateTimeStart")
+                    IrradiationJournalButtonAddTime.Text = "Заполнить время начала измерения";
+                if (colName == "DateTimeFinish")
+                    IrradiationJournalButtonAddTime.Text = "Заполнить время окончания измерения";
+
             }
             catch (Exception ex)
             {
@@ -146,12 +246,54 @@ namespace NewForms
             }
         }
 
+        private short PositionInContainer
+        {
+            get 
+            {
+                try
+                {
+                    short newPositionValue = 0;
+                    var cList = _irradiationList.Where(ir => ir.Container == ContainerNumber && ir.Position.HasValue).Select(ir => ir.Position.Value).ToArray();
+
+                    if (cList.Any())
+                        newPositionValue = cList.Max();
+
+                    return ++newPositionValue;
+                }
+                catch
+                {
+                    return 1;
+                }
+            }
+            //TODO: add changing position functional:
+            //      should recalculate all previous position in container
+            //set
+            //{
+                
+            //}
+        }
+
+        private short ContainerNumber
+        {
+            get
+            {
+                return short.Parse(ContainerComboBox.SelectedItem.ToString());
+            }
+            set
+            {
+                ContainerComboBox.SelectedItem = value.ToString();
+            }
+        }
+
         private int Duration
         {
             get
             {
-                var ts = new TimeSpan((int)IrradiationJournalNumericUpDownHours.Value, (int)IrradiationJournalNumericUpDownMinutes.Value, (int)IrradiationJournalNumericUpDownSeconds.Value);
-
+                var ts = new TimeSpan((int)IrradiationJournalNumericUpDownDays.Value,
+                                      (int)IrradiationJournalNumericUpDownHours.Value,
+                                      (int)IrradiationJournalNumericUpDownMinutes.Value,
+                                      (int)IrradiationJournalNumericUpDownSeconds.Value
+                                      );
                 return (int)ts.TotalSeconds;
             }
             set
@@ -159,7 +301,8 @@ namespace NewForms
                 var ts = TimeSpan.FromSeconds(value);
                 IrradiationJournalNumericUpDownSeconds.Value = ts.Seconds;
                 IrradiationJournalNumericUpDownMinutes.Value = ts.Minutes;
-                IrradiationJournalNumericUpDownHours.Value = ts.Hours;
+                IrradiationJournalNumericUpDownHours.Value   = ts.Hours;
+                IrradiationJournalNumericUpDownDays.Value    = ts.Days;
             }
         }
 
@@ -167,11 +310,16 @@ namespace NewForms
         {
             try
             {
-                var ts = new TimeSpan((int)IrradiationJournalNumericUpDownHours.Value, (int)IrradiationJournalNumericUpDownMinutes.Value, (int)IrradiationJournalNumericUpDownSeconds.Value);
+                var ts = new TimeSpan((int)IrradiationJournalNumericUpDownDays.Value,
+                                      (int)IrradiationJournalNumericUpDownHours.Value,
+                                      (int)IrradiationJournalNumericUpDownMinutes.Value,
+                                      (int)IrradiationJournalNumericUpDownSeconds.Value
+                                      );
 
                 IrradiationJournalNumericUpDownSeconds.Value = ts.Seconds;
                 IrradiationJournalNumericUpDownMinutes.Value = ts.Minutes;
-                IrradiationJournalNumericUpDownHours.Value = ts.Hours;
+                IrradiationJournalNumericUpDownHours.Value   = ts.Hours;
+                IrradiationJournalNumericUpDownDays.Value    = ts.Days;
 
                 if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
                 var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
@@ -210,6 +358,8 @@ namespace NewForms
                 _bindingSource = advbindSource.GetBindingSource();
                 IrradiationJournalADGV.DataSource = _bindingSource;
 
+                if (_type.Contains("LLI"))
+                    _bindingSource.Sort = "Container, Position";
 
                 SetColumnVisibles(_type);
                 IrradiationJournalADGVSearchToolBar.SetColumns(IrradiationJournalADGV.Columns);
@@ -223,6 +373,8 @@ namespace NewForms
             catch (Exception ex)
             {
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+                if (_irradiationList == null)
+                    _irradiationList = new List<IrradiationInfo>();
             }
 
 
@@ -476,7 +628,12 @@ namespace NewForms
 
                     System.Type irrInfo = typeof(IrradiationInfo);
                     var prop = irrInfo.GetProperty(IrradiationJournalADGV.Columns[e.ColumnIndex].Name);
-                    prop.SetValue(currentIrr, IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
+                    if (!string.IsNullOrEmpty(IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()))
+                        prop.SetValue(currentIrr, IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                    else
+                        prop.SetValue(currentIrr, null);
+
 
                     ic.Irradiations.Update(currentIrr);
                     ic.SaveChanges();
@@ -490,10 +647,13 @@ namespace NewForms
 
         private bool DataValidation(DataGridViewCellEventArgs e)
         {
+            DataGridViewCell currentCell = IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            DataGridViewCell savedValueOfCurrentCell = currentCell.Clone() as DataGridViewCell;
+
             try
             {
                 var isValidated = true;
-                DataGridViewCell currentCell = IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                              
                 DataGridViewColumn currentColumn = currentCell.OwningColumn;
                 DataGridViewRow currentRow = currentCell.OwningRow;
 
@@ -504,18 +664,22 @@ namespace NewForms
                     isValidated = (currentCell.Value.ToString().Length < 300);
 
                 if (!isValidated)
+                {
                     MessageBoxTemplates.WarningAsync($"Ошибка при валидации данных. Столбец - {currentColumn.Name}");
+                    currentCell.Value = savedValueOfCurrentCell.Value;
+                }
 
                 return isValidated;
             }
             catch (Exception ex)
             {
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+                currentCell.Value = savedValueOfCurrentCell.Value;
                 return false;
             }
         }
 
-        private void IrradiationJournalButtonAddStartTime_Click(object sender, EventArgs e)
+        private void IrradiationJournalButtonAddTime_Click(object sender, EventArgs e)
         {
             try
             {
