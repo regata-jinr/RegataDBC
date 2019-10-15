@@ -162,7 +162,13 @@ namespace NewForms
             if (_type == "SLI")
                 SetSLIVisibilities();
 
-            if (_rolesOfUser.Contains("operator") || _rolesOfUser.Contains("admin")) return;
+            if (_rolesOfUser.Contains("admin")) return;
+
+            if (_rolesOfUser.Contains("operator"))
+            {
+                IrradiationJournalButtonRehandle.Visible = false;
+                return;
+            }
 
             IrradiationJournalADGV.ReadOnly = true;
             IrradiationJournalGroupBoxDuration.Visible = false;
@@ -171,6 +177,10 @@ namespace NewForms
             IrradiationJournalButtonAddTime.Visible = false;
             IrradiationJournalTabs.Visible = false;
             IrradiationJournalGoupBoxContainer.Visible = false;
+            IrradiationJournalButtonRehandle.Visible = false;
+
+            if (_rolesOfUser.Contains("rehanlder"))
+                IrradiationJournalButtonRehandle.Visible = true;
         }
 
         private void ChannelRadioButtonCheckedChanged(object sender, EventArgs e)
@@ -692,6 +702,23 @@ namespace NewForms
                 _currentJournalDateTime = _currentJournalDateTime.Date.AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute).AddSeconds(DateTime.Now.Second);
 
                 firstCell.Value = _currentJournalDateTime;
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+            }
+        }
+
+        private void IrradiationJournalButtonRehandle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (IrradiationJournalADGV.SelectedCells.Count == 0) return;
+                var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
+                if (colName != "Rehandler") return;
+
+                foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                    cell.Value = _user;
             }
             catch (Exception ex)
             {

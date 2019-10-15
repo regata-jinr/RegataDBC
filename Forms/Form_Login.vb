@@ -2,7 +2,6 @@
 Imports System.Threading.Tasks
 Imports Squirrel
 Imports System.Net
-Imports System.Linq
 Imports System.IO
 Imports Extensions
 
@@ -12,6 +11,7 @@ Public Class Form_Login
         Try
             Dim restart As Boolean = False
             Dim latestExe As String = ""
+            Dim verL As String = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
             Using manager = Await UpdateManager.GitHubUpdateManager("https://github.com/regata-jinr/RegataDBC")
@@ -22,7 +22,6 @@ Public Class Form_Login
                     Dim LatestVersion = upd.ReleasesToApply.OrderBy(Function(x) x.Version).Last()
 
                     Dim verR As String = LatestVersion.Version.Version.ToString()
-                    Dim verL As String = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()
 
                     If verR = verL Then Throw New ArgumentException()
 

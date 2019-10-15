@@ -14,7 +14,7 @@ namespace NewForms
         {
             SetColumnsProperties(ref IrradiationJournalADGV,
                                 new string[]
-                                { "Id", "SetKey", "SampleKey", "Type", "LoadNumber", "Rehandler" },
+                                { "Id", "SetKey", "SampleKey", "Type", "LoadNumber" },
                                 new Dictionary<string, string>() {
                                     { "CountryCode",    "Код страны" },
                                     { "ClientNumber",   "Номер клиента" },
@@ -29,10 +29,11 @@ namespace NewForms
                                     { "Container",      "Контейнер" },
                                     { "Position",       "Позиция" },
                                     { "Channel",        "Канал" },
+                                    { "Rehandler",      "Перепаковано" },
                                     { "Assistant",      "Облучил" },
                                     { "Note",           "Примечание" } },
                                 new string[]
-                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Container", "Position", "Assistant" }
+                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Container", "Position", "Assistant", "Rehandler" }
                                 );
 
         }

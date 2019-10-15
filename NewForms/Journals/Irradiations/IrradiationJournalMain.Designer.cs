@@ -59,6 +59,8 @@
             this.IrradiationJournalLabelMinutes = new System.Windows.Forms.Label();
             this.IrradiationJournalNumericUpDownMinutes = new System.Windows.Forms.NumericUpDown();
             this.IrradiationJournalGroupBoxDuration = new System.Windows.Forms.GroupBox();
+            this.IrradiationJournalLabelDays = new System.Windows.Forms.Label();
+            this.IrradiationJournalNumericUpDownDays = new System.Windows.Forms.NumericUpDown();
             this.IrradiationJournalGroupBoxChannel = new System.Windows.Forms.GroupBox();
             this.IrradiationJournalRadioButtonChannel2 = new System.Windows.Forms.RadioButton();
             this.IrradiationJournalRadioButtonChannel1 = new System.Windows.Forms.RadioButton();
@@ -67,8 +69,7 @@
             this.IrradiationJournalComboBoxContainerNumber = new System.Windows.Forms.ComboBox();
             this.IrradiationJournalGoupBoxContainer = new System.Windows.Forms.GroupBox();
             this.IrradiationJournalGroupBoxEditMainTable = new System.Windows.Forms.GroupBox();
-            this.IrradiationJournalLabelDays = new System.Windows.Forms.Label();
-            this.IrradiationJournalNumericUpDownDays = new System.Windows.Forms.NumericUpDown();
+            this.IrradiationJournalButtonRehandle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalADGV)).BeginInit();
             this.IrradiationJournalTabs.SuspendLayout();
             this.IrradiationJournalTabPageSamples.SuspendLayout();
@@ -84,10 +85,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownMinutes)).BeginInit();
             this.IrradiationJournalGroupBoxDuration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownDays)).BeginInit();
             this.IrradiationJournalGroupBoxChannel.SuspendLayout();
             this.IrradiationJournalGoupBoxContainer.SuspendLayout();
             this.IrradiationJournalGroupBoxEditMainTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownDays)).BeginInit();
             this.SuspendLayout();
             // 
             // IrradiationJournalADGV
@@ -491,6 +492,24 @@
             this.IrradiationJournalGroupBoxDuration.TabStop = false;
             this.IrradiationJournalGroupBoxDuration.Text = "Продолжительность облучения";
             // 
+            // IrradiationJournalLabelDays
+            // 
+            this.IrradiationJournalLabelDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IrradiationJournalLabelDays.Location = new System.Drawing.Point(9, 22);
+            this.IrradiationJournalLabelDays.Name = "IrradiationJournalLabelDays";
+            this.IrradiationJournalLabelDays.Size = new System.Drawing.Size(48, 21);
+            this.IrradiationJournalLabelDays.TabIndex = 16;
+            this.IrradiationJournalLabelDays.Text = "Дни";
+            this.IrradiationJournalLabelDays.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // IrradiationJournalNumericUpDownDays
+            // 
+            this.IrradiationJournalNumericUpDownDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IrradiationJournalNumericUpDownDays.Location = new System.Drawing.Point(9, 46);
+            this.IrradiationJournalNumericUpDownDays.Name = "IrradiationJournalNumericUpDownDays";
+            this.IrradiationJournalNumericUpDownDays.Size = new System.Drawing.Size(48, 22);
+            this.IrradiationJournalNumericUpDownDays.TabIndex = 15;
+            // 
             // IrradiationJournalGroupBoxChannel
             // 
             this.IrradiationJournalGroupBoxChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -595,29 +614,25 @@
             this.IrradiationJournalGroupBoxEditMainTable.TabStop = false;
             this.IrradiationJournalGroupBoxEditMainTable.Text = "Формирование журнала";
             // 
-            // IrradiationJournalLabelDays
+            // IrradiationJournalButtonRehandle
             // 
-            this.IrradiationJournalLabelDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalLabelDays.Location = new System.Drawing.Point(9, 22);
-            this.IrradiationJournalLabelDays.Name = "IrradiationJournalLabelDays";
-            this.IrradiationJournalLabelDays.Size = new System.Drawing.Size(48, 21);
-            this.IrradiationJournalLabelDays.TabIndex = 16;
-            this.IrradiationJournalLabelDays.Text = "Дни";
-            this.IrradiationJournalLabelDays.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // IrradiationJournalNumericUpDownDays
-            // 
-            this.IrradiationJournalNumericUpDownDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IrradiationJournalNumericUpDownDays.Location = new System.Drawing.Point(9, 46);
-            this.IrradiationJournalNumericUpDownDays.Name = "IrradiationJournalNumericUpDownDays";
-            this.IrradiationJournalNumericUpDownDays.Size = new System.Drawing.Size(48, 22);
-            this.IrradiationJournalNumericUpDownDays.TabIndex = 15;
+            this.IrradiationJournalButtonRehandle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IrradiationJournalButtonRehandle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IrradiationJournalButtonRehandle.Location = new System.Drawing.Point(801, 655);
+            this.IrradiationJournalButtonRehandle.Name = "IrradiationJournalButtonRehandle";
+            this.IrradiationJournalButtonRehandle.Size = new System.Drawing.Size(634, 59);
+            this.IrradiationJournalButtonRehandle.TabIndex = 22;
+            this.IrradiationJournalButtonRehandle.Text = "ПЕРЕПАКОВАНО";
+            this.IrradiationJournalButtonRehandle.UseVisualStyleBackColor = true;
+            this.IrradiationJournalButtonRehandle.Click += new System.EventHandler(this.IrradiationJournalButtonRehandle_Click);
             // 
             // IrradiationJournal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1446, 719);
+            this.Controls.Add(this.IrradiationJournalButtonRehandle);
             this.Controls.Add(this.IrradiationJournalGroupBoxEditMainTable);
             this.Controls.Add(this.IrradiationJournalGoupBoxContainer);
             this.Controls.Add(this.IrradiationJournalGroupBoxChannel);
@@ -647,10 +662,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownMinutes)).EndInit();
             this.IrradiationJournalGroupBoxDuration.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownDays)).EndInit();
             this.IrradiationJournalGroupBoxChannel.ResumeLayout(false);
             this.IrradiationJournalGoupBoxContainer.ResumeLayout(false);
             this.IrradiationJournalGroupBoxEditMainTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalNumericUpDownDays)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -696,6 +711,7 @@
         private System.Windows.Forms.GroupBox IrradiationJournalGroupBoxEditMainTable;
         private System.Windows.Forms.Label IrradiationJournalLabelDays;
         private System.Windows.Forms.NumericUpDown IrradiationJournalNumericUpDownDays;
+        private System.Windows.Forms.Button IrradiationJournalButtonRehandle;
     }
 }
 

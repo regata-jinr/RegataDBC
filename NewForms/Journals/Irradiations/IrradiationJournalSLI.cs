@@ -77,6 +77,7 @@ namespace NewForms
         private void SetSLIVisibilities()
         {
             IrradiationJournalGoupBoxContainer.Visible = false;
+            IrradiationJournalButtonRehandle.Visible = false;
         }
     }
 }

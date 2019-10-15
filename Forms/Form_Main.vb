@@ -491,16 +491,8 @@ Public Class Form_Main
 
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
-            Dim UpdMsg As String
-            UpdMsg = $"{vbTab}Теперь база данных располагается на облачном сервере в ЛИТе.{vbCrLf}"
-            'update message
-            If ApplicationDeployment.IsNetworkDeployed Then
+            MaskedTextBoxDateOfNewJournal.Text = Now.ToShortDateString()
 
-                Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
-                If current.IsFirstRun Then
-                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{vbCrLf}{UpdMsg}{vbCrLf}{vbCrLf}Свои комментарии, замечания, сообщения об ошибках Вы можете сообщить мне {vbCrLf}по почте - bdrum@jinr.ru{vbCrLf}по телефону - 6 24 36{vbCrLf}лично{vbCrLf}С уважением,{vbCrLf}Борис Румянцев", $"Обновление клиента базы данных НАА", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            End If
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Me.Close()
@@ -639,8 +631,14 @@ Public Class Form_Main
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
         Try
 
-            Dim ij As New NewForms.IrradiationJournal(DateTime.Now.Date, "SLI", MyConnectionString)
-            ij.Show()
+            Dim curDt As DateTime
+            If DateTime.TryParse(MaskedTextBoxDateOfNewJournal.Text, curDt) Then
+                Dim ij As New NewForms.IrradiationJournal(curDt.Date, "SLI", MyConnectionString)
+                ij.Show()
+            Else
+                MsgBox("Установленная дата нового журнала имеет неверный формат!", MsgBoxStyle.Exclamation, "Ошибка формата даты")
+            End If
+
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -720,13 +718,19 @@ Public Class Form_Main
             Dim maxLoadNumber As Integer = 0
             Using conn As New SqlConnection(MyConnectionString)
 
-                Dim cmd As New SqlCommand("select max(LoadNumber) from NAA_DB_TEST.dbo.Irradiations", conn)
+                Dim cmd As New SqlCommand("select max(LoadNumber) from Irradiations", conn)
                 conn.Open()
                 maxLoadNumber = cmd.ExecuteScalar()
             End Using
             maxLoadNumber += 1
-            Dim ij As New NewForms.IrradiationJournal(DateTime.Now.Date, "LLI-1", MyConnectionString, maxLoadNumber)
-            ij.Show()
+
+            Dim curDt As DateTime
+            If DateTime.TryParse(MaskedTextBoxDateOfNewJournal.Text, curDt) Then
+                Dim ij As New NewForms.IrradiationJournal(curDt.Date, "LLI-1", MyConnectionString, maxLoadNumber)
+                ij.Show()
+            Else
+                MsgBox("Установленная дата нового журнала имеет неверный формат!", MsgBoxStyle.Exclamation, "Ошибка формата даты")
+            End If
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)

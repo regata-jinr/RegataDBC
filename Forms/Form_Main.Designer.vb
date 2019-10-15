@@ -81,6 +81,8 @@ Partial Class Form_Main
         Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
         Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
+        Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -205,7 +207,7 @@ Partial Class Form_Main
         Me.B_Select_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.B_Select_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 420)
         Me.B_Select_SLI_Irradiation_Log.Name = "B_Select_SLI_Irradiation_Log"
-        Me.B_Select_SLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
+        Me.B_Select_SLI_Irradiation_Log.Size = New System.Drawing.Size(129, 23)
         Me.B_Select_SLI_Irradiation_Log.TabIndex = 154
         Me.B_Select_SLI_Irradiation_Log.Text = "Select SLI irradiation log"
         Me.B_Select_SLI_Irradiation_Log.UseVisualStyleBackColor = True
@@ -213,9 +215,9 @@ Partial Class Form_Main
         'B_New_SLI_Irradiation_Log
         '
         Me.B_New_SLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 449)
+        Me.B_New_SLI_Irradiation_Log.Location = New System.Drawing.Point(681, 479)
         Me.B_New_SLI_Irradiation_Log.Name = "B_New_SLI_Irradiation_Log"
-        Me.B_New_SLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
+        Me.B_New_SLI_Irradiation_Log.Size = New System.Drawing.Size(129, 23)
         Me.B_New_SLI_Irradiation_Log.TabIndex = 153
         Me.B_New_SLI_Irradiation_Log.Text = "New SLI irradiation log"
         Me.B_New_SLI_Irradiation_Log.UseVisualStyleBackColor = True
@@ -371,9 +373,9 @@ Partial Class Form_Main
         'B_New_LLI_Irradiation_Log
         '
         Me.B_New_LLI_Irradiation_Log.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(818, 449)
+        Me.B_New_LLI_Irradiation_Log.Location = New System.Drawing.Point(820, 479)
         Me.B_New_LLI_Irradiation_Log.Name = "B_New_LLI_Irradiation_Log"
-        Me.B_New_LLI_Irradiation_Log.Size = New System.Drawing.Size(131, 23)
+        Me.B_New_LLI_Irradiation_Log.Size = New System.Drawing.Size(129, 23)
         Me.B_New_LLI_Irradiation_Log.TabIndex = 165
         Me.B_New_LLI_Irradiation_Log.Text = "New LLI irradiation log"
         Me.B_New_LLI_Irradiation_Log.UseVisualStyleBackColor = True
@@ -620,26 +622,48 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
         Me.ResetLoginButton.Text = "Reset login"
+        '
+        'MaskedTextBoxDateOfNewJournal
+        '
+        Me.MaskedTextBoxDateOfNewJournal.BackColor = System.Drawing.Color.White
+        Me.MaskedTextBoxDateOfNewJournal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MaskedTextBoxDateOfNewJournal.Location = New System.Drawing.Point(879, 451)
+        Me.MaskedTextBoxDateOfNewJournal.Mask = "00/00/0000"
+        Me.MaskedTextBoxDateOfNewJournal.Name = "MaskedTextBoxDateOfNewJournal"
+        Me.MaskedTextBoxDateOfNewJournal.Size = New System.Drawing.Size(70, 22)
+        Me.MaskedTextBoxDateOfNewJournal.TabIndex = 197
+        Me.MaskedTextBoxDateOfNewJournal.ValidatingType = GetType(Date)
+        '
+        'LabelDateOfNewJournalTitle
+        '
+        Me.LabelDateOfNewJournalTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelDateOfNewJournalTitle.Location = New System.Drawing.Point(681, 446)
+        Me.LabelDateOfNewJournalTitle.Name = "LabelDateOfNewJournalTitle"
+        Me.LabelDateOfNewJournalTitle.Size = New System.Drawing.Size(192, 30)
+        Me.LabelDateOfNewJournalTitle.TabIndex = 198
+        Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
         '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 761)
+        Me.Controls.Add(Me.LabelDateOfNewJournalTitle)
+        Me.Controls.Add(Me.MaskedTextBoxDateOfNewJournal)
         Me.Controls.Add(Me.ButtonShowAllSrms)
         Me.Controls.Add(Me.ButtonshowAll)
         Me.Controls.Add(Me.SampleSetInfo)
@@ -751,4 +775,6 @@ Partial Class Form_Main
     Friend WithEvents ChangeLang As ToolStripMenuItem
     Friend WithEvents B_Refresh As ToolStripMenuItem
     Friend WithEvents ResetLoginButton As ToolStripMenuItem
+    Friend WithEvents MaskedTextBoxDateOfNewJournal As MaskedTextBox
+    Friend WithEvents LabelDateOfNewJournalTitle As Label
 End Class
