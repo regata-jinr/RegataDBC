@@ -378,7 +378,7 @@
             this.IrradiationJournalButtonAddTime.Name = "IrradiationJournalButtonAddTime";
             this.IrradiationJournalButtonAddTime.Size = new System.Drawing.Size(258, 59);
             this.IrradiationJournalButtonAddTime.TabIndex = 7;
-            this.IrradiationJournalButtonAddTime.Text = "Заполнить время измерения";
+            this.IrradiationJournalButtonAddTime.Text = "Заполнить время облучения";
             this.IrradiationJournalButtonAddTime.UseVisualStyleBackColor = true;
             this.IrradiationJournalButtonAddTime.Click += new System.EventHandler(this.IrradiationJournalButtonAddTime_Click);
             // 

@@ -9,8 +9,7 @@ using NewForms.Models;
 namespace NewForms
 {
     // TODO: developments:
-    //          1. lli
-    //          2. add tests
+    //          1. add tests using WinAppDriver
     public partial class IrradiationJournal : Form
     {
         private BindingSource _bindingSource;
@@ -23,7 +22,6 @@ namespace NewForms
         private DateTime _currentJournalDateTime;
         private readonly Dictionary<string,string> typeEngRus;
         private readonly string[] AllowNullColumnsNames;
-        private readonly ComboBox ContainerComboBox;
 
         private string[] _rolesOfUser;
 
@@ -75,9 +73,7 @@ namespace NewForms
                 InitializeComponent();
                 SetVisibilities();
 
-
-                ContainerComboBox = IrradiationJournalGoupBoxContainer.Controls[0] as ComboBox;
-                ContainerComboBox.SelectedValueChanged += ContainerComboBox_SelectedValueChanged;
+                IrradiationJournalComboBoxContainerNumber.SelectedValueChanged += ContainerComboBox_SelectedValueChanged;
                 ContainerNumber = 1;
 
 
@@ -127,7 +123,7 @@ namespace NewForms
                 if (colName != "Container") return;
 
                 foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
-                    cell.Value = short.Parse(ContainerComboBox.SelectedItem.ToString());
+                    cell.Value = ContainerNumber;
             }
             catch (Exception ex)
             {
@@ -164,6 +160,12 @@ namespace NewForms
 
             if (_rolesOfUser.Contains("admin")) return;
 
+            if (_rolesOfUser.Contains("rehanlder") && _rolesOfUser.Contains("operator"))
+            {
+                IrradiationJournalButtonRehandle.Visible = true;
+                return;
+            }
+
             if (_rolesOfUser.Contains("operator"))
             {
                 IrradiationJournalButtonRehandle.Visible = false;
@@ -177,10 +179,9 @@ namespace NewForms
             IrradiationJournalButtonAddTime.Visible = false;
             IrradiationJournalTabs.Visible = false;
             IrradiationJournalGoupBoxContainer.Visible = false;
-            IrradiationJournalButtonRehandle.Visible = false;
 
-            if (_rolesOfUser.Contains("rehanlder"))
-                IrradiationJournalButtonRehandle.Visible = true;
+            if (!_rolesOfUser.Contains("rehanlder"))
+                IrradiationJournalButtonRehandle.Visible = false;
         }
 
         private void ChannelRadioButtonCheckedChanged(object sender, EventArgs e)
@@ -192,7 +193,7 @@ namespace NewForms
                 if (colName != "Channel") return;
 
                 foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
-                    cell.Value = short.Parse(IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Where(r => r.Checked).First().Text);
+                    cell.Value = Channel;
             }
             catch (Exception ex)
             {
@@ -210,7 +211,7 @@ namespace NewForms
                 var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
                 var firstCell =  IrradiationJournalADGV.SelectedCells[0];
 
-                IrradiationJournalButtonAddTime.Text = "Заполнить время измерения";
+                IrradiationJournalButtonAddTime.Text = "Заполнить время облучения";
 
                 if (colName == "Duration")
                 {
@@ -233,9 +234,9 @@ namespace NewForms
                 }
 
                 if (colName == "DateTimeStart")
-                    IrradiationJournalButtonAddTime.Text = "Заполнить время начала измерения";
+                    IrradiationJournalButtonAddTime.Text = "Заполнить время начала облучения";
                 if (colName == "DateTimeFinish")
-                    IrradiationJournalButtonAddTime.Text = "Заполнить время окончания измерения";
+                    IrradiationJournalButtonAddTime.Text = "Заполнить время окончания облучения";
 
             }
             catch (Exception ex)
@@ -287,11 +288,11 @@ namespace NewForms
         {
             get
             {
-                return short.Parse(ContainerComboBox.SelectedItem.ToString());
+                return short.Parse(IrradiationJournalComboBoxContainerNumber.SelectedItem.ToString());
             }
             set
             {
-                ContainerComboBox.SelectedItem = value.ToString();
+                IrradiationJournalComboBoxContainerNumber.SelectedItem = value.ToString();
             }
         }
 
@@ -373,8 +374,6 @@ namespace NewForms
 
                 SetColumnVisibles(_type);
                 IrradiationJournalADGVSearchToolBar.SetColumns(IrradiationJournalADGV.Columns);
-
-                var r = IrradiationJournalADGVSearchToolBar.Items[0];
 
                 ShowSamples();
                 ShowStandards();

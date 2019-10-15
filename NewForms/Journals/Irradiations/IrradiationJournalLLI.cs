@@ -9,7 +9,6 @@ namespace NewForms
     // LLI
     public partial class IrradiationJournal : Form
     {
-
         private void SetColumnProperties4LLI()
         {
             SetColumnsProperties(ref IrradiationJournalADGV,
