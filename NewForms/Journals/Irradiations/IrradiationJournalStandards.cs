@@ -42,6 +42,9 @@ namespace NewForms
                     StandardList = ic.Standards.Where(s =>
                                                 s.SRM_Set_Name == selCells["SRM_Set_Name"].Value.ToString() &&
                                                 s.SRM_Set_Number == selCells["SRM_Set_Number"].Value.ToString() &&
+                                                ((_type == "SLI" && (s.SRM_SLI_Weight != 0 && s.SRM_SLI_Weight.HasValue)) ||
+                                                (_type.Contains("LLI") && s.SRM_LLI_Weight != 0 && s.SRM_LLI_Weight.HasValue))
+                                                &&
                                                 !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
                                                 ).ToList();
                 }
@@ -95,7 +98,7 @@ namespace NewForms
         {
             try
             {
-                foreach (DataGridViewRow row in IrradiationJournalADGVStandards.SelectedRows)
+                foreach (DataGridViewRow row in IrradiationJournalADGVStandards.SelectedRows.OfType<DataGridViewRow>().Reverse())
                 {
                     var drvSet = IrradiationJournalADGVStandardsSets.SelectedRows[0];
 
@@ -108,7 +111,7 @@ namespace NewForms
                         SetIndex      = drvSet.Cells["SRM_Set_Number"].Value.ToString(),
                         SampleNumber  = row.Cells["SRM_Number"].Value.ToString(),
                         Type          = _type,
-                        DateTimeStart = _currentJournalDateTime,
+                        DateTimeStart = _currentJournalDateTime.Date,
                         Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightStandardColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightStandardColumnName].Value.ToString()),
                         Duration      = Duration,
                         Channel       = this.Channel,
@@ -134,7 +137,7 @@ namespace NewForms
         {
             try
             {
-                foreach (DataGridViewRow row in IrradiationJournalADGVStandards.SelectedRows)
+                foreach (DataGridViewRow row in IrradiationJournalADGVStandards.SelectedRows.OfType<DataGridViewRow>().Reverse())
                 {
                     var drvSet = IrradiationJournalADGVStandardsSets.SelectedRows[0];
 
@@ -147,14 +150,13 @@ namespace NewForms
                         SetIndex      = drvSet.Cells["SRM_Set_Number"].Value.ToString(),
                         SampleNumber  = row.Cells["SRM_Number"].Value.ToString(),
                         Type          = _type,
-                        DateTimeStart = _currentJournalDateTime,
+                        DateTimeStart = _currentJournalDateTime.Date,
                         Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightStandardColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightStandardColumnName].Value.ToString()),
                         Duration      = Duration,
                         Container     = ContainerNumber,
                         Position      = PositionInContainer,
                         Channel       = this.Channel,
-                        LoadNumber    = _loadNumber,
-                        Assistant     =  _user
+                        LoadNumber    = _loadNumber
                     };
 
                     _irradiationList.Add(newIrr);

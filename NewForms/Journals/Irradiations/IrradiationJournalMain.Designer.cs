@@ -69,6 +69,9 @@
             this.IrradiationJournalComboBoxContainerNumber = new System.Windows.Forms.ComboBox();
             this.IrradiationJournalGoupBoxContainer = new System.Windows.Forms.GroupBox();
             this.IrradiationJournalGroupBoxEditMainTable = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.IrradiationJournalButtonRehandle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalADGV)).BeginInit();
             this.IrradiationJournalTabs.SuspendLayout();
@@ -89,13 +92,13 @@
             this.IrradiationJournalGroupBoxChannel.SuspendLayout();
             this.IrradiationJournalGoupBoxContainer.SuspendLayout();
             this.IrradiationJournalGroupBoxEditMainTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // IrradiationJournalADGV
             // 
             this.IrradiationJournalADGV.AllowUserToAddRows = false;
             this.IrradiationJournalADGV.AllowUserToDeleteRows = false;
-            this.IrradiationJournalADGV.AllowUserToResizeColumns = false;
             this.IrradiationJournalADGV.AllowUserToResizeRows = false;
             this.IrradiationJournalADGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -131,7 +134,8 @@
             // 
             // IrradiationJournalTabs
             // 
-            this.IrradiationJournalTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalTabs.Controls.Add(this.IrradiationJournalTabPageSamples);
             this.IrradiationJournalTabs.Controls.Add(this.tabPage2);
             this.IrradiationJournalTabs.Controls.Add(this.tabPage3);
@@ -171,10 +175,11 @@
             // 
             // IrradiationJournalLabelSamples
             // 
-            this.IrradiationJournalLabelSamples.AutoSize = true;
-            this.IrradiationJournalLabelSamples.Location = new System.Drawing.Point(521, 7);
+            this.IrradiationJournalLabelSamples.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IrradiationJournalLabelSamples.Location = new System.Drawing.Point(427, 7);
             this.IrradiationJournalLabelSamples.Name = "IrradiationJournalLabelSamples";
-            this.IrradiationJournalLabelSamples.Size = new System.Drawing.Size(74, 16);
+            this.IrradiationJournalLabelSamples.Size = new System.Drawing.Size(346, 16);
             this.IrradiationJournalLabelSamples.TabIndex = 5;
             this.IrradiationJournalLabelSamples.Text = "Образцы";
             // 
@@ -191,8 +196,7 @@
             // 
             this.IrradiationJournalADGVSamples.AllowUserToAddRows = false;
             this.IrradiationJournalADGVSamples.AllowUserToDeleteRows = false;
-            this.IrradiationJournalADGVSamples.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.IrradiationJournalADGVSamples.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalADGVSamples.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.IrradiationJournalADGVSamples.BackgroundColor = System.Drawing.Color.Gainsboro;
@@ -200,19 +204,18 @@
             this.IrradiationJournalADGVSamples.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             this.IrradiationJournalADGVSamples.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.IrradiationJournalADGVSamples.FilterAndSortEnabled = true;
-            this.IrradiationJournalADGVSamples.Location = new System.Drawing.Point(453, 30);
+            this.IrradiationJournalADGVSamples.Location = new System.Drawing.Point(427, 30);
             this.IrradiationJournalADGVSamples.Name = "IrradiationJournalADGVSamples";
             this.IrradiationJournalADGVSamples.RowHeadersVisible = false;
             this.IrradiationJournalADGVSamples.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.IrradiationJournalADGVSamples.Size = new System.Drawing.Size(320, 154);
+            this.IrradiationJournalADGVSamples.Size = new System.Drawing.Size(346, 154);
             this.IrradiationJournalADGVSamples.TabIndex = 3;
             // 
             // IrradiationJournalADGVSamplesSets
             // 
             this.IrradiationJournalADGVSamplesSets.AllowUserToAddRows = false;
             this.IrradiationJournalADGVSamplesSets.AllowUserToDeleteRows = false;
-            this.IrradiationJournalADGVSamplesSets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalADGVSamplesSets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IrradiationJournalADGVSamplesSets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.IrradiationJournalADGVSamplesSets.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.IrradiationJournalADGVSamplesSets.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -372,7 +375,7 @@
             // 
             // IrradiationJournalButtonAddTime
             // 
-            this.IrradiationJournalButtonAddTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalButtonAddTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalButtonAddTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IrradiationJournalButtonAddTime.Location = new System.Drawing.Point(1055, 594);
             this.IrradiationJournalButtonAddTime.Name = "IrradiationJournalButtonAddTime";
@@ -475,7 +478,7 @@
             // 
             // IrradiationJournalGroupBoxDuration
             // 
-            this.IrradiationJournalGroupBoxDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalGroupBoxDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalLabelDays);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalNumericUpDownDays);
             this.IrradiationJournalGroupBoxDuration.Controls.Add(this.IrradiationJournalNumericUpDownMinutes);
@@ -512,7 +515,7 @@
             // 
             // IrradiationJournalGroupBoxChannel
             // 
-            this.IrradiationJournalGroupBoxChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalGroupBoxChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalGroupBoxChannel.Controls.Add(this.IrradiationJournalRadioButtonChannel2);
             this.IrradiationJournalGroupBoxChannel.Controls.Add(this.IrradiationJournalRadioButtonChannel1);
             this.IrradiationJournalGroupBoxChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -590,7 +593,7 @@
             // 
             // IrradiationJournalGoupBoxContainer
             // 
-            this.IrradiationJournalGoupBoxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalGoupBoxContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalGoupBoxContainer.Controls.Add(this.IrradiationJournalComboBoxContainerNumber);
             this.IrradiationJournalGoupBoxContainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IrradiationJournalGoupBoxContainer.Location = new System.Drawing.Point(1334, 595);
@@ -602,22 +605,55 @@
             // 
             // IrradiationJournalGroupBoxEditMainTable
             // 
-            this.IrradiationJournalGroupBoxEditMainTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IrradiationJournalGroupBoxEditMainTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.label5);
+            this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.label6);
+            this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.trackBar1);
             this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.IrradiationJournalButtonAddSelectedToJournal);
             this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.IrradiationJournalButtonRemoveSelectedFromJournal);
             this.IrradiationJournalGroupBoxEditMainTable.Controls.Add(this.IrradiationJournalButtonRestoreSelectedFromJournal);
             this.IrradiationJournalGroupBoxEditMainTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IrradiationJournalGroupBoxEditMainTable.Location = new System.Drawing.Point(801, 514);
             this.IrradiationJournalGroupBoxEditMainTable.Name = "IrradiationJournalGroupBoxEditMainTable";
-            this.IrradiationJournalGroupBoxEditMainTable.Size = new System.Drawing.Size(248, 113);
+            this.IrradiationJournalGroupBoxEditMainTable.Size = new System.Drawing.Size(248, 139);
             this.IrradiationJournalGroupBoxEditMainTable.TabIndex = 21;
             this.IrradiationJournalGroupBoxEditMainTable.TabStop = false;
             this.IrradiationJournalGroupBoxEditMainTable.Text = "Формирование журнала";
             // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(164, 108);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 25);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "ДЖИ-2";
+            this.label5.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(6, 108);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 25);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "ДЖИ-1";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label6.Visible = false;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.AutoSize = false;
+            this.trackBar1.LargeChange = 1;
+            this.trackBar1.Location = new System.Drawing.Point(85, 108);
+            this.trackBar1.Maximum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(73, 25);
+            this.trackBar1.TabIndex = 30;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.Visible = false;
+            // 
             // IrradiationJournalButtonRehandle
             // 
-            this.IrradiationJournalButtonRehandle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IrradiationJournalButtonRehandle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.IrradiationJournalButtonRehandle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IrradiationJournalButtonRehandle.Location = new System.Drawing.Point(801, 655);
             this.IrradiationJournalButtonRehandle.Name = "IrradiationJournalButtonRehandle";
@@ -666,6 +702,7 @@
             this.IrradiationJournalGroupBoxChannel.ResumeLayout(false);
             this.IrradiationJournalGoupBoxContainer.ResumeLayout(false);
             this.IrradiationJournalGroupBoxEditMainTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -712,6 +749,9 @@
         private System.Windows.Forms.Label IrradiationJournalLabelDays;
         private System.Windows.Forms.NumericUpDown IrradiationJournalNumericUpDownDays;
         private System.Windows.Forms.Button IrradiationJournalButtonRehandle;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 

@@ -42,6 +42,9 @@ namespace NewForms
                     MonitorList = ic.Monitors.Where(s =>
                                                 s.Monitor_Set_Name == selCells["Monitor_Set_Name"].Value.ToString() &&
                                                 s.Monitor_Set_Number == selCells["Monitor_Set_Number"].Value.ToString() &&
+                                                ((_type == "SLI" && (s.Monitor_SLI_Weight !=0 && s.Monitor_SLI_Weight.HasValue)) ||
+                                                (_type.Contains("LLI") && s.Monitor_LLI_Weight != 0 && s.Monitor_LLI_Weight.HasValue))
+                                                &&
                                                 !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
                                                 ).ToList();
                 }
@@ -65,7 +68,7 @@ namespace NewForms
                     new string[] { "Monitor_Set_Name", "Monitor_Set_Number", "Monitor_Set_Weight", restWeightColumn.First() },
                     new Dictionary<string, string>()
                     {
-                    { "Monitor_Number",             "Номер"   },
+                    { "Monitor_Number",                "Номер"   },
                     { _currentWeightMonitorColumnName, "Вес"     }
                     },
                     new string[0]
@@ -95,7 +98,7 @@ namespace NewForms
         {
             try
             {
-                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows)
+                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows.OfType<DataGridViewRow>().Reverse())
                 {
                     var drvSet = IrradiationJournalADGVMonitorsSets.SelectedRows[0];
 
@@ -108,7 +111,7 @@ namespace NewForms
                         SetIndex      = drvSet.Cells["Monitor_Set_Number"].Value.ToString(),
                         SampleNumber  = row.Cells["Monitor_Number"].Value.ToString(),
                         Type          = _type,
-                        DateTimeStart = _currentJournalDateTime,
+                        DateTimeStart = _currentJournalDateTime.Date,
                         Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightMonitorColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightMonitorColumnName].Value.ToString()),
                         Duration      = Duration,
                         Channel       = this.Channel,
@@ -134,7 +137,7 @@ namespace NewForms
         {
             try
             {
-                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows)
+                foreach (DataGridViewRow row in IrradiationJournalADGVMonitors.SelectedRows.OfType<DataGridViewRow>().Reverse())
                 {
                     var drvSet = IrradiationJournalADGVMonitorsSets.SelectedRows[0];
 
@@ -147,14 +150,13 @@ namespace NewForms
                         SetIndex      = drvSet.Cells["Monitor_Set_Number"].Value.ToString(),
                         SampleNumber  = row.Cells["Monitor_Number"].Value.ToString(),
                         Type          = _type,
-                        DateTimeStart = _currentJournalDateTime,
+                        DateTimeStart = _currentJournalDateTime.Date,
                         Weight        = string.IsNullOrEmpty(row.Cells[_currentWeightMonitorColumnName].Value.ToString()) ? 0 : decimal.Parse(row.Cells[_currentWeightMonitorColumnName].Value.ToString()),
                         Duration      = Duration,
                         Container     = ContainerNumber,
                         Position      = PositionInContainer,
                         Channel       = this.Channel,
                         LoadNumber    = _loadNumber,
-                        Assistant     =  _user
                     };
 
                     _irradiationList.Add(newIrr);

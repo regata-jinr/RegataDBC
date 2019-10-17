@@ -355,7 +355,7 @@ namespace NewForms
                 {
                     _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue &&
                                                              ir.DateTimeStart.Value.Date == _currentJournalDateTime.Date &&
-                                                             ir.Type == _type)
+                                                             ir.Type == _type).OrderBy(ir => ir.Id)
                                                       .ToList();
                 }
 
@@ -558,7 +558,15 @@ namespace NewForms
                 }
 
                 foreach (var colName in columnHeaders.Keys)
+                {
                     adgv.Columns[colName].HeaderText = columnHeaders[colName];
+
+                    if (colName.Contains("DateTime"))
+                    {
+                        adgv.Columns[colName].DefaultCellStyle.Format = "dd.MM.yyyy hh:mm:ss";
+                        adgv.Columns[colName].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -643,9 +651,10 @@ namespace NewForms
                     else
                         prop.SetValue(currentIrr, null);
 
-
+                    currentIrr.Assistant = _user;
                     ic.Irradiations.Update(currentIrr);
                     ic.SaveChanges();
+                    IrradiationJournalADGV.Rows[e.RowIndex].Cells["Assistant"].Value = _user;
                 }
             }
             catch (Exception ex)
@@ -696,11 +705,10 @@ namespace NewForms
                 var colName = IrradiationJournalADGV.SelectedCells[0].OwningColumn.Name;
                 if (colName != "DateTimeStart" && colName != "DateTimeFinish") return;
 
-                var firstCell = IrradiationJournalADGV.SelectedCells[0];
-
                 _currentJournalDateTime = _currentJournalDateTime.Date.AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute).AddSeconds(DateTime.Now.Second);
-
-                firstCell.Value = _currentJournalDateTime;
+                
+                foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
+                    cell.Value = _currentJournalDateTime;
             }
             catch (Exception ex)
             {

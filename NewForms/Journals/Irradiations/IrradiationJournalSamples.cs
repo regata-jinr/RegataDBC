@@ -27,6 +27,9 @@ namespace NewForms
                                             s.F_Year == selCells["Year"].Value.ToString() &&
                                             s.F_Sample_Set_Id == selCells["Sample_Set_ID"].Value.ToString() &&
                                             s.F_Sample_Set_Index == selCells["Sample_Set_Index"].Value.ToString() &&
+                                            ((_type == "SLI" && (s.P_Weighting_SLI != 0 && s.P_Weighting_SLI.HasValue)) ||
+                                             (_type.Contains("LLI") && s.P_Weighting_LLI != 0 && s.P_Weighting_LLI.HasValue))
+                                            &&
                                             !_irradiationList.Select(i => i.ToString()).Contains(s.SampleKey)
                                             ).ToList();
             }

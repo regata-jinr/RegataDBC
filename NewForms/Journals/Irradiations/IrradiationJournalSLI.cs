@@ -13,7 +13,7 @@ namespace NewForms
         {
             SetColumnsProperties(ref IrradiationJournalADGV,
                                 new string[]
-                                { "Id", "SetKey", "SampleKey", "Type", "Container", "Position", "LoadNumber", "Rehandler" },
+                                { "Id", "SetKey", "SampleKey", "Type", "Container", "Position", "LoadNumber", "Rehandler", "DateTimeFinish" },
                                 new Dictionary<string, string>() {
                                     { "CountryCode",    "Код страны" },
                                     { "ClientNumber",   "Номер клиента" },
@@ -24,7 +24,6 @@ namespace NewForms
                                     { "Weight",         "Вес" },
                                     { "DateTimeStart",  "Дата и время начала облучения" },
                                     { "Duration",       "Продолжительность облучения" },
-                                    { "DateTimeFinish", "Дата и время конца облучения" },
                                     { "Channel",        "Канал" },
                                     { "Assistant",      "Облучил" },
                                     { "Note",           "Примечание" } },
@@ -40,7 +39,7 @@ namespace NewForms
         {
             try
             {
-                foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows)
+                foreach (DataGridViewRow row in IrradiationJournalADGVSamples.SelectedRows.OfType<DataGridViewRow>().Reverse())
                 {
                     var drvSet = IrradiationJournalADGVSamplesSets.SelectedRows[0];
 
@@ -53,7 +52,7 @@ namespace NewForms
                         SetIndex     = drvSet.Cells["Sample_Set_Index"].Value.ToString(),
                         SampleNumber = row.Cells["A_Sample_ID"].Value.ToString(),
                         Type         = _type,
-                        DateTimeStart = _currentJournalDateTime,
+                        DateTimeStart = _currentJournalDateTime.Date,
                         Weight       = string.IsNullOrEmpty(row.Cells["P_Weighting_SLI"].Value.ToString()) ? 0 : decimal.Parse(row.Cells["P_Weighting_SLI"].Value.ToString()),
                         Duration     = Duration,
                         Channel      = this.Channel,

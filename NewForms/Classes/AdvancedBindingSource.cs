@@ -50,8 +50,7 @@ namespace NewForms
                 _datatable = _dataset.Tables.Add(_basicType.Name);
 
                 foreach (var pi in _propertiesList)
-                    _datatable.Columns.Add(pi.Name, Nullable.GetUnderlyingType(
-                pi.PropertyType) ?? pi.PropertyType);
+                    _datatable.Columns.Add(pi.Name, Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType);
 
                 _bindingSource.DataMember = _datatable.TableName;
             }
