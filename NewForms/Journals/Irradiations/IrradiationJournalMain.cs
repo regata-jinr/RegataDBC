@@ -13,7 +13,6 @@ namespace NewForms
     public partial class IrradiationJournal : Form
     {
         private BindingSource _bindingSource;
-        private CheckBox _tabSamplesCheckBox;
         private List<string> ChosenSets;
         private List<IrradiationInfo> _irradiationList;
         private readonly string _type;
@@ -31,21 +30,23 @@ namespace NewForms
             using (SqlConnection conn = new SqlConnection(conString))
             {
                 var ListOfRoles = new List<string>();
-                var cmd = new SqlCommand("select IS_Rolemember('operator')", conn);
-                conn.Open();
-                object o = cmd.ExecuteScalar();
-                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
-                    ListOfRoles.Add("operator");
+                using (var cmd = new SqlCommand("select IS_Rolemember('operator')", conn))
+                {
+                    conn.Open();
+                    object o = cmd.ExecuteScalar();
+                    if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                        ListOfRoles.Add("operator");
 
-                cmd.CommandText = "select IS_Rolemember('db_owner')";
-                o = cmd.ExecuteScalar();
-                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
-                    ListOfRoles.Add("admin");
+                    cmd.CommandText = "select IS_Rolemember('db_owner')";
+                    o = cmd.ExecuteScalar();
+                    if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                        ListOfRoles.Add("admin");
 
-                cmd.CommandText = "select IS_Rolemember('rehanlder')";
-                o = cmd.ExecuteScalar();
-                if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
-                    ListOfRoles.Add("rehanlder");
+                    cmd.CommandText = "select IS_Rolemember('rehanlder')";
+                    o = cmd.ExecuteScalar();
+                    if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
+                        ListOfRoles.Add("rehanlder");
+                }
 
                 _rolesOfUser = ListOfRoles.ToArray();
             }
@@ -86,14 +87,27 @@ namespace NewForms
                 InitializeMainTable();
 
 
-                _tabSamplesCheckBox = IrradiationJournalTabs.TabPages["IrradiationJournalTabPageSamples"].Controls["IrradiationJournalСheckBoxSetsFromJournal"] as CheckBox;
+                if (_irradiationList.Any())
+                    IrradiationJournalСheckBoxSetsFromJournal.Checked = true;
+                else
+                    IrradiationJournalСheckBoxSetsFromJournal.Checked = false;
+
+                IrradiationJournalСheckBoxSetsFromJournal.CheckedChanged += _tabSamplesCheckBox_CheckedChanged;
+
 
                 if (_irradiationList.Any())
-                    _tabSamplesCheckBox.Checked = true;
+                    IrradiationJournalСheckBoxSRMsFromJournal.Checked = true;
                 else
-                    _tabSamplesCheckBox.Checked = false;
+                    IrradiationJournalСheckBoxSRMsFromJournal.Checked = false;
 
-                _tabSamplesCheckBox.CheckedChanged += _tabSamplesCheckBox_CheckedChanged;
+                IrradiationJournalСheckBoxSRMsFromJournal.CheckedChanged += _tabSRMsCheckBox_CheckedChanged;
+
+                if (_irradiationList.Any())
+                    IrradiationJournalСheckBoxMonitorsFromJournal.Checked = true;
+                else
+                    IrradiationJournalСheckBoxMonitorsFromJournal.Checked = false;
+
+                IrradiationJournalСheckBoxMonitorsFromJournal.CheckedChanged += _tabMonitorsCheckBox_CheckedChanged;
 
                 InitializeSampleSetTable();
                 IrradiationJournalADGV.CellValueChanged += UpdateIrradiationJournal;
@@ -107,6 +121,7 @@ namespace NewForms
                 InitializeMonitorSetTable();
 
                 IrradiationJournalADGV.KeyDown += IrradiationJournal_KeyDown;
+
             }
             catch (Exception ex)
             {
@@ -395,6 +410,20 @@ namespace NewForms
             InitializeSampleSetTable();
         }
 
+
+        private void _tabSRMsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            IrradiationJournalADGVStandardsSets.DataSource = null;
+            InitializeStandardSetTable();
+        }
+
+
+        private void _tabMonitorsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            IrradiationJournalADGVMonitorsSets.DataSource = null;
+            InitializeMonitorSetTable();
+        }
+
         private void InitializeSampleSetTable()
         {
             try
@@ -403,7 +432,7 @@ namespace NewForms
                 using (var ic = new InfoContext())
                 {
 
-                    if (_tabSamplesCheckBox.Checked && ChosenSets.Any())
+                    if (IrradiationJournalСheckBoxSetsFromJournal.Checked && ChosenSets.Any())
                         ssList = ic.SampleSets.Where(ss => ChosenSets.Contains(ss.ToString())).ToList();
                     else
                         ssList = ic.SampleSets.Select(ss => ss).OrderByDescending(ss => ss.Sample_Set_Receipt_Date).ThenByDescending(ss => ss.Sample_Set_Id).ToList();
@@ -423,7 +452,6 @@ namespace NewForms
             {
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
-
         }
 
         private void InitializeStandardSetTable()
@@ -432,8 +460,11 @@ namespace NewForms
             {
                 List<StandardSetInfo> standardSetsList = null;
                 using (var ic = new InfoContext())
-                {
-                    standardSetsList = ic.StandardSets.Select(ss => ss).OrderBy(ss => ss.SRM_Set_Name).ThenByDescending(ss => ss.SRM_Set_Number).ToList();
+                { 
+                    if (IrradiationJournalСheckBoxSRMsFromJournal.Checked && ChosenSets.Any())
+                        standardSetsList = ic.StandardSets.Where(ss => ChosenSets.Contains(ss.ToString())).ToList();
+                    else
+                        standardSetsList = ic.StandardSets.Select(ss => ss).OrderBy(ss => ss.SRM_Set_Name).ThenByDescending(ss => ss.SRM_Set_Number).ToList();
                 }
 
 
@@ -462,7 +493,10 @@ namespace NewForms
                 List<MonitorSetInfo> MonitorSetsList = null;
                 using (var ic = new InfoContext())
                 {
-                    MonitorSetsList = ic.MonitorSets.Select(ms => ms).OrderBy(ms => ms.Monitor_Set_Name).ThenByDescending(ms => ms.Monitor_Set_Number).ToList();
+                    if (IrradiationJournalСheckBoxMonitorsFromJournal.Checked && ChosenSets.Any())
+                        MonitorSetsList = ic.MonitorSets.Where(ms => ChosenSets.Contains(ms.ToString())).ToList();
+                    else
+                        MonitorSetsList = ic.MonitorSets.Select(ms => ms).OrderBy(ms => ms.Monitor_Set_Name).ThenByDescending(ms => ms.Monitor_Set_Number).ToList();
                 }
 
 
@@ -563,7 +597,7 @@ namespace NewForms
 
                     if (colName.Contains("DateTime"))
                     {
-                        adgv.Columns[colName].DefaultCellStyle.Format = "dd.MM.yyyy hh:mm:ss";
+                        adgv.Columns[colName].DefaultCellStyle.Format = "dd.MM.yyyy HH:mm:ss";
                         adgv.Columns[colName].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                     }
                 }
@@ -614,6 +648,10 @@ namespace NewForms
                 {
 
                     var row = cell.OwningRow;
+
+                    if (!_irradiationList.Select(ir => ir.Id).Contains((int)row.Cells["Id"].Value))
+                        continue;
+
                     var irr = _irradiationList.Where(ir => ir.Id == (int)row.Cells["Id"].Value).First();
 
                     using (var ic = new InfoContext())
@@ -621,6 +659,7 @@ namespace NewForms
                         ic.Irradiations.Remove(irr);
                         ic.SaveChanges();
                     }
+                    _irradiationList.Remove(irr);
                 }
 
                 InitializeMainTable();
@@ -663,6 +702,12 @@ namespace NewForms
             }
         }
 
+        private void AutoChangePosition()
+        {
+            if (_type.Contains("LLI"))
+                _bindingSource.Sort = "Container, Position";
+        }
+
         private bool DataValidation(DataGridViewCellEventArgs e)
         {
             DataGridViewCell currentCell = IrradiationJournalADGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -674,6 +719,13 @@ namespace NewForms
                               
                 DataGridViewColumn currentColumn = currentCell.OwningColumn;
                 DataGridViewRow currentRow = currentCell.OwningRow;
+
+                if (currentColumn.Name.Contains("Position"))
+                {
+                    isValidated = uint.TryParse(currentCell.Value.ToString(), out _);
+                    if (isValidated) AutoChangePosition();
+                }
+
 
                 if (currentColumn.Name.Contains("DateTime"))
                     isValidated = DateTime.TryParse(currentCell.Value.ToString(), out _);

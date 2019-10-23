@@ -32,7 +32,7 @@ namespace NewForms
                                     { "Assistant",      "Облучил" },
                                     { "Note",           "Примечание" } },
                                 new string[]
-                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Container", "Position", "Assistant", "Rehandler" }
+                                { "CountryCode", "ClientNumber", "Year", "SetNumber", "SetIndex", "SampleNumber", "Weight", "DateTimeStart", "Duration", "DateTimeFinish", "Channel", "Container", "Assistant", "Rehandler" }
                                 );
 
         }

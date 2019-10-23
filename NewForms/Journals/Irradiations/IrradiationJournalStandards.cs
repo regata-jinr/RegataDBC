@@ -26,6 +26,41 @@ namespace NewForms
 
         private string _currentWeightStandardColumnName;
 
+        //private void GetLastIrradiationDate(InfoContext ic, ref StandardInfo standard)
+        //{
+        //    var std = standard;
+        //    var dateTimes = ic.Irradiations.Where(ir => ir.CountryCode == "s" && ir.ToString() == std.ToString() && ir.DateTimeStart.HasValue).Select(ir => ir.DateTimeStart.Value.Date).Distinct().ToList();
+        //        if (dateTimes.Any())
+        //            standard.LastIrradiationDate = dateTimes.Max();
+        //        else 
+        //            standard.LastIrradiationDate = null;
+        //}
+
+        //private int? GetNumberOfIrradiations(StandardInfo standard)
+        //{
+        //    int? num = null;
+
+        //    using (var ic = new InfoContext())
+        //    {
+        //        num = ic.Irradiations.Where(ir => ir.CountryCode == "s" && ir.ToString() == standard.ToString() && ir.DateTimeStart.HasValue).Select(ir => ir.DateTimeStart.Value).Count();
+        //    }
+
+        //    return num;
+        //}
+
+        //private void FillStandardsFields(ref List<StandardInfo> StandardList)
+        //{
+        //    using (var ic = new InfoContext())
+        //    {
+        //        foreach (var s in StandardList)
+        //        {
+        //            var std = s;
+        //            GetLastIrradiationDate(ic, ref std);
+        //            //s.NumberOfIrradiations = GetNumberOfIrradiations(s);
+        //        }
+        //    }
+        //}
+
         private void ShowStandards()
         {
             try
@@ -40,9 +75,9 @@ namespace NewForms
                 using (var ic = new InfoContext())
                 {
                     StandardList = ic.Standards.Where(s =>
-                                                s.SRM_Set_Name == selCells["SRM_Set_Name"].Value.ToString() &&
+                                                s.SRM_Set_Name   == selCells["SRM_Set_Name"].Value.ToString() &&
                                                 s.SRM_Set_Number == selCells["SRM_Set_Number"].Value.ToString() &&
-                                                ((_type == "SLI" && (s.SRM_SLI_Weight != 0 && s.SRM_SLI_Weight.HasValue)) ||
+                                                ((_type == "SLI"       && (s.SRM_SLI_Weight != 0 && s.SRM_SLI_Weight.HasValue)) ||
                                                 (_type.Contains("LLI") && s.SRM_LLI_Weight != 0 && s.SRM_LLI_Weight.HasValue))
                                                 &&
                                                 !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
@@ -51,6 +86,8 @@ namespace NewForms
 
                 if (StandardList == null)
                     StandardList = new List<StandardInfo>();
+
+                //FillStandardsFields(ref StandardList);
 
                 var advbindSource = new  AdvancedBindingSource<StandardInfo>(StandardList);
                 IrradiationJournalADGVStandards.SetDoubleBuffered();
@@ -62,14 +99,14 @@ namespace NewForms
                 var restWeightColumn = new List<string>(){ "SRM_LLI_Weight", "SRM_SLI_Weight" };
                 restWeightColumn.Remove(_currentWeightStandardColumnName);
 
-
-
                 SetColumnsProperties(ref IrradiationJournalADGVStandards,
                     new string[] { "SRM_Set_Name", "SRM_Set_Number", "SRM_Set_Weight", restWeightColumn.First() },
                     new Dictionary<string, string>()
                     {
-                    { "SRM_Number",             "Номер"   },
-                    { _currentWeightStandardColumnName, "Вес"     }
+                        { "SRM_Number",                     "Номер"                    },
+                        { _currentWeightStandardColumnName, "Вес"                      }
+                        //{ "LastIrradiationDate",            "Дата последнего облучения"},
+                        //{ "NumberOfIrradiations",           "Количество облучений"     }
                     },
                     new string[0]
                     );

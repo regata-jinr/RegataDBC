@@ -20,42 +20,42 @@ Public Class Form_Main
             Debug.WriteLine("DataSampleSetLoad:")
             SampleSetFormLoadFlag = False
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim cmd As New System.Data.SqlClient.SqlCommand
+            Using cmd As New System.Data.SqlClient.SqlCommand
 
-            cmd.CommandType = System.Data.CommandType.Text
-            fields = Field
+                cmd.CommandType = System.Data.CommandType.Text
+                fields = Field
 
-            cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
+                cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
 
-            Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-            Dim ds As New DataSet()
+                Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+                Dim ds As New DataSet()
 
-            dataadapter.Fill(ds, "SampleInf")
-            DataGridView_Sample_Set.DataSource = ds
-            DataGridView_Sample_Set.DataMember = "SampleInf"
-            DataGridView_Sample_Set.ReadOnly = True
-            DataGridView_Sample_Set.AllowUserToAddRows = False
-            DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
-            SampleSetFormLoadFlag = True
+                dataadapter.Fill(ds, "SampleInf")
+                DataGridView_Sample_Set.DataSource = ds
+                DataGridView_Sample_Set.DataMember = "SampleInf"
+                DataGridView_Sample_Set.ReadOnly = True
+                DataGridView_Sample_Set.AllowUserToAddRows = False
+                DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
+                SampleSetFormLoadFlag = True
 
-            Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
-            Dim finish As Integer = DataGridView_Sample_Set.RowCount
+                Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
+                Dim finish As Integer = DataGridView_Sample_Set.RowCount
 
-            For i As Integer = start To finish - 1
-                Colorize(DataGridView_Sample_Set.Rows.Item(i))
-            Next
+                For i As Integer = start To finish - 1
+                    Colorize(DataGridView_Sample_Set.Rows.Item(i))
+                Next
 
-            If DataGridView_Sample_Set.RowCount = 0 Then
-                MsgBox("Таких значений нет")
-                DataSampleSetLoad("")
-                ' Exit Sub
-            End If
+                If DataGridView_Sample_Set.RowCount = 0 Then
+                    MsgBox("Таких значений нет")
+                    DataSampleSetLoad("")
+                    ' Exit Sub
+                End If
 
-            DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-            DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
+                DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
+                DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
 
-            If Not BackgroundWorkerColorizer.IsBusy Then BackgroundWorkerColorizer.RunWorkerAsync()
-
+                If Not BackgroundWorkerColorizer.IsBusy Then BackgroundWorkerColorizer.RunWorkerAsync()
+            End Using
         Catch backgroundWorker As InvalidOperationException
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -747,7 +747,6 @@ Public Class Form_Main
             number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
             Dim ij As New NewForms.IrradiationJournal(DateTime.Parse(jDate), "LLI-1", MyConnectionString, Integer.Parse(number))
             ij.Show()
-
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub

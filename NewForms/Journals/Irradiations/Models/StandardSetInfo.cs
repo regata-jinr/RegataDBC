@@ -15,7 +15,7 @@ namespace NewForms.Models
 
         public override string ToString()
         {
-            return $"{SRM_Set_Name}-{SRM_Set_Number}";
+            return $"s-s-s-{SRM_Set_Name}-{SRM_Set_Number}";
         }
 
     }

@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                _bindingSource.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -73,6 +74,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.IrradiationJournalButtonRehandle = new System.Windows.Forms.Button();
+            this.IrradiationJournalСheckBoxSRMsFromJournal = new System.Windows.Forms.CheckBox();
+            this.IrradiationJournalСheckBoxMonitorsFromJournal = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.IrradiationJournalADGV)).BeginInit();
             this.IrradiationJournalTabs.SuspendLayout();
             this.IrradiationJournalTabPageSamples.SuspendLayout();
@@ -232,6 +235,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.IrradiationJournalСheckBoxSRMsFromJournal);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.IrradiationJournalADGVStandards);
@@ -304,6 +308,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.IrradiationJournalСheckBoxMonitorsFromJournal);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.IrradiationJournalADGVMonitors);
@@ -663,6 +668,26 @@
             this.IrradiationJournalButtonRehandle.UseVisualStyleBackColor = true;
             this.IrradiationJournalButtonRehandle.Click += new System.EventHandler(this.IrradiationJournalButtonRehandle_Click);
             // 
+            // IrradiationJournalСheckBoxSRMsFromJournal
+            // 
+            this.IrradiationJournalСheckBoxSRMsFromJournal.AutoSize = true;
+            this.IrradiationJournalСheckBoxSRMsFromJournal.Location = new System.Drawing.Point(165, 7);
+            this.IrradiationJournalСheckBoxSRMsFromJournal.Name = "IrradiationJournalСheckBoxSRMsFromJournal";
+            this.IrradiationJournalСheckBoxSRMsFromJournal.Size = new System.Drawing.Size(115, 20);
+            this.IrradiationJournalСheckBoxSRMsFromJournal.TabIndex = 8;
+            this.IrradiationJournalСheckBoxSRMsFromJournal.Text = "Из журнала";
+            this.IrradiationJournalСheckBoxSRMsFromJournal.UseVisualStyleBackColor = true;
+            // 
+            // IrradiationJournalСheckBoxMonitorsFromJournal
+            // 
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.AutoSize = true;
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.Location = new System.Drawing.Point(165, 7);
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.Name = "IrradiationJournalСheckBoxMonitorsFromJournal";
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.Size = new System.Drawing.Size(115, 20);
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.TabIndex = 10;
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.Text = "Из журнала";
+            this.IrradiationJournalСheckBoxMonitorsFromJournal.UseVisualStyleBackColor = true;
+            // 
             // IrradiationJournal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,6 +777,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.CheckBox IrradiationJournalСheckBoxSRMsFromJournal;
+        private System.Windows.Forms.CheckBox IrradiationJournalСheckBoxMonitorsFromJournal;
     }
 }
 

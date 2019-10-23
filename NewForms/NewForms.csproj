@@ -140,6 +140,7 @@
     <Compile Include="Journals\Irradiations\Models\IrradiationInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\MonitorInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\MonitorSetInfo.cs" />
+    <Compile Include="Journals\Irradiations\Models\LastSrmIrrInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\StandardSetInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\StandardInfo.cs" />
     <Compile Include="Journals\Irradiations\Models\SampleInfo.cs" />
