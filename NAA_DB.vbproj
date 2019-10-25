@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<<<<<<< HEAD
+=======
+  <Import Project="packages\Costura.Fody.4.1.0\build\Costura.Fody.props" Condition="Exists('packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" />
+  <Import Project="packages\squirrel.windows.1.9.1\build\squirrel.windows.props" Condition="Exists('packages\squirrel.windows.1.9.1\build\squirrel.windows.props')" />
+>>>>>>> master
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -17,9 +22,15 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+<<<<<<< HEAD
     <PublishUrl>\\NF-100-213\NaaSoft\NaaDB\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
+=======
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+>>>>>>> master
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -27,6 +38,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
+<<<<<<< HEAD
     <InstallUrl>\\NF-100-213\NaaSoft\NaaDB\</InstallUrl>
     <ProductName>NaaDB</ProductName>
     <PublisherName>SNAAR</PublisherName>
@@ -37,6 +49,17 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+=======
+    <ProductName>NaaDB</ProductName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>78</ApplicationRevision>
+    <ApplicationVersion>5.9.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+>>>>>>> master
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -76,6 +99,7 @@
   <PropertyGroup>
     <ApplicationIcon>NaaDBIcon.ico</ApplicationIcon>
   </PropertyGroup>
+<<<<<<< HEAD
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -90,6 +114,20 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+=======
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>1AF59FC25CDF18E5A1B7A317AF6164ED7EC12EE4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NAA_DB_2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+>>>>>>> master
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -126,11 +164,32 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <Reference Include="ClosedXML">
       <HintPath>.\ClosedXML.dll</HintPath>
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+=======
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ClosedXML.0.94.2\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="CredentialManagement, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CredentialManagement.Standard.1.0.4\lib\netstandard2.0\CredentialManagement.dll</HintPath>
+>>>>>>> master
     </Reference>
     <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
       <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
@@ -141,7 +200,20 @@
     <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
       <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+=======
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FastMember.1.3.0\lib\net40\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+>>>>>>> master
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -155,7 +227,14 @@
       <HintPath>packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+<<<<<<< HEAD
       <HintPath>packages\squirrel.windows.1.9.0\lib\Net45\NuGet.Squirrel.dll</HintPath>
+=======
+      <HintPath>packages\squirrel.windows.1.9.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+>>>>>>> master
     </Reference>
     <Reference Include="SharpCompress, Version=0.17.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>packages\SharpCompress.0.17.1\lib\net45\SharpCompress.dll</HintPath>
@@ -163,6 +242,7 @@
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="SqlGridView">
       <HintPath>..\myLibs\SqlGridView\SqlGridView\bin\Release\SqlGridView.dll</HintPath>
     </Reference>
@@ -173,6 +253,37 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+=======
+    <Reference Include="Squirrel, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\squirrel.windows.1.9.1\lib\Net45\Squirrel.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+>>>>>>> master
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -198,6 +309,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Form_Add_New_Client.Designer.vb">
       <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
@@ -315,10 +427,125 @@
     </Compile>
     <Compile Include="ListItem.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+=======
+    <Compile Include="Forms\Form_Add_New_Client.Designer.vb">
+      <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Add_New_Client.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_ElsSum.Designer.vb">
+      <DependentUpon>Form_ElsSum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_ElsSum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Fill_Notes.Designer.vb">
+      <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Fill_Notes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Main.Designer.vb">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Monitor_Accept.Designer.vb">
+      <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Monitor_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Monitor_Set_Accept.Designer.vb">
+      <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Monitor_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_NAA_Results.Designer.vb">
+      <DependentUpon>Form_NAA_Results.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_NAA_Results.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Notice.Designer.vb">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Notice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Samples_Search.Designer.vb">
+      <DependentUpon>Form_Samples_Search.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Samples_Search.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Accept.Designer.vb">
+      <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Set_Accept.Designer.vb">
+      <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Set_Accept_Print_Form.Designer.vb">
+      <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Set_Accept_Print_Form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_SRM_Accept.Designer.vb">
+      <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_SRM_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_SRM_Set_Accept.Designer.vb">
+      <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_SRM_Set_Accept.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Physical_Environment.Designer.vb">
+      <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Physical_Environment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Samples_List.Designer.vb">
+      <DependentUpon>Form_Samples_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Samples_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Login.Designer.vb">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Preparation.Designer.vb">
+      <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Sample_Preparation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListItem.vb" />
+>>>>>>> master
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="My Project\AssemblyInfo.vb" />
+>>>>>>> master
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -326,8 +553,13 @@
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
+<<<<<<< HEAD
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+=======
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+>>>>>>> master
     </Compile>
     <Compile Include="NAA_DBDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -335,6 +567,7 @@
       <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="NAA_DB_EXPDataSet.Designer.vb">
+<<<<<<< HEAD
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
@@ -422,13 +655,101 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OpenSampleForm.resx">
+=======
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="NAA_DB_EXPDataSet.vb">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Forms\OpenSampleForm.Designer.vb">
+      <DependentUpon>OpenSampleForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OpenSampleForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Form_Add_New_Client.resx">
+      <DependentUpon>Form_Add_New_Client.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_ElsSum.resx">
+      <DependentUpon>Form_ElsSum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Fill_Notes.resx">
+      <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Main.resx">
+      <DependentUpon>Form_Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Monitor_Accept.resx">
+      <DependentUpon>Form_Monitor_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Monitor_Set_Accept.resx">
+      <DependentUpon>Form_Monitor_Set_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_NAA_Results.resx">
+      <DependentUpon>Form_NAA_Results.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Notice.resx">
+      <DependentUpon>Form_Notice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Samples_Search.resx">
+      <DependentUpon>Form_Samples_Search.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Sample_Accept.resx">
+      <DependentUpon>Form_Sample_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Sample_Set_Accept.resx">
+      <DependentUpon>Form_Sample_Set_Accept.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Sample_Set_Accept_Print_Form.resx">
+      <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_SRM_Accept.resx">
+      <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_SRM_Set_Accept.resx">
+      <DependentUpon>Form_SRM_Set_Accept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Physical_Environment.resx">
+      <DependentUpon>Form_Physical_Environment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Samples_List.resx">
+      <DependentUpon>Form_Samples_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Login.resx">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Sample_Preparation.resx">
+      <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpenSampleForm.resx">
+>>>>>>> master
       <DependentUpon>OpenSampleForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+=======
+    <None Include="app.config" />
+>>>>>>> master
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -436,9 +757,13 @@
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
+<<<<<<< HEAD
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
+=======
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+>>>>>>> master
     </None>
     <None Include="NAA_DBDataSet.xsc">
       <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
@@ -451,6 +776,7 @@
     <None Include="NAA_DBDataSet.xss">
       <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
     </None>
+<<<<<<< HEAD
     <None Include="NAA_DB_1_TemporaryKey.pfx" />
     <None Include="NAA_DB_EXPDataSet.xsc">
       <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
@@ -469,6 +795,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ibr1.gif" />
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\DataSources\" />
@@ -496,12 +824,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="jinr_embl2.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="jinr_embl1.gif" />
   </ItemGroup>
   <ItemGroup>
+=======
+>>>>>>> master
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -516,11 +847,20 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="NAA_DB_TemporaryKey.pfx" />
+=======
+    <None Include="NAA_DB_EXPDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NAA_DB_EXPDataSet.Designer.vb</LastGenOutput>
+    </None>
+>>>>>>> master
     <None Include="packages.config" />
     <None Include="Resources\headerDict.txt" />
     <None Include="bin\Debug\ClosedXML.dll" />
     <None Include="bin\Debug\DocumentFormat.OpenXml.dll" />
+<<<<<<< HEAD
     <Content Include="headDictKV.txt" />
     <Content Include="NaaDBIcon.ico" />
   </ItemGroup>
@@ -537,6 +877,32 @@
     </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+=======
+    <Content Include="NaaDBIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Extensions\Extensions.csproj">
+      <Project>{93857a67-5872-4789-8ff2-217d92cae0ec}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="NewForms\NewForms.csproj">
+      <Project>{1380e3fd-4545-4ca3-b20a-2f620192933f}</Project>
+      <Name>NewForms</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\squirrel.windows.1.9.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\squirrel.windows.1.9.1\build\squirrel.windows.props'))" />
+    <Error Condition="!Exists('packages\squirrel.windows.1.9.1\build\squirrel.windows.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\squirrel.windows.1.9.1\build\squirrel.windows.targets'))" />
+    <Error Condition="!Exists('packages\Fody.6.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.0.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+  </Target>
+  <Import Project="packages\squirrel.windows.1.9.1\build\squirrel.windows.targets" Condition="Exists('packages\squirrel.windows.1.9.1\build\squirrel.windows.targets')" />
+  <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />
+>>>>>>> master
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
