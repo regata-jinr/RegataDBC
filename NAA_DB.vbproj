@@ -19,6 +19,8 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -36,8 +38,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -128,11 +128,12 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -197,6 +198,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
@@ -259,6 +261,12 @@
     <Compile Include="Forms\Form_Fill_Notes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Form_LLI_Irradiation_Log.Designer.vb">
+      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_LLI_Irradiation_Log.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Form_Main.Designer.vb">
       <DependentUpon>Form_Main.vb</DependentUpon>
     </Compile>
@@ -313,6 +321,12 @@
     <Compile Include="Forms\Form_Sample_Set_Accept_Print_Form.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Form_SLI_Irradiation_Log.Designer.vb">
+      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_SLI_Irradiation_Log.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Form_SRM_Accept.Designer.vb">
       <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
     </Compile>
@@ -365,27 +379,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="NAA_DBDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="NAA_DB_EXPDataSet.Designer.vb">
-      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="NAA_DB_EXPDataSet.vb">
-      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
-      <SubType>code</SubType>
-    </Compile>
     <Compile Include="Forms\OpenSampleForm.Designer.vb">
       <DependentUpon>OpenSampleForm.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\OpenSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.vb" />
+    <Compile Include="Forms\NAA_DB_EXPDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NAA_DB_EXPDataSet.vb">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\Form_Add_New_Client.resx">
@@ -396,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_Fill_Notes.resx">
       <DependentUpon>Form_Fill_Notes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_LLI_Irradiation_Log.resx">
+      <DependentUpon>Form_LLI_Irradiation_Log.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_Main.resx">
       <DependentUpon>Form_Main.vb</DependentUpon>
@@ -428,6 +438,9 @@
       <DependentUpon>Form_Sample_Set_Accept_Print_Form.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_SLI_Irradiation_Log.resx">
+      <DependentUpon>Form_SLI_Irradiation_Log.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_SRM_Accept.resx">
       <DependentUpon>Form_SRM_Accept.vb</DependentUpon>
     </EmbeddedResource>
@@ -447,13 +460,13 @@
     <EmbeddedResource Include="Forms\Form_Sample_Preparation.resx">
       <DependentUpon>Form_Sample_Preparation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpenSampleForm.resx">
+      <DependentUpon>OpenSampleForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OpenSampleForm.resx">
-      <DependentUpon>OpenSampleForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -466,17 +479,6 @@
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="NAA_DBDataSet.xsc">
-      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="NAA_DBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>NAA_DBDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="NAA_DBDataSet.xss">
-      <DependentUpon>NAA_DBDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -519,10 +521,16 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NAA_DB_EXPDataSet.xsd">
-      <SubType>Designer</SubType>
+    <None Include="Forms\NAA_DB_EXPDataSet.xsc">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Forms\NAA_DB_EXPDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>NAA_DB_EXPDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Forms\NAA_DB_EXPDataSet.xss">
+      <DependentUpon>NAA_DB_EXPDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Resources\headerDict.txt" />
@@ -534,10 +542,6 @@
     <ProjectReference Include="Extensions\Extensions.csproj">
       <Project>{93857a67-5872-4789-8ff2-217d92cae0ec}</Project>
       <Name>Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="NewForms\NewForms.csproj">
-      <Project>{1380e3fd-4545-4ca3-b20a-2f620192933f}</Project>
-      <Name>NewForms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

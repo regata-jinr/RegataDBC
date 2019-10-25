@@ -36,6 +36,7 @@ Partial Class Form_Main
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView_Sample_Set = New System.Windows.Forms.DataGridView()
+        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet
         Me.B_Select_Sample_Set = New System.Windows.Forms.Button()
         Me.B_Physical_Environment = New System.Windows.Forms.Button()
         Me.L_Name_SLI_Irradiation_Log = New System.Windows.Forms.Label()
@@ -84,6 +85,7 @@ Partial Class Form_Main
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,6 +163,15 @@ Partial Class Form_Main
         Me.DataGridView_Sample_Set.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 251)
         Me.DataGridView_Sample_Set.TabIndex = 2
+
+
+        'NAA_DB_EXPDataSet
+        '
+        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
+        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'B_Select_Sample_Set
+
         '
         'B_Select_Sample_Set
         '
@@ -594,6 +605,7 @@ Partial Class Form_Main
         'Table_SRM_Set_BindingSource
         '
         Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
+        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
         '
         'Table_SRM_TableAdapter
         '
@@ -703,6 +715,7 @@ Partial Class Form_Main
         Me.Name = "Form_Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
@@ -722,6 +735,7 @@ Partial Class Form_Main
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridView_Sample_Set As System.Windows.Forms.DataGridView
+    Friend WithEvents NAA_DB_EXPDataSet As NAA_DB_EXPDataSet
     Friend WithEvents B_Select_Sample_Set As System.Windows.Forms.Button
     Friend WithEvents B_Physical_Environment As System.Windows.Forms.Button
     Friend WithEvents ISLILogNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
