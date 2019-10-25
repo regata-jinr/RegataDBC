@@ -31,8 +31,7 @@ namespace NewForms.Models
               .HasKey(ss => new { ss.SRM_Set_Name, ss.SRM_Set_Number });
 
             modelBuilder.Entity<StandardInfo>()
-             .HasKey(ss => new { ss.SRM_Set_Name, ss.SRM_Set_Number, ss.SRM_Number});
-
+             .HasKey(ss => new { ss.SRM_Number });
 
             modelBuilder.Entity<MonitorSetInfo>()
              .HasKey(ss => new { ss.Monitor_Set_Name, ss.Monitor_Set_Number });
