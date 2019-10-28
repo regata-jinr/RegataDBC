@@ -171,7 +171,7 @@ Public Class Form_SLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Received_By". При необходимости она может быть перемещена или удалена.
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            'Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
+            Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_SLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
@@ -335,7 +335,7 @@ Public Class Form_SLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_ExpDataSet.table_Sample_Set". При необходимости она может быть перемещена или удалена.
             Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            'Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
+            Me.Table_Sample_Set_TableAdapter.Fill_Sample_Set(Me.NAA_DB_EXPDataSet.table_Sample_Set)
 
             With DataGridView_SLI_Sample_Set
                 .Columns.Clear()
@@ -397,7 +397,7 @@ Public Class Form_SLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SRM_Set". При необходимости она может быть перемещена или удалена.
             Table_SRM_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            'Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
+            Me.Table_SRM_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_SRM_Set)
 
             With DataGridView_Table_SRM_Set
                 .Columns.Clear()
@@ -592,7 +592,7 @@ Public Class Form_SLI_Irradiation_Log
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Monitor_Set". При необходимости она может быть перемещена или удалена.
             Table_Monitor_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            'Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
+            Me.Table_Monitor_Set_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Monitor_Set)
 
             With DataGridView_Table_Monitor_Set
                 .Columns.Clear()
@@ -840,15 +840,14 @@ Public Class Form_SLI_Irradiation_Log
                 DataGridView_SLI_Sample_Set.SelectedCells.Item(2).Value + "', '" +
                 DataGridView_SLI_Sample_Set.SelectedCells.Item(3).Value + "', '" +
                 DataGridView_SLI_Sample_Set.SelectedCells.Item(4).Value + "', '" +
-                ListBox_Sample_ID.Text + "', '" + MaskedTextBox_SLI_Irradiation_Log.Text + "')"
+                ListBox_Sample_ID.Text + "', " + $"convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104))"
 
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
             sqlConnection1.Close()
 
-            cmd.CommandText = "UPDATE dbo.table_Sample SET I_SLI_Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text +
-                "' WHERE F_Country_Code='" + DataGridView_SLI_Sample_Set.SelectedCells.Item(0).Value +
+            cmd.CommandText = $"UPDATE dbo.table_Sample SET I_SLI_Date_Start=convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104) WHERE F_Country_Code='" + DataGridView_SLI_Sample_Set.SelectedCells.Item(0).Value +
                 "' and F_Client_ID='" + DataGridView_SLI_Sample_Set.SelectedCells.Item(1).Value +
                 "' and F_Year='" + DataGridView_SLI_Sample_Set.SelectedCells.Item(2).Value +
                 "' and F_Sample_Set_ID='" + DataGridView_SLI_Sample_Set.SelectedCells.Item(3).Value +
@@ -1081,6 +1080,7 @@ Public Class Form_SLI_Irradiation_Log
         '            'Me.Validate()
         '            'Me.Table_SLI_Irradiation_Log_BindingSource.EndEdit()
         '            'Me.Table_SLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log)
+        ' and Date_Start=convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104)"
         '            'Form_SLI_Irradiation_Log_Load(sender, e)
 
         '            Exit Sub
@@ -1171,7 +1171,7 @@ Public Class Form_SLI_Irradiation_Log
                "' and Sample_Set_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(3).Value +
                "' and Sample_Set_Index='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(4).Value +
                "' and Sample_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(5).Value +
-               "' and Date_Start='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
+              $"' and Date_Start=convert(date, '{DataGridView_SLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104)"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -1184,7 +1184,7 @@ Public Class Form_SLI_Irradiation_Log
                "' and F_Sample_Set_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(3).Value +
                "' and F_Sample_Set_Index='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(4).Value +
                "' and A_Sample_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(5).Value +
-               "' and I_SLI_Date_Start='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(6).Value + "'"
+              $"' and I_SLI_Date_Start=convert(date, '{DataGridView_SLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104)"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -1332,8 +1332,8 @@ Public Class Form_SLI_Irradiation_Log
                                             " VALUES ('s', 's', 's', '" +
                                              DataGridView_Table_SRM_Set.SelectedCells.Item(0).Value + "', '" +
                                              DataGridView_Table_SRM_Set.SelectedCells.Item(1).Value.ToString + "', '" +
-                                             DataGridView_Table_SRM.SelectedCells.Item(0).Value.ToString + "', '" +
-                                             MaskedTextBox_SLI_Irradiation_Log.Text + "')"
+                                             DataGridView_Table_SRM.SelectedCells.Item(0).Value.ToString + "', " +
+                                             $"convert(datetime, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104))"
 
                     cmd.Connection = sqlConnection1
                     sqlConnection1.Open()
@@ -1496,7 +1496,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                  "' and Sample_Set_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(3).Value +
                  "' and Sample_Set_Index='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(4).Value.ToString +
                  "' and Sample_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(5).Value.ToString +
-                 "' and Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text + "'"
+                $"' and Date_Start=convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104)"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -1564,8 +1564,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
-            cmd.CommandText = "UPDATE dbo.table_Monitor SET Monitor_SLI_Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text +
-                 "' WHERE Monitor_Set_Name='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value +
+            cmd.CommandText = $"UPDATE dbo.table_Monitor SET Monitor_SLI_Date_Start=convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104) WHERE Monitor_Set_Name='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value +
                  "' and Monitor_Set_Number='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString +
                  "' and Monitor_Number='" + DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "'"
 
@@ -1578,9 +1577,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                 " VALUES ('m', 'm', 'm', '" +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value + "', '" +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString + "', '" +
-                 DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "', '" +
-                 MaskedTextBox_SLI_Irradiation_Log.Text + "')"
-
+                 DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "', " +
+                 $"convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104))"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()
@@ -1627,7 +1625,7 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_SLI_Irradiation_Log " +
                  "' and Sample_Set_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(3).Value +
                  "' and Sample_Set_Index='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(4).Value.ToString +
                  "' and Sample_ID='" + DataGridView_SLI_Irradiation_Log.SelectedCells.Item(5).Value.ToString +
-                 "' and Date_Start='" + MaskedTextBox_SLI_Irradiation_Log.Text + "'"
+                $"' and Date_Start=convert(date, '{MaskedTextBox_SLI_Irradiation_Log.Text}', 104)"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()

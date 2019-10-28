@@ -270,7 +270,7 @@ Public Class Form_ElsSum
     End Sub
 
     Sub GetRelatedSLISRMs(ByRef srmarr As Dictionary(Of String, String), ByVal setKey As String, ByVal dt As DateTime)
-        GetQueryResult(srmarr, $"Select  distinct File_First, '{setKey}\kji\SRMs\' + File_First + '.cnf' from table_SLI_Irradiation_Log where Country_Code = 's' and Date_Start between (select max(DateStart) from IBR2MCycles where DateStart <= '{dt.ToShortDateString()}') and (select min(DateFinish) from IBR2MCycles where DateFinish >= '{dt.ToShortDateString()}') and File_First is not null")
+        GetQueryResult(srmarr, $"Select  distinct File_First, '{setKey}\kji\SRMs\' + File_First + '.cnf' from table_SLI_Irradiation_Log where Country_Code = 's' and Date_Start between (select max(DateStart) from IBR2MCycles where DateStart <= convert(date,'{dt.ToShortDateString()}',104)) and (select min(DateFinish) from IBR2MCycles where DateFinish >= convert(date,'{dt.ToShortDateString()}',104)) and File_First is not null")
     End Sub
 
     'TODO implement interface with datarow
