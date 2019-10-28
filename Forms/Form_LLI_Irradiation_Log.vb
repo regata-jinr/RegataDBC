@@ -2247,8 +2247,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
-            cmd.CommandText = $"UPDATE dbo.table_Monitor SET Monitor_LLI_Date_Start =convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)" +
-                 "' WHERE Monitor_Set_Name='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value +
+            cmd.CommandText = $"UPDATE dbo.table_Monitor SET Monitor_LLI_Date_Start = convert(date, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104)" +
+                 " WHERE Monitor_Set_Name='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value +
                  "' and Monitor_Set_Number='" + DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString +
                  "' and Monitor_Number='" + DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "'"
 
@@ -2261,8 +2261,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 " VALUES ('m', 'm', 'm', '" +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(0).Value + "', '" +
                  DataGridView_Table_Monitor_Set.SelectedCells.Item(1).Value.ToString + "', '" +
-                 DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "', '" +
-                 $"convert(datetime, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104);"
+                 DataGridView_Table_Monitor.SelectedCells.Item(0).Value.ToString + "', " +
+                 $"convert(date, '{MaskedTextBox_LLI_Irradiation_Log.Text}', 104));"
 
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
@@ -2829,6 +2829,9 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                 ' 
                 For Each cntNum In ContNum
                     For i As Integer = 0 To DataGridView_LLI_Irradiation_Log.Rows.Count - 1
+                        If IsDBNull(DataGridView_LLI_Irradiation_Log(11, i).Value) Then
+                            Throw New ArgumentNullException("Номер контейнера не должен быть пустым при сохранении журнала!")
+                        End If
                         If DataGridView_LLI_Irradiation_Log(11, i).Value = cntNum Then
                             len += 1
                             colorDict.Remove(cntNum)
