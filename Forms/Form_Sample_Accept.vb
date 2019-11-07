@@ -180,26 +180,34 @@ Public Class Form_Sample_Accept
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
                 While reader.Read()
-                    TextBox_Client_Sample_ID.Text = reader(0)
-                    ComboBox_Sample_Type.Text = reader(1)
+                    TextBox_Client_Sample_ID.Text = reader(0).ToString
+                    ComboBox_Sample_Type.Text = reader(1).ToString
                     ComboBox_Sample_Type_SelectionChangeCommitted(sender, e)
-                    ComboBox_Sample_Subtype.Text = reader(2)
-                    TextBox_Collection_Place.Text = reader(3)
-                    MaskedTextBox_Latitude.Text = reader(4)
-                    MaskedTextBox_Longitude.Text = reader(5)
+                    ComboBox_Sample_Subtype.Text = reader(2).ToString
+                    TextBox_Collection_Place.Text = reader(3).ToString
+                    MaskedTextBox_Latitude.Text = reader(4).ToString
+                    MaskedTextBox_Longitude.Text = reader(5).ToString
                     For i = 0 To CheckedListBox_Sample_Preparation.Items.Count - 1
-                        If reader(6 + i) = True Then
-                            CheckedListBox_Sample_Preparation.SetItemChecked(i, True)
+                        If Not IsDBNull(reader(6 + i)) Then
+                            If reader(6 + i) = True Then
+                                CheckedListBox_Sample_Preparation.SetItemChecked(i, True)
+                            Else
+                                CheckedListBox_Sample_Preparation.SetItemChecked(i, False)
+                            End If
                         Else
                             CheckedListBox_Sample_Preparation.SetItemChecked(i, False)
                         End If
                     Next
-                    ComboBox_Determined_Elements.Text = reader(13)
+                    ComboBox_Determined_Elements.Text = reader(13).ToString()
                     For i = 0 To CheckedListBox_Group_Of_Elements.Items.Count - 1
-                        If reader(14 + i) = True Then
-                            CheckedListBox_Group_Of_Elements.SetItemChecked(i, True)
-                        Else
+                        If IsDBNull(reader(14 + i)) Then
                             CheckedListBox_Group_Of_Elements.SetItemChecked(i, False)
+                        Else
+                            If reader(14 + i) = True Then
+                                CheckedListBox_Group_Of_Elements.SetItemChecked(i, True)
+                            Else
+                                CheckedListBox_Group_Of_Elements.SetItemChecked(i, False)
+                            End If
                         End If
                     Next
                     For i = 0 To CheckedListBox_Separate_Elements.Items.Count - 1
@@ -213,10 +221,10 @@ Public Class Form_Sample_Accept
                             End If
                         End If
                     Next
-                    ComboBox_Cupboard_Number.Text = reader(83)
-                    ComboBox_Box_Number.Text = reader(84)
-                    ComboBox_Table_ReceivedBy.Text = reader(85)
-                    TextBox_New_Sample_Accept_Notes.Text = reader(86)
+                    ComboBox_Cupboard_Number.Text = reader(83).ToString()
+                    ComboBox_Box_Number.Text = reader(84).ToString()
+                    ComboBox_Table_ReceivedBy.Text = reader(85).ToString()
+                    TextBox_New_Sample_Accept_Notes.Text = reader(86).ToString()
                 End While
                 sqlConnection1.Close()
 
@@ -348,7 +356,7 @@ Public Class Form_Sample_Accept
             End If
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в Form_NewSampleAccept_Load)!", MsgBoxStyle.Critical, Me.Text)
+                MsgBox($"Операция была отменена (ошибка в Form_NewSampleAccept_Load)!{vbCrLf}{ex.ToString}", MsgBoxStyle.Critical, Me.Text)
             ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in Form_NewSampleAccept_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If

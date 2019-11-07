@@ -307,31 +307,13 @@ Public Class Form_Samples_List
 
     Private Sub B_Insert_All_Samples_Into_Sample_Set_Click(sender As System.Object, e As System.EventArgs) Handles B_Insert_All_Samples_Into_Sample_Set.Click
         Try
-            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            'Dim reader As SqlDataReader
-            'Dim cmd As New System.Data.SqlClient.SqlCommand
-            'cmd.CommandType = System.Data.CommandType.Text
-            Dim array_length_NAS As Integer
-            Dim Samples_Info(,) As String
-            'Dim Samples_Weights(,) As Single
-            Dim row_count As Integer
+
             With MaskedTextBox_New_Sample_ID
                 If .Text.Trim = "" Or .Text.Trim = "0" Or .Text.Trim = "00" Then
                     If Form_Main.language = "Русский" Then
                         MsgBox("Введите номер нового образца!", MsgBoxStyle.Exclamation, Me.Text)
                     ElseIf Form_Main.language = "English" Then
                         MsgBox("Type new sample ID!", MsgBoxStyle.Exclamation, Me.Text)
-                    End If
-                    Exit Sub
-                End If
-            End With
-
-            With MaskedTextBox_New_Sample_ID
-                If .Text.Trim <> "01" Then
-                    If Form_Main.language = "Русский" Then
-                        MsgBox("Партия образцов должна быть пустой!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf Form_Main.language = "English" Then
-                        MsgBox("Sample set must be empty!", MsgBoxStyle.Exclamation, Me.Text)
                     End If
                     Exit Sub
                 End If
@@ -346,8 +328,6 @@ Public Class Form_Samples_List
                 Exit Sub
             End If
 
-            sample_action = "new sample"
-
             If Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 If Form_Main.language = "Русский" Then
                     MsgBox("Выберите партию образцов!", MsgBoxStyle.Exclamation, Me.Text)
@@ -356,198 +336,11 @@ Public Class Form_Samples_List
                 End If
                 Exit Sub
             Else
-                ' определяем количество строк в файле с инфой об образцах
-                array_length_NAS = 0
-                Using MyReader As New FileIO.TextFieldParser(Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.FileName, System.Text.Encoding.Default)
-                    MyReader.TextFieldType = FileIO.FieldType.Delimited
-                    MyReader.SetDelimiters(vbTab)
-                    Dim currentRow As String
-                    While Not MyReader.EndOfData
-                        currentRow = MyReader.ReadLine
-                        currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                        While InStr(currentRow, "  ") > 0
-                            currentRow = Replace(currentRow, "  ", " ")
-                        End While
-                        If (currentRow = "0") Or (currentRow = "1") Then
-                            currentRow = MyReader.ReadLine
-                            currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                            While InStr(currentRow, "  ") > 0
-                                currentRow = Replace(currentRow, "  ", " ")
-                            End While
-                            If currentRow = "№	Sample ID	Sample type	Sample subtype	Latitude	Longitude	Collection place	Determined elements	Halogens	Heavy metals	Short-lived	Long-lived	F	Na	Mg	Al	Si	S	Cl	K	Ca	Sc	Ti	V	Cr	Mn	Fe	Co	Ni	Cu	Zn	Ga	Ge	As	Se	Br	Rb	Sr	Y	Zr	Nb	Mo	Ru	Pd	Ag	Cd	In	Sn	Sb	I	Cs	Ba	La	Ce	Pr	Nd	Sm	Eu	Gd	Tb	Dy	Ho	Er	Tm	Yb	Lu	Hf	Ta	W	Re	Os	Ir	Pt	Au	Hg	Th	U	Notes" Or currentRow = "№	Номер образца	Тип образца	Подтип образца	Широта	Долгота	Место сбора	Определяемые элементы	Галогены	Тяжёлые металлы	Короткоживущие	Долгоживущие	F	Na	Mg	Al	Si	S	Cl	K	Ca	Sc	Ti	V	Cr	Mn	Fe	Co	Ni	Cu	Zn	Ga	Ge	As	Se	Br	Rb	Sr	Y	Zr	Nb	Mo	Ru	Pd	Ag	Cd	In	Sn	Sb	I	Cs	Ba	La	Ce	Pr	Nd	Sm	Eu	Gd	Tb	Dy	Ho	Er	Tm	Yb	Lu	Hf	Ta	W	Re	Os	Ir	Pt	Au	Hg	Th	U	Примечания" Then
-                                'currentRow = MyReader.ReadLine
-                                'currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                                'While InStr(currentRow, "--") > 0
-                                '    currentRow = Replace(currentRow, "--", "-")
-                                'End While
-                                'If currentRow = "-" Then
-                                'MessageBox.Show("Похоже, правильный формат файла активностей исследуемого образца!")
-                                currentRow = MyReader.ReadLine
-a:                              array_length_NAS = array_length_NAS + 1
-                                currentRow = MyReader.ReadLine
-                                If currentRow <> "" Then GoTo a
-                                'End If
-                            End If
-                        End If
-                    End While
-                End Using
-
-                ReDim Samples_Info(array_length_NAS, 78)
-                'ReDim Samples_Weights(array_length_VES, 2)
-
-                Dim File_Name As String
-                File_Name = Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.FileName
-
-                Using MyReader As New FileIO.TextFieldParser(Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.FileName, System.Text.Encoding.Default)
-                    MyReader.TextFieldType = FileIO.FieldType.Delimited
-                    MyReader.SetDelimiters(vbTab)
-                    Dim currentRow As String
-                    While Not MyReader.EndOfData
-                        currentRow = MyReader.ReadLine
-                        currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                        While InStr(currentRow, "  ") > 0
-                            currentRow = Replace(currentRow, "  ", " ")
-                        End While
-                        If (currentRow = "0") Or (currentRow = "1") Then
-                            currentRow = MyReader.ReadLine
-                            currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                            While InStr(currentRow, "  ") > 0
-                                currentRow = Replace(currentRow, "  ", " ")
-                            End While
-                            If currentRow = "№	Sample ID	Sample type	Sample subtype	Latitude	Longitude	Collection place	Determined elements	Halogens	Heavy metals	Short-lived	Long-lived	F	Na	Mg	Al	Si	S	Cl	K	Ca	Sc	Ti	V	Cr	Mn	Fe	Co	Ni	Cu	Zn	Ga	Ge	As	Se	Br	Rb	Sr	Y	Zr	Nb	Mo	Ru	Pd	Ag	Cd	In	Sn	Sb	I	Cs	Ba	La	Ce	Pr	Nd	Sm	Eu	Gd	Tb	Dy	Ho	Er	Tm	Yb	Lu	Hf	Ta	W	Re	Os	Ir	Pt	Au	Hg	Th	U	Notes" Or currentRow = "№	Номер образца	Тип образца	Подтип образца	Широта	Долгота	Место сбора	Определяемые элементы	Галогены	Тяжёлые металлы	Короткоживущие	Долгоживущие	F	Na	Mg	Al	Si	S	Cl	K	Ca	Sc	Ti	V	Cr	Mn	Fe	Co	Ni	Cu	Zn	Ga	Ge	As	Se	Br	Rb	Sr	Y	Zr	Nb	Mo	Ru	Pd	Ag	Cd	In	Sn	Sb	I	Cs	Ba	La	Ce	Pr	Nd	Sm	Eu	Gd	Tb	Dy	Ho	Er	Tm	Yb	Lu	Hf	Ta	W	Re	Os	Ir	Pt	Au	Hg	Th	U	Примечания" Then
-
-                                '                                currentRow = MyReader.ReadLine
-                                '                                currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                                '                                While InStr(currentRow, "--") > 0
-                                '                                    currentRow = Replace(currentRow, "--", "-")
-                                '                                End While
-                                '                                If currentRow = "-" Then
-                                '                                    'MessageBox.Show("Похоже, правильный формат файла активностей исследуемого образца!")
-
-                                row_count = 0
-                                currentRow = MyReader.ReadLine
-b:                              currentRow = currentRow.Trim 'удаляем пробелы в начале и конце строки, если они есть
-                                'While InStr(currentRow, vbTab + vbTab) > 0
-                                '    currentRow = Replace(currentRow, vbTab + vbTab, vbTab) ' заменяем все двойные пробелы одинарными
-                                'End While
-                                If currentRow(currentRow.Count - 1) <> vbTab Then currentRow = currentRow + vbTab 'добавляем пробел в конец строки
-                                Dim i As Integer
-                                i = 0
-c:                              Samples_Info(row_count, i) = Mid(currentRow, 1, InStr(1, currentRow, vbTab) - 1) ' первое слово до пробела
-                                currentRow = Replace(currentRow, Samples_Info(row_count, i) + vbTab, "", , 1, )
-                                i = i + 1
-                                If currentRow <> "" Then GoTo c
-                                'Samples_Info(row_count, 1) = Mid(currentRow, 1, InStr(1, currentRow, vbTab) - 1) 'имя образца - первое слово до пробела
-                                'currentRow = Replace(currentRow, Samples_Info(row_count, 1) + vbTab, "", , 1, )
-                                '                                    Samples_Weights(row_count, 0) = CDbl(Replace(Mid(currentRow, 1, InStr(1, currentRow, " ") - 1), ".", ","))
-                                '                                    currentRow = Replace(currentRow, Mid(currentRow, 1, InStr(1, currentRow, " ") - 1) + " ", "")
-                                '                                    Samples_Weights(row_count, 1) = CDbl(Replace(Mid(currentRow, 1, InStr(1, currentRow, " ") - 1), ".", ","))
-
-                                row_count = row_count + 1
-                                currentRow = MyReader.ReadLine
-                                If currentRow <> "" Then GoTo b
-
-                                'End If
-                                'MsgBox(Samples_Info(row_count - 1, 71))
-                            End If
-                        End If
-                    End While
-                End Using
-
-                ' цикл по количеству строк в файле с инфой об образцах
-                For i2 = 0 To array_length_NAS - 1
-
-                    Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.FileName = File_Name
-
-                    MaskedTextBox_New_Sample_ID.Text = i2 + 1
-
-                    If MaskedTextBox_New_Sample_ID.Text < 10 Then MaskedTextBox_New_Sample_ID.Text = "0" + MaskedTextBox_New_Sample_ID.Text.Trim("0")
-
-                    Form_Sample_Accept.L_SS_Country_Code.Text = L_SS_Country_Code.Text
-                    Form_Sample_Accept.L_SS_Client_ID.Text = L_SS_Client_ID.Text
-                    Form_Sample_Accept.L_SS_Year.Text = L_SS_Year.Text
-                    Form_Sample_Accept.L_SS_Sample_Set_ID.Text = L_SS_Sample_Set_ID.Text
-                    Form_Sample_Accept.L_SS_Sample_Set_Index.Text = L_SS_Sample_Set_Index.Text
-
-                    Form_Sample_Accept.L_Sample_ID.Text = MaskedTextBox_New_Sample_ID.Text.Trim
-
-                    Form_Sample_Accept.TextBox_Client_Sample_ID.Text = Samples_Info(i2, 1)
-
-                    Form_Sample_Accept.ComboBox_Sample_Subtype.Visible = False
-                    Form_Sample_Accept.L_Name_Sample_Subtype.Visible = False
-
-                    For i = 0 To array_length_NAS - 1
-                        If Samples_Info(i, 2) = "почвы" Then Samples_Info(i, 2) = "soils"
-                        If Samples_Info(i, 2) = "донные отложения" Then Samples_Info(i, 2) = "sediments"
-                        If Samples_Info(i, 2) = "горные породы" Then Samples_Info(i, 2) = "rocks"
-                        If Samples_Info(i, 2) = "продукты" Then Samples_Info(i, 2) = "foodstuffs"
-                        If Samples_Info(i, 2) = "растительность" Then Samples_Info(i, 2) = "vegetation"
-                        If Samples_Info(i, 2) = "биосубстраты" Then Samples_Info(i, 2) = "biomedical materials"
-                        If Samples_Info(i, 2) = "технологический" Then Samples_Info(i, 2) = "technological"
-                        If Samples_Info(i, 2) = "фильтры" Then Samples_Info(i, 2) = "filters"
-                        If Samples_Info(i, 2) = "жидкий" Then Samples_Info(i, 2) = "luquids"
-                        If Samples_Info(i, 2) = "другие" Then Samples_Info(i, 2) = "others"
-
-                        If Samples_Info(i, 3) = "мох" Then Samples_Info(i, 3) = "moss"
-                        If Samples_Info(i, 3) = "листья" Then Samples_Info(i, 3) = "leaves"
-                        If Samples_Info(i, 3) = "кора" Then Samples_Info(i, 3) = "tree-bark"
-                        If Samples_Info(i, 3) = "лишайники" Then Samples_Info(i, 3) = "lichens"
-                        If Samples_Info(i, 3) = "другая растительность" Then Samples_Info(i, 3) = "others vegetation"
-
-                        If Samples_Info(i, 3) = "волосы" Then Samples_Info(i, 3) = "hairs"
-                        If Samples_Info(i, 3) = "ногти" Then Samples_Info(i, 3) = "nails"
-                        If Samples_Info(i, 3) = "кровь" Then Samples_Info(i, 3) = "blood"
-                        If Samples_Info(i, 3) = "моча" Then Samples_Info(i, 3) = "urine"
-                        If Samples_Info(i, 3) = "ткани" Then Samples_Info(i, 3) = "tissues"
-                        If Samples_Info(i, 3) = "зубы" Then Samples_Info(i, 3) = "teeth"
-                        If Samples_Info(i, 3) = "другие биосубстраты" Then Samples_Info(i, 3) = "others biomedical materials"
-
-                        If Samples_Info(i, 7) = "группа элементов" Then Samples_Info(i, 7) = "group of elements"
-                        If Samples_Info(i, 7) = "отдельные элементы" Then Samples_Info(i, 7) = "separate elements"
-                        If Samples_Info(i, 7) = "все элементы" Then Samples_Info(i, 7) = "all elements"
-                    Next
-
-                    For i = 0 To array_length_NAS - 1
-                        If Form_Sample_Accept.TextBox_Client_Sample_ID.Text = Samples_Info(i, 1) Then
-                            For i1 = 0 To Form_Sample_Accept.ComboBox_Sample_Type.Items.Count - 1
-                                If Form_Sample_Accept.ComboBox_Sample_Type.Items(i1) = Samples_Info(i, 2) Then
-                                    Form_Sample_Accept.ComboBox_Sample_Type.SelectedItem = Form_Sample_Accept.ComboBox_Sample_Type.Items(i1)
-                                    Form_Sample_Accept.ComboBox_Sample_Type_SelectionChangeCommitted(sender, e)
-                                End If
-                            Next
-                            If Form_Sample_Accept.ComboBox_Sample_Subtype.Visible = True Then
-                                For i1 = 0 To Form_Sample_Accept.ComboBox_Sample_Subtype.Items.Count - 1
-                                    If Form_Sample_Accept.ComboBox_Sample_Subtype.Items(i1) = Samples_Info(i, 3) Then
-                                        Form_Sample_Accept.ComboBox_Sample_Subtype.SelectedItem = Form_Sample_Accept.ComboBox_Sample_Subtype.Items(i1)
-                                    End If
-                                Next
-                            End If
-                            Form_Sample_Accept.MaskedTextBox_Latitude.Text = Samples_Info(i, 4)
-                            Form_Sample_Accept.MaskedTextBox_Longitude.Text = Samples_Info(i, 5)
-                            Form_Sample_Accept.TextBox_Collection_Place.Text = Samples_Info(i, 6)
-                            For i1 = 0 To Form_Sample_Accept.ComboBox_Determined_Elements.Items.Count - 1
-                                If Form_Sample_Accept.ComboBox_Determined_Elements.Items(i1) = Samples_Info(i, 7) Then
-                                    Form_Sample_Accept.ComboBox_Determined_Elements.SelectedItem = Form_Sample_Accept.ComboBox_Determined_Elements.Items(i1)
-                                    Form_Sample_Accept.ComboBox_Determined_Elements_SelectionChangeCommitted(sender, e)
-                                End If
-                            Next
-                            For j = 0 To Form_Sample_Accept.CheckedListBox_Group_Of_Elements.Items.Count - 1
-                                If Samples_Info(i, j + 8) = "1" Then Form_Sample_Accept.CheckedListBox_Group_Of_Elements.SetItemChecked(j, True)
-                                If Samples_Info(i, j + 8) = "0" Then Form_Sample_Accept.CheckedListBox_Group_Of_Elements.SetItemChecked(j, False)
-                            Next
-                            For j = 0 To Form_Sample_Accept.CheckedListBox_Separate_Elements.Items.Count - 1
-                                If Samples_Info(i, j + 12) = "1" Then Form_Sample_Accept.CheckedListBox_Separate_Elements.SetItemChecked(j, True)
-                                If Samples_Info(i, j + 12) = "0" Then Form_Sample_Accept.CheckedListBox_Separate_Elements.SetItemChecked(j, False)
-                            Next
-                            Form_Sample_Accept.TextBox_New_Sample_Accept_Notes.Text = Samples_Info(i, 77)
-                        End If
-                    Next
-                    'Form_Sample_Accept.B_Fill_In_From_File_Click(sender, e)
-
-                    Form_Sample_Accept.Button_Save_Sample_Click(sender, e)
-                Next
+                Extensions.CSV.CSVAdapter.LoadFileToDb(Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.FileName, Form_Main.MyConnectionString, L_SS_Country_Code.Text, L_SS_Client_ID.Text, L_SS_Year.Text, L_SS_Sample_Set_ID.Text, L_SS_Sample_Set_Index.Text)
             End If
+            Close()
 
+            Form_Main.B_Select_Sample_Set.PerformClick()
 
         Catch ex As Exception
             If Form_Main.language = "Русский" Then

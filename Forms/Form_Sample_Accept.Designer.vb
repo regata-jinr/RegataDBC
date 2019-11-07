@@ -410,6 +410,7 @@ Partial Class Form_Sample_Accept
         'OpenFileDialog_Fill_In_From_File
         '
         Me.OpenFileDialog_Fill_In_From_File.Filter = "Samples info files (*.nas)|*.nas|All files (*.*)|*.*"
+        Me.OpenFileDialog_Fill_In_From_File.RestoreDirectory = True
         '
         'ComboBox_Sample_Subtype
         '

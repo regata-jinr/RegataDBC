@@ -177,44 +177,48 @@ Public Class Form_ElsSum
     End Sub
 
     Function FormFinalFilesDict(ByVal type As String, ByRef gYear As String) As Dictionary(Of String, String)
-        Debug.WriteLine("Started to form final files array:")
-        LabelStatus.Text = "Формирование имен загружаемых файлов..."
-        Dim finArr = New Dictionary(Of String, String)
-        Dim finSrmsArr = New Dictionary(Of String, String)
-        Dim typeFtp As New Dictionary(Of String, String)
-        Dim dtStrCont As String = ""
-        Dim dt As New DateTime()
-        typeFtp.Add("КЖИ", "kji")
-        typeFtp.Add("ДЖИ-1", "dji-1")
-        typeFtp.Add("ДЖИ-2", "dji-2")
-        Dim setKey As String = $"{LablelElSumCountryCode.Text}-{LabelElSumClientId.Text}-{LabelElSumYear.Text}-{LabelElSumSetId.Text}-{LabelElSumSetIndex.Text}"
+        Try
+            Debug.WriteLine("Started to form final files array:")
+            LabelStatus.Text = "Формирование имен загружаемых файлов..."
+            Dim finArr = New Dictionary(Of String, String)
+            Dim finSrmsArr = New Dictionary(Of String, String)
+            Dim typeFtp As New Dictionary(Of String, String)
+            Dim dtStrCont As String = ""
+            Dim dt As New DateTime()
+            typeFtp.Add("КЖИ", "kji")
+            typeFtp.Add("ДЖИ-1", "dji-1")
+            typeFtp.Add("ДЖИ-2", "dji-2")
+            Dim setKey As String = $"{LablelElSumCountryCode.Text}-{LabelElSumClientId.Text}-{LabelElSumYear.Text}-{LabelElSumSetId.Text}-{LabelElSumSetIndex.Text}"
 
-        For Each row As DataGridViewRow In DataGridViewElsSum.Rows
-            Dim cellFile As DataGridViewCell = row.Cells($"Файлы спектров {type}")
-            If String.IsNullOrEmpty(cellFile.Value.ToString) Then Continue For
-            Dim cellDate As DataGridViewCell = row.Cells($"{typeFtp(type)}-Date")
-            Dim loadNumCell As DataGridViewCell = row.Cells($"loadNumber")
-            If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
-            dt = Convert.ToDateTime(cellDate.Value)
-            If (Not dtStrCont.Contains($"{dt.ToShortDateString}-{row.Cells("Container_Number").Value}")) Then dtStrCont += $"'{dt.ToShortDateString}-{row.Cells("Container_Number").Value}',"
+            For Each row As DataGridViewRow In DataGridViewElsSum.Rows
+                Dim cellFile As DataGridViewCell = row.Cells($"Файлы спектров {type}")
+                If String.IsNullOrEmpty(cellFile.Value.ToString) Then Continue For
+                Dim cellDate As DataGridViewCell = row.Cells($"{typeFtp(type)}-Date")
+                Dim loadNumCell As DataGridViewCell = row.Cells($"loadNumber")
+                If String.IsNullOrEmpty(cellDate.Value.ToString) Then Continue For
+                dt = Convert.ToDateTime(cellDate.Value)
+                If (Not dtStrCont.Contains($"{dt.ToShortDateString}-{row.Cells("Container_Number").Value}")) Then dtStrCont += $"'{dt.ToShortDateString}-{row.Cells("Container_Number").Value}',"
+
+                If type.Contains("ДЖИ") Then
+                    Debug.WriteLine($"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                    finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                Else
+                    Debug.WriteLine($"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                    finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
+                    GetRelatedSLISRMs(finSrmsArr, setKey, dt)
+                End If
+            Next
 
             If type.Contains("ДЖИ") Then
-                Debug.WriteLine($"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{loadNumCell.Value}\{typeFtp(type)}\c-{row.Cells("Container_Number").Value}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-            Else
-                Debug.WriteLine($"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-                finArr.Add(row.Cells($"Файлы спектров {type}").Value, $"{setKey}\{typeFtp(type)}\samples\{row.Cells($"Файлы спектров {type}").Value}.cnf")
-                GetRelatedSLISRMs(finSrmsArr, setKey, dt)
+                GetRelatedLLISRMs(finSrmsArr, setKey, typeFtp(type), dtStrCont.Substring(0, dtStrCont.Length - 1))
             End If
-        Next
 
-        If type.Contains("ДЖИ") Then
-            GetRelatedLLISRMs(finSrmsArr, setKey, typeFtp(type), dtStrCont.Substring(0, dtStrCont.Length - 1))
-        End If
-
-        gYear = Convert.ToDateTime(DataGridViewElsSum.Rows(0).Cells($"{typeFtp(type)}-Date").Value).Year.ToString()
-        Debug.WriteLine($"Guessed year: {gYear}")
-        Return finArr.Union(finSrmsArr).ToDictionary(Function(p) p.Key, Function(p) p.Value)
+            gYear = Convert.ToDateTime(DataGridViewElsSum.Rows(0).Cells($"{typeFtp(type)}-Date").Value).Year.ToString()
+            Debug.WriteLine($"Guessed year: {gYear}")
+            Return finArr.Union(finSrmsArr).ToDictionary(Function(p) p.Key, Function(p) p.Value)
+        Catch ex As Exception
+            Return New Dictionary(Of String, String)
+        End Try
     End Function
 
     Function FindFiles(ByRef names As Dictionary(Of String, String).KeyCollection, ByVal gYear As String) As Dictionary(Of String, String)
