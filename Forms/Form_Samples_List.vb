@@ -343,11 +343,7 @@ Public Class Form_Samples_List
             Form_Main.B_Select_Sample_Set.PerformClick()
 
         Catch ex As Exception
-            If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в B_Insert_All_Samples_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "English" Then
-                MsgBox("The operation was cancelled (error in B_Insert_All_Samples_Into_Sample_Set_Click)!", MsgBoxStyle.Critical, Me.Text)
-            End If
+            MsgBox($"Операция была отменена. Ошибка при внесении данных в базу.{vbCrLf}{ex.ToString}", MsgBoxStyle.Critical, Me.Text)
             Form_Sample_Accept.Close()
             Exit Sub
         End Try

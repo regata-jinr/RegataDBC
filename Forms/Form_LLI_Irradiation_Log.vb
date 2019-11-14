@@ -2,7 +2,6 @@
 Imports Renci.SshNet
 Imports System.IO
 
-
 Public Class Form_LLI_Irradiation_Log
 
     Public ContNum As Integer() = {1, 2, 3, 4, 5, 6, 7, 8, 9}
@@ -1360,31 +1359,31 @@ Public Class Form_LLI_Irradiation_Log
                 DataGridView_LLI_Irradiation_Log.Rows.RemoveAt(row.Index)
             Next
 
-            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-                sqlConnection1.Open()
-                Using cmd As New System.Data.SqlClient.SqlCommand($"DELETE FROM dbo.table_LLI_Irradiation_Log WHERE
-                                                                    Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}'
-                                                                    and Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}'
-                                                                    and Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}'
-                                                                    and Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}'
-                                                                    and Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}'
-                                                                    and Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}'
-                                                                    
-                                                                    and Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);
-                                                                    UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
-                                                                    F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
-                                                                    F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
-                                                                    F_Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}' and
-                                                                    F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
-                                                                    F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
-                                                                    A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
-                                                                    I_LLI_Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);",
-                                                                    sqlConnection1)
-                    Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
-                    cmd.ExecuteNonQuery()
-                End Using
-                sqlConnection1.Close()
-            End Using
+            'Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+            '    sqlConnection1.Open()
+            '    Using cmd As New System.Data.SqlClient.SqlCommand($"DELETE FROM dbo.table_LLI_Irradiation_Log WHERE
+            '                                                        Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}'
+            '                                                        and Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}'
+            '                                                        and Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}'
+            '                                                        and Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}'
+            '                                                        and Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}'
+            '                                                        and Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}'
+
+            '                                                        and Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);
+            '                                                        UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
+            '                                                        F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
+            '                                                        F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
+            '                                                        F_Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}' and
+            '                                                        F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
+            '                                                        F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
+            '                                                        A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
+            '                                                        I_LLI_Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);",
+            '                                                        sqlConnection1)
+            '        Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
+            '        cmd.ExecuteNonQuery()
+            '    End Using
+            '    sqlConnection1.Close()
+            'End Using
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then

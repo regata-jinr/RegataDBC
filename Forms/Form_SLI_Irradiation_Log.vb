@@ -1160,7 +1160,6 @@ Public Class Form_SLI_Irradiation_Log
             End If
 
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            'Dim reader As SqlDataReader
             Dim cmd As New System.Data.SqlClient.SqlCommand
             cmd.CommandType = System.Data.CommandType.Text
 
