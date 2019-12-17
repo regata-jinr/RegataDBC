@@ -399,9 +399,9 @@ Public Class Form_Main
     End Sub
 
     Public Sub Form_Main_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If My.Settings.language = "Русский" Then
-            Me.Text = $"Клиент базы данных эксперимента РЕГАТА - {Application.ProductVersion}   {us}"
-        ElseIf My.Settings.language = "English" Then
+        If language = "Русский" Then
+            Me.Text = $"Клиент базы данных эксперимента РЕГАТА - {Application.ProductVersion}   {us} [NEW ERA]"
+        ElseIf language = "English" Then
             Me.Text = $"Regata experiment data base client - {Application.ProductVersion}   {us}"
         End If
         Try
