@@ -88,25 +88,20 @@ namespace NewForms
 
 
                 if (_irradiationList.Any())
-                    IrradiationJournalСheckBoxSetsFromJournal.Checked = true;
-                else
-                    IrradiationJournalСheckBoxSetsFromJournal.Checked = false;
-
-                IrradiationJournalСheckBoxSetsFromJournal.CheckedChanged += _tabSamplesCheckBox_CheckedChanged;
-
-
-                if (_irradiationList.Any())
-                    IrradiationJournalСheckBoxSRMsFromJournal.Checked = true;
-                else
-                    IrradiationJournalСheckBoxSRMsFromJournal.Checked = false;
-
-                IrradiationJournalСheckBoxSRMsFromJournal.CheckedChanged += _tabSRMsCheckBox_CheckedChanged;
-
-                if (_irradiationList.Any())
+                {
+                    IrradiationJournalСheckBoxSetsFromJournal.Checked     = true;
+                    IrradiationJournalСheckBoxSRMsFromJournal.Checked     = true;
                     IrradiationJournalСheckBoxMonitorsFromJournal.Checked = true;
+                }
                 else
+                {
+                    IrradiationJournalСheckBoxSetsFromJournal.Checked     = false;
+                    IrradiationJournalСheckBoxSRMsFromJournal.Checked     = false;
                     IrradiationJournalСheckBoxMonitorsFromJournal.Checked = false;
+                }
 
+                IrradiationJournalСheckBoxSetsFromJournal.CheckedChanged     += _tabSamplesCheckBox_CheckedChanged;
+                IrradiationJournalСheckBoxSRMsFromJournal.CheckedChanged     += _tabSRMsCheckBox_CheckedChanged;
                 IrradiationJournalСheckBoxMonitorsFromJournal.CheckedChanged += _tabMonitorsCheckBox_CheckedChanged;
 
                 InitializeSampleSetTable();
@@ -187,13 +182,13 @@ namespace NewForms
                 return;
             }
 
-            IrradiationJournalADGV.ReadOnly = true;
-            IrradiationJournalGroupBoxDuration.Visible = false;
-            IrradiationJournalGroupBoxChannel.Visible = false;
+            IrradiationJournalADGV.ReadOnly                 = true;
+            IrradiationJournalGroupBoxDuration.Visible      = false;
+            IrradiationJournalGroupBoxChannel.Visible       = false;
             IrradiationJournalGroupBoxEditMainTable.Visible = false;
-            IrradiationJournalButtonAddTime.Visible = false;
-            IrradiationJournalTabs.Visible = false;
-            IrradiationJournalGoupBoxContainer.Visible = false;
+            IrradiationJournalButtonAddTime.Visible         = false;
+            IrradiationJournalTabs.Visible                  = false;
+            IrradiationJournalGoupBoxContainer.Visible      = false;
 
             if (!_rolesOfUser.Contains("rehanlder"))
                 IrradiationJournalButtonRehandle.Visible = false;
@@ -366,6 +361,7 @@ namespace NewForms
             try
             {
                 ChosenSets = new List<string>();
+                //FIXME: here are the multiplicity implicit allocations
                 using (var ic = new InfoContext())
                 {
                     _irradiationList = ic.Irradiations.Where(ir => ir.DateTimeStart.HasValue &&
