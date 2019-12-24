@@ -40,7 +40,7 @@ namespace NewForms
                 List<LastSrmIrrInfo> StandardList = null;
                 using (var ic = new InfoContext())
                 {
-                    StandardList = ic.NewStandards.FromSqlRaw($"EXEC [NAA_DB_TEST].[dbo].srminfo '{selCells[0].Value}', '{selCells[1].Value}', '{_type}'").ToList();
+                    StandardList = ic.NewStandards.FromSql($"EXEC [dbo].srminfo '{selCells[0].Value}', '{selCells[1].Value}', '{_type}'").ToList();
                     //StandardList = ic.Standards.Where(s =>
                     //                            s.SRM_Set_Name == selCells["SRM_Set_Name"].Value.ToString() &&
                     //                            s.SRM_Set_Number == selCells["SRM_Set_Number"].Value.ToString() &&

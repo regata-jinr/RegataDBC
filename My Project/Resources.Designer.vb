@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -72,8 +72,7 @@ Namespace My.Resources
         '''Mg, предел обнаружения, uгр/гр;R_Mg_Detection_Limit
         '''Al, концентрация, uгр/гр;R_Al_Concentaration
         '''Al, погрешность, %;R_Al_Error
-        '''Al, предел обнаружения, uгр/гр;R_Al_Detection_Limit
-        '''Si, концен [rest of string was truncated]&quot;;.
+        '''Al, предел обнаружения, uгр/гр;R_Al_Detection_Limit [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property headerDict() As String
             Get

@@ -63,7 +63,7 @@ namespace NewForms
                 if (ex.TargetSite != null)
                 {
                     stringBuilder.Append($"Instanse name: {ex.TargetSite.DeclaringType}{Environment.NewLine}");
-                    stringBuilder.Append($"Member type:   {ex.TargetSite.MemberType}{Environment.NewLine}");
+                    //stringBuilder.Append($"Member type:   {ex.TargetSite.MemberType}{Environment.NewLine}");
                     stringBuilder.Append($"Member name:   {ex.TargetSite.Name}{Environment.NewLine}");
                 }
                 stringBuilder.Append($"Message:       {ex.Message}{Environment.NewLine}");
