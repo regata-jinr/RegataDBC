@@ -630,7 +630,6 @@ Public Class Form_Main
 
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
         Try
-
             Dim curDt As DateTime
             If DateTime.TryParse(MaskedTextBoxDateOfNewJournal.Text, curDt) Then
                 Dim ij As New NewForms.IrradiationJournal(curDt.Date, "SLI", MyConnectionString)
@@ -647,11 +646,10 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
-
         Try
+            'FIXME: Costura gives stack overflow see Report20191225-2217.diagsession
             Dim ij As New NewForms.IrradiationJournal(DateTime.Parse(ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name), "SLI", MyConnectionString)
             ij.Show()
-
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub

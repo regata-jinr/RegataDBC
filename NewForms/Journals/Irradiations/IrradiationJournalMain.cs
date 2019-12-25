@@ -47,7 +47,6 @@ namespace NewForms
                     if ((o == null || DBNull.Value == o) ? false : ((int)o != 0))
                         ListOfRoles.Add("rehanlder");
                 }
-
                 _rolesOfUser = ListOfRoles.ToArray();
             }
         }
@@ -76,7 +75,6 @@ namespace NewForms
 
                 IrradiationJournalComboBoxContainerNumber.SelectedValueChanged += ContainerComboBox_SelectedValueChanged;
                 ContainerNumber = 1;
-
 
                 IrradiationJournalNumericUpDownSeconds.ValueChanged += DurationHandler;
                 IrradiationJournalNumericUpDownMinutes.ValueChanged += DurationHandler;
@@ -110,7 +108,6 @@ namespace NewForms
 
                 foreach (var rb in IrradiationJournalGroupBoxChannel.Controls.OfType<RadioButton>().Select(r => r).ToArray())
                     rb.CheckedChanged += ChannelRadioButtonCheckedChanged;
-
 
                 InitializeStandardSetTable();
                 InitializeMonitorSetTable();
@@ -154,7 +151,6 @@ namespace NewForms
                         if (AllowNullColumnsNames.Contains(cell.OwningColumn.Name))
                             cell.Value = DBNull.Value;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -209,7 +205,6 @@ namespace NewForms
             {
                 MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
-
         }
 
         private void IrradiationJournalADGV_SelectionChanged(object sender, EventArgs e)
@@ -290,7 +285,6 @@ namespace NewForms
             //      should recalculate all previous position in container
             //set
             //{
-                
             //}
         }
 
@@ -396,8 +390,6 @@ namespace NewForms
                 if (_irradiationList == null)
                     _irradiationList = new List<IrradiationInfo>();
             }
-
-
         }
 
         private void _tabSamplesCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -406,13 +398,11 @@ namespace NewForms
             InitializeSampleSetTable();
         }
 
-
         private void _tabSRMsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             IrradiationJournalADGVStandardsSets.DataSource = null;
             InitializeStandardSetTable();
         }
-
 
         private void _tabMonitorsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -463,7 +453,6 @@ namespace NewForms
                         standardSetsList = ic.StandardSets.Select(ss => ss).OrderBy(ss => ss.SRM_Set_Name).ThenByDescending(ss => ss.SRM_Set_Number).ToList();
                 }
 
-
                 var advbindSource = new  AdvancedBindingSource<StandardSetInfo>(standardSetsList);
                 IrradiationJournalADGVStandardsSets.SetDoubleBuffered();
                 var _SSbindingSource = advbindSource.GetBindingSource();
@@ -494,7 +483,6 @@ namespace NewForms
                     else
                         MonitorSetsList = ic.MonitorSets.Select(ms => ms).OrderBy(ms => ms.Monitor_Set_Name).ThenByDescending(ms => ms.Monitor_Set_Number).ToList();
                 }
-
 
                 var advbindSource = new  AdvancedBindingSource<MonitorSetInfo>(MonitorSetsList);
                 IrradiationJournalADGVMonitorsSets.SetDoubleBuffered();
@@ -642,7 +630,6 @@ namespace NewForms
 
                 foreach (DataGridViewCell cell in IrradiationJournalADGV.SelectedCells)
                 {
-
                     var row = cell.OwningRow;
 
                     if (!_irradiationList.Select(ir => ir.Id).Contains((int)row.Cells["Id"].Value))
@@ -671,7 +658,6 @@ namespace NewForms
             try
             {
                 if (e.RowIndex < 0 || e.RowIndex >= IrradiationJournalADGV.Rows.Count) return;
-
                 if (!DataValidation(e)) return;
 
                 using (var ic = new InfoContext())
@@ -721,7 +707,6 @@ namespace NewForms
                     isValidated = uint.TryParse(currentCell.Value.ToString(), out _);
                     if (isValidated) AutoChangePosition();
                 }
-
 
                 if (currentColumn.Name.Contains("DateTime"))
                     isValidated = DateTime.TryParse(currentCell.Value.ToString(), out _);
@@ -782,3 +767,4 @@ namespace NewForms
         }
     }
 }
+
