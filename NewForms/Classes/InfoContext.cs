@@ -11,7 +11,7 @@ namespace NewForms.Models
         public DbSet<SampleSetInfo>     SampleSets        { get; set; }
         public DbSet<SampleInfo>        Samples           { get; set; }
         public DbSet<StandardInfo>      Standards         { get; set; }
-        public DbSet<LastSrmIrrInfo>  NewStandards      { get; set; }
+        public DbSet<LastSrmIrrInfo>    NewStandards      { get; set; }
         public DbSet<StandardSetInfo>   StandardSets      { get; set; }
         public DbSet<MonitorInfo>       Monitors          { get; set; }
         public DbSet<MonitorSetInfo>    MonitorSets       { get; set; }

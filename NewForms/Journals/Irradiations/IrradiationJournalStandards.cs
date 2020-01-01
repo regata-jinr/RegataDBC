@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using NewForms.Models;
 using System.Collections.Generic;
@@ -40,15 +41,7 @@ namespace NewForms
                 List<LastSrmIrrInfo> StandardList = null;
                 using (var ic = new InfoContext())
                 {
-                    StandardList = ic.NewStandards.FromSql($"EXEC [dbo].srminfo '{selCells[0].Value}', '{selCells[1].Value}', '{_type}'").ToList();
-                    //StandardList = ic.Standards.Where(s =>
-                    //                            s.SRM_Set_Name == selCells["SRM_Set_Name"].Value.ToString() &&
-                    //                            s.SRM_Set_Number == selCells["SRM_Set_Number"].Value.ToString() &&
-                    //                            ((_type == "SLI" && (s.SRM_SLI_Weight != 0 && s.SRM_SLI_Weight.HasValue)) ||
-                    //                            (_type.Contains("LLI") && s.SRM_LLI_Weight != 0 && s.SRM_LLI_Weight.HasValue))
-                    //                            &&
-                    //                            !_irradiationList.Select(i => i.ToString()).Contains(s.ToString())
-                    //                            ).ToList();
+                    StandardList = ic.NewStandards.FromSql(($"EXEC srminfo '{selCells[0].Value}', '{selCells[1].Value}', '{_type}'").ToString()).AsEnumerable().ToList();
                 }
 
                 if (StandardList == null)
