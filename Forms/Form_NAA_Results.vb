@@ -353,9 +353,8 @@ Public Class Form_NAA_Results
 
     Private Sub ComboBox_Person_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox_Person.SelectedValueChanged
         Try
-
             For k = 0 To DataGridView_Table_Sample_NAA_Results.Rows.Count - 1
-                If DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value = "" Then
+                If IsDBNull(DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value) Then
                     DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value += ComboBox_Person.Text
                 Else
                     DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value += ";" & ComboBox_Person.Text
@@ -363,11 +362,7 @@ Public Class Form_NAA_Results
 
             Next
         Catch ex As Exception
-            If Form_Main.language = "Русский" Then
-                MsgBox("Операция была отменена (ошибка в ComboBox_Person_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "English" Then
-                MsgBox("The operation was cancelled (error in ComboBox_Person_SelectedValueChanged)!", MsgBoxStyle.Critical, Me.Text)
-            End If
+            MsgBox(ex.ToString(), MsgBoxStyle.Critical, Me.Text)
             Exit Sub
         End Try
     End Sub
