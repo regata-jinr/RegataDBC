@@ -41,7 +41,7 @@ namespace NewForms
                 List<LastSrmIrrInfo> StandardList = null;
                 using (var ic = new InfoContext())
                 {
-                    StandardList = ic.NewStandards.FromSql(($"EXEC srminfo '{selCells[0].Value}', '{selCells[1].Value}', '{_type}'").ToString()).AsEnumerable().ToList();
+                    StandardList = ic.NewStandards.FromSql(($"EXEC srminfo {selCells[0].Value}, {selCells[1].Value}, {_type}")).AsEnumerable().ToList();
                 }
 
                 if (StandardList == null)
