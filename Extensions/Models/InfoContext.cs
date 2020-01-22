@@ -5,6 +5,7 @@ namespace Extensions.Models
    public class InfoContext : DbContext
     {
         public DbSet<SampleInfo> Samples { get; set; }
+        public DbSet<SampleSetInfo> Sets { get; set; }
 
         private readonly string connectionString;
         public InfoContext(string connectionString) : base()
