@@ -3271,15 +3271,15 @@ Partial Public Class NAA_DB_EXPDataSet
             Me.columnReceived_By = New Global.System.Data.DataColumn("Received_By", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnReceived_By)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnCountry_Code, Me.columnClient_ID, Me.columnYear, Me.columnSample_Set_ID, Me.columnSample_Set_Index}, true))
-            Me.columnCountry_Code.AllowDBNull = False
+            Me.columnCountry_Code.AllowDBNull = false
             Me.columnCountry_Code.MaxLength = 2
-            Me.columnClient_ID.AllowDBNull = False
+            Me.columnClient_ID.AllowDBNull = false
             Me.columnClient_ID.MaxLength = 2
-            Me.columnYear.AllowDBNull = False
+            Me.columnYear.AllowDBNull = false
             Me.columnYear.MaxLength = 2
-            'Me.columnSample_Set_ID.AllowDBNull = False
-            'Me.columnSample_Set_ID.MaxLength = 2
-            'Me.columnSample_Set_Index.AllowDBNull = False
+            Me.columnSample_Set_ID.AllowDBNull = false
+            Me.columnSample_Set_ID.MaxLength = 2
+            Me.columnSample_Set_Index.AllowDBNull = false
             Me.columnSample_Set_Index.MaxLength = 1
             Me.columnReceived_By.MaxLength = 25
         End Sub

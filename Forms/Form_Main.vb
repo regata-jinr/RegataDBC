@@ -1644,6 +1644,11 @@ Public Class Form_Main
         Application.Restart()
     End Sub
 
+    Private Sub ErrorJournalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ErrorJournalToolStripMenuItem.Click
+        Dim erJ As New Extensions.NewForms.JournalOfErrors(MyConnectionString)
+        erJ.Show()
+    End Sub
+
     Public firstFlag As Integer = 0
 
     Private Sub CBFilter_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBFilter.SelectedIndexChanged

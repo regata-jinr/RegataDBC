@@ -36,7 +36,7 @@ Partial Class Form_Main
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView_Sample_Set = New System.Windows.Forms.DataGridView()
-        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet
+        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Sample_Set = New System.Windows.Forms.Button()
         Me.B_Physical_Environment = New System.Windows.Forms.Button()
         Me.L_Name_SLI_Irradiation_Log = New System.Windows.Forms.Label()
@@ -84,6 +84,7 @@ Partial Class Form_Main
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
+        Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,15 +164,11 @@ Partial Class Form_Main
         Me.DataGridView_Sample_Set.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 251)
         Me.DataGridView_Sample_Set.TabIndex = 2
-
-
+        '
         'NAA_DB_EXPDataSet
         '
         Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
         Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'B_Select_Sample_Set
-
         '
         'B_Select_Sample_Set
         '
@@ -617,7 +614,7 @@ Partial Class Form_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(955, 24)
@@ -634,19 +631,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'MaskedTextBoxDateOfNewJournal
@@ -668,6 +665,12 @@ Partial Class Form_Main
         Me.LabelDateOfNewJournalTitle.Size = New System.Drawing.Size(192, 30)
         Me.LabelDateOfNewJournalTitle.TabIndex = 198
         Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
+        '
+        'ErrorJournalToolStripMenuItem
+        '
+        Me.ErrorJournalToolStripMenuItem.Name = "ErrorJournalToolStripMenuItem"
+        Me.ErrorJournalToolStripMenuItem.Size = New System.Drawing.Size(152, 20)
+        Me.ErrorJournalToolStripMenuItem.Text = "Журнал несоответствий"
         '
         'Form_Main
         '
@@ -791,4 +794,5 @@ Partial Class Form_Main
     Friend WithEvents ResetLoginButton As ToolStripMenuItem
     Friend WithEvents MaskedTextBoxDateOfNewJournal As MaskedTextBox
     Friend WithEvents LabelDateOfNewJournalTitle As Label
+    Friend WithEvents ErrorJournalToolStripMenuItem As ToolStripMenuItem
 End Class
