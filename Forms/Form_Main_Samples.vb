@@ -1,8 +1,9 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports Extensions.Content
+Imports Zuby.ADGV.AdvancedDataGridView
+
 Partial Public Class Form_Main
-
-
 
     Private Sub Fill_In_Monitor() 'заполнение отображаемой информации в Label Monitor и раскраска DataGridView1
         Debug.WriteLine("Fill In Monitor started:")
@@ -163,49 +164,11 @@ Partial Public Class Form_Main
         End Try
     End Sub
 
-    Sub DataSampleSetLoad(ByVal Field As String)
+    Sub DataSampleSetLoad()
         Try
-            ChangeLang.Text = language
-            Debug.WriteLine("DataSampleSetLoad:")
-            SampleSetFormLoadFlag = False
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Using cmd As New System.Data.SqlClient.SqlCommand
+            DataGridView_Sample_Set.SetDoubleBuffered()
+            DataGridView_Sample_Set.DataSource = SamplesSetSource
 
-                cmd.CommandType = System.Data.CommandType.Text
-                fields = Field
-
-                cmd.CommandText = "select distinct sampSet.Country_Code, sampSet.Client_ID, sampSet.Year, sampSet.Sample_Set_ID,            sampSet.Sample_Set_Index from SamplesSetForNaaDB as sampSet " + Field + " order by sampSet.Year, sampSet.Sample_Set_ID, sampSet.Client_ID, sampSet.Country_Code, sampSet.Sample_Set_Index"
-
-                Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-                Dim ds As New DataSet()
-
-                dataadapter.Fill(ds, "SampleInf")
-                DataGridView_Sample_Set.DataSource = ds
-                DataGridView_Sample_Set.DataMember = "SampleInf"
-                DataGridView_Sample_Set.ReadOnly = True
-                DataGridView_Sample_Set.AllowUserToAddRows = False
-                DataGridView_Sample_Set.ClearSelection() ' вызывает срабатывание changeselection чтобы не было не выделенной строки при добавляем флаги SampleSetFormLoadFlag
-                SampleSetFormLoadFlag = True
-
-                Dim start As Integer = DataGridView_Sample_Set.RowCount - DataGridView_Sample_Set.DisplayedRowCount(True)
-                Dim finish As Integer = DataGridView_Sample_Set.RowCount
-
-                For i As Integer = start To finish - 1
-                    Colorize(DataGridView_Sample_Set.Rows.Item(i))
-                Next
-
-                If DataGridView_Sample_Set.RowCount = 0 Then
-                    MsgBox("Таких значений нет")
-                    DataSampleSetLoad("")
-                    ' Exit Sub
-                End If
-
-                DataGridView_Sample_Set.Rows.Item(DataGridView_Sample_Set.RowCount - 1).Selected = True
-                DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = DataGridView_Sample_Set.RowCount - 1
-
-                If Not BackgroundWorkerColorizer.IsBusy Then BackgroundWorkerColorizer.RunWorkerAsync()
-            End Using
-        Catch backgroundWorker As InvalidOperationException
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
         End Try

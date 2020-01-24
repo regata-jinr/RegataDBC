@@ -4,7 +4,7 @@ using System;
 
 namespace Extensions.Models
 {
-    public class SampleSetInfo
+    public class SamplesSetInfo
     {
         public string Country_Code { get; set; }
         public string Client_ID { get; set; }

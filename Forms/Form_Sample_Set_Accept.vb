@@ -437,7 +437,7 @@ Public Class Form_Sample_Set_Accept
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_SampleSetID". При необходимости она может быть перемещена или удалена.
             'Form_Main.Table_Sample_Set_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             'Form_Main.Table_Sample_Set_TableAdapter.Fill(Form_Main.NAA_DB_EXPDataSet.table_Sample_Set)
-            Form_Main.DataSampleSetLoad("")
+            Form_Main.DataSampleSetLoad()
 
             'Form_Main.DataGridView_Sample_Set.FirstDisplayedScrollingRowIndex = Form_Main.DataGridView_Sample_Set.RowCount - 1
             'For i = 0 To Form_Main.DataGridView_Sample_Set.RowCount - 1

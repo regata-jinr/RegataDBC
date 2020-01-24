@@ -35,7 +35,7 @@ Partial Class Form_Main
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridView_Sample_Set = New System.Windows.Forms.DataGridView()
+        Me.DataGridView_Sample_Set = New Zuby.ADGV.AdvancedDataGridView()
         Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Sample_Set = New System.Windows.Forms.Button()
         Me.B_Physical_Environment = New System.Windows.Forms.Button()
@@ -673,7 +673,7 @@ Partial Class Form_Main
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridView_Sample_Set As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridView_Sample_Set As Zuby.ADGV.AdvancedDataGridView
     Friend WithEvents NAA_DB_EXPDataSet As NAA_DB_EXPDataSet
     Friend WithEvents B_Select_Sample_Set As System.Windows.Forms.Button
     Friend WithEvents B_Physical_Environment As System.Windows.Forms.Button

@@ -250,8 +250,9 @@ Public Class Form_Main
             End Using
 
             fill_in_monitor_monitor()
-
-            DataSampleSetLoad("where color <> 'LimeGreen'")
+            advsrc = New Extensions.Content.SetContent(MyConnectionString)
+            SamplesSetSource = advsrc.FormDataSet("")
+            DataSampleSetLoad()
 
             MaskedTextBoxDateOfNewJournal.Text = Now.ToShortDateString()
 
@@ -261,12 +262,10 @@ Public Class Form_Main
             'Form_Login.Close()
             Exit Sub
         End Try
-        'Dim conn As New SqlConnection("Data Source=NF-100-205\SQLExpress,1433;Initial Catalog=NAA_DB_EXP;User ID=1v;Password=1")
-        ''но возникает "Ошибка входа пользователя 'usr1'." при открытии соединения
-        'conn.Open()
     End Sub
 
-
+    Public advsrc As Extensions.Content.ISetContent
+    Public SamplesSetSource As BindingSource
     Private Sub B_Search_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Try
             Me.Enabled = False
@@ -653,10 +652,6 @@ Public Class Form_Main
             Exit Sub
     End Try
     End Sub
-
-
-
-
 
     'Private Sub SelectionChanged(sender As System.Object, e As System.EventArgs) Handles DataGridView_Description.SelectionChanged
 
