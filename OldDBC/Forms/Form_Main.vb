@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports System.Deployment.Application
 
 Public Class Form_Main
     Public us As String
@@ -262,6 +261,7 @@ Public Class Form_Main
             Dim i As Integer
             Dim Country, Organzation, LastName, SampleType, SLIF, LLIF, Results, SLIDateString, LLIDateString, Notice, NoticeMod, WorkType, Note As String
             Dim ProcessedBy As String = ""
+            Dim ReceivedBy As String = ""
             Dim SLIDateAr As New ArrayList
             Dim LLIDateAr As New ArrayList
             Dim CountOfSample As Integer
@@ -361,6 +361,9 @@ Public Class Form_Main
                 If Not IsDBNull(reader(22)) Then
                     Note = reader(22)
                 End If
+                If Not IsDBNull(reader(26)) Then
+                    ReceivedBy = reader(26)
+                End If
                 i += 1
             End While
             reader.Close()
@@ -374,7 +377,7 @@ Public Class Form_Main
                 SampleType += $"{TypeSet.ToArray().GetValue(k)},"
             Next
             If Not String.IsNullOrEmpty(SampleType) Then SampleType = SampleType.Substring(0, SampleType.Length - 1)
-            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice + vbCrLf + "Тип работ: " + WorkType + vbCrLf + "Примечание к партии: " + vbCrLf + Note
+            L_Monitor.Text = "Страна: " + Country + vbCrLf + "Организация: " + Organzation + vbCrLf + "Фамилия: " + LastName + vbCrLf + "Кол-во образцов: " + CountOfSample.ToString + vbCrLf + "Тип образцов: " + SampleType + vbCrLf + "Дата КЖИ: " + SLIDateString + vbCrLf + "Дата ДЖИ: " + LLIDateString + vbCrLf + "Обработчик: " + ProcessedBy + vbCrLf + "Результаты: " + Results + vbCrLf + "Обработано образцов: " + ProcessedSample.ToString + " из " + CountOfSample.ToString + vbCrLf + "Комментарии:" + vbCrLf + Notice + vbCrLf + "Внесено:" + ReceivedBy + vbCrLf + "Тип работ: " + WorkType + vbCrLf + "Примечание к партии: " + vbCrLf + Note
 
             SLIDateAr.Clear()
             LLIDateAr.Clear()
@@ -503,10 +506,6 @@ Public Class Form_Main
         ''но возникает "Ошибка входа пользователя 'usr1'." при открытии соединения
         'conn.Open()
     End Sub
-
-
-
-
 
     Public Sub B_Select_Sample_Set_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_Sample_Set.Click
         Try
@@ -1578,7 +1577,7 @@ Public Class Form_Main
         Dim sqlConnection1 As New SqlConnection(MyConnectionString)
         Dim cmd As New System.Data.SqlClient.SqlCommand
         cmd.CommandType = System.Data.CommandType.Text
-        cmd.CommandText = $"select s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name, sampType = STUFF((SELECT distinct ','+ s1.A_Sample_Type from SamplesSetForNaaDB s1 where s1.Country_Code=s.Country_Code and s1.Client_ID = s.Client_ID and s.Year = s1.Year and S.Sample_Set_ID = s1.Sample_Set_ID and s.Sample_Set_Index = s1.Sample_Set_Index FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), s2.cnt as cnt from SamplesSetForNaaDB as s join (select Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, SUM(countOfSamples) as cnt from SamplesSetForNaaDB group by Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index) s2 on s.Country_Code=s2.Country_Code and s.Client_ID = s2.Client_ID and s.Year = s2.Year and S.Sample_Set_ID = s2.Sample_Set_ID and s.Sample_Set_Index = s2.Sample_Set_Index  {whereString} group by  s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name,s2.cnt order by s.Year, S.Sample_Set_ID, S.Sample_Set_Index"
+        cmd.CommandText = $"select s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name, sampType = STUFF((SELECT distinct ','+ s1.A_Sample_Type from SamplesSetForNaaDB s1 where s1.Country_Code=s.Country_Code and s1.Client_ID = s.Client_ID and s.Year = s1.Year and S.Sample_Set_ID = s1.Sample_Set_ID and s.Sample_Set_Index = s1.Sample_Set_Index FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), s.Note, s2.cnt as cnt from SamplesSetForNaaDB as s join (select Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, SUM(countOfSamples) as cnt from SamplesSetForNaaDB group by Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index) s2 on s.Country_Code=s2.Country_Code and s.Client_ID = s2.Client_ID and s.Year = s2.Year and S.Sample_Set_ID = s2.Sample_Set_ID and s.Sample_Set_Index = s2.Sample_Set_Index  {whereString} group by  s.Country_Code, s.Client_ID, s.Year, s.Sample_Set_ID, s.Sample_Set_Index, s.Last_Name, s.Note, s2.cnt order by s.Year, S.Sample_Set_ID, S.Sample_Set_Index"
 
         Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
         Dim ds1 As New DataSet()
@@ -1594,7 +1593,8 @@ Public Class Form_Main
         OpenSampleForm.DataGridViewForPrint.Columns(4).HeaderText = "Индекс партии"
         OpenSampleForm.DataGridViewForPrint.Columns(5).HeaderText = "Фамилия клиента"
         OpenSampleForm.DataGridViewForPrint.Columns(6).HeaderText = "Тип образцов"
-        OpenSampleForm.DataGridViewForPrint.Columns(7).HeaderText = "Кол-во образцов"
+        OpenSampleForm.DataGridViewForPrint.Columns(7).HeaderText = "Примечания"
+        OpenSampleForm.DataGridViewForPrint.Columns(8).HeaderText = "Кол-во образцов"
         OpenSampleForm.Show()
 
     End Sub

@@ -23,8 +23,8 @@ Partial Class Form_Sample_Set_Accept
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.B_Close = New System.Windows.Forms.Button()
         Me.B_SaveNewSampleAcceptance = New System.Windows.Forms.Button()
         Me.TextBox_Notes_1 = New System.Windows.Forms.TextBox()
@@ -122,20 +122,20 @@ Partial Class Form_Sample_Set_Accept
         CType(Me.Table_Received_By_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_SetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Sample_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout
+        Me.SuspendLayout()
         '
         'B_Close
         '
         Me.B_Close.Location = New System.Drawing.Point(453, 572)
         Me.B_Close.Name = "B_Close"
-        Me.B_Close.Size = New System.Drawing.Size(176, 23)
+        Me.B_Close.Size = New System.Drawing.Size(155, 23)
         Me.B_Close.TabIndex = 70
         Me.B_Close.Text = "Close"
         Me.B_Close.UseVisualStyleBackColor = True
         '
         'B_SaveNewSampleAcceptance
         '
-        Me.B_SaveNewSampleAcceptance.Location = New System.Drawing.Point(91, 572)
+        Me.B_SaveNewSampleAcceptance.Location = New System.Drawing.Point(12, 572)
         Me.B_SaveNewSampleAcceptance.Name = "B_SaveNewSampleAcceptance"
         Me.B_SaveNewSampleAcceptance.Size = New System.Drawing.Size(174, 23)
         Me.B_SaveNewSampleAcceptance.TabIndex = 69
@@ -144,11 +144,11 @@ Partial Class Form_Sample_Set_Accept
         '
         'TextBox_Notes_1
         '
-        Me.TextBox_Notes_1.Location = New System.Drawing.Point(10, 506)
+        Me.TextBox_Notes_1.Location = New System.Drawing.Point(12, 506)
         Me.TextBox_Notes_1.MaxLength = 400
         Me.TextBox_Notes_1.Multiline = True
         Me.TextBox_Notes_1.Name = "TextBox_Notes_1"
-        Me.TextBox_Notes_1.Size = New System.Drawing.Size(561, 60)
+        Me.TextBox_Notes_1.Size = New System.Drawing.Size(596, 60)
         Me.TextBox_Notes_1.TabIndex = 68
         '
         'L_Name_Notes_1
@@ -412,14 +412,14 @@ Partial Class Form_Sample_Set_Accept
         Me.Table_Sample_SetDataGridView.AllowUserToResizeRows = False
         Me.Table_Sample_SetDataGridView.AutoGenerateColumns = False
         Me.Table_Sample_SetDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Table_Sample_SetDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.Table_Sample_SetDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.Table_Sample_SetDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Sample_Set_Index})
         Me.Table_Sample_SetDataGridView.DataSource = Me.Table_Sample_SetBindingSource
@@ -450,15 +450,15 @@ Partial Class Form_Sample_Set_Accept
         'Sample_Set_Index
         '
         Me.Sample_Set_Index.DataPropertyName = "Sample_Set_Index"
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Sample_Set_Index.DefaultCellStyle = DataGridViewCellStyle4
         Me.Sample_Set_Index.HeaderText = "Sample set index"
         Me.Sample_Set_Index.Name = "Sample_Set_Index"
         Me.Sample_Set_Index.ReadOnly = True
         '
         'B_Print_Preview_Form
         '
-        Me.B_Print_Preview_Form.Location = New System.Drawing.Point(271, 572)
+        Me.B_Print_Preview_Form.Location = New System.Drawing.Point(241, 572)
         Me.B_Print_Preview_Form.Name = "B_Print_Preview_Form"
         Me.B_Print_Preview_Form.Size = New System.Drawing.Size(176, 23)
         Me.B_Print_Preview_Form.TabIndex = 113
@@ -651,12 +651,14 @@ Partial Class Form_Sample_Set_Accept
         '
         'B_Fill_Notes_1
         '
-        Me.B_Fill_Notes_1.Location = New System.Drawing.Point(577, 506)
+        Me.B_Fill_Notes_1.Enabled = False
+        Me.B_Fill_Notes_1.Location = New System.Drawing.Point(491, 424)
         Me.B_Fill_Notes_1.Name = "B_Fill_Notes_1"
-        Me.B_Fill_Notes_1.Size = New System.Drawing.Size(84, 60)
+        Me.B_Fill_Notes_1.Size = New System.Drawing.Size(84, 26)
         Me.B_Fill_Notes_1.TabIndex = 159
         Me.B_Fill_Notes_1.Text = "Quick fill in notes"
         Me.B_Fill_Notes_1.UseVisualStyleBackColor = True
+        Me.B_Fill_Notes_1.Visible = False
         '
         'B_Correct_Client_Info
         '
@@ -895,9 +897,9 @@ Partial Class Form_Sample_Set_Accept
         Me.ComboBoxSetTypes.DisplayMember = "ReceivedBy"
         Me.ComboBoxSetTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxSetTypes.FormattingEnabled = True
-        Me.ComboBoxSetTypes.Location = New System.Drawing.Point(10, 465)
+        Me.ComboBoxSetTypes.Location = New System.Drawing.Point(12, 465)
         Me.ComboBoxSetTypes.Name = "ComboBoxSetTypes"
-        Me.ComboBoxSetTypes.Size = New System.Drawing.Size(170, 21)
+        Me.ComboBoxSetTypes.Size = New System.Drawing.Size(168, 21)
         Me.ComboBoxSetTypes.TabIndex = 196
         Me.ComboBoxSetTypes.ValueMember = "ReceivedBy"
         '
@@ -1016,7 +1018,7 @@ Partial Class Form_Sample_Set_Accept
         CType(Me.Table_Sample_SetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Sample_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents B_Close As System.Windows.Forms.Button

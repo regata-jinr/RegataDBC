@@ -81,12 +81,12 @@ Public Class Form_NAA_Results
                             elem = workSheet.Row(1).Cell(i).Value & ", "
                         End If
 
-                        If workSheet.Row(StartRow - 1).Cell(i).Value = "Conc, ug/g" Then
-                            dti.Columns.Add(elem & "концентрация, uгр/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(9).ValueType)
+                        If workSheet.Row(StartRow - 1).Cell(i).Value = "Conc, μg/gr" Then
+                            dti.Columns.Add(elem & "концентрация, μг/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(9).ValueType)
                         ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "Err, %" Then
                             dti.Columns.Add(elem & "погрешность, %", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(10).ValueType)
-                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "MDC, ug/g" Then
-                            dti.Columns.Add(elem & "предел обнаружения, uгр/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(11).ValueType)
+                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "MDC, μg/gr" Then
+                            dti.Columns.Add(elem & "предел обнаружения, μг/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(11).ValueType)
                         End If
                     Next
 
@@ -171,7 +171,7 @@ Public Class Form_NAA_Results
             Me.Enabled = True
             If Form_Main.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
-                    ElseIf Form_Main.language = "English" Then
+            ElseIf Form_Main.language = "English" Then
                 MsgBox("The operation was cancelled (error in B_Fill_In_From_File_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -437,11 +437,11 @@ Public Class Form_NAA_Results
                         End If
                         ' изменение названия в подзаголовке  величин
                         If dt.Columns(j - 1).ColumnName.Split(",")(1) = " концентрация" Then
-                            ws.Cell(2, j).Value = "Conc, ug/g"
+                            ws.Cell(2, j).Value = "Conc, μg/gr"
                         ElseIf dt.Columns(j - 1).ColumnName.Split(",")(1) = " погрешность" Then
                             ws.Cell(2, j).Value = "Err, %"
                         ElseIf dt.Columns(j - 1).ColumnName.Split(",")(1) = " предел обнаружения" Then
-                            ws.Cell(2, j).Value = "MDC, ug/g"
+                            ws.Cell(2, j).Value = "MDC, μg/gr"
                         End If
                         ' закраска с чередованием по три столбца
                         If inum <= 3 And j <> dt.Columns.Count - 1 Then
@@ -456,7 +456,7 @@ Public Class Form_NAA_Results
                     Next
 
                     If dt.Columns.Count > 8 Then
-                        ws.Cell(2, dt.Columns.Count).Value = "MDC, ug/g"
+                        ws.Cell(2, dt.Columns.Count).Value = "MDC, μg/gr"
                         ws.Range(1, dt.Columns.Count + 1, dt.Rows.Count + 2, dt.Columns.Count + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.NoColor
                     End If
 
