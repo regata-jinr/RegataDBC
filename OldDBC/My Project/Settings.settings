@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NAA_DB_EXPConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=159.93.223.239,1433;Initial Catalog=NAA_DB;</Value>
+    </Setting>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Русский</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

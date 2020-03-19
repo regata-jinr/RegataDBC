@@ -235,9 +235,9 @@ Public Class Form_ElsSum
             client.Connect()
             Dim terminal As SshCommand ' = client.RunCommand($"cd Spectra")
             For Each name As String In names
-                terminal = client.RunCommand($"find /home/FTP/Spectra/{gYear} -name {Path.GetFileNameWithoutExtension(name)}*")
-                If String.IsNullOrEmpty(terminal.Result) Then terminal = client.RunCommand($"find /home/FTP/Spectra/ -name {Path.GetFileNameWithoutExtension(name)}*")
-                If Not String.IsNullOrEmpty(terminal.Result) Then
+                terminal = client.RunCommand($"locate {name} | grep Spectra")
+                'If String.IsNullOrEmpty(terminal.Result) Then terminal = client.RunCommand($"find /home/FTP/Spectra/ -name {Path.GetFileNameWithoutExtension(name)}*")
+                If Not String.IsNullOrEmpty(terminal.Result) And Not String.IsNullOrWhiteSpace(terminal.Result) And terminal.Result <> "\n" Then
                     fullFileName.Add(name, terminal.Result.Substring(0, terminal.Result.Length - 1)) 'delete \n
                     Debug.WriteLine($"The file was found - {fullFileName.Last}")
                 Else

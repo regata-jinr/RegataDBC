@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                _ic.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -46,7 +47,6 @@
             this.advancedDataGridViewJournalErr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.advancedDataGridViewJournalErr.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.advancedDataGridViewJournalErr.BackgroundColor = System.Drawing.SystemColors.Control;
             this.advancedDataGridViewJournalErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -60,7 +60,6 @@
             this.advancedDataGridViewJournalErr.FilterAndSortEnabled = true;
             this.advancedDataGridViewJournalErr.Location = new System.Drawing.Point(0, 39);
             this.advancedDataGridViewJournalErr.Name = "advancedDataGridViewJournalErr";
-            this.advancedDataGridViewJournalErr.ReadOnly = true;
             this.advancedDataGridViewJournalErr.RowHeadersVisible = false;
             this.advancedDataGridViewJournalErr.Size = new System.Drawing.Size(808, 367);
             this.advancedDataGridViewJournalErr.TabIndex = 0;
@@ -89,6 +88,7 @@
             this.buttonSaveChanges.TabIndex = 2;
             this.buttonSaveChanges.Text = "Сохранить изменения";
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
             // JournalOfErrors
             // 
@@ -101,8 +101,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "JournalOfErrors";
             this.Text = "JournalOfErrors";
-            this.Load += new System.EventHandler(this.JournalOfErrors_Load);
-            this.Shown += new System.EventHandler(this.JournalOfErrors_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridViewJournalErr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._bindingSource)).EndInit();
             this.ResumeLayout(false);

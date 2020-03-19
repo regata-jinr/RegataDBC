@@ -619,7 +619,7 @@
     <Content Include="NaaDBIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Extensions\Extensions.csproj">
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
       <Project>{93857a67-5872-4789-8ff2-217d92cae0ec}</Project>
       <Name>Extensions</Name>
     </ProjectReference>

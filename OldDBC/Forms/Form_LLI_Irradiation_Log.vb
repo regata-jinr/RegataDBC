@@ -42,7 +42,7 @@ Public Class Form_LLI_Irradiation_Log
                 Button_LLI1_Spectrum_File.Text = "Зап. файл ДЖИ1"
                 L_Name_LLI2_Spectrum_File.Text = "Файл ДЖИ2"
                 Button_LLI2_Spectrum_File.Text = "Зап. файл ДЖИ2"
-                ButtonSaveSpectra.Text = "Загрузить спектры"
+                ButtonSaveSpectra.Text = "Сохранить спектры"
 
                 L_Name_SRM_Set.Text = "Партии стандартов"
                 L_Name_SRM.Text = "Стандарты"
@@ -1356,35 +1356,27 @@ Public Class Form_LLI_Irradiation_Log
                 Exit Sub
             End If
 
+            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+                sqlConnection1.Open()
+                Using cmd As New System.Data.SqlClient.SqlCommand($"UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
+                                                                    F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
+                                                                    F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
+                                                                    F_Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}' and
+                                                                    F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
+                                                                    F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
+                                                                    A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
+                                                                    I_LLI_Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);",
+                                                                    sqlConnection1)
+                    Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
             For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows
                 DataGridView_LLI_Irradiation_Log.Rows.RemoveAt(row.Index)
             Next
 
-            'Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            '    sqlConnection1.Open()
-            '    Using cmd As New System.Data.SqlClient.SqlCommand($"DELETE FROM dbo.table_LLI_Irradiation_Log WHERE
-            '                                                        Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}'
-            '                                                        and Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}'
-            '                                                        and Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}'
-            '                                                        and Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}'
-            '                                                        and Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}'
-            '                                                        and Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}'
 
-            '                                                        and Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);
-            '                                                        UPDATE dbo.table_Sample SET I_LLI_Date_Start=NULL where
-            '                                                        F_Country_Code='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(0).Value}' and
-            '                                                        F_Client_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(1).Value}' and
-            '                                                        F_Year='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(2).Value}' and
-            '                                                        F_Sample_Set_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(3).Value}' and
-            '                                                        F_Sample_Set_Index='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(4).Value}' and
-            '                                                        A_Sample_ID='{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(5).Value}' and
-            '                                                        I_LLI_Date_Start=convert(datetime, '{DataGridView_LLI_Irradiation_Log.SelectedCells.Item(6).Value}', 104);",
-            '                                                        sqlConnection1)
-            '        Debug.WriteLine($"Delete and update query is:{vbCrLf}{cmd.CommandText}")
-            '        cmd.ExecuteNonQuery()
-            '    End Using
-            '    sqlConnection1.Close()
-            'End Using
             Save_And_Update_LLI_Click(sender, e)
         Catch ex As Exception
             If Form_Main.language = "Русский" Then
@@ -1713,221 +1705,221 @@ Public Class Form_LLI_Irradiation_Log
         End Try
     End Sub
 
-    Private Sub DataGridView_LLI_Irradiation_Log_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
-        'Try
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 25 Then 'Детектор 1 LLI1
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then 'событие CellContentClick происходит перед непосредственным изменением значения ячейки: было DBNull станет True
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    'Private Sub DataGridView_LLI_Irradiation_Log_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+    'Try
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 25 Then 'Детектор 1 LLI1
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then 'событие CellContentClick происходит перед непосредственным изменением значения ячейки: было DBNull станет True
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then 'было False станет True
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then 'было False станет True
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 26 Then 'Детектор 2 LLI1
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 26 Then 'Детектор 2 LLI1
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 27 Then 'Детектор 3 LLI1
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 27 Then 'Детектор 3 LLI1
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(28).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 28 Then 'Детектор 4 LLI1
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 28 Then 'Детектор 4 LLI1
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(25).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(26).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(27).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
+    '            Exit Sub
+    '        End If
+    '    End If
 
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 32 Then 'Детектор 1 LLI2
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then 'событие CellContentClick происходит перед непосредственным изменением значения ячейки: было DBNull станет True
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 32 Then 'Детектор 1 LLI2
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then 'событие CellContentClick происходит перед непосредственным изменением значения ячейки: было DBNull станет True
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then 'было False станет True
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then 'было False станет True
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 33 Then 'Детектор 2 LLI2
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 33 Then 'Детектор 2 LLI2
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 34 Then 'Детектор 3 LLI2
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 34 Then 'Детектор 3 LLI2
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(35).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 35 Then 'Детектор 4 LLI2
-        '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            Exit Sub
+    '        End If
+    '    End If
+    '    If DataGridView_LLI_Irradiation_Log.CurrentCell.ColumnIndex = 35 Then 'Детектор 4 LLI2
+    '        If IsDBNull(DataGridView_LLI_Irradiation_Log.CurrentCell.Value) = True Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
 
-        '            Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            Form_LLI_Irradiation_Log_Load(sender, e)
+    '            Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
-        '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
+    '            Exit Sub
+    '        End If
+    '        If DataGridView_LLI_Irradiation_Log.CurrentCell.Value = False Then
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(32).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(33).Value = False
+    '            DataGridView_LLI_Irradiation_Log.Rows.Item(DataGridView_LLI_Irradiation_Log.CurrentCell.RowIndex).Cells.Item(34).Value = False
 
-        '            'Me.Validate()
-        '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
-        '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
-        '            'Form_LLI_Irradiation_Log_Load(sender, e)
+    '            'Me.Validate()
+    '            Me.Table_LLI_Irradiation_Log_BindingSource.EndEdit()
+    '            Me.Table_LLI_Irradiation_Log_TableAdapter.Update(Me.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log)
+    '            'Form_LLI_Irradiation_Log_Load(sender, e)
 
-        '            Exit Sub
-        '        End If
-        '    End If
-        'Catch ex As Exception
-        '    MsgBox($"The operation was cancelled!")
-        'End Try
-    End Sub
+    '            Exit Sub
+    '        End If
+    '    End If
+    'Catch ex As Exception
+    '    MsgBox($"The operation was cancelled!")
+    'End Try
+    'End Sub
 
     Private Sub DataGridView_LLI_Irradiation_Log_CellEndEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView_LLI_Irradiation_Log.CellEndEdit, DataGridView_LLI_Irradiation_Log.CellContentClick
         'Try
@@ -2846,11 +2838,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
                     dt.Rows.Add()
                     For Each cell As DataGridViewCell In row.Cells
                         dt.Rows(dt.Rows.Count - 1)(cell.ColumnIndex) = cell.Value
-
-
                     Next
                 Next
-
 
                 colorNames.Add(1, ClosedXML.Excel.XLColor.SkyBlue)
                 colorNames.Add(2, ClosedXML.Excel.XLColor.Tan)
@@ -3575,7 +3564,7 @@ Label_Exit:     oSheet.Range("B" + (maximum_i + 1).ToString + ":D" + (maximum_i 
         ElseIf System.Windows.Forms.DialogResult.OK Then
 
             If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                MsgBox($"Выберите спетры для скачивания!")
+                MsgBox($"Выберите спетры для сохранения!")
                 Exit Sub
             End If
             For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows
@@ -3605,17 +3594,19 @@ Label_Exit:     oSheet.Range("B" + (maximum_i + 1).ToString + ":D" + (maximum_i 
             Debug.WriteLine($"Connection is OK")
             For Each fName As String In fNames.Keys
                 Debug.WriteLine($"Will save here - ${fNames(fName)}")
+
+                If Not client.Exists(fName) Then
+                    fName = fName.Replace("cnf", "CNF")
+                    If Not client.Exists(fName) Then
+                        Debug.WriteLine($"{fName} doesn't exist")
+                        Continue For
+                    End If
+                End If
+
                 Directory.CreateDirectory(Path.GetDirectoryName(fNames(fName)))
                 Using fileStream As FileStream = IO.File.Create(fNames(fName))
                     Debug.WriteLine($"Will download from here: {fName}")
-                    If Not client.Exists(fName) Then fName = fName.Replace("cnf", "CNF")
-                    If client.Exists(fName) Then
-                        client.DownloadFile(fName, fileStream)
-                    Else
-                        Debug.WriteLine($"{fName} doesn't exist")
-                    End If
-
-                    fileStream.Close()
+                    client.DownloadFile(fName, fileStream)
                 End Using
             Next
         End Using
