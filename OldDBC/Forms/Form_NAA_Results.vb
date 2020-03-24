@@ -81,11 +81,11 @@ Public Class Form_NAA_Results
                             elem = workSheet.Row(1).Cell(i).Value & ", "
                         End If
 
-                        If workSheet.Row(StartRow - 1).Cell(i).Value = "Conc, μg/gr" Then
+                        If workSheet.Row(StartRow - 1).Cell(i).Value = "Conc, μg/g" Then
                             dti.Columns.Add(elem & "концентрация, μг/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(9).ValueType)
                         ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "Err, %" Then
                             dti.Columns.Add(elem & "погрешность, %", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(10).ValueType)
-                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "MDC, μg/gr" Then
+                        ElseIf workSheet.Row(StartRow - 1).Cell(i).Value = "MDC, μg/g" Then
                             dti.Columns.Add(elem & "предел обнаружения, μг/гр", DataGridView_Table_Sample_NAA_Results.Rows(0).Cells(11).ValueType)
                         End If
                     Next
@@ -437,11 +437,11 @@ Public Class Form_NAA_Results
                         End If
                         ' изменение названия в подзаголовке  величин
                         If dt.Columns(j - 1).ColumnName.Split(",")(1) = " концентрация" Then
-                            ws.Cell(2, j).Value = "Conc, μg/gr"
+                            ws.Cell(2, j).Value = "Conc, μg/g"
                         ElseIf dt.Columns(j - 1).ColumnName.Split(",")(1) = " погрешность" Then
                             ws.Cell(2, j).Value = "Err, %"
                         ElseIf dt.Columns(j - 1).ColumnName.Split(",")(1) = " предел обнаружения" Then
-                            ws.Cell(2, j).Value = "MDC, μg/gr"
+                            ws.Cell(2, j).Value = "MDC, μg/g"
                         End If
                         ' закраска с чередованием по три столбца
                         If inum <= 3 And j <> dt.Columns.Count - 1 Then
@@ -456,7 +456,7 @@ Public Class Form_NAA_Results
                     Next
 
                     If dt.Columns.Count > 8 Then
-                        ws.Cell(2, dt.Columns.Count).Value = "MDC, μg/gr"
+                        ws.Cell(2, dt.Columns.Count).Value = "MDC, μg/g"
                         ws.Range(1, dt.Columns.Count + 1, dt.Rows.Count + 2, dt.Columns.Count + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.NoColor
                     End If
 
