@@ -7,7 +7,6 @@ Public Class Form_LLI_Irradiation_Log
     Public ContNum As Integer() = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     Public colorNames As New Dictionary(Of Integer, ClosedXML.Excel.XLColor)
 
-    'FIXME: fix deletion of sample from irr journals: clear date in table_sample
     Private Sub Form_LLI_Irradiation_Log_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             If Form_Main.language = "Русский" Then
