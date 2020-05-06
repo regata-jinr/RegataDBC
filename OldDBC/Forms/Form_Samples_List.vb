@@ -269,28 +269,15 @@ Public Class Form_Samples_List
 
             For k As Integer = 0 To 6
                 Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).Frozen = True
+                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).ReadOnly = True
             Next
 
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ReadOnly = True
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(5).ReadOnly = False
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.AllowUserToAddRows = False
 
             Dim inum As Integer = 1
             Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = True
             Debug.WriteLine($"End  {timer.ElapsedMilliseconds / 1000}")
-
-            'For j As Integer = 8 To 25 'Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Count - 1
-            '    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).SortMode = DataGridViewColumnSortMode.NotSortable
-            '    If inum <= 3 Then
-            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.SkyBlue
-            '    Else
-            '        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(j).DefaultCellStyle.BackColor = Color.Tan
-            '    End If
-            '    inum += 1
-            '    If inum = 7 Then inum = 1
-
-            'Next
-
-            'Form_NAA_Results.BackgroundWorkerNaaResults.RunWorkerAsync()
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)

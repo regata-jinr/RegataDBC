@@ -28,10 +28,10 @@ Partial Class Form_Notice
         Me.ButtonFormNoticeCancel = New System.Windows.Forms.Button()
         Me.Form_Notice_Log = New System.Windows.Forms.RichTextBox()
         Me.GroupBoxComplete = New System.Windows.Forms.GroupBox()
-        Me.CheckBoxCompleteProcess = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxCompleteLLI = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxCompleteSLI = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxCompletePrep = New System.Windows.Forms.CheckBox()
+        Me.ResCompl = New System.Windows.Forms.CheckBox()
+        Me.LLICompl = New System.Windows.Forms.CheckBox()
+        Me.SLICompl = New System.Windows.Forms.CheckBox()
+        Me.PrepCompl = New System.Windows.Forms.CheckBox()
         Me.GroupBoxComplete.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,10 +75,10 @@ Partial Class Form_Notice
         '
         'GroupBoxComplete
         '
-        Me.GroupBoxComplete.Controls.Add(Me.CheckBoxCompleteProcess)
-        Me.GroupBoxComplete.Controls.Add(Me.CheckBoxCompleteLLI)
-        Me.GroupBoxComplete.Controls.Add(Me.CheckBoxCompleteSLI)
-        Me.GroupBoxComplete.Controls.Add(Me.CheckBoxCompletePrep)
+        Me.GroupBoxComplete.Controls.Add(Me.ResCompl)
+        Me.GroupBoxComplete.Controls.Add(Me.LLICompl)
+        Me.GroupBoxComplete.Controls.Add(Me.SLICompl)
+        Me.GroupBoxComplete.Controls.Add(Me.PrepCompl)
         Me.GroupBoxComplete.Location = New System.Drawing.Point(12, 259)
         Me.GroupBoxComplete.Name = "GroupBoxComplete"
         Me.GroupBoxComplete.Size = New System.Drawing.Size(480, 43)
@@ -86,45 +86,45 @@ Partial Class Form_Notice
         Me.GroupBoxComplete.TabStop = False
         Me.GroupBoxComplete.Text = "Закончить этап"
         '
-        'CheckBoxCompleteProcess
+        'ResCompl
         '
-        Me.CheckBoxCompleteProcess.AutoSize = True
-        Me.CheckBoxCompleteProcess.Location = New System.Drawing.Point(393, 19)
-        Me.CheckBoxCompleteProcess.Name = "CheckBoxCompleteProcess"
-        Me.CheckBoxCompleteProcess.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBoxCompleteProcess.TabIndex = 4
-        Me.CheckBoxCompleteProcess.Text = "Обработки"
-        Me.CheckBoxCompleteProcess.UseVisualStyleBackColor = True
+        Me.ResCompl.AutoSize = True
+        Me.ResCompl.Location = New System.Drawing.Point(393, 19)
+        Me.ResCompl.Name = "ResCompl"
+        Me.ResCompl.Size = New System.Drawing.Size(81, 17)
+        Me.ResCompl.TabIndex = 4
+        Me.ResCompl.Text = "Обработки"
+        Me.ResCompl.UseVisualStyleBackColor = True
         '
-        'CheckBoxCompleteLLI
+        'LLICompl
         '
-        Me.CheckBoxCompleteLLI.AutoSize = True
-        Me.CheckBoxCompleteLLI.Location = New System.Drawing.Point(268, 19)
-        Me.CheckBoxCompleteLLI.Name = "CheckBoxCompleteLLI"
-        Me.CheckBoxCompleteLLI.Size = New System.Drawing.Size(111, 17)
-        Me.CheckBoxCompleteLLI.TabIndex = 2
-        Me.CheckBoxCompleteLLI.Text = "Облучения ДЖИ"
-        Me.CheckBoxCompleteLLI.UseVisualStyleBackColor = True
+        Me.LLICompl.AutoSize = True
+        Me.LLICompl.Location = New System.Drawing.Point(268, 19)
+        Me.LLICompl.Name = "LLICompl"
+        Me.LLICompl.Size = New System.Drawing.Size(111, 17)
+        Me.LLICompl.TabIndex = 2
+        Me.LLICompl.Text = "Облучения ДЖИ"
+        Me.LLICompl.UseVisualStyleBackColor = True
         '
-        'CheckBoxCompleteSLI
+        'SLICompl
         '
-        Me.CheckBoxCompleteSLI.AutoSize = True
-        Me.CheckBoxCompleteSLI.Location = New System.Drawing.Point(126, 19)
-        Me.CheckBoxCompleteSLI.Name = "CheckBoxCompleteSLI"
-        Me.CheckBoxCompleteSLI.Size = New System.Drawing.Size(109, 17)
-        Me.CheckBoxCompleteSLI.TabIndex = 1
-        Me.CheckBoxCompleteSLI.Text = "Облучения КЖИ"
-        Me.CheckBoxCompleteSLI.UseVisualStyleBackColor = True
+        Me.SLICompl.AutoSize = True
+        Me.SLICompl.Location = New System.Drawing.Point(126, 19)
+        Me.SLICompl.Name = "SLICompl"
+        Me.SLICompl.Size = New System.Drawing.Size(109, 17)
+        Me.SLICompl.TabIndex = 1
+        Me.SLICompl.Text = "Облучения КЖИ"
+        Me.SLICompl.UseVisualStyleBackColor = True
         '
-        'CheckBoxCompletePrep
+        'PrepCompl
         '
-        Me.CheckBoxCompletePrep.AutoSize = True
-        Me.CheckBoxCompletePrep.Location = New System.Drawing.Point(4, 19)
-        Me.CheckBoxCompletePrep.Name = "CheckBoxCompletePrep"
-        Me.CheckBoxCompletePrep.Size = New System.Drawing.Size(116, 17)
-        Me.CheckBoxCompletePrep.TabIndex = 0
-        Me.CheckBoxCompletePrep.Text = "Пробоподготовки"
-        Me.CheckBoxCompletePrep.UseVisualStyleBackColor = True
+        Me.PrepCompl.AutoSize = True
+        Me.PrepCompl.Location = New System.Drawing.Point(4, 19)
+        Me.PrepCompl.Name = "PrepCompl"
+        Me.PrepCompl.Size = New System.Drawing.Size(116, 17)
+        Me.PrepCompl.TabIndex = 0
+        Me.PrepCompl.Text = "Пробоподготовки"
+        Me.PrepCompl.UseVisualStyleBackColor = True
         '
         'Form_Notice
         '
@@ -151,8 +151,8 @@ Partial Class Form_Notice
     Friend WithEvents ButtonFormNoticeCancel As Button
     Friend WithEvents Form_Notice_Log As RichTextBox
     Friend WithEvents GroupBoxComplete As GroupBox
-    Friend WithEvents CheckBoxCompleteLLI As CheckBox
-    Friend WithEvents CheckBoxCompleteSLI As CheckBox
-    Friend WithEvents CheckBoxCompletePrep As CheckBox
-    Friend WithEvents CheckBoxCompleteProcess As CheckBox
+    Friend WithEvents LLICompl As CheckBox
+    Friend WithEvents SLICompl As CheckBox
+    Friend WithEvents PrepCompl As CheckBox
+    Friend WithEvents ResCompl As CheckBox
 End Class

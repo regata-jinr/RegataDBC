@@ -82,9 +82,9 @@ Partial Class Form_Main
         Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
         Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
-        Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -646,6 +646,14 @@ Partial Class Form_Main
         Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
+        'ErrorJournalToolStripMenuItem
+        '
+        Me.ErrorJournalToolStripMenuItem.Enabled = False
+        Me.ErrorJournalToolStripMenuItem.Name = "ErrorJournalToolStripMenuItem"
+        Me.ErrorJournalToolStripMenuItem.Size = New System.Drawing.Size(152, 20)
+        Me.ErrorJournalToolStripMenuItem.Text = "Журнал несоответствий"
+        Me.ErrorJournalToolStripMenuItem.Visible = False
+        '
         'MaskedTextBoxDateOfNewJournal
         '
         Me.MaskedTextBoxDateOfNewJournal.BackColor = System.Drawing.Color.White
@@ -665,12 +673,6 @@ Partial Class Form_Main
         Me.LabelDateOfNewJournalTitle.Size = New System.Drawing.Size(192, 30)
         Me.LabelDateOfNewJournalTitle.TabIndex = 198
         Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
-        '
-        'ErrorJournalToolStripMenuItem
-        '
-        Me.ErrorJournalToolStripMenuItem.Name = "ErrorJournalToolStripMenuItem"
-        Me.ErrorJournalToolStripMenuItem.Size = New System.Drawing.Size(152, 20)
-        Me.ErrorJournalToolStripMenuItem.Text = "Журнал несоответствий"
         '
         'Form_Main
         '

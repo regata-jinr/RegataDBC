@@ -428,7 +428,7 @@ Public Class Form_Sample_Set_Accept
             sqlConnection1.Close()
 
             cmd.CommandText = "INSERT dbo.table_Sample_Set (Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index, Sample_Set_Receipt_Date, Sample_Set_Report_Date, Received_By, Notes_3, Note) " +
-                     $"VALUES ('{Country_Code}', '{ComboBox_Client_ID.Text}', '{L_NSSID_Year.Text}', '{MaskedTextBox_New_Sample_Set_ID.Text} ', '{MaskedTextBox_New_Sample_Set_Index.Text}',  convert(date, '{MaskedTextBox_Sample_Set_Receipt_Date.Text}',104),  convert(date, '{MaskedTextBox_Sample_Set_Report_Date.Text}',104), '{LabelSign.Text}', '{ComboBoxSetTypes.Text}', '{TextBox_Notes_1.Text}')"
+                     $"VALUES ('{Country_Code}', '{ComboBox_Client_ID.Text}', '{L_NSSID_Year.Text}', '{MaskedTextBox_New_Sample_Set_ID.Text}', '{MaskedTextBox_New_Sample_Set_Index.Text}',  convert(date, '{MaskedTextBox_Sample_Set_Receipt_Date.Text}',104),  convert(date, '{MaskedTextBox_Sample_Set_Report_Date.Text}',104), '{LabelSign.Text}', '{ComboBoxSetTypes.Text}', '{TextBox_Notes_1.Text}')"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             cmd.ExecuteNonQuery()

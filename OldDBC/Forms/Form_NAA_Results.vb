@@ -121,14 +121,10 @@ Public Class Form_NAA_Results
                                         End If
                                         filespect += tempstr + ","
                                     Next
-                                    ' Debug.WriteLine((rown + 4).ToString & "  " & tempstr)
                                     dti.Rows(rown)(coln) = filespect.Substring(0, filespect.Length - 1)
                                     filespect = ""
                                 Else
-                                    ' MsgBox(DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value
-                                    ' Debug.WriteLine(DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value)
                                     dti.Rows(rown)(coln) = DataGridView_Table_Sample_NAA_Results.Rows(rown).Cells(coln).Value
-                                    ' MsgBox(dti.Rows(rown)(coln))
                                 End If
                             Next
                         Next
@@ -186,7 +182,6 @@ Public Class Form_NAA_Results
             cmd.CommandType = System.Data.CommandType.Text
 
             cmd.CommandText = "select * from ActingHandlers"
-            'cmd.CommandText = "SELECT * FROM table_Received_By ORDER BY Received_By"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
@@ -306,6 +301,15 @@ Public Class Form_NAA_Results
                         If column.Index <> DataGridView_Table_Sample_NAA_Results.Columns.Count - 1 Then
                             queryBody += ","
                         End If
+                    ElseIf column.Index = 5 Then
+                        If DataGridView_Table_Sample_NAA_Results.Rows(j).Cells(column.Index).Value.ToString = "" Then
+                            queryBody += "[" & column.HeaderText & "]" & " = " & "null"
+                        Else
+                            queryBody += "[" & column.HeaderText & "]" & " = '" & DataGridView_Table_Sample_NAA_Results.Rows(j).Cells(column.Index).Value.ToString & "'"
+                        End If
+                        If column.Index <> DataGridView_Table_Sample_NAA_Results.Columns.Count - 1 Then
+                            queryBody += ","
+                        End If
 
                     End If
 
@@ -354,12 +358,7 @@ Public Class Form_NAA_Results
     Private Sub ComboBox_Person_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox_Person.SelectedValueChanged
         Try
             For k = 0 To DataGridView_Table_Sample_NAA_Results.Rows.Count - 1
-                If IsDBNull(DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value) Then
-                    DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value += ComboBox_Person.Text
-                Else
-                    DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value += ";" & ComboBox_Person.Text
-                End If
-
+                DataGridView_Table_Sample_NAA_Results.Rows.Item(k).Cells.Item(7).Value = ComboBox_Person.Text
             Next
         Catch ex As Exception
             MsgBox(ex.ToString(), MsgBoxStyle.Critical, Me.Text)

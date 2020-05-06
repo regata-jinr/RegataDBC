@@ -32,13 +32,13 @@ Partial Class Form_ElsSum
         Me.LabelElSumSetIndex = New System.Windows.Forms.Label()
         Me.DataGridViewElsSum = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RadioButtonDFLLI2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonDFLLI1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonDFSLI = New System.Windows.Forms.RadioButton()
+        Me.ProgressBarDwld = New System.Windows.Forms.ProgressBar()
         Me.ButtonSpectraDWLD = New System.Windows.Forms.Button()
         Me.FolderBrowserDialogSpectra = New System.Windows.Forms.FolderBrowserDialog()
-        Me.ProgressBarDwld = New System.Windows.Forms.ProgressBar()
         Me.LabelStatus = New System.Windows.Forms.Label()
-        Me.RadioButtonDFSLI = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonDFLLI1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonDFLLI2 = New System.Windows.Forms.RadioButton()
         CType(Me.DataGridViewElsSum, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -147,42 +147,16 @@ Partial Class Form_ElsSum
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Загрузить файлы спектров"
         '
-        'ButtonSpectraDWLD
+        'RadioButtonDFLLI2
         '
-        Me.ButtonSpectraDWLD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.ButtonSpectraDWLD.Location = New System.Drawing.Point(215, 37)
-        Me.ButtonSpectraDWLD.Name = "ButtonSpectraDWLD"
-        Me.ButtonSpectraDWLD.Size = New System.Drawing.Size(62, 25)
-        Me.ButtonSpectraDWLD.TabIndex = 3
-        Me.ButtonSpectraDWLD.Text = "OK"
-        Me.ButtonSpectraDWLD.UseVisualStyleBackColor = True
-        '
-        'ProgressBarDwld
-        '
-        Me.ProgressBarDwld.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ProgressBarDwld.Location = New System.Drawing.Point(6, 39)
-        Me.ProgressBarDwld.Name = "ProgressBarDwld"
-        Me.ProgressBarDwld.Size = New System.Drawing.Size(198, 23)
-        Me.ProgressBarDwld.TabIndex = 184
-        '
-        'LabelStatus
-        '
-        Me.LabelStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelStatus.Location = New System.Drawing.Point(518, 9)
-        Me.LabelStatus.Name = "LabelStatus"
-        Me.LabelStatus.Size = New System.Drawing.Size(147, 57)
-        Me.LabelStatus.TabIndex = 184
-        '
-        'RadioButtonDFSLI
-        '
-        Me.RadioButtonDFSLI.AutoSize = True
-        Me.RadioButtonDFSLI.Location = New System.Drawing.Point(7, 17)
-        Me.RadioButtonDFSLI.Name = "RadioButtonDFSLI"
-        Me.RadioButtonDFSLI.Size = New System.Drawing.Size(53, 19)
-        Me.RadioButtonDFSLI.TabIndex = 185
-        Me.RadioButtonDFSLI.TabStop = True
-        Me.RadioButtonDFSLI.Text = "КЖИ"
-        Me.RadioButtonDFSLI.UseVisualStyleBackColor = True
+        Me.RadioButtonDFLLI2.AutoSize = True
+        Me.RadioButtonDFLLI2.Location = New System.Drawing.Point(137, 17)
+        Me.RadioButtonDFLLI2.Name = "RadioButtonDFLLI2"
+        Me.RadioButtonDFLLI2.Size = New System.Drawing.Size(65, 19)
+        Me.RadioButtonDFLLI2.TabIndex = 187
+        Me.RadioButtonDFLLI2.TabStop = True
+        Me.RadioButtonDFLLI2.Text = "ДЖИ-2"
+        Me.RadioButtonDFLLI2.UseVisualStyleBackColor = True
         '
         'RadioButtonDFLLI1
         '
@@ -195,16 +169,42 @@ Partial Class Form_ElsSum
         Me.RadioButtonDFLLI1.Text = "ДЖИ-1"
         Me.RadioButtonDFLLI1.UseVisualStyleBackColor = True
         '
-        'RadioButtonDFLLI2
+        'RadioButtonDFSLI
         '
-        Me.RadioButtonDFLLI2.AutoSize = True
-        Me.RadioButtonDFLLI2.Location = New System.Drawing.Point(137, 17)
-        Me.RadioButtonDFLLI2.Name = "RadioButtonDFLLI2"
-        Me.RadioButtonDFLLI2.Size = New System.Drawing.Size(65, 19)
-        Me.RadioButtonDFLLI2.TabIndex = 187
-        Me.RadioButtonDFLLI2.TabStop = True
-        Me.RadioButtonDFLLI2.Text = "ДЖИ-2"
-        Me.RadioButtonDFLLI2.UseVisualStyleBackColor = True
+        Me.RadioButtonDFSLI.AutoSize = True
+        Me.RadioButtonDFSLI.Location = New System.Drawing.Point(7, 17)
+        Me.RadioButtonDFSLI.Name = "RadioButtonDFSLI"
+        Me.RadioButtonDFSLI.Size = New System.Drawing.Size(53, 19)
+        Me.RadioButtonDFSLI.TabIndex = 185
+        Me.RadioButtonDFSLI.TabStop = True
+        Me.RadioButtonDFSLI.Text = "КЖИ"
+        Me.RadioButtonDFSLI.UseVisualStyleBackColor = True
+        '
+        'ProgressBarDwld
+        '
+        Me.ProgressBarDwld.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProgressBarDwld.Location = New System.Drawing.Point(6, 39)
+        Me.ProgressBarDwld.Name = "ProgressBarDwld"
+        Me.ProgressBarDwld.Size = New System.Drawing.Size(198, 23)
+        Me.ProgressBarDwld.TabIndex = 184
+        '
+        'ButtonSpectraDWLD
+        '
+        Me.ButtonSpectraDWLD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.ButtonSpectraDWLD.Location = New System.Drawing.Point(215, 37)
+        Me.ButtonSpectraDWLD.Name = "ButtonSpectraDWLD"
+        Me.ButtonSpectraDWLD.Size = New System.Drawing.Size(62, 25)
+        Me.ButtonSpectraDWLD.TabIndex = 3
+        Me.ButtonSpectraDWLD.Text = "OK"
+        Me.ButtonSpectraDWLD.UseVisualStyleBackColor = True
+        '
+        'LabelStatus
+        '
+        Me.LabelStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelStatus.Location = New System.Drawing.Point(518, 9)
+        Me.LabelStatus.Name = "LabelStatus"
+        Me.LabelStatus.Size = New System.Drawing.Size(147, 57)
+        Me.LabelStatus.TabIndex = 184
         '
         'Form_ElsSum
         '

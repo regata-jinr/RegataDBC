@@ -5,8 +5,6 @@ Imports Renci.SshNet
 
 Public Class Form_ElsSum
 
-
-
     Private Sub Form_ElsSum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
             sqlConnection1.Open()
