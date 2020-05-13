@@ -408,7 +408,6 @@ Public Class Form_Main
             Me.Text = $"Regata experiment data base client - {Application.ProductVersion}   {us}"
         End If
         Try
-            Form_Sample_Accept.OpenFileDialog_Fill_In_From_File.InitialDirectory = "C:\"
             CBFilter.Text = "Показать все"
 
             Using sqlConnection1 As New SqlConnection(MyConnectionString)
@@ -507,87 +506,6 @@ Public Class Form_Main
         'conn.Open()
     End Sub
 
-    Public Sub B_Select_Sample_Set_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_Sample_Set.Click
-        Try
-            Dim num As Integer
-            num = DataGridView_Sample_Set.SelectedCells.Item(0).RowIndex ' номер строки с выделенной ячейкой
-
-            If DataGridView_Sample_Set.Rows.Item(num).Cells.Item(0).Value = "" Then
-                If language = "Русский" Then
-                    MsgBox("Выберите строку!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Select row!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            DataGridView_Sample_Set.Rows.Item(num).Selected = True ' выделяем всю строку (на тот случай, если выделены одна или несколько ячеек)
-
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim reader As SqlDataReader
-            Dim cmd As New System.Data.SqlClient.SqlCommand
-            cmd.CommandType = System.Data.CommandType.Text
-
-            cmd.CommandText = "SELECT A_Sample_ID FROM dbo.table_Sample WHERE F_Country_Code='" +
-                DataGridView_Sample_Set.SelectedCells.Item(0).Value +
-                "' and F_Client_ID='" + DataGridView_Sample_Set.SelectedCells.Item(1).Value +
-                "' and F_Year='" + DataGridView_Sample_Set.SelectedCells.Item(2).Value +
-                "' and F_Sample_Set_ID='" + DataGridView_Sample_Set.SelectedCells.Item(3).Value +
-                "' and F_Sample_Set_Index='" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
-
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            Form_Samples_List.ListBox_Sample_ID.Items.Clear()
-
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then Form_Samples_List.ListBox_Sample_ID.Items.Add(reader(0))
-            End While
-            sqlConnection1.Close()
-            Form_Samples_List.ListBox_Sample_ID.SelectedIndex = Form_Samples_List.ListBox_Sample_ID.Items.Count - 1 'выделяем последний образец
-            Form_Samples_List.L_SS_Country_Code.Text = DataGridView_Sample_Set.SelectedCells.Item(0).Value
-            Form_Samples_List.L_SS_Client_ID.Text = DataGridView_Sample_Set.SelectedCells.Item(1).Value
-            Form_Samples_List.L_SS_Year.Text = DataGridView_Sample_Set.SelectedCells.Item(2).Value
-            Form_Samples_List.L_SS_Sample_Set_ID.Text = DataGridView_Sample_Set.SelectedCells.Item(3).Value
-            Form_Samples_List.L_SS_Sample_Set_Index.Text = DataGridView_Sample_Set.SelectedCells.Item(4).Value
-
-            Me.Enabled = False
-            Form_Samples_List.Show()
-
-            cmd.CommandText = "SELECT MAX(A_Sample_ID) FROM dbo.table_Sample WHERE F_Country_Code='" +
-          DataGridView_Sample_Set.SelectedCells.Item(0).Value +
-          "' and F_Client_ID='" + DataGridView_Sample_Set.SelectedCells.Item(1).Value +
-          "' and F_Year='" + DataGridView_Sample_Set.SelectedCells.Item(2).Value +
-          "' and F_Sample_Set_ID='" + DataGridView_Sample_Set.SelectedCells.Item(3).Value +
-          "' and F_Sample_Set_Index='" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
-
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            While reader.Read()
-                If IsDBNull(reader(0)) Then
-                    Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = "01"
-                ElseIf reader(0) < 9 Then
-                    Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = "0" + (reader(0) + 1).ToString
-                Else
-                    Form_Samples_List.MaskedTextBox_New_Sample_ID.Text = (reader(0) + 1).ToString
-                End If
-
-            End While
-            sqlConnection1.Close()
-
-            Form_Samples_List.L_SS_Country_Code.Text = DataGridView_Sample_Set.SelectedCells.Item(0).Value
-
-            Me.Enabled = False
-            Form_Samples_List.Show()
-
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-            Form_Samples_List.Close()
-            Me.Enabled = True
-            Exit Sub
-        End Try
-    End Sub
 
     Private Sub B_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.Close()
@@ -603,90 +521,66 @@ Public Class Form_Main
         End Try
     End Sub
 
-    Private Sub B_Search_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
+
+        Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
-            Me.Enabled = False
-            Form_Samples_Search.Show()
+            Dim SLI_Irradiation_Log As Date
+            Try
+                SLI_Irradiation_Log = MaskedTextBoxDateOfNewJournal.Text
+            Catch ex As Exception
+                LangException(language, ex.Message & ex.ToString)
+                Exit Sub
+            End Try
 
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
-            cmd.CommandText = "SELECT Country FROM dbo.Table_Country"
+            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start= convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
-            Form_Samples_Search.ComboBox_Country.Text = ""
-            Form_Samples_Search.ComboBox_Country.Items.Clear()
+
             While reader.Read()
-                If Not IsDBNull(reader(0)) Then Form_Samples_Search.ComboBox_Country.Items.Add(reader(0))
+                If reader(0) > 0 Then
+                    If language = "Русский" Then
+                        MsgBox("This SLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
+                    ElseIf language = "English" Then
+                        MsgBox("Такой журнал КЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
+                    End If
+                    sqlConnection1.Close()
+                    Exit Sub
+                End If
             End While
             sqlConnection1.Close()
-        Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
-
-        Dim ForSliLog As New Form_SLI_Irradiation_Log
-            Try
-                Dim SLI_Irradiation_Log As Date
-                Try
-                SLI_Irradiation_Log = MaskedTextBoxDateOfNewJournal.Text
-            Catch ex As Exception
-                    LangException(language, ex.Message & ex.ToString)
-                    Exit Sub
-                End Try
-
-                Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-                Dim cmd As New SqlCommand
-                Dim reader As SqlDataReader
-            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start= convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
-            cmd.Connection = sqlConnection1
-                sqlConnection1.Open()
-                reader = cmd.ExecuteReader()
-
-                While reader.Read()
-                    If reader(0) > 0 Then
-                        If language = "Русский" Then
-                            MsgBox("This SLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
-                        ElseIf language = "English" Then
-                            MsgBox("Такой журнал КЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                        End If
-                        sqlConnection1.Close()
-                        Exit Sub
-                    End If
-                End While
-                sqlConnection1.Close()
 
             ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = MaskedTextBoxDateOfNewJournal.Text
 
             ForSliLog.Show()
 
-                If language = "Русский" Then
-                    ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-                ElseIf language = "English" Then
-                    ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
-                End If
-                ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+            If language = "Русский" Then
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
+            End If
+            ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
 
-                If language = "Русский" Then
-                    ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-                ElseIf language = "English" Then
-                    ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
-                End If
-                ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+            If language = "Русский" Then
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
+            End If
+            ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
 
-                If language = "Русский" Then
-                    ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-                ElseIf language = "English" Then
-                    ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
-                End If
-                ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            If language = "Русский" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
+            End If
+            ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
 
 
-            Catch ex As Exception
+        Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub
         End Try
@@ -1642,11 +1536,6 @@ Public Class Form_Main
     Private Sub ResetLoginButton_Click(sender As Object, e As EventArgs) Handles ResetLoginButton.Click
         Extensions.PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", us, "")
         Application.Restart()
-    End Sub
-
-    Private Sub ErrorJournalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ErrorJournalToolStripMenuItem.Click
-        Dim erJ As New Extensions.NewForms.JournalOfErrors(MyConnectionString)
-        erJ.Show()
     End Sub
 
     Public firstFlag As Integer = 0

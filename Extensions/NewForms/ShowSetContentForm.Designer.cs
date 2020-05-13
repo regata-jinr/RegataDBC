@@ -1,7 +1,16 @@
-﻿namespace Extensions.NewForms
+﻿using System.Windows.Forms;
+using Regata.UITemplates;
+using System.Collections.Generic;
+using System;
+using Extensions.Models;
+
+namespace Extensions.Forms
 {
-    public partial class ShowSetContentForm
+    public partial class ShowSetContentForm : DataTableForm<Sample>
     {
+
+        private IReadOnlyDictionary<string, string> RussianLabels;
+        private IReadOnlyDictionary<string, string> EnglishLabels;
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -18,6 +27,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            _ic.Dispose();
         }
 
         #region Windows Form Designer generated code
@@ -28,11 +38,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Text = "Content of set: ";
+            DataGridView.ReadOnly = false;
+            ButtonExport = new Button();
+            ButtonExport.Name = "ButtonExport";
+            ButtonExport.Click += ExportButton_Click;
+
+            ButtonSaveToDB = new Button();
+            ButtonSaveToDB.Name = "ButtonSaveToDB";
+            ButtonSaveToDB.Click += ButtonSaveToDB_Click;
+            ButtonSaveToDB.Enabled = false;
+
+            ButtonAddSample = new Button();
+            ButtonAddSample.Name = "ButtonAddSample";
+            ButtonAddSample.Click += ButtonAddSample_Click;
+
+            Labels.AddRussianLabels(ref RussianLabels);
+            Labels.AddEnglishLabels(ref EnglishLabels);
+            AddButtonToLayout(ButtonExport);
+            AddButtonToLayout(ButtonSaveToDB);
+            AddButtonToLayout(ButtonAddSample);
+
+            HideColumnsWithIndexes(0, 1, 2, 3, 4);
+
+            DataGridView.Columns[5].ReadOnly = true;
         }
+
+     
 
         #endregion
     }

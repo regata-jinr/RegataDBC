@@ -1,15 +1,27 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class Form_Notice
+
+
+    Public Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index As String
+
     Public Sub Form_Notice_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        Me.Text = $"Комментарии к партии {Form_Samples_List.L_SS_Country_Code.Text}-{Form_Samples_List.L_SS_Client_ID.Text}-{Form_Samples_List.L_SS_Year.Text}-{Form_Samples_List.L_SS_Sample_Set_ID.Text}-{Form_Samples_List.L_SS_Sample_Set_Index.Text}"
+
+        If Form_Main.DataGridView_Sample_Set.SelectedRows.Count = 0 Then Exit Sub
+
+        Country_Code = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(0).Value
+        Client_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(1).Value
+        Year = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(2).Value
+        Sample_Set_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(3).Value
+        Sample_Set_Index = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(4).Value
+        Me.Text = $"Комментарии к партии {Country_Code}-{Client_ID}-{Year}-{Sample_Set_ID}-{Sample_Set_Index}"
 
         Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
             Using cmd As New SqlCommand
                 Dim reader As SqlDataReader
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
-                cmd.CommandText = $"select Loggs, ResCompl, LLICompl,SLICompl, PrepCompl from table_Sample_Set where Country_Code='{Form_Samples_List.L_SS_Country_Code.Text}' and Client_ID='{Form_Samples_List.L_SS_Client_ID.Text}' and Year='{Form_Samples_List.L_SS_Year.Text}' and Sample_Set_ID='{Form_Samples_List.L_SS_Sample_Set_ID.Text}' and Sample_Set_Index='{Form_Samples_List.L_SS_Sample_Set_Index.Text}'"
+                cmd.CommandText = $"select Loggs, ResCompl, LLICompl,SLICompl, PrepCompl from table_Sample_Set where Country_Code='{Country_Code}' and Client_ID='{Client_ID}' and Year='{Year}' and Sample_Set_ID='{Sample_Set_ID}' and Sample_Set_Index='{Sample_Set_Index}'"
                 Debug.WriteLine(cmd.CommandText)
                 reader = cmd.ExecuteReader()
                 reader.Read()
@@ -56,7 +68,7 @@ Public Class Form_Notice
                 Else
                     log += $"{vbCrLf}@{Form_Main.us}|{Now.ToString("dd/MM/yyyy hh:mm")}: {RichTextBoxFormNotice.Text}"
                 End If
-                cmd.CommandText = $"update table_Sample_Set set Loggs='{log}.{adds}' {queryCompleteMarker} where Country_Code='{Form_Samples_List.L_SS_Country_Code.Text}' and Client_ID='{Form_Samples_List.L_SS_Client_ID.Text}' and Year='{Form_Samples_List.L_SS_Year.Text}' and Sample_Set_ID='{Form_Samples_List.L_SS_Sample_Set_ID.Text}' and Sample_Set_Index='{Form_Samples_List.L_SS_Sample_Set_Index.Text}'"
+                cmd.CommandText = $"update table_Sample_Set set Loggs='{log}.{adds}' {queryCompleteMarker} where Country_Code='{Country_Code}' and Client_ID='{Client_ID}' and Year='{Year}' and Sample_Set_ID='{Sample_Set_ID}' and Sample_Set_Index='{Sample_Set_Index}'"
                 cmd.ExecuteNonQuery()
                 Form_Notice_Log.Text = log
                 RichTextBoxFormNotice.Clear()

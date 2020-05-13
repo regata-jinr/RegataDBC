@@ -85,6 +85,9 @@ Partial Class Form_Main
         Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -177,7 +180,7 @@ Partial Class Form_Main
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
         Me.B_Select_Sample_Set.Size = New System.Drawing.Size(90, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
-        Me.B_Select_Sample_Set.Text = "Select sample set"
+        Me.B_Select_Sample_Set.Text = "Content"
         Me.B_Select_Sample_Set.UseVisualStyleBackColor = True
         '
         'B_Physical_Environment
@@ -464,7 +467,7 @@ Partial Class Form_Main
         Me.DataGridView_Description.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView_Description.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView_Description.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cell_Color, Me.Description})
-        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 326)
+        Me.DataGridView_Description.Location = New System.Drawing.Point(6, 355)
         Me.DataGridView_Description.MultiSelect = False
         Me.DataGridView_Description.Name = "DataGridView_Description"
         Me.DataGridView_Description.ReadOnly = True
@@ -472,7 +475,7 @@ Partial Class Form_Main
         Me.DataGridView_Description.RowHeadersWidth = 21
         Me.DataGridView_Description.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView_Description.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView_Description.Size = New System.Drawing.Size(358, 176)
+        Me.DataGridView_Description.Size = New System.Drawing.Size(358, 147)
         Me.DataGridView_Description.TabIndex = 176
         '
         'Cell_Color
@@ -525,7 +528,7 @@ Partial Class Form_Main
         Me.OpenSet.Name = "OpenSet"
         Me.OpenSet.Size = New System.Drawing.Size(76, 23)
         Me.OpenSet.TabIndex = 181
-        Me.OpenSet.Text = "Просмотр"
+        Me.OpenSet.Text = "Print"
         Me.OpenSet.UseVisualStyleBackColor = True
         '
         'GBFilters
@@ -583,7 +586,7 @@ Partial Class Form_Main
         Me.ButtonshowAll.Name = "ButtonshowAll"
         Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
         Me.ButtonshowAll.TabIndex = 192
-        Me.ButtonshowAll.Text = "Показать все"
+        Me.ButtonshowAll.Text = "Show all"
         Me.ButtonshowAll.UseVisualStyleBackColor = True
         '
         'ButtonShowAllSrms
@@ -631,19 +634,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'ErrorJournalToolStripMenuItem
@@ -674,11 +677,44 @@ Partial Class Form_Main
         Me.LabelDateOfNewJournalTitle.TabIndex = 198
         Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
         '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.Button1.Location = New System.Drawing.Point(176, 326)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(90, 23)
+        Me.Button1.TabIndex = 201
+        Me.Button1.Text = "GetSpectra"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.Button2.Location = New System.Drawing.Point(94, 326)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(76, 23)
+        Me.Button2.TabIndex = 200
+        Me.Button2.Text = "Comments"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.Button3.Location = New System.Drawing.Point(4, 326)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(84, 23)
+        Me.Button3.TabIndex = 199
+        Me.Button3.Text = "NaaResults"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 761)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LabelDateOfNewJournalTitle)
         Me.Controls.Add(Me.MaskedTextBoxDateOfNewJournal)
         Me.Controls.Add(Me.ButtonShowAllSrms)
@@ -797,4 +833,7 @@ Partial Class Form_Main
     Friend WithEvents MaskedTextBoxDateOfNewJournal As MaskedTextBox
     Friend WithEvents LabelDateOfNewJournalTitle As Label
     Friend WithEvents ErrorJournalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class

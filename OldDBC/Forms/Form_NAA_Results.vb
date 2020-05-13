@@ -5,9 +5,6 @@ Imports System.IO
 Public Class Form_NAA_Results
     Public HidColumnsDict As New Dictionary(Of Integer, String)
     Public colorNames As New Dictionary(Of Integer, ClosedXML.Excel.XLColor)
-    Private Sub Form_NAA_Results_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        Form_Samples_List.Enabled = True
-    End Sub
 
     Private Sub B_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Close.Click
         Me.Close()
@@ -175,6 +172,7 @@ Public Class Form_NAA_Results
     End Sub
     Private Sub Form_NAA_Results_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If Form_Main.DataGridView_Sample_Set.SelectedRows.Count = 0 Then Exit Sub
         Try
             Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
             Dim reader As SqlDataReader
@@ -191,56 +189,48 @@ Public Class Form_NAA_Results
             End While
             sqlConnection1.Close()
 
-            If Form_Main.language = "Русский" Then
-                Me.Text = "Результаты НАА"
+            Me.Text = "Результаты НАА"
 
-                L_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Инд. парт."
+            L_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Инд. парт."
 
-                L_Name_Person.Text = "ФИО"
-
-
-                cmd.CommandText = "select distinct Обработано from NaaRes where F_Country_Code = '" & Form_Samples_List.L_SS_Country_Code.Text & "' and F_Client_ID = '" & Form_Samples_List.L_SS_Client_ID.Text & "' and F_YEAR = '" & Form_Samples_List.L_SS_Year.Text & "' and F_Sample_Set_ID = '" & Form_Samples_List.L_SS_Sample_Set_ID.Text & "' and F_Sample_Set_index = '" & Form_Samples_List.L_SS_Sample_Set_Index.Text & "'"
-
-                cmd.Connection = sqlConnection1
-                sqlConnection1.Open()
-                reader = cmd.ExecuteReader()
-                While reader.Read()
-                    If Not IsDBNull(reader(0)) Then
-                        ComboBox_Person.Text = reader(0)
-                        ComboBox_Person_SelectedValueChanged(sender, e)
-                    End If
-
-                End While
-                sqlConnection1.Close()
-
-                B_Fill_In_From_File.Text = "Заполнить из файла"
-                Clear_Table.Text = "Очистить таблицу"
-                B_Save.Text = "Сохранить в БД"
-                B_Save_Final_Report.Text = "Сохранить финальный отчёт"
-                B_Close.Text = "Закрыть"
-
-                OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-                SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "English" Then
-                Me.Text = "NAA results"
-
-                L_Name_Code.Text = "Country-Client-Year-Set ID-Set index"
-
-                L_Name_Person.Text = "Person"
-
-                B_Fill_In_From_File.Text = "Fill in from file"
-                Clear_Table.Text = "Clear table"
-                B_Save.Text = "Save into DB"
-                B_Save_Final_Report.Text = "Save final report"
-                B_Close.Text = "Close"
-
-
-                OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
-                SaveFileDialog_Final_Report.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+            L_Name_Person.Text = "ФИО"
 
 
 
-            End If
+            Dim Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index As String
+
+            Country_Code = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(0).Value
+            Client_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(1).Value
+            Year = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(2).Value
+            Sample_Set_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(3).Value
+            Sample_Set_Index = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(4).Value
+
+
+            cmd.CommandText = "select distinct Обработано from NaaRes where F_Country_Code = '" & Country_Code & "' and F_Client_ID = '" & Client_ID & "' and F_YEAR = '" & Year & "' and F_Sample_Set_ID = '" & Sample_Set_ID & "' and F_Sample_Set_index = '" & Sample_Set_Index & "'"
+
+            cmd.Connection = sqlConnection1
+            sqlConnection1.Open()
+            reader = cmd.ExecuteReader()
+            While reader.Read()
+                If Not IsDBNull(reader(0)) Then
+                    ComboBox_Person.Text = reader(0)
+                    ComboBox_Person_SelectedValueChanged(sender, e)
+                End If
+
+            End While
+            sqlConnection1.Close()
+
+            B_Fill_In_From_File.Text = "Заполнить из файла"
+            Clear_Table.Text = "Очистить таблицу"
+            B_Save.Text = "Сохранить в БД"
+            B_Save_Final_Report.Text = "Сохранить финальный отчёт"
+            B_Close.Text = "Закрыть"
+
+            OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+            SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+
+
+
         Catch ex As Exception
             MsgBox(ex.ToString)
             If Form_Main.language = "Русский" Then

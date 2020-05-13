@@ -1,15 +1,49 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.Drawing.Text;
+using System;
 
 namespace Extensions.Models
 {
     [Table("table_Sample")]
-    public class Sample
+    public class Sample : INotifyPropertyChanged, ICloneable
     {
+        public override string ToString() => $"{F_Country_Code}-{F_Client_Id}-{F_Year}-{F_Sample_Set_Id}-{F_Sample_Set_Index}";
+        public Sample() { }
+
+        public Sample(string setKey)
+        {
+            var sk = setKey.Split('-');
+
+            // TODO: add exception to wrong key, cover by test!
+            F_Country_Code = sk[0];
+            F_Client_Id = sk[1];
+            F_Year = sk[2];
+            F_Sample_Set_Id = sk[3];
+            F_Sample_Set_Index = sk[4];
+
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        private string _CountryCode;
+
         [Ignore]
         [Key]
-        public string F_Country_Code        { get; set; }
+        public string F_Country_Code
+        {
+            get { return _CountryCode; }
+            set
+            {
+                _CountryCode = value;
+                NotifyPropertyChanged("CountryCode");
+            }
+        }
         [Ignore]
         [Key]
         public string F_Client_Id           { get; set; }
@@ -59,6 +93,14 @@ namespace Extensions.Models
         public float P_Weighting_SLI        { get; set; }
         [Ignore]
         public float P_Weighting_LLI        { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string PropName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(PropName));
+        }
     }
 }
 
