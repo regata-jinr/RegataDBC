@@ -6,22 +6,15 @@ using Regata.UITemplates;
 using System.Net;
 using System.IO;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using CsvHelper;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.Internal;
 using Extensions.Models;
 
-namespace Extensions.Forms
+namespace Extensions.NewForms
 {
-    // TODO: seems from time to time settings file resets
-    // TODO: add exceptions for wrong key, parsing error, save to db error
     // TODO: add listbox to type and subtype
     // TODO: in case of type is other subtype can't be empty
-    // TODO: add exceptions and cancelling to async methods
-    // TODO: in case of existing value was update in dgv: save button enabled and update instead savechanges.
-    // TODO: add saving to db and getting saving status
-    // TODO: looks like range query doesn't work. see csv file
     // TODO: add tests
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
@@ -35,45 +28,36 @@ namespace Extensions.Forms
         private Button ButtonAddSample;
         private readonly InfoContext _ic;
 
-        public ShowSetContentForm(string ConString, string setKey) : base("TestAssembly")
+        public ShowSetContentForm(string ConString, string setKey) : base("WinFormFlow")
         {
             SetKey = setKey;
-            RussianLabels = new Dictionary<string, string>() {
-                { "ButtonExport", $"Экспорт из {Environment.NewLine} GoogleSheet" },
-                { "ButtonSaveToDB", "Сохранить" },
-                { "ButtonAddSample", "Добавить образец" },
-                { "FormText", $"Просмотр партии - {SetKey}" },
-                { "MoreThan99Message", "В партии должно быть не более 99 образцов!"},
-                { "ExportCancelledByTimeout", "Экспортирование было отменено по таймауту. Проверьте соединение с интернетом."},
-                { "SuccessExport", "Экспортирование успешно завершено"}
-            };
-
-            EnglishLabels = new Dictionary<string, string>() {
-                { "ButtonExport", $"Export from {Environment.NewLine} GoogleSheet" },
-                { "ButtonSaveToDB", "Save" },
-                { "ButtonAddSample", "Add sample" },
-                { "FormText", $"Set content - {SetKey}" },
-                { "MoreThan99Message", "Set can't contain more than 99 samples!"},
-                { "ExportCancelledByTimeout", "Export has cancelled by timeout. Check internet connection."},
-                { "SuccessExport", "Export has done"}
-           };
 
             InitializeComponent();
 
-            var lst = new List<Sample>();
-
             var sk = setKey.Split('-');
+            var lst = new List<Sample>();
             _ic = new InfoContext(ConString);
             lst = _ic.Samples.Where(s => s.F_Country_Code == sk[0] && s.F_Client_Id == sk[1] && s.F_Year == sk[2] && s.F_Sample_Set_Id == sk[3] && s.F_Sample_Set_Index == sk[4]).ToList();
 
-            Data.ListChanged += Data_ListChanged;
-
+            DataGridView.CellValueChanged += DataGridView_CellValueChanged;
+            DataGridView.RowsAdded += DataGridView_RowsAdded;
             DataGridView.ColumnHeaderMouseDoubleClick += DataGridView_ColumnHeaderMouseDoubleClick;
 
             foreach (var l in lst)
                 Data.Add(l);
 
             ButtonSaveToDB.Enabled = false;
+            HideColumnsWithIndexes(0, 1, 2, 3, 4);
+        }
+
+        private void DataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            ButtonSaveToDB.Enabled = true;
+        }
+
+        private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            ButtonSaveToDB.Enabled = true;
         }
 
         private void DataGridView_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -102,41 +86,58 @@ namespace Extensions.Forms
             DataGridView.ClearSelection();
         }
 
-        private void Data_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            ButtonSaveToDB.Enabled = true;
-        }
-
         private async void ButtonSaveToDB_Click(object sender, EventArgs e)
         {
-            FooterStatusLabel.Text = "Сохранение данных в базу...";
-            await _ic.Samples.AddRangeAsync(Data);
-            await _ic.SaveChangesAsync();
-            ButtonSaveToDB.Enabled = false;
-            FooterStatusLabel.Text = "Сохранение успешно завершено";
+            FooterStatusProgressBar.Value = 0;
+            var _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(TimeOutSeconds));
+            try
+            {
+                ButtonSaveToDB.Enabled = false;
+                FooterStatusLabel.Text = Labels.GetLabel("InitSavingToDb");
+                await _ic.SaveChangesAsync(_cancellationTokenSource.Token);
+                FooterStatusLabel.Text = Labels.GetLabel("SavedToDbSuccessfuly");
+                FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
+            }
+            catch (OperationCanceledException)
+            {
+                FooterStatusLabel.Text = Labels.GetLabel("ExportCancelledByTimeout");
+            }
+            finally
+            {
+                ButtonSaveToDB.Enabled = true;
+                _cancellationTokenSource.Dispose();
+            }
         }
 
 
         private async void ExportButton_Click(object sender, EventArgs e)
         {
             FooterStatusProgressBar.Value = 0;
-            FooterStatusLabel.Text = "Экспортирование файла...";
-            Data.Clear();
-            ButtonExport.Enabled = false;
-            var result = "";
-            using (Prompt prompt = new Prompt($"Вставьте ссылку на таблицу Google.{Environment.NewLine}Убедитесь, что файл доступен для просмотра по ссылке.", "Export from Google Sheets"))
+            FooterStatusLabel.Text = Labels.GetLabel("InitialExport");
+
+            if (Data.Any())
             {
-                 result = prompt.Result;
+                var res = MessageBox.Show(Labels.GetLabel("DeleteFromDB"), Labels.GetLabel("HelpCaptionPromt"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.No) return;
+                _ic.Samples.RemoveRange(Data);
+            }
+
+            Data.Clear();
+            var result = "";
+            using (Prompt prompt = new Prompt(Labels.GetLabel("HelpMessagePromt"), Labels.GetLabel("HelpCaptionPromt")))
+            {
+                result = prompt.Result;
             }
             if (string.IsNullOrEmpty(result))
             {
                 FooterStatusLabel.Text = "";
                 return;
             }
+            ButtonExport.Enabled = false;
 
             var key = new Uri(result).AbsolutePath.Split('/')[3];
-            //string[5] { "", "spreadsheets", "d", "17CWptecsNCGHx8mrKkLKmVXxDmZWXasNoyziAqNKWd4", "edit" }
-            var link = $"https://docs.google.com/spreadsheets/d/{key}/gviz/tq?tqx=out:csv&sheet=SamplesList$range=A:H";
+            var link = $"https://docs.google.com/spreadsheets/d/{key}/gviz/tq?tqx=out:csv&sheet=SamplesList";
             var csvFile = $"{System.IO.Path.GetDirectoryName(SettingsPath)}\\{SetKey}.csv";
 
             var _cancellationTokenSource = new CancellationTokenSource();
@@ -159,16 +160,20 @@ namespace Extensions.Forms
                     Data.Add(l);
                     FooterStatusProgressBar.Value++;
                 }
-                Data_ListChanged(null, null);
                 FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
-                ButtonExport.Enabled = true;
                 FooterStatusLabel.Text = Labels.GetLabel("SuccessExport");
+                await _ic.Samples.AddRangeAsync(Data);
+                //await _ic.SaveChangesAsync();
             }
             catch (OperationCanceledException)
             {
                 FooterStatusLabel.Text = Labels.GetLabel("ExportCancelledByTimeout");
             }
-
+            finally
+            {
+                ButtonExport.Enabled = true;
+                _cancellationTokenSource.Dispose();
+            }
         }
 
         private async Task<Sample[]> ProcessFile(string link, string file, CancellationToken ct)
@@ -196,11 +201,6 @@ namespace Extensions.Forms
             }, ct);
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            _ic.SaveChanges();
-        }
-
         private void ButtonAddSample_Click(object sender, System.EventArgs e)
         {
             var newSamp = new Sample(SetKey);
@@ -220,7 +220,7 @@ namespace Extensions.Forms
                 newSamp.A_Sample_ID = "01";
             }
             Data.Add(newSamp);
-            Data_ListChanged(null, null);
+            _ic.Samples.Add(newSamp);
         }
     }
 }
