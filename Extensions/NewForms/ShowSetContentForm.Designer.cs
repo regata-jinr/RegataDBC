@@ -94,8 +94,6 @@ namespace Extensions.NewForms
             DataGridView.Columns[5].ReadOnly = true;
         }
 
-     
-
         #endregion
     }
 }

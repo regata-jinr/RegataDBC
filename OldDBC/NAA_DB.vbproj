@@ -328,6 +328,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UITemplatesWinForm">
+      <HintPath>..\..\Libs\UITemplatesWinForm\bin\Release\net48\UITemplatesWinForm.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

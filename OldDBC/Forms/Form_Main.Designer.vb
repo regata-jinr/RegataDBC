@@ -104,7 +104,7 @@ Partial Class Form_Main
         Me.B_NewSampleSetIDAccept.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(6, 297)
         Me.B_NewSampleSetIDAccept.Name = "B_NewSampleSetIDAccept"
-        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(119, 23)
+        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(110, 23)
         Me.B_NewSampleSetIDAccept.TabIndex = 0
         Me.B_NewSampleSetIDAccept.Text = "Добавить партию"
         Me.B_NewSampleSetIDAccept.UseVisualStyleBackColor = True
@@ -524,9 +524,9 @@ Partial Class Form_Main
         'OpenSet
         '
         Me.OpenSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.OpenSet.Location = New System.Drawing.Point(227, 297)
+        Me.OpenSet.Location = New System.Drawing.Point(236, 297)
         Me.OpenSet.Name = "OpenSet"
-        Me.OpenSet.Size = New System.Drawing.Size(137, 23)
+        Me.OpenSet.Size = New System.Drawing.Size(128, 23)
         Me.OpenSet.TabIndex = 181
         Me.OpenSet.Text = "Список для облучения"
         Me.OpenSet.UseVisualStyleBackColor = True
@@ -582,11 +582,11 @@ Partial Class Form_Main
         'ButtonshowAll
         '
         Me.ButtonshowAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonshowAll.Location = New System.Drawing.Point(131, 297)
+        Me.ButtonshowAll.Location = New System.Drawing.Point(119, 297)
         Me.ButtonshowAll.Name = "ButtonshowAll"
-        Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
+        Me.ButtonshowAll.Size = New System.Drawing.Size(114, 23)
         Me.ButtonshowAll.TabIndex = 192
-        Me.ButtonshowAll.Text = "Показать все"
+        Me.ButtonshowAll.Text = "Сбросить фильтры"
         Me.ButtonshowAll.UseVisualStyleBackColor = True
         '
         'ButtonShowAllSrms
@@ -634,19 +634,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'ErrorJournalToolStripMenuItem

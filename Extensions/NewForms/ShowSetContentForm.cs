@@ -221,5 +221,6 @@ namespace Extensions.NewForms
             Data.Add(newSamp);
             _ic.Samples.Add(newSamp);
         }
+
     }
 }

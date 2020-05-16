@@ -1222,8 +1222,8 @@ Public Class Form_Main
                 DataGridView_Sample_Set.Columns.Item(4).HeaderText = "инд. партии образ."
                 ' DataGridView_Sample_Set.Columns.Item(5).HeaderText = "Кол-во образцов"
                 B_NewSampleSetIDAccept.Text = "Приём новой партии образцов"
-                B_Select_Sample_Set.Text = "Выбрать партию образцов"
-                OpenSet.Text = "Просмотр партии"
+                B_Select_Sample_Set.Text = "Образцы"
+                OpenSet.Text = "Список для облучения"
                 L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
 
                 L_Name_SLI_Irradiation_Log.Text = "Журналы облучения КЖИ"
@@ -1272,7 +1272,7 @@ Public Class Form_Main
                 DataGridView_Sample_Set.Columns.Item(3).HeaderText = "Samle set ID"
                 DataGridView_Sample_Set.Columns.Item(4).HeaderText = "Samle set index"
                 B_NewSampleSetIDAccept.Text = "New sample set acceptance"
-                B_Select_Sample_Set.Text = "Select sample set"
+                B_Select_Sample_Set.Text = "Samples"
 
                 L_Name_Sample_Set_View.Text = "Choose type of" & vbCrLf & "filter"
 
@@ -1285,7 +1285,7 @@ Public Class Form_Main
                 ComboBox_Journal_Of_Irradiation_View.Items.Clear()
                 ComboBox_Journal_Of_Irradiation_View.Items.Add("Current year")
                 ComboBox_Journal_Of_Irradiation_View.Items.Add("All time")
-                OpenSet.Text = "Viewing set"
+                OpenSet.Text = "Print irr. list"
                 ButtonShowAllSrms.Text = "Show all SRMs"
                 L_Name_SRM_Set.Text = "SRM sets"
                 Table_SRM_SetDataGridView.Columns.Item(0).HeaderText = "Name"
@@ -1536,6 +1536,102 @@ Public Class Form_Main
     Private Sub ResetLoginButton_Click(sender As Object, e As EventArgs) Handles ResetLoginButton.Click
         Extensions.PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", us, "")
         Application.Restart()
+    End Sub
+
+    Private Sub B_Select_Sample_Set_Click(sender As Object, e As EventArgs) Handles B_Select_Sample_Set.Click
+        If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
+
+        Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(MyConnectionString, String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
+        showcontentform.Show()
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Try
+            If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
+            If DataGridView_Description.Rows(0).Cells(0).Value = 0 Then
+                If language = "Русский" Then
+                    MsgBox("Партия образцов не содержит ни одного образца. Выберите другую партию!", MsgBoxStyle.Exclamation, Me.Text)
+                ElseIf language = "English" Then
+                    MsgBox("This sample set has not any sample. Select another sample set!", MsgBoxStyle.Exclamation, Me.Text)
+                End If
+                Exit Sub
+            End If
+
+            Form_NAA_Results.Show()
+
+            Dim L_SS_Country_Code As String = DataGridView_Sample_Set.SelectedCells(0).Value
+            Dim L_SS_Client_ID As String = DataGridView_Sample_Set.SelectedCells(1).Value
+            Dim L_SS_Year As String = DataGridView_Sample_Set.SelectedCells(2).Value
+            Dim L_SS_Sample_Set_ID As String = DataGridView_Sample_Set.SelectedCells(3).Value
+            Dim L_SS_Sample_Set_Index As String = DataGridView_Sample_Set.SelectedCells(4).Value
+
+            Form_NAA_Results.L_SS_Country_Code.Text = L_SS_Country_Code
+            Form_NAA_Results.L_SS_Client_ID.Text = L_SS_Client_ID
+            Form_NAA_Results.L_SS_Year.Text = L_SS_Year
+            Form_NAA_Results.L_SS_Sample_Set_ID.Text = L_SS_Sample_Set_ID
+            Form_NAA_Results.L_SS_Sample_Set_Index.Text = L_SS_Sample_Set_Index
+
+            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+            Dim cmd As New System.Data.SqlClient.SqlCommand
+            cmd.CommandType = System.Data.CommandType.Text
+            cmd.CommandText = "select * from NaaRes where F_Country_Code = '" & L_SS_Country_Code & "' and F_Client_ID = '" & L_SS_Client_ID & "' and F_Year = '" & L_SS_Year & "' and F_Sample_Set_Id = '" & L_SS_Sample_Set_ID & "' and F_Sample_Set_Index = '" & L_SS_Sample_Set_Index & "'"
+
+            Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+            Dim ds As New DataSet()
+
+
+            dataadapter.Fill(ds, "SampleInf")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = False
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataSource = ds
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataMember = "SampleInf"
+
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Country_Code")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Client_ID")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Year")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Id")
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Index")
+
+            For k As Integer = 0 To 6
+                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).Frozen = True
+                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).ReadOnly = True
+            Next
+
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(5).ReadOnly = False
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.AllowUserToAddRows = False
+
+            Dim inum As Integer = 1
+            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = True
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)
+            If language = "Русский" Then
+                MsgBox("Операция была отменена (ошибка в B_NAA_Results_Click)!", MsgBoxStyle.Critical, Me.Text)
+            ElseIf language = "English" Then
+                MsgBox("The operation was cancelled (error in B_NAA_Results_Click)!", MsgBoxStyle.Critical, Me.Text)
+            End If
+            Form_NAA_Results.Close()
+            Exit Sub
+        End Try
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Form_Notice.Show()
+        Dim L_SS_Country_Code As String = DataGridView_Sample_Set.SelectedCells(0).Value
+        Dim L_SS_Client_ID As String = DataGridView_Sample_Set.SelectedCells(1).Value
+        Dim L_SS_Year As String = DataGridView_Sample_Set.SelectedCells(2).Value
+        Dim L_SS_Sample_Set_ID As String = DataGridView_Sample_Set.SelectedCells(3).Value
+        Dim L_SS_Sample_Set_Index As String = DataGridView_Sample_Set.SelectedCells(4).Value
+        Dim sqlConnection1 As New SqlConnection(MyConnectionString)
+        Dim cmd As New SqlCommand
+        Dim reader As SqlDataReader
+        cmd.CommandText = "select Note from table_Sample_Set where Country_Code = '" & L_SS_Country_Code & "' and Client_ID = '" & L_SS_Client_ID & "' and Year = '" & L_SS_Year & "' and Sample_Set_Id = '" & L_SS_Sample_Set_ID & "' and Sample_Set_Index = '" & L_SS_Sample_Set_Index & "'"
+        cmd.Connection = sqlConnection1
+        sqlConnection1.Open()
+        reader = cmd.ExecuteReader()
+        reader.Read()
+        Form_Notice.RichTextBoxFormNotice.Text = reader(0)
+        sqlConnection1.Close()
     End Sub
 
     Public firstFlag As Integer = 0
