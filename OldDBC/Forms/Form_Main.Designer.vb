@@ -102,11 +102,11 @@ Partial Class Form_Main
         'B_NewSampleSetIDAccept
         '
         Me.B_NewSampleSetIDAccept.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(4, 297)
+        Me.B_NewSampleSetIDAccept.Location = New System.Drawing.Point(6, 297)
         Me.B_NewSampleSetIDAccept.Name = "B_NewSampleSetIDAccept"
-        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(84, 23)
+        Me.B_NewSampleSetIDAccept.Size = New System.Drawing.Size(119, 23)
         Me.B_NewSampleSetIDAccept.TabIndex = 0
-        Me.B_NewSampleSetIDAccept.Text = "New sample set acceptance"
+        Me.B_NewSampleSetIDAccept.Text = "Добавить партию"
         Me.B_NewSampleSetIDAccept.UseVisualStyleBackColor = True
         '
         'DataGridViewTextBoxColumn1
@@ -176,11 +176,11 @@ Partial Class Form_Main
         'B_Select_Sample_Set
         '
         Me.B_Select_Sample_Set.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(272, 297)
+        Me.B_Select_Sample_Set.Location = New System.Drawing.Point(6, 326)
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
-        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(90, 23)
+        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(76, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
-        Me.B_Select_Sample_Set.Text = "Content"
+        Me.B_Select_Sample_Set.Text = "Образцы"
         Me.B_Select_Sample_Set.UseVisualStyleBackColor = True
         '
         'B_Physical_Environment
@@ -524,11 +524,11 @@ Partial Class Form_Main
         'OpenSet
         '
         Me.OpenSet.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.OpenSet.Location = New System.Drawing.Point(94, 297)
+        Me.OpenSet.Location = New System.Drawing.Point(227, 297)
         Me.OpenSet.Name = "OpenSet"
-        Me.OpenSet.Size = New System.Drawing.Size(76, 23)
+        Me.OpenSet.Size = New System.Drawing.Size(137, 23)
         Me.OpenSet.TabIndex = 181
-        Me.OpenSet.Text = "Print"
+        Me.OpenSet.Text = "Список для облучения"
         Me.OpenSet.UseVisualStyleBackColor = True
         '
         'GBFilters
@@ -582,11 +582,11 @@ Partial Class Form_Main
         'ButtonshowAll
         '
         Me.ButtonshowAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ButtonshowAll.Location = New System.Drawing.Point(176, 297)
+        Me.ButtonshowAll.Location = New System.Drawing.Point(131, 297)
         Me.ButtonshowAll.Name = "ButtonshowAll"
         Me.ButtonshowAll.Size = New System.Drawing.Size(90, 23)
         Me.ButtonshowAll.TabIndex = 192
-        Me.ButtonshowAll.Text = "Show all"
+        Me.ButtonshowAll.Text = "Показать все"
         Me.ButtonshowAll.UseVisualStyleBackColor = True
         '
         'ButtonShowAllSrms
@@ -634,19 +634,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'ErrorJournalToolStripMenuItem
@@ -684,27 +684,27 @@ Partial Class Form_Main
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(90, 23)
         Me.Button1.TabIndex = 201
-        Me.Button1.Text = "GetSpectra"
+        Me.Button1.Text = "Спектры"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
         Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button2.Location = New System.Drawing.Point(94, 326)
+        Me.Button2.Location = New System.Drawing.Point(272, 326)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(76, 23)
+        Me.Button2.Size = New System.Drawing.Size(92, 23)
         Me.Button2.TabIndex = 200
-        Me.Button2.Text = "Comments"
+        Me.Button2.Text = "Комментарии"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
         Me.Button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button3.Location = New System.Drawing.Point(4, 326)
+        Me.Button3.Location = New System.Drawing.Point(88, 326)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(84, 23)
+        Me.Button3.Size = New System.Drawing.Size(82, 23)
         Me.Button3.TabIndex = 199
-        Me.Button3.Text = "NaaResults"
+        Me.Button3.Text = "Результаты"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Form_Main

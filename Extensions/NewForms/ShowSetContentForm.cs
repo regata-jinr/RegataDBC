@@ -8,7 +8,6 @@ using System.IO;
 using System.Threading.Tasks;
 using CsvHelper;
 using System.Threading;
-using Microsoft.EntityFrameworkCore.Internal;
 using Extensions.Models;
 
 namespace Extensions.NewForms
@@ -64,7 +63,7 @@ namespace Extensions.NewForms
         {
             if (DataGridView.Columns[e.ColumnIndex].ValueType != typeof(bool)) return;
 
-            if (!DataGridView.SelectedCells.Any())
+            if (DataGridView.SelectedCells.Count == 0)
             {
                 foreach (DataGridViewRow row in DataGridView.Rows)
                 {

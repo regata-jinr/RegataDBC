@@ -72,7 +72,7 @@ Public Class Form_Login
             sqlConnection1.Open()
             sqlConnection1.Close()
             Form_Main.Show()
-            Me.Hide()
+            Me.Close()
         Catch sqlEx As SqlException
             Debug.WriteLine(sqlEx.ToString)
             MsgBox("Неправильное имя пользователя или пароль.", MsgBoxStyle.Critical)

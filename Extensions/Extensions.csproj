@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="UITemplatesWinForm">
-      <HintPath>..\..\Libs\UITemplatesWinForm\bin\Debug\netcoreapp3.1\UITemplatesWinForm.dll</HintPath>
+      <HintPath>..\..\Libs\UITemplatesWinForm\bin\Debug\net48\UITemplatesWinForm.dll</HintPath>
     </Reference>
   </ItemGroup>
 
