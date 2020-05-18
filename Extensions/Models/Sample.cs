@@ -8,7 +8,7 @@ using System;
 namespace Extensions.Models
 {
     [Table("table_Sample")]
-    public class Sample : INotifyPropertyChanged, ICloneable
+    public class Sample : ICloneable
     {
         public override string ToString() => $"{F_Country_Code}-{F_Client_Id}-{F_Year}-{F_Sample_Set_Id}-{F_Sample_Set_Index}";
         public Sample() { }
@@ -31,19 +31,9 @@ namespace Extensions.Models
             return this.MemberwiseClone();
         }
 
-        private string _CountryCode;
-
         [Ignore]
         [Key]
-        public string F_Country_Code
-        {
-            get { return _CountryCode; }
-            set
-            {
-                _CountryCode = value;
-                NotifyPropertyChanged("CountryCode");
-            }
-        }
+        public string F_Country_Code        { get; set; }
         [Ignore]
         [Key]
         public string F_Client_Id           { get; set; }
@@ -94,13 +84,6 @@ namespace Extensions.Models
         [Ignore]
         public float P_Weighting_LLI        { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(string PropName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropName));
-        }
     }
 }
 

@@ -13,40 +13,89 @@ using Extensions.Models;
 namespace Extensions.NewForms
 {
     // TODO: add listbox to type and subtype
+    // TODO: change column indexes to names
+    // TODO: menuitem of checkbox reresent typy and subtype of last sample
     // TODO: in case of type is other subtype can't be empty
+    // TODO: how to check it? before saving or during exporting?
+    // TODO: what if in db create talbe LangDBC that contains keys - name of controls and rus and eng translation?
     // TODO: add tests
+    // TODO: change translation base to db
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
     {
         public readonly string SetKey;
-
         private const int TimeOutSeconds = 5;
-
-        private Button ButtonExport;
-        private Button ButtonSaveToDB;
-        private Button ButtonAddSample;
         private readonly InfoContext _ic;
+        private readonly string[] _types;
 
         public ShowSetContentForm(string ConString, string setKey) : base("WinFormFlow")
         {
             SetKey = setKey;
+            _ic = new InfoContext(ConString);
+            _types = _ic.Types.Select(t => t.Type).Distinct().ToArray();
 
             InitializeComponent();
 
             var sk = setKey.Split('-');
-            var lst = new List<Sample>();
-            _ic = new InfoContext(ConString);
-            lst = _ic.Samples.Where(s => s.F_Country_Code == sk[0] && s.F_Client_Id == sk[1] && s.F_Year == sk[2] && s.F_Sample_Set_Id == sk[3] && s.F_Sample_Set_Index == sk[4]).ToList();
+            var lst = _ic.Samples.Where(s => s.F_Country_Code == sk[0] && s.F_Client_Id == sk[1] && s.F_Year == sk[2] && s.F_Sample_Set_Id == sk[3] && s.F_Sample_Set_Index == sk[4]).ToList();
 
             DataGridView.CellValueChanged += DataGridView_CellValueChanged;
             DataGridView.RowsAdded += DataGridView_RowsAdded;
             DataGridView.ColumnHeaderMouseDoubleClick += DataGridView_ColumnHeaderMouseDoubleClick;
+            Load += ShowSetContentForm_Load;
 
             foreach (var l in lst)
                 Data.Add(l);
 
             ButtonSaveToDB.Enabled = false;
             HideColumnsWithIndexes(0, 1, 2, 3, 4);
+        }
+
+        private void MenuItemMenuTypes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!Data.Any()) return;
+
+            var curItem = sender as ToolStripMenuItem;
+            if (!curItem.Checked) return;
+
+            var ListOfSampleTypes = new List<DataGridViewCell>();
+
+
+            if (DataGridView.SelectedCells.Count == 0)
+            {
+                ListOfSampleTypes.Add(DataGridView.Rows[DataGridView.Rows.GetLastRow(DataGridViewElementStates.None)].Cells["A_Sample_Type"]);
+            }
+            else
+            {
+                foreach (DataGridViewCell cell in DataGridView.SelectedCells)
+                {
+                    if (cell.OwningColumn.Name != "A_Sample_Type") continue;
+                    ListOfSampleTypes.Add(cell);
+                }
+            }
+
+
+            foreach (ToolStripMenuItem tm in MenuItemMenuType.DropDownItems)
+            {
+                if (tm.Name == curItem.Name)
+                {
+                    if (curItem.Checked)
+                    {
+                        foreach (var cell in ListOfSampleTypes)
+                            cell.Value = curItem.Name;
+                    }
+                    continue;
+                }
+                tm.Checked = false;
+            }
+        }
+
+        private async void ShowSetContentForm_Load(object sender, EventArgs e)
+        {
+            await GenerateTypeAndSubTypeMenuItems();
+            ChangeLanguageOfControlsTexts(Controls);
+            MatchType();
+            DataGridView.ClearSelection();
         }
 
         private void DataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
