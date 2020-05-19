@@ -3,7 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 
-namespace Extensions.Classes
+namespace Extensions
 {
     public static class MessageBoxTemplates
     {

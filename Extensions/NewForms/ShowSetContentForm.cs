@@ -3,23 +3,21 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Regata.UITemplates;
-using System.Net;
-using System.IO;
-using System.Threading.Tasks;
-using CsvHelper;
 using System.Threading;
 using Extensions.Models;
 
 namespace Extensions.NewForms
 {
-    // TODO: add listbox to type and subtype
-    // TODO: change column indexes to names
-    // TODO: menuitem of checkbox reresent typy and subtype of last sample
-    // TODO: in case of type is other subtype can't be empty
-    // TODO: how to check it? before saving or during exporting?
-    // TODO: what if in db create talbe LangDBC that contains keys - name of controls and rus and eng translation?
     // TODO: add tests
+    // TODO: add data validation. e.g in case of longitude or latitude length more than 10, but required 9.
+    // TODO: add exception handling for saving data to db
+    // TODO: add link to template in shared place? Menu? Copy link for template file to clipboard
+    // TODO: change column indexes to names
     // TODO: change translation base to db
+    // TODO: what if in db create talbe LangDBC that contains keys - name of controls and rus and eng translation?
+    // TODO: subtype mechanic the same as type, but depends on it. in case of some type has chosen subtype filled.
+    // TODO: in case of type is other subtype can't be empty or notes? it will crash changes for existed samples
+    // TODO: how to check it? before saving or during exporting?
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
     {
@@ -177,6 +175,7 @@ namespace Extensions.NewForms
             {
                 result = prompt.Result;
             }
+
             if (string.IsNullOrEmpty(result))
             {
                 FooterStatusLabel.Text = "";
@@ -184,8 +183,6 @@ namespace Extensions.NewForms
             }
             ButtonExport.Enabled = false;
 
-            var key = new Uri(result).AbsolutePath.Split('/')[3];
-            var link = $"https://docs.google.com/spreadsheets/d/{key}/gviz/tq?tqx=out:csv&sheet=SamplesList";
             var csvFile = $"{System.IO.Path.GetDirectoryName(SettingsPath)}\\{SetKey}.csv";
 
             var _cancellationTokenSource = new CancellationTokenSource();
@@ -193,7 +190,7 @@ namespace Extensions.NewForms
 
             try
             {
-                var samples = await ProcessFile(link, csvFile, _cancellationTokenSource.Token);
+                var samples = await Exporter.ProcessFile(result, csvFile, _cancellationTokenSource.Token);
 
                 FooterStatusProgressBar.Maximum = samples.Length;
                 foreach (var l in samples)
@@ -213,9 +210,20 @@ namespace Extensions.NewForms
                 await _ic.Samples.AddRangeAsync(Data);
                 //await _ic.SaveChangesAsync();
             }
+            catch (NullReferenceException nre)
+            {
+                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception=nre, Level = ExceptionLevel.Error });
+            }
             catch (OperationCanceledException)
             {
                 FooterStatusLabel.Text = Labels.GetLabel("ExportCancelledByTimeout");
+            }
+            catch (AggregateException ae)
+            {
+                foreach (var ie in ae.InnerExceptions)
+                {
+                    Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
+                }
             }
             finally
             {
@@ -224,30 +232,7 @@ namespace Extensions.NewForms
             }
         }
 
-        private async Task<Sample[]> ProcessFile(string link, string file, CancellationToken ct)
-        {
-            return await Task.Run(() =>
-            {
-                    using (var client = new WebClient())
-                    {
-                        client.DownloadFile(link, file);
-                    }
-
-                    List<Sample> samples = null;
-                    using (var reader = new StreamReader(file))
-                    {
-                        using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture))
-                        {
-                            csv.Configuration.HasHeaderRecord = true;
-                            csv.Configuration.Delimiter = ",";
-                            csv.Configuration.BadDataFound = null;
-
-                            samples = new List<Sample>(csv.GetRecords<Sample>());
-                        }
-                    }
-                    return samples.ToArray();
-            }, ct);
-        }
+      
 
         private void ButtonAddSample_Click(object sender, System.EventArgs e)
         {

@@ -1541,9 +1541,12 @@ Public Class Form_Main
     Private Sub B_Select_Sample_Set_Click(sender As Object, e As EventArgs) Handles B_Select_Sample_Set.Click
         If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
 
-        Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(MyConnectionString, String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
-        showcontentform.Show()
-
+        Try
+            Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(MyConnectionString, String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
+            showcontentform.Show()
+        Catch ex As Exception
+            LangException(language, ex.Message & ex.ToString)
+        End Try
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -1737,7 +1740,6 @@ Public Class Form_Main
                 DataGridView_Sample_Set.Focus()
             End If
         Catch ex As Exception
-
             LangException(language, ex.Message & ex.ToString)
         End Try
 
