@@ -9,6 +9,13 @@ using Extensions.Models;
 namespace Extensions.NewForms
 {
     // TODO: add tests
+    // TODO: access right. users without inspector roles should jst view the table
+    // TODO: close form in case of app has closed
+    // TODO: add exporting from excel
+    // TODO: move export buttons to menu
+    // TODO: in case of other type has been chosen in excel or gs show warning that note must be filled
+    // TODO: increase font for setkey in window title or add label in right empty field of buttonlayoutpanel
+    // TODO: move save button to the end of the list
     // TODO: add data validation. e.g in case of longitude or latitude length more than 10, but required 9.
     // TODO: add exception handling for saving data to db
     // TODO: add link to template in shared place? Menu? Copy link for template file to clipboard
@@ -73,7 +80,7 @@ namespace Extensions.NewForms
             }
 
 
-            foreach (ToolStripMenuItem tm in MenuItemMenuType.DropDownItems)
+            foreach (ToolStripMenuItem tm in MenuItemType.DropDownItems)
             {
                 if (tm.Name == curItem.Name)
                 {
@@ -157,7 +164,7 @@ namespace Extensions.NewForms
         }
 
 
-        private async void ExportButton_Click(object sender, EventArgs e)
+        private async void ExportFromGoogleButton_Click(object sender, EventArgs e)
         {
             FooterStatusProgressBar.Value = 0;
             FooterStatusLabel.Text = Labels.GetLabel("InitialExport");
@@ -181,7 +188,6 @@ namespace Extensions.NewForms
                 FooterStatusLabel.Text = "";
                 return;
             }
-            ButtonExport.Enabled = false;
 
             var csvFile = $"{System.IO.Path.GetDirectoryName(SettingsPath)}\\{SetKey}.csv";
 
@@ -227,7 +233,6 @@ namespace Extensions.NewForms
             }
             finally
             {
-                ButtonExport.Enabled = true;
                 _cancellationTokenSource.Dispose();
             }
         }

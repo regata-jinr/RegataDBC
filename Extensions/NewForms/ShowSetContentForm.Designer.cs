@@ -31,18 +31,20 @@ namespace Extensions.NewForms
             _ic.Dispose();
         }
 
-        private Button ButtonExport;
         private Button ButtonSaveToDB;
         private Button ButtonAddSample;
         private Button ButtonClearSelection;
-        private ToolStripMenuItem MenuItemMenuType;
+        private ToolStripMenuItem MenuItemType;
+        private ToolStripMenuItem MenuItemMenuCopyLinkToClip;
+        private ToolStripMenuItem MenuItemMenuExportFromGoogle;
+        private ToolStripMenuItem MenuItemMenuExportFromExcel;
         //private ToolStripMenuItem MenuItemMenuSubType;
 
 
         private async Task GenerateTypeAndSubTypeMenuItems()
         {
 
-            FillTypeMenu(ref MenuItemMenuType, _types);
+            FillTypeMenu(ref MenuItemType, _types);
 
 
             //var subTypes = await _ic.Types.Where(t => t.Type == ).Select(s => s.A_Sample_Subtype).Distinct().ToArrayAsync();
@@ -74,7 +76,7 @@ namespace Extensions.NewForms
 
             var lst = Data.Last();
             
-            foreach (ToolStripMenuItem tm in MenuItemMenuType.DropDownItems)
+            foreach (ToolStripMenuItem tm in MenuItemType.DropDownItems)
             {
                 if (tm.Name == lst.A_Sample_Type)
                 {
@@ -93,11 +95,13 @@ namespace Extensions.NewForms
         private void InitializeComponent()
         {
             RussianLabels = new Dictionary<string, string>() {
-                { "ButtonExport",             $"Экспорт из {Environment.NewLine} GoogleSheet" },
+                { "MenuItemMenuExportFromGoogle",             $"Экспорт из GoogleSheet" },
+                { "MenuItemMenuExportFromExcel",             $"Экспорт из Excel" },
                 { "ButtonSaveToDB",           "Сохранить" },
                 { "ButtonClearSelection",           "Снять выделение" },
                 { "MenuItemMenuType",         "Тип" },
                 { "MenuItemMenuSubType",      "Подтип" },
+                { "MenuItemMenuCopyLinkToClip",      "Копировать ссылку на шаблон для заполнения" },
                 { "ButtonAddSample",          "Добавить образец" },
                 { "FormText",                 $"Просмотр партии - {SetKey}" },
                 { "MoreThan99Message",        "В партии должно быть не более 99 образцов!"},
@@ -129,11 +133,13 @@ namespace Extensions.NewForms
             };
 
             EnglishLabels = new Dictionary<string, string>() {
-                { "ButtonExport",             $"Export from {Environment.NewLine} GoogleSheet" },
+                { "MenuItemMenuExportFromGoogle",             $"Export from GoogleSheet" },
+                { "MenuItemMenuExportFromExcel",             $"Export from Excel" },
                 { "ButtonSaveToDB",           "Save" },
                 { "ButtonClearSelection",           "Clear selection" },
                 { "MenuItemMenuType",         "Type" },
                 { "MenuItemMenuSubType",      "SubType" },
+                { "MenuItemMenuCopyLinkToClip",      "Copy template link to clipboard" },
                 { "ButtonAddSample",          "Add sample" },
                 { "FormText",                 $"Set content - {SetKey}" },
                 { "MoreThan99Message",        "Set can't contain more than 99 samples!"},
@@ -164,19 +170,23 @@ namespace Extensions.NewForms
                 { "moss", "Moss" }
            };
 
-            MenuItemMenuType = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuType", AutoSize = true };
+            MenuItemType = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuType", AutoSize = true };
+            MenuItemMenuCopyLinkToClip = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuCopyLinkToClip", AutoSize = true };
+            MenuItemMenuExportFromGoogle = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuExportFromGoogle", AutoSize = true };
+            MenuItemMenuExportFromExcel = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuExportFromExcel", AutoSize = true };
             //MenuItemMenuSubType = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSubType", AutoSize = true };
 
-            MenuStrip.Items.Add(MenuItemMenuType);
+            MenuStrip.Items.Add(MenuItemType);
+            MenuItemMenu.DropDownItems.AddRange(new ToolStripItem[] { MenuItemMenuCopyLinkToClip, MenuItemMenuExportFromGoogle, MenuItemMenuExportFromExcel });
+            MenuItemMenuCopyLinkToClip.Click += MenuItemMenuCopyLinkToClip_Click;
+            
             //MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             //MenuItemMenuType, MenuItemMenuSubType});
 
 
             this.Text = "Content of set: ";
             DataGridView.ReadOnly = false;
-            ButtonExport = new Button();
-            ButtonExport.Name = "ButtonExport";
-            ButtonExport.Click += ExportButton_Click;
+            MenuItemMenuExportFromGoogle.Click += ExportFromGoogleButton_Click;
 
             ButtonSaveToDB = new Button();
             ButtonSaveToDB.Name = "ButtonSaveToDB";
@@ -193,13 +203,17 @@ namespace Extensions.NewForms
 
             Labels.AddRussianLabels(ref RussianLabels);
             Labels.AddEnglishLabels(ref EnglishLabels);
-            AddButtonToLayout(ButtonExport);
             AddButtonToLayout(ButtonSaveToDB);
             AddButtonToLayout(ButtonAddSample);
             AddButtonToLayout(ButtonClearSelection);
 
             DataGridView.Columns[5].ReadOnly = true;
 
+        }
+
+        private void MenuItemMenuCopyLinkToClip_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("https://docs.google.com/spreadsheets/d/1QWgYP694uad09Mac9AjvtSFWhUaJCALIWPc0pK9oYVc/edit?usp=sharing");
         }
 
         private void ButtonClearSelection_Click(object sender, EventArgs e)

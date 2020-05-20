@@ -70,10 +70,6 @@ namespace Extensions.Models
         [Ignore]
         public bool A_Drying_Plan           { get; set; }
         [Ignore]
-        public bool A_Evaporation_Plan      { get; set; }
-        [Ignore]
-        public bool A_Fragmentation_Plan    { get; set; }
-        [Ignore]
         public bool A_Freeze_Drying_Plan    { get; set; }
         [Ignore]
         public bool A_Homogenizing_Plan     { get; set; }
