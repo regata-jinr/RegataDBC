@@ -9,6 +9,7 @@ using Extensions.Models;
 namespace Extensions.NewForms
 {
     // TODO: add tests
+    // TODO: add data validation before saving
     // TODO: access right. users without inspector roles should jst view the table
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel
@@ -33,7 +34,7 @@ namespace Extensions.NewForms
         private readonly InfoContext _ic;
         private readonly string[] _types;
 
-        public ShowSetContentForm(string ConString, string setKey) : base("WinFormFlow")
+        public ShowSetContentForm(string ConString, string setKey) : base("RegataDBC", "ShowSetContentForm")
         {
             SetKey = setKey;
             _ic = new InfoContext(ConString);
@@ -78,7 +79,6 @@ namespace Extensions.NewForms
                     ListOfSampleTypes.Add(cell);
                 }
             }
-
 
             foreach (ToolStripMenuItem tm in MenuItemType.DropDownItems)
             {
@@ -162,7 +162,6 @@ namespace Extensions.NewForms
                 _cancellationTokenSource.Dispose();
             }
         }
-
 
         private async void ExportFromGoogleButton_Click(object sender, EventArgs e)
         {

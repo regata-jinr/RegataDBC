@@ -34,6 +34,7 @@ namespace Extensions.NewForms
         private Button ButtonSaveToDB;
         private Button ButtonAddSample;
         private Button ButtonClearSelection;
+        private Label  SetKeyLabel;
         private ToolStripMenuItem MenuItemType;
         private ToolStripMenuItem MenuItemMenuCopyLinkToClip;
         private ToolStripMenuItem MenuItemMenuExportFromGoogle;
@@ -201,11 +202,17 @@ namespace Extensions.NewForms
             ButtonAddSample.Name = "ButtonAddSample";
             ButtonAddSample.Click += ButtonAddSample_Click;
 
+            SetKeyLabel = new Label();
+            SetKeyLabel.Name = "SetKeyLabel";
+            SetKeyLabel.Text = SetKey;
+            SetKeyLabel.Font = new System.Drawing.Font("Arial", 14);
+
             Labels.AddRussianLabels(ref RussianLabels);
             Labels.AddEnglishLabels(ref EnglishLabels);
             AddButtonToLayout(ButtonSaveToDB);
             AddButtonToLayout(ButtonAddSample);
             AddButtonToLayout(ButtonClearSelection);
+            ButtonsLayoutPanel.Controls.Add(SetKeyLabel);
 
             DataGridView.Columns[5].ReadOnly = true;
 

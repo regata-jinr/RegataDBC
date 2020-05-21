@@ -17,7 +17,6 @@ namespace Extensions.Models
         {
             var sk = setKey.Split('-');
 
-            // TODO: add exception to wrong key, cover by test!
             F_Country_Code = sk[0];
             F_Client_Id = sk[1];
             F_Year = sk[2];
