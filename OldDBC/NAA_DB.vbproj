@@ -75,7 +75,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>NaaDBIcon.ico</ApplicationIcon>
+    <ApplicationIcon>DBCLogo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -608,6 +608,7 @@
     <None Include="Resources\headerDict.txt" />
     <None Include="bin\Debug\ClosedXML.dll" />
     <None Include="bin\Debug\DocumentFormat.OpenXml.dll" />
+    <Content Include="DBCLogo.ico" />
     <Content Include="NaaDBIcon.ico" />
   </ItemGroup>
   <ItemGroup>

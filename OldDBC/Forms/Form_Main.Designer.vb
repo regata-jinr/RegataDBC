@@ -634,19 +634,19 @@ Partial Class Form_Main
         'ChangeLang
         '
         Me.ChangeLang.Name = "ChangeLang"
-        Me.ChangeLang.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeLang.Size = New System.Drawing.Size(132, 22)
         Me.ChangeLang.Text = "Lang"
         '
         'B_Refresh
         '
         Me.B_Refresh.Name = "B_Refresh"
-        Me.B_Refresh.Size = New System.Drawing.Size(180, 22)
+        Me.B_Refresh.Size = New System.Drawing.Size(132, 22)
         Me.B_Refresh.Text = "Обновить"
         '
         'ResetLoginButton
         '
         Me.ResetLoginButton.Name = "ResetLoginButton"
-        Me.ResetLoginButton.Size = New System.Drawing.Size(180, 22)
+        Me.ResetLoginButton.Size = New System.Drawing.Size(132, 22)
         Me.ResetLoginButton.Text = "Reset login"
         '
         'ErrorJournalToolStripMenuItem

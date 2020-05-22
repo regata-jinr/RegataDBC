@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Extensions.NewForms
 {
     // TODO: add tests
-    // TODO: access right. users without inspector roles should jst view the table
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel
     // TODO: in case of other type has been chosen in excel or gs show warning that note must be filled
@@ -89,6 +88,26 @@ namespace Extensions.NewForms
             }
         }
 
+        private void SetVisibilityForUser()
+        {
+            if (UserRoles.Contains("inspector") || UserRoles.Contains("db_owner"))
+            {
+                DataGridView.Location = new System.Drawing.Point(18, 105);
+                DataGridView.Size = new System.Drawing.Size(1164, 553);
+                DataGridView.ReadOnly = false;
+                ButtonsLayoutPanel.Visible = true;
+                MenuItemMenu.Visible = true;
+                MenuItemType.Visible = true;
+                FooterStatusStrip.Visible = true;
+
+                DataGridView.Columns["A_Sample_ID"].ReadOnly = true;
+                DataGridView.Columns["A_Sample_Type"].ReadOnly = true;
+                DataGridView.Columns["A_Sample_Subtype"].ReadOnly = true;
+                DataGridView.Columns["P_Weighting_SLI"].ReadOnly = true;
+                DataGridView.Columns["P_Weighting_LLI"].ReadOnly = true;
+            }
+        }
+
         private async void ShowSetContentForm_Load(object sender, EventArgs e)
         {
             await GenerateTypeAndSubTypeMenuItems();
@@ -97,6 +116,7 @@ namespace Extensions.NewForms
             DataGridView.ClearSelection();
             SetKeyLabel.Text = SetKey;
             Text += SetKey;
+            SetVisibilityForUser();
         }
 
         private void DataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

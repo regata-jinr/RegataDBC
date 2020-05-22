@@ -9,8 +9,8 @@ Imports System.Runtime.InteropServices
 ' Проверьте значения атрибутов сборки
 
 <Assembly: AssemblyTitle("NaaDB")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("SNAAR,FLNP,JINR")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("Regata JINR")>
 <Assembly: AssemblyProduct("")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' используя "*", как показано ниже:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("6.4.0")>
-<Assembly: AssemblyFileVersion("6.4.0")>
+<Assembly: AssemblyVersion("6.5.0")>
+<Assembly: AssemblyFileVersion("6.5.0")>

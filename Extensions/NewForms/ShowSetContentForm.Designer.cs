@@ -40,7 +40,7 @@ namespace Extensions.NewForms
         //private ToolStripMenuItem MenuItemMenuSubType;
 
 
-     
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -91,12 +91,15 @@ namespace Extensions.NewForms
             AddButtonToLayout(ButtonSaveToDB);
             ButtonsLayoutPanel.Controls.Add(SetKeyLabel);
 
-            DataGridView.Columns["A_Sample_ID"].ReadOnly = true;
-            DataGridView.Columns["A_Sample_Type"].ReadOnly = true;
-            DataGridView.Columns["A_Sample_Subtype"].ReadOnly = true;
-            DataGridView.Columns["P_Weighting_SLI"].ReadOnly = true;
-            DataGridView.Columns["P_Weighting_LLI"].ReadOnly = true;
+            DataGridView.ReadOnly = true;
+            ButtonsLayoutPanel.Visible = false;
+            MenuItemMenu.Visible = false;
+            MenuItemType.Visible = false;
+            FooterStatusStrip.Visible = false;
 
+            DataGridView.Location = new System.Drawing.Point(18, 35);
+            this.DataGridView.Size = new System.Drawing.Size(1162, 640);
+            this.Icon = new System.Drawing.Icon("Resources/DBCLogo.ico");
         }
         
         private async Task GenerateTypeAndSubTypeMenuItems()
