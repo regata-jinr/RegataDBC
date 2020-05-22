@@ -58,6 +58,8 @@ namespace Extensions
             {
                 var stringBuilder = new StringBuilder();
                 var ex = exceptionEventsArgs.exception;
+                return ex.Message;
+                
                 if (ex.Data != null && ex.Data["Assembly"] != null)
                     stringBuilder.Append($"Assembly name: {ex.Data["Assembly"].ToString()}{Environment.NewLine}");
                 if (ex.TargetSite != null)

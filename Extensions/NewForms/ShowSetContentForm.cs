@@ -5,27 +5,15 @@ using System.Collections.Generic;
 using Regata.UITemplates;
 using System.Threading;
 using Extensions.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Extensions.NewForms
 {
     // TODO: add tests
-    // TODO: add data validation before saving
     // TODO: access right. users without inspector roles should jst view the table
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel
-    // TODO: move export buttons to menu
     // TODO: in case of other type has been chosen in excel or gs show warning that note must be filled
-    // TODO: increase font for setkey in window title or add label in right empty field of buttonlayoutpanel
-    // TODO: move save button to the end of the list
-    // TODO: add data validation. e.g in case of longitude or latitude length more than 10, but required 9.
-    // TODO: add exception handling for saving data to db
-    // TODO: add link to template in shared place? Menu? Copy link for template file to clipboard
-    // TODO: change column indexes to names
-    // TODO: change translation base to db
-    // TODO: what if in db create talbe LangDBC that contains keys - name of controls and rus and eng translation?
-    // TODO: subtype mechanic the same as type, but depends on it. in case of some type has chosen subtype filled.
-    // TODO: in case of type is other subtype can't be empty or notes? it will crash changes for existed samples
-    // TODO: how to check it? before saving or during exporting?
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
     {
@@ -34,12 +22,11 @@ namespace Extensions.NewForms
         private readonly InfoContext _ic;
         private readonly string[] _types;
 
-        public ShowSetContentForm(string ConString, string setKey) : base("RegataDBC", "ShowSetContentForm")
+        public ShowSetContentForm(string setKey) : base("ShowSetContentForm")
         {
             SetKey = setKey;
-            _ic = new InfoContext(ConString);
+            _ic = new InfoContext(Settings.ConnectionString);
             _types = _ic.Types.Select(t => t.Type).Distinct().ToArray();
-
             InitializeComponent();
 
             var sk = setKey.Split('-');
@@ -49,12 +36,19 @@ namespace Extensions.NewForms
             DataGridView.RowsAdded += DataGridView_RowsAdded;
             DataGridView.ColumnHeaderMouseDoubleClick += DataGridView_ColumnHeaderMouseDoubleClick;
             Load += ShowSetContentForm_Load;
+            Settings.LanguageChanged += Settings_LanguageChanged;
 
             foreach (var l in lst)
                 Data.Add(l);
 
             ButtonSaveToDB.Enabled = false;
             HideColumnsWithIndexes(0, 1, 2, 3, 4);
+        }
+
+        private void Settings_LanguageChanged()
+        {
+            SetKeyLabel.Text = SetKey;
+            Text += SetKey;
         }
 
         private void MenuItemMenuTypes_CheckedChanged(object sender, EventArgs e)
@@ -101,6 +95,8 @@ namespace Extensions.NewForms
             ChangeLanguageOfControlsTexts(Controls);
             MatchType();
             DataGridView.ClearSelection();
+            SetKeyLabel.Text = SetKey;
+            Text += SetKey;
         }
 
         private void DataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -147,14 +143,18 @@ namespace Extensions.NewForms
             try
             {
                 ButtonSaveToDB.Enabled = false;
-                FooterStatusLabel.Text = Labels.GetLabel("InitSavingToDb");
+                FooterStatusLabel.Text = _labels.GetLabel("InitSavingToDb");
                 await _ic.SaveChangesAsync(_cancellationTokenSource.Token);
-                FooterStatusLabel.Text = Labels.GetLabel("SavedToDbSuccessfuly");
+                FooterStatusLabel.Text = _labels.GetLabel("SavedToDbSuccessfuly");
                 FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
             }
             catch (OperationCanceledException)
             {
-                FooterStatusLabel.Text = Labels.GetLabel("ExportCancelledByTimeout");
+                FooterStatusLabel.Text = _labels.GetLabel("ExportCancelledByTimeout");
+            }
+            catch (DbUpdateException tie)
+            {
+                    MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = tie.InnerException, Level = ExceptionLevel.Warn });
             }
             finally
             {
@@ -166,18 +166,18 @@ namespace Extensions.NewForms
         private async void ExportFromGoogleButton_Click(object sender, EventArgs e)
         {
             FooterStatusProgressBar.Value = 0;
-            FooterStatusLabel.Text = Labels.GetLabel("InitialExport");
+            FooterStatusLabel.Text = _labels.GetLabel("InitialExport");
 
             if (Data.Any())
             {
-                var res = MessageBox.Show(Labels.GetLabel("DeleteFromDB"), Labels.GetLabel("HelpCaptionPromt"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                var res = MessageBox.Show(_labels.GetLabel("DeleteFromDB"), _labels.GetLabel("HelpCaptionPromt"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (res == DialogResult.No) return;
                 _ic.Samples.RemoveRange(Data);
             }
 
             Data.Clear();
             var result = "";
-            using (Prompt prompt = new Prompt(Labels.GetLabel("HelpMessagePromt"), Labels.GetLabel("HelpCaptionPromt")))
+            using (Prompt prompt = new Prompt(_labels.GetLabel("HelpMessagePromt"), _labels.GetLabel("HelpCaptionPromt")))
             {
                 result = prompt.Result;
             }
@@ -211,17 +211,17 @@ namespace Extensions.NewForms
                     FooterStatusProgressBar.Value++;
                 }
                 FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
-                FooterStatusLabel.Text = Labels.GetLabel("SuccessExport");
+                FooterStatusLabel.Text = _labels.GetLabel("SuccessExport");
                 await _ic.Samples.AddRangeAsync(Data);
                 //await _ic.SaveChangesAsync();
             }
             catch (NullReferenceException nre)
             {
-                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception=nre, Level = ExceptionLevel.Error });
+                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = nre, Level = ExceptionLevel.Error });
             }
             catch (OperationCanceledException)
             {
-                FooterStatusLabel.Text = Labels.GetLabel("ExportCancelledByTimeout");
+                FooterStatusLabel.Text = _labels.GetLabel("ExportCancelledByTimeout");
             }
             catch (AggregateException ae)
             {
@@ -229,6 +229,10 @@ namespace Extensions.NewForms
                 {
                     Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
                 }
+            }
+            catch (Exception ex)
+            {
+                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
             finally
             {
@@ -248,7 +252,7 @@ namespace Extensions.NewForms
 
                 if (int.Parse(newSamp.A_Sample_ID) > 99)
                 {
-                    MessageBox.Show(Labels.GetLabel("MoreThan99Message"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(_labels.GetLabel("MoreThan99Message"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }

@@ -75,9 +75,9 @@ namespace Extensions.Models
         [Ignore]
         public bool A_Pelletization_Plan    { get; set; }
         [Ignore]
-        public float P_Weighting_SLI        { get; set; }
+        public float? P_Weighting_SLI        { get; set; }
         [Ignore]
-        public float P_Weighting_LLI        { get; set; }
+        public float? P_Weighting_LLI        { get; set; }
 
     }
 }

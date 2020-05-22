@@ -1541,11 +1541,17 @@ Public Class Form_Main
     Private Sub B_Select_Sample_Set_Click(sender As Object, e As EventArgs) Handles B_Select_Sample_Set.Click
         If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
 
+        Regata.UITemplates.Settings.ConnectionString = MyConnectionString
+        Regata.UITemplates.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
+
         Try
-            Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(MyConnectionString, String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
+            Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
             showcontentform.Show()
         Catch ex As Exception
-            LangException(language, ex.Message & ex.ToString)
+            Dim exx As New Extensions.ExceptionEventsArgs()
+            exx.exception = ex
+            exx.Level = Extensions.ExceptionLevel.Error
+            Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(exx)
         End Try
     End Sub
 
