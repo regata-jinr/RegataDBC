@@ -9,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Extensions.NewForms
 {
-    // TODO: add tests
+    // FIXME: add tests
+    // TODO: before release sync databases (new UILabels table and UserRoles view)
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel
     // TODO: in case of other type has been chosen in excel or gs show warning that note must be filled
@@ -21,7 +22,7 @@ namespace Extensions.NewForms
         private readonly InfoContext _ic;
         private readonly string[] _types;
 
-        public ShowSetContentForm(string setKey) : base("ShowSetContentForm")
+        public ShowSetContentForm(string setKey) : base(typeof(ShowSetContentForm).Name)
         {
             SetKey = setKey;
             _ic = new InfoContext(Settings.ConnectionString);
@@ -36,12 +37,42 @@ namespace Extensions.NewForms
             DataGridView.ColumnHeaderMouseDoubleClick += DataGridView_ColumnHeaderMouseDoubleClick;
             Load += ShowSetContentForm_Load;
             Settings.LanguageChanged += Settings_LanguageChanged;
+            DataGridView.CellValidating += DataGridView_CellValidating;
 
             foreach (var l in lst)
                 Data.Add(l);
 
             ButtonSaveToDB.Enabled = false;
             HideColumnsWithIndexes(0, 1, 2, 3, 4);
+        }
+
+        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (DataGridView.Rows[e.RowIndex].IsNewRow) return;
+
+            var column = DataGridView.Columns[e.ColumnIndex];
+
+            if (column.Name == "A_Longitude" || column.Name == "A_Latitude")
+            {
+                if (e.FormattedValue.ToString().Length > 9)
+                {
+                    e.Cancel = true;
+                    MessageBoxTemplates.InfoSync($"Value of {column.Name} is to long for db {e.FormattedValue.ToString().Length}. Should be 9.");
+                }
+
+                var reg = new System.Text.RegularExpressions.Regex(@"[-]{0,1}\d{1,2}.\d{1,6}");
+                if (!reg.IsMatch(e.FormattedValue.ToString()))
+                {
+                    e.Cancel = true;
+                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
+                }
+
+                if (!double.TryParse(e.FormattedValue.ToString(), out _))
+                {
+                    e.Cancel = true;
+                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
+                }
+            }
         }
 
         private void Settings_LanguageChanged()
@@ -183,6 +214,11 @@ namespace Extensions.NewForms
             }
         }
 
+
+        private async void ExportFromExcelButton_Click(object sender, EventArgs e)
+        {
+            MessageBoxTemplates.InfoSync("Functional would soon be added");
+        }
         private async void ExportFromGoogleButton_Click(object sender, EventArgs e)
         {
             FooterStatusProgressBar.Value = 0;

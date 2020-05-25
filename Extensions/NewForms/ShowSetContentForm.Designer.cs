@@ -37,6 +37,11 @@ namespace Extensions.NewForms
         private ToolStripMenuItem MenuItemMenuCopyLinkToClip;
         private ToolStripMenuItem MenuItemMenuExportFromGoogle;
         private ToolStripMenuItem MenuItemMenuExportFromExcel;
+        private ToolStripMenuItem MenuItemMenuSpectra;
+        private ToolStripMenuItem MenuItemMenuSpectraSLI;
+        private ToolStripMenuItem MenuItemMenuSpectraLLI1;
+        private ToolStripMenuItem MenuItemMenuSpectraLLI2;
+        private ToolStripMenuItem MenuItemMenuSpectraAll;
         //private ToolStripMenuItem MenuItemMenuSubType;
 
 
@@ -50,15 +55,23 @@ namespace Extensions.NewForms
         private void InitializeComponent()
         {
          
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowSetContentForm));
             MenuItemType = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuType", AutoSize = true };
             MenuItemMenuCopyLinkToClip = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuCopyLinkToClip", AutoSize = true };
             MenuItemMenuExportFromGoogle = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuExportFromGoogle", AutoSize = true };
             MenuItemMenuExportFromExcel = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuExportFromExcel", AutoSize = true };
+            MenuItemMenuSpectra = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSpectra", AutoSize = true };
+            MenuItemMenuSpectraSLI = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSpectraSLI", AutoSize = true };
+            MenuItemMenuSpectraLLI1 = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSpectraLLI1", AutoSize = true };
+            MenuItemMenuSpectraLLI2 = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSpectraLLI2", AutoSize = true };
+            MenuItemMenuSpectraAll = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSpectraAll", AutoSize = true };
             //MenuItemMenuSubType = new System.Windows.Forms.ToolStripMenuItem() { Name = "MenuItemMenuSubType", AutoSize = true };
 
             MenuStrip.Items.Add(MenuItemType);
-            MenuItemMenu.DropDownItems.AddRange(new ToolStripItem[] { MenuItemMenuCopyLinkToClip, MenuItemMenuExportFromGoogle, MenuItemMenuExportFromExcel });
+            MenuItemMenu.DropDownItems.AddRange(new ToolStripItem[] { MenuItemMenuCopyLinkToClip, MenuItemMenuExportFromGoogle, MenuItemMenuExportFromExcel, MenuItemMenuSpectra });
             MenuItemMenuCopyLinkToClip.Click += MenuItemMenuCopyLinkToClip_Click;
+
+            MenuItemMenuSpectra.DropDownItems.AddRange((new ToolStripItem[] { MenuItemMenuSpectraSLI, MenuItemMenuSpectraLLI1, MenuItemMenuSpectraLLI2, MenuItemMenuSpectraAll }));
             
             //MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             //MenuItemMenuType, MenuItemMenuSubType});
@@ -66,6 +79,7 @@ namespace Extensions.NewForms
             this.Text = "Content of set: ";
             DataGridView.ReadOnly = false;
             MenuItemMenuExportFromGoogle.Click += ExportFromGoogleButton_Click;
+            MenuItemMenuExportFromExcel.Click += ExportFromExcelButton_Click;
 
             ButtonSaveToDB = new Button();
             ButtonSaveToDB.Name = "ButtonSaveToDB";
@@ -99,7 +113,7 @@ namespace Extensions.NewForms
 
             DataGridView.Location = new System.Drawing.Point(18, 35);
             this.DataGridView.Size = new System.Drawing.Size(1162, 640);
-            this.Icon = new System.Drawing.Icon("Resources/DBCLogo.ico");
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
         }
         
         private async Task GenerateTypeAndSubTypeMenuItems()

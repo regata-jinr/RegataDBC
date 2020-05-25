@@ -85,7 +85,6 @@ Partial Class Form_Main
         Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,7 +177,7 @@ Partial Class Form_Main
         Me.B_Select_Sample_Set.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.B_Select_Sample_Set.Location = New System.Drawing.Point(6, 326)
         Me.B_Select_Sample_Set.Name = "B_Select_Sample_Set"
-        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(76, 23)
+        Me.B_Select_Sample_Set.Size = New System.Drawing.Size(110, 23)
         Me.B_Select_Sample_Set.TabIndex = 3
         Me.B_Select_Sample_Set.Text = "Образцы"
         Me.B_Select_Sample_Set.UseVisualStyleBackColor = True
@@ -677,22 +676,12 @@ Partial Class Form_Main
         Me.LabelDateOfNewJournalTitle.TabIndex = 198
         Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
         '
-        'Button1
-        '
-        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button1.Location = New System.Drawing.Point(176, 326)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(90, 23)
-        Me.Button1.TabIndex = 201
-        Me.Button1.Text = "Спектры"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Button2
         '
         Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button2.Location = New System.Drawing.Point(272, 326)
+        Me.Button2.Location = New System.Drawing.Point(236, 326)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(92, 23)
+        Me.Button2.Size = New System.Drawing.Size(128, 23)
         Me.Button2.TabIndex = 200
         Me.Button2.Text = "Комментарии"
         Me.Button2.UseVisualStyleBackColor = True
@@ -700,9 +689,9 @@ Partial Class Form_Main
         'Button3
         '
         Me.Button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button3.Location = New System.Drawing.Point(88, 326)
+        Me.Button3.Location = New System.Drawing.Point(119, 326)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(82, 23)
+        Me.Button3.Size = New System.Drawing.Size(114, 23)
         Me.Button3.TabIndex = 199
         Me.Button3.Text = "Результаты"
         Me.Button3.UseVisualStyleBackColor = True
@@ -712,7 +701,6 @@ Partial Class Form_Main
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 761)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LabelDateOfNewJournalTitle)
@@ -833,7 +821,6 @@ Partial Class Form_Main
     Friend WithEvents MaskedTextBoxDateOfNewJournal As MaskedTextBox
     Friend WithEvents LabelDateOfNewJournalTitle As Label
     Friend WithEvents ErrorJournalToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
 End Class

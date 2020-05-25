@@ -1111,8 +1111,6 @@ Public Class Form_Main
             ElseIf DataGridView_Description.CurrentRow.Index() = 5 Then
                 DataSampleSetLoad("where color = 'LimeGreen'")
                 ' DataSampleSetLoad("where Results is not null and SamplSLI is not null and SamplLLI is not null")
-            ElseIf DataGridView_Description.CurrentRow.Index() = 6 Then
-                '  DataSampleSetLoad("")
             End If
 
         End If
@@ -1140,7 +1138,7 @@ Public Class Form_Main
             ElseIf language = "English" Then
                 DataGridView_Description.Columns.Item(1).HeaderText = "Description"
             End If
-            DataGridView_Description.Rows.Add(7)
+            DataGridView_Description.Rows.Add(6)
             DataGridView_Description.Rows.Item(0).Cells.Item(0).Style.BackColor = Color.LightPink
             If language = "Русский" Then
                 DataGridView_Description.Rows.Item(0).Cells.Item(1).Value = "партия принята"
@@ -1181,13 +1179,6 @@ Public Class Form_Main
                 DataGridView_Description.Rows.Item(5).Cells.Item(1).Value = "КЖИ и ДЖИ плюс результаты"
             ElseIf language = "English" Then
                 DataGridView_Description.Rows.Item(5).Cells.Item(1).Value = "SLI and LLI plus results"
-            End If
-
-            DataGridView_Description.Rows.Item(6).Cells.Item(0).Style.BackColor = Color.Bisque
-            If language = "Русский" Then
-                DataGridView_Description.Rows.Item(6).Cells.Item(1).Value = "Показать все"
-            ElseIf language = "English" Then
-                DataGridView_Description.Rows.Item(6).Cells.Item(1).Value = "Show all"
             End If
 
             DataGridView_Description.ClearSelection()
@@ -1511,6 +1502,7 @@ Public Class Form_Main
         Else
             DataSampleSetLoad("")
         End If
+        DataGridView_Description.ClearSelection()
     End Sub
 
     Public hist As String = ""
@@ -1641,6 +1633,10 @@ Public Class Form_Main
         reader.Read()
         Form_Notice.RichTextBoxFormNotice.Text = reader(0)
         sqlConnection1.Close()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Public firstFlag As Integer = 0
