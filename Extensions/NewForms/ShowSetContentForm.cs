@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 namespace Extensions.NewForms
 {
     // FIXME: add tests
+    // NOTE:downloading file via curl
+    //          curl -u bdrum -X GET https://disk.jinr.ru/remote.php/webdav/RegataStorage/Spectra/2017/11/dji-1/7105704.cnf --output 7105705.cnf
     // TODO: before release sync databases (new UILabels table and UserRoles view)
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel

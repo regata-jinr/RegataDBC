@@ -22,8 +22,8 @@ namespace Extensions.Classes
         public static string SetKey;
         public static string DirPath;
 
-        private static List<string> ListOfSpectra;
-        private static List<string> ListOfSrms;
+        private static Dictionary<string, string> SpectraPathDict;
+        private static Dictionary<string, string> SrmPathDict;
 
         private static async Task GetListOfSamplesSpectra(CancellationToken ct)
         {
