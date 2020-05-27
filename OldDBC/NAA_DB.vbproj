@@ -331,6 +331,9 @@
     <Reference Include="UITemplatesWinForm">
       <HintPath>..\..\Libs\UITemplatesWinForm\bin\Release\net48\UITemplatesWinForm.dll</HintPath>
     </Reference>
+    <Reference Include="Utilities">
+      <HintPath>..\..\Libs\Utilities\bin\Release\net48\Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

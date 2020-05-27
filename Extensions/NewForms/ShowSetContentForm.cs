@@ -6,6 +6,7 @@ using Regata.UITemplates;
 using System.Threading;
 using Extensions.Models;
 using Microsoft.EntityFrameworkCore;
+using Regata.Utilities;
 
 namespace Extensions.NewForms
 {
@@ -246,14 +247,12 @@ namespace Extensions.NewForms
                 return;
             }
 
-            var csvFile = $"{System.IO.Path.GetDirectoryName(SettingsPath)}\\{SetKey}.csv";
-
             var _cancellationTokenSource = new CancellationTokenSource();
             _cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(TimeOutSeconds));
 
             try
             {
-                var samples = await Exporter.ProcessFile(result, csvFile, _cancellationTokenSource.Token);
+                var samples = await ExportData.FromGoogleSheet<Sample>(result, _cancellationTokenSource.Token);
 
                 FooterStatusProgressBar.Maximum = samples.Length;
                 foreach (var l in samples)
@@ -275,7 +274,7 @@ namespace Extensions.NewForms
             }
             catch (NullReferenceException nre)
             {
-                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = nre, Level = ExceptionLevel.Error });
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = nre, Level = ExceptionLevel.Error });
             }
             catch (OperationCanceledException)
             {
@@ -285,12 +284,12 @@ namespace Extensions.NewForms
             {
                 foreach (var ie in ae.InnerExceptions)
                 {
-                    Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
+                    MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
                 }
             }
             catch (Exception ex)
             {
-                Extensions.MessageBoxTemplates.WrapExceptionToMessageBox(new Extensions.ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
+                MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ex, Level = ExceptionLevel.Error });
             }
             finally
             {
