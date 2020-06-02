@@ -83,10 +83,15 @@ Partial Class Form_Main
         Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
         Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПомощьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.НеМогуНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КакМнеСкачатьСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КакНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -616,7 +621,7 @@ Partial Class Form_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(955, 24)
@@ -655,6 +660,25 @@ Partial Class Form_Main
         Me.ErrorJournalToolStripMenuItem.Size = New System.Drawing.Size(152, 20)
         Me.ErrorJournalToolStripMenuItem.Text = "Журнал несоответствий"
         Me.ErrorJournalToolStripMenuItem.Visible = False
+        '
+        'ПомощьToolStripMenuItem
+        '
+        Me.ПомощьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.НеМогуНайтиПартиюToolStripMenuItem, Me.КакМнеСкачатьСпектрыToolStripMenuItem, Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem, Me.КакНайтиПартиюToolStripMenuItem})
+        Me.ПомощьToolStripMenuItem.Name = "ПомощьToolStripMenuItem"
+        Me.ПомощьToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
+        Me.ПомощьToolStripMenuItem.Text = "Помощь"
+        '
+        'НеМогуНайтиПартиюToolStripMenuItem
+        '
+        Me.НеМогуНайтиПартиюToolStripMenuItem.Name = "НеМогуНайтиПартиюToolStripMenuItem"
+        Me.НеМогуНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.НеМогуНайтиПартиюToolStripMenuItem.Text = "Не вижу партию в списке..."
+        '
+        'КакМнеСкачатьСпектрыToolStripMenuItem
+        '
+        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Name = "КакМнеСкачатьСпектрыToolStripMenuItem"
+        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Text = "Как скачать спектры и стандарты сразу для всей партии?"
         '
         'MaskedTextBoxDateOfNewJournal
         '
@@ -695,6 +719,18 @@ Partial Class Form_Main
         Me.Button3.TabIndex = 199
         Me.Button3.Text = "Результаты"
         Me.Button3.UseVisualStyleBackColor = True
+        '
+        'КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem
+        '
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Name = "КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem"
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Text = "Как скачать только необходимые спектры?"
+        '
+        'КакНайтиПартиюToolStripMenuItem
+        '
+        Me.КакНайтиПартиюToolStripMenuItem.Name = "КакНайтиПартиюToolStripMenuItem"
+        Me.КакНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.КакНайтиПартиюToolStripMenuItem.Text = "Как найти партию?"
         '
         'Form_Main
         '
@@ -823,4 +859,9 @@ Partial Class Form_Main
     Friend WithEvents ErrorJournalToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents ПомощьToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents НеМогуНайтиПартиюToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КакМнеСкачатьСпектрыToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents КакНайтиПартиюToolStripMenuItem As ToolStripMenuItem
 End Class

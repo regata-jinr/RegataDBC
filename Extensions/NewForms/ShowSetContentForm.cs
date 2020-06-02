@@ -11,12 +11,13 @@ using Regata.Utilities;
 namespace Extensions.NewForms
 {
     // FIXME: add tests
-    // NOTE:downloading file via curl
-    //          curl -u bdrum -X GET https://disk.jinr.ru/remote.php/webdav/RegataStorage/Spectra/2017/11/dji-1/7105704.cnf --output 7105705.cnf
     // TODO: before release sync databases (new UILabels table and UserRoles view)
+    // TODO: add async spectra downloading + progress bar + cancelling
+    // TODO: link help button to readme page
+    // TODO: prepare detailed description for app 
     // TODO: close form in case of app has closed
     // TODO: add exporting from excel
-    // TODO: in case of other type has been chosen in excel or gs show warning that note must be filled
+    // TODO: type without listbox but with suggestions via warning
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
     {
