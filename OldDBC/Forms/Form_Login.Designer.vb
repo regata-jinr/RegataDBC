@@ -45,9 +45,9 @@ Partial Class Form_Login
         'LogoPictureBox
         '
         Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
-        Me.LogoPictureBox.Location = New System.Drawing.Point(4, 1)
+        Me.LogoPictureBox.Location = New System.Drawing.Point(32, 33)
         Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(204, 193)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(132, 130)
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
         '

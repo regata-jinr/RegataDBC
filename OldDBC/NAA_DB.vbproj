@@ -612,7 +612,6 @@
     <None Include="bin\Debug\ClosedXML.dll" />
     <None Include="bin\Debug\DocumentFormat.OpenXml.dll" />
     <Content Include="DBCLogo.ico" />
-    <Content Include="NaaDBIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj">

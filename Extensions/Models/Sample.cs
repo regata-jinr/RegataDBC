@@ -1,8 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using System.Drawing.Text;
 using System;
 
 namespace Extensions.Models
@@ -54,16 +52,14 @@ namespace Extensions.Models
         [Index(1)]
         public string A_Sample_Type         { get; set; }
         [Index(2)]
-        public string A_Sample_Subtype      { get; set; }
-        [Index(3)]
         public string A_Latitude            { get; set; }
-        [Index(4)]
+        [Index(3)]
         public string A_Longitude           { get; set; }
-        [Index(5)]
+        [Index(4)]
         public string A_Collection_Place    { get; set; }
-        [Index(6)]
+        [Index(5)]
         public string A_Notes               { get; set; }
-        [Index(7)]
+        [Index(6)]
         public string A_Determined_Elements { get; set; }
 
         [Ignore]

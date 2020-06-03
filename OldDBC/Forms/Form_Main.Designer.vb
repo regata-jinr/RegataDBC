@@ -36,7 +36,6 @@ Partial Class Form_Main
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView_Sample_Set = New System.Windows.Forms.DataGridView()
-        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
         Me.B_Select_Sample_Set = New System.Windows.Forms.Button()
         Me.B_Physical_Environment = New System.Windows.Forms.Button()
         Me.L_Name_SLI_Irradiation_Log = New System.Windows.Forms.Label()
@@ -74,9 +73,6 @@ Partial Class Form_Main
         Me.ButtonshowAll = New System.Windows.Forms.Button()
         Me.ButtonShowAllSrms = New System.Windows.Forms.Button()
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
-        Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
-        Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.МенюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
@@ -86,21 +82,25 @@ Partial Class Form_Main
         Me.ПомощьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.НеМогуНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.КакМнеСкачатьСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.КакНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КакНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NAA_DB_EXPDataSet = New NaaDB.NAA_DB_EXPDataSet()
+        Me.Table_SRM_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Table_SRM_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_SRMTableAdapter()
+        Me.Table_Monitor_Set_TableAdapter = New NaaDB.NAA_DB_EXPDataSetTableAdapters.table_Monitor_SetTableAdapter()
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBFilters.SuspendLayout()
         Me.SampleSetInfo.SuspendLayout()
-        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'B_NewSampleSetIDAccept
@@ -171,11 +171,6 @@ Partial Class Form_Main
         Me.DataGridView_Sample_Set.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView_Sample_Set.Size = New System.Drawing.Size(358, 251)
         Me.DataGridView_Sample_Set.TabIndex = 2
-        '
-        'NAA_DB_EXPDataSet
-        '
-        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
-        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'B_Select_Sample_Set
         '
@@ -606,19 +601,6 @@ Partial Class Form_Main
         'BackgroundWorkerColorizer
         '
         '
-        'Table_SRM_Set_BindingSource
-        '
-        Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
-        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
-        '
-        'Table_SRM_TableAdapter
-        '
-        Me.Table_SRM_TableAdapter.ClearBeforeFill = True
-        '
-        'Table_Monitor_Set_TableAdapter
-        '
-        Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
-        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem})
@@ -680,6 +662,18 @@ Partial Class Form_Main
         Me.КакМнеСкачатьСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
         Me.КакМнеСкачатьСпектрыToolStripMenuItem.Text = "Как скачать спектры и стандарты сразу для всей партии?"
         '
+        'КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem
+        '
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Name = "КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem"
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Text = "Как скачать только необходимые спектры?"
+        '
+        'КакНайтиПартиюToolStripMenuItem
+        '
+        Me.КакНайтиПартиюToolStripMenuItem.Name = "КакНайтиПартиюToolStripMenuItem"
+        Me.КакНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.КакНайтиПартиюToolStripMenuItem.Text = "Как найти партию?"
+        '
         'MaskedTextBoxDateOfNewJournal
         '
         Me.MaskedTextBoxDateOfNewJournal.BackColor = System.Drawing.Color.White
@@ -720,17 +714,23 @@ Partial Class Form_Main
         Me.Button3.Text = "Результаты"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem
+        'NAA_DB_EXPDataSet
         '
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Name = "КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem"
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Text = "Как скачать только необходимые спектры?"
+        Me.NAA_DB_EXPDataSet.DataSetName = "NAA_DB_EXPDataSet"
+        Me.NAA_DB_EXPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'КакНайтиПартиюToolStripMenuItem
+        'Table_SRM_Set_BindingSource
         '
-        Me.КакНайтиПартиюToolStripMenuItem.Name = "КакНайтиПартиюToolStripMenuItem"
-        Me.КакНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.КакНайтиПартиюToolStripMenuItem.Text = "Как найти партию?"
+        Me.Table_SRM_Set_BindingSource.DataMember = "table_SRM_Set"
+        Me.Table_SRM_Set_BindingSource.DataSource = Me.NAA_DB_EXPDataSet
+        '
+        'Table_SRM_TableAdapter
+        '
+        Me.Table_SRM_TableAdapter.ClearBeforeFill = True
+        '
+        'Table_Monitor_Set_TableAdapter
+        '
+        Me.Table_Monitor_Set_TableAdapter.ClearBeforeFill = True
         '
         'Form_Main
         '
@@ -780,16 +780,16 @@ Partial Class Form_Main
         Me.Name = "Form_Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.DataGridView_Sample_Set, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_SRM_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Table_Monitor_SetDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView_Description, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBFilters.ResumeLayout(False)
         Me.GBFilters.PerformLayout()
         Me.SampleSetInfo.ResumeLayout(False)
-        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Table_SRM_Set_BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

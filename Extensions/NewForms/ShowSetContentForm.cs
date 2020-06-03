@@ -1,36 +1,33 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using Regata.UITemplates;
 using System.Threading;
 using Extensions.Models;
 using Microsoft.EntityFrameworkCore;
 using Regata.Utilities;
+using System.Threading.Tasks;
 
 namespace Extensions.NewForms
 {
-    // FIXME: add tests
-    // TODO: before release sync databases (new UILabels table and UserRoles view)
-    // TODO: add async spectra downloading + progress bar + cancelling
-    // TODO: link help button to readme page
+    // TODO: add background downloading
+    // TODO: test on win7 vm and win10sandbox
     // TODO: prepare detailed description for app 
-    // TODO: close form in case of app has closed
-    // TODO: add exporting from excel
-    // TODO: type without listbox but with suggestions via warning
+    // TODO: link help button to readme page
+    // TODO: add exporting from excel the same as from google sheet
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
     {
         public readonly string SetKey;
         private const int TimeOutSeconds = 5;
         private readonly InfoContext _ic;
-        private readonly string[] _types;
+        private CancellationTokenSource _cts;
 
         public ShowSetContentForm(string setKey) : base(typeof(ShowSetContentForm).Name)
         {
             SetKey = setKey;
             _ic = new InfoContext(Settings.ConnectionString);
-            _types = _ic.Types.Select(t => t.Type).Distinct().ToArray();
             InitializeComponent();
 
             var sk = setKey.Split('-');
@@ -85,44 +82,6 @@ namespace Extensions.NewForms
             Text += SetKey;
         }
 
-        private void MenuItemMenuTypes_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!Data.Any()) return;
-
-            var curItem = sender as ToolStripMenuItem;
-            if (!curItem.Checked) return;
-
-            var ListOfSampleTypes = new List<DataGridViewCell>();
-
-
-            if (DataGridView.SelectedCells.Count == 0)
-            {
-                ListOfSampleTypes.Add(DataGridView.Rows[DataGridView.Rows.GetLastRow(DataGridViewElementStates.None)].Cells["A_Sample_Type"]);
-            }
-            else
-            {
-                foreach (DataGridViewCell cell in DataGridView.SelectedCells)
-                {
-                    if (cell.OwningColumn.Name != "A_Sample_Type") continue;
-                    ListOfSampleTypes.Add(cell);
-                }
-            }
-
-            foreach (ToolStripMenuItem tm in MenuItemType.DropDownItems)
-            {
-                if (tm.Name == curItem.Name)
-                {
-                    if (curItem.Checked)
-                    {
-                        foreach (var cell in ListOfSampleTypes)
-                            cell.Value = curItem.Name;
-                    }
-                    continue;
-                }
-                tm.Checked = false;
-            }
-        }
-
         private void SetVisibilityForUser()
         {
             if (UserRoles.Contains("inspector") || UserRoles.Contains("db_owner"))
@@ -132,12 +91,9 @@ namespace Extensions.NewForms
                 DataGridView.ReadOnly = false;
                 ButtonsLayoutPanel.Visible = true;
                 MenuItemMenu.Visible = true;
-                MenuItemType.Visible = true;
                 FooterStatusStrip.Visible = true;
 
                 DataGridView.Columns["A_Sample_ID"].ReadOnly = true;
-                DataGridView.Columns["A_Sample_Type"].ReadOnly = true;
-                DataGridView.Columns["A_Sample_Subtype"].ReadOnly = true;
                 DataGridView.Columns["P_Weighting_SLI"].ReadOnly = true;
                 DataGridView.Columns["P_Weighting_LLI"].ReadOnly = true;
             }
@@ -145,9 +101,7 @@ namespace Extensions.NewForms
 
         private async void ShowSetContentForm_Load(object sender, EventArgs e)
         {
-            await GenerateTypeAndSubTypeMenuItems();
             ChangeLanguageOfControlsTexts(Controls);
-            MatchType();
             DataGridView.ClearSelection();
             SetKeyLabel.Text = SetKey;
             Text += SetKey;
@@ -217,7 +171,6 @@ namespace Extensions.NewForms
                 _cancellationTokenSource.Dispose();
             }
         }
-
 
         private async void ExportFromExcelButton_Click(object sender, EventArgs e)
         {
@@ -298,8 +251,6 @@ namespace Extensions.NewForms
             }
         }
 
-      
-
         private void ButtonAddSample_Click(object sender, System.EventArgs e)
         {
             var newSamp = new Sample(SetKey);
@@ -322,5 +273,186 @@ namespace Extensions.NewForms
             _ic.Samples.Add(newSamp);
         }
 
-    }
-}
+        private async void MenuItemMenuSpectraSLI_Click(object sender, EventArgs e)
+        {
+            if (_folderDialog.ShowDialog() != DialogResult.OK) return;
+
+            ButtonCancel.Enabled = true;
+            try
+            {
+                _cts = new CancellationTokenSource();
+                FooterStatusProgressBar.Value = 0;
+                FooterStatusProgressBar.Maximum = 1;
+                var i = 0;
+
+                await foreach (var ssi in SpectraTools.SLISetSpectrasAsync(SetKey, _cts.Token).WithCancellation(_cts.Token))
+                {
+                    if (_cts == null) _cts = new CancellationTokenSource();
+                    i++;
+                    if (i % 2 == 0)
+                        FooterStatusProgressBar.Value = 0;
+
+                    FooterStatusLabel.Text = $"{_labels.GetLabel("DownloadingFile")}{ssi.SampleSpectra}";
+                    await WebDavClientApi.DownloadFile(ssi.token, Path.Combine(_folderDialog.SelectedPath, SetKey, "SLI", ssi.SampleType, $"{ssi.SampleSpectra}.cnf"), _cts.Token);
+                    FooterStatusProgressBar.Value = 1;
+                }
+
+                if (i == 0) throw new IndexOutOfRangeException();
+
+                FooterStatusLabel.Text = $"{_labels.GetLabel("DownloadingHasDone")}{i}";
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (OperationCanceledException ose)
+            {
+                FooterStatusProgressBar.Value = 0;
+                FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+            }
+            catch (AggregateException ae)
+            {
+                foreach (var ie in ae.InnerExceptions)
+                    MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
+            }
+            finally
+            {
+                ButtonCancel.Enabled = false;
+                _cts?.Dispose();
+                _cts = null;
+            }
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            _cts?.Cancel();
+        }
+
+        private async void MenuItemMenuSpectraLLI_Click(object sender, EventArgs e)
+        {
+            if (_folderDialog.ShowDialog() != DialogResult.OK) return;
+
+            var objName = (sender as ToolStripMenuItem)?.Name;
+
+            var type = objName.Contains("LLI1") ? IrradiationType.LLI1 : IrradiationType.LLI2;
+
+            _cts = new CancellationTokenSource();
+            ButtonCancel.Enabled = true;
+            try
+            {
+                FooterStatusProgressBar.Value = 0;
+                FooterStatusProgressBar.Maximum = 1;
+                var i = 0;
+
+                await foreach (var ssi in SpectraTools.LLISetSpectrasAsync(SetKey, type, _cts.Token).WithCancellation(_cts.Token))
+                {
+                    if (_cts == null) _cts = new CancellationTokenSource();
+                    i++;
+                    if (i % 2 == 0)
+                        FooterStatusProgressBar.Value = 0;
+
+                    FooterStatusLabel.Text = $"{_labels.GetLabel("DownloadingFile")}{ssi.SampleSpectra}";
+                    await WebDavClientApi.DownloadFile(ssi.token, Path.Combine(_folderDialog.SelectedPath, SetKey, SpectraTools.IrradiationTypeMap[type], ssi.LoadNumber.ToString(), $"c-{ssi.Container}", ssi.SampleType, $"{ssi.SampleSpectra}.cnf"), _cts.Token);
+                    FooterStatusProgressBar.Value = 1;
+                }
+
+                if (i == 0) throw new IndexOutOfRangeException();
+
+                FooterStatusLabel.Text = $"{_labels.GetLabel("DownloadingHasDone")}{i}";
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (OperationCanceledException ose)
+            {
+                FooterStatusProgressBar.Value = 0;
+                FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+            }
+            catch (AggregateException ae)
+            {
+                foreach (var ie in ae.InnerExceptions)
+                    MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
+            }
+            finally
+            {
+                ButtonCancel.Enabled = false;
+                _cts?.Dispose();
+                _cts = null;
+            }
+        }
+
+        private async void MenuItemMenuSpectraAll_Click(object sender, EventArgs e)
+        {
+            if (_folderDialog.ShowDialog() != DialogResult.OK) return;
+            _cts = new CancellationTokenSource();
+        
+            FooterStatusLabel.Text = $"{_labels.GetLabel("InitAllSpectraDownloading")}";
+            FooterStatusProgressBar.Value = 0;
+            ButtonCancel.Enabled = true;
+            try
+            {
+                _cts = new CancellationTokenSource();
+                var sliSpectras = SpectraTools.SLISetSpectrasAsync(SetKey, _cts.Token).WithCancellation(_cts.Token);
+                var lli1Spectras = SpectraTools.LLISetSpectrasAsync(SetKey, IrradiationType.LLI1, _cts.Token).WithCancellation(_cts.Token);
+                var lli2Spectras = SpectraTools.LLISetSpectrasAsync(SetKey, IrradiationType.LLI2, _cts.Token).WithCancellation(_cts.Token);
+
+                var taskSli = Task.Run(async () =>
+                {
+                    await foreach (var ssi in sliSpectras.WithCancellation(_cts.Token))
+                    {
+                        if (_cts == null) _cts = new CancellationTokenSource();
+                        await WebDavClientApi.DownloadFile(ssi.token, Path.Combine(_folderDialog.SelectedPath, SetKey, "SLI", ssi.SampleType, $"{ssi.SampleSpectra}.cnf"), _cts.Token);
+                    }
+                });
+
+                var taskLLI1 = Task.Run(async () =>
+                {
+                    await foreach (var ssi in lli1Spectras.WithCancellation(_cts.Token))
+                    {
+                        if (_cts == null) _cts = new CancellationTokenSource();
+                        await WebDavClientApi.DownloadFile(ssi.token, Path.Combine(_folderDialog.SelectedPath, SetKey, SpectraTools.IrradiationTypeMap[IrradiationType.LLI1], ssi.LoadNumber.ToString(), $"c-{ssi.Container}", ssi.SampleType, $"{ssi.SampleSpectra}.cnf"), _cts.Token);
+                    }
+
+                });
+
+                var taskLLI2 = Task.Run(async () =>
+                {
+                    await foreach (var ssi in lli2Spectras.WithCancellation(_cts.Token))
+                    {
+                        if (_cts == null) _cts = new CancellationTokenSource();
+                        await WebDavClientApi.DownloadFile(ssi.token, Path.Combine(_folderDialog.SelectedPath, SetKey, SpectraTools.IrradiationTypeMap[IrradiationType.LLI2], ssi.LoadNumber.ToString(), $"c-{ssi.Container}", ssi.SampleType, $"{ssi.SampleSpectra}.cnf"), _cts.Token);
+                    }
+                });
+
+                await Task.WhenAll(taskSli, taskLLI1, taskLLI2);
+
+                FooterStatusLabel.Text = $"{_labels.GetLabel("AllSpectraDownldCompl")}";
+                FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
+
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (OperationCanceledException ose)
+            {
+                FooterStatusProgressBar.Value = 0;
+                FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+            }
+            catch (AggregateException ae)
+            {
+                foreach (var ie in ae.InnerExceptions)
+                    MessageBoxTemplates.WrapExceptionToMessageBox(new ExceptionEventsArgs() { exception = ie, Level = ExceptionLevel.Error });
+            }
+            finally
+            {
+                ButtonCancel.Enabled = false;
+                _cts.Dispose();
+                _cts = null;
+            }
+
+        }
+
+    } //  public partial class ShowSetContentForm : DataTableForm<Sample>
+} // namespace Extensions.NewForms
