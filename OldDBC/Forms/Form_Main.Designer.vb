@@ -80,10 +80,10 @@ Partial Class Form_Main
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
         Me.ErrorJournalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПомощьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.НеМогуНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КакМнеСкачатьСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.КакНайтиПартиюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DonSeeSetInTheListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HowToDownloadAllSpectraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HowToDownloadSomeSpectraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HowToFindTheSetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -645,34 +645,34 @@ Partial Class Form_Main
         '
         'ПомощьToolStripMenuItem
         '
-        Me.ПомощьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.НеМогуНайтиПартиюToolStripMenuItem, Me.КакМнеСкачатьСпектрыToolStripMenuItem, Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem, Me.КакНайтиПартиюToolStripMenuItem})
+        Me.ПомощьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DonSeeSetInTheListToolStripMenuItem, Me.HowToDownloadAllSpectraToolStripMenuItem, Me.HowToDownloadSomeSpectraToolStripMenuItem, Me.HowToFindTheSetToolStripMenuItem})
         Me.ПомощьToolStripMenuItem.Name = "ПомощьToolStripMenuItem"
         Me.ПомощьToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
         Me.ПомощьToolStripMenuItem.Text = "Помощь"
         '
-        'НеМогуНайтиПартиюToolStripMenuItem
+        'DonSeeSetInTheListToolStripMenuItem
         '
-        Me.НеМогуНайтиПартиюToolStripMenuItem.Name = "НеМогуНайтиПартиюToolStripMenuItem"
-        Me.НеМогуНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.НеМогуНайтиПартиюToolStripMenuItem.Text = "Не вижу партию в списке..."
+        Me.DonSeeSetInTheListToolStripMenuItem.Name = "DonSeeSetInTheListToolStripMenuItem"
+        Me.DonSeeSetInTheListToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.DonSeeSetInTheListToolStripMenuItem.Text = "Не вижу партию в списке..."
         '
-        'КакМнеСкачатьСпектрыToolStripMenuItem
+        'HowToDownloadAllSpectraToolStripMenuItem
         '
-        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Name = "КакМнеСкачатьСпектрыToolStripMenuItem"
-        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.КакМнеСкачатьСпектрыToolStripMenuItem.Text = "Как скачать спектры и стандарты сразу для всей партии?"
+        Me.HowToDownloadAllSpectraToolStripMenuItem.Name = "HowToDownloadAllSpectraToolStripMenuItem"
+        Me.HowToDownloadAllSpectraToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.HowToDownloadAllSpectraToolStripMenuItem.Text = "Как скачать спектры и стандарты сразу для всей партии?"
         '
-        'КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem
+        'HowToDownloadSomeSpectraToolStripMenuItem
         '
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Name = "КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem"
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem.Text = "Как скачать только необходимые спектры?"
+        Me.HowToDownloadSomeSpectraToolStripMenuItem.Name = "HowToDownloadSomeSpectraToolStripMenuItem"
+        Me.HowToDownloadSomeSpectraToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.HowToDownloadSomeSpectraToolStripMenuItem.Text = "Как скачать только необходимые спектры?"
         '
-        'КакНайтиПартиюToolStripMenuItem
+        'HowToFindTheSetToolStripMenuItem
         '
-        Me.КакНайтиПартиюToolStripMenuItem.Name = "КакНайтиПартиюToolStripMenuItem"
-        Me.КакНайтиПартиюToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
-        Me.КакНайтиПартиюToolStripMenuItem.Text = "Как найти партию?"
+        Me.HowToFindTheSetToolStripMenuItem.Name = "HowToFindTheSetToolStripMenuItem"
+        Me.HowToFindTheSetToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
+        Me.HowToFindTheSetToolStripMenuItem.Text = "Как найти партию?"
         '
         'MaskedTextBoxDateOfNewJournal
         '
@@ -860,8 +860,8 @@ Partial Class Form_Main
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents ПомощьToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents НеМогуНайтиПартиюToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents КакМнеСкачатьСпектрыToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents КакСкачатьТолькоНеобходимыеСпектрыToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents КакНайтиПартиюToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DonSeeSetInTheListToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HowToDownloadAllSpectraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HowToDownloadSomeSpectraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HowToFindTheSetToolStripMenuItem As ToolStripMenuItem
 End Class

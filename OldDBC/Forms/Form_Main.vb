@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports System.Globalization
 
 Public Class Form_Main
     Public us As String
@@ -589,60 +590,62 @@ Public Class Form_Main
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
         Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
-                If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
-                    If language = "Русский" Then
-                        MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf language = "English" Then
-                        MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
-                    End If
-                    Exit Sub
-                End If
-
-                If ListBox_SLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                    If language = "Русский" Then
-                        MsgBox("Выберите журнал КЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf language = "English" Then
-                        MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
-                    End If
-                    Exit Sub
-                End If
-
-                'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-                ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-                ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
-                Dim s As String
-                s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
-                ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(ForSliLog.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, s)
-
-                ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = s
-
-                ' Me.Enabled = False
-                ForSliLog.Show()
-
+            If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
                 If language = "Русский" Then
-                    ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
+                    MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf language = "English" Then
-                    ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
+                    MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
-                ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+                Exit Sub
+            End If
 
+            If ListBox_SLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
                 If language = "Русский" Then
-                    ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+                    MsgBox("Выберите журнал КЖИ!", MsgBoxStyle.Exclamation, Me.Text)
                 ElseIf language = "English" Then
-                    ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+                    MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
-                ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+                Exit Sub
+            End If
 
-                If language = "Русский" Then
-                    ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-                ElseIf language = "English" Then
-                    ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
-                End If
-                ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+            'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
+            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
+            ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
+            Dim s As String
+            s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
+            Dim jDateTime As New DateTime(Integer.Parse(s.Split(".")(2)), Integer.Parse(s.Split(".")(1)), Integer.Parse(s.Split(".")(0)))
 
-                '  Me.Enabled = False
+            'ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(ForSliLog.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, jDateTime.ToShortDateString())
 
-            Catch ex As Exception
+            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = jDateTime.ToString("dd.MM.yyyy")
+
+            ' Me.Enabled = False
+            ForSliLog.Show()
+
+            If language = "Русский" Then
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
+            End If
+            ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
+
+            If language = "Русский" Then
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
+            End If
+            ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
+
+            If language = "Русский" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
+            ElseIf language = "English" Then
+                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
+            End If
+            ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
+
+            '  Me.Enabled = False
+
+        Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub
         End Try
@@ -804,10 +807,10 @@ Public Class Form_Main
 
             jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
             number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
-            's1 = s(s.Count - 4) + s(s.Count - 3) + s(s.Count - 2) + s(s.Count - 1)
-            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormLLiLog.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDate, number)
+            Dim jDateTime As New DateTime(Integer.Parse(jDate.Split(".")(2)), Integer.Parse(jDate.Split(".")(1)), Integer.Parse(jDate.Split(".")(0)))
+            'FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormLLiLog.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDateTime.ToShortDateString(), number)
 
-            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = ListBox_LLI_Irradiation_Log_Date.Text
+            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = jDateTime.Date.ToString("dd.MM.yyyy")
             FormLLiLog.TextBox_Download.Text = number
 
             ' Me.Enabled = False))
@@ -1642,6 +1645,22 @@ Public Class Form_Main
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub DonSeeSetInTheListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DonSeeSetInTheListToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC#%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D1%80%D1%82%D0%B8%D0%B9")
+    End Sub
+
+    Private Sub HowToDownloadAllSpectraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HowToDownloadAllSpectraToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B2-%D0%BF%D0%B0%D1%80%D1%82%D0%B8%D0%B8")
+    End Sub
+
+    Private Sub HowToDownloadSomeSpectraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HowToDownloadSomeSpectraToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B2")
+    End Sub
+
+    Private Sub HowToFindTheSetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HowToFindTheSetToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC#%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D1%80%D1%82%D0%B8%D0%B9")
     End Sub
 
     Public firstFlag As Integer = 0

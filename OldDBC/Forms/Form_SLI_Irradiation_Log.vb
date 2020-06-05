@@ -174,7 +174,12 @@ Public Class Form_SLI_Irradiation_Log
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_SLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
 
-            Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, MaskedTextBox_SLI_Irradiation_Log.Text)
+            MaskedTextBox_SLI_Irradiation_Log.Text = MaskedTextBox_SLI_Irradiation_Log.Text.Replace(",", ".")
+            Dim s As String
+            s = MaskedTextBox_SLI_Irradiation_Log.Text
+            Dim jDateTime As New DateTime(Integer.Parse(s.Split(".")(2)), Integer.Parse(s.Split(".")(1)), Integer.Parse(s.Split(".")(0)))
+
+            Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, jDateTime.ToShortDateString())
             ListBox_Sample_ID.Items.Clear()
             ListBox_Sample_ID_All_SLI_Weight.Items.Clear()
 

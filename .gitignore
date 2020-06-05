@@ -269,3 +269,4 @@ app.config
 *DataSet*
 SquirrelTemp
 *.diagsession
+*.settings

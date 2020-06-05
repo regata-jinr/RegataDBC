@@ -69,9 +69,6 @@ Partial Class Form_SLI_Irradiation_Log
         Me.SampleSetReceiptDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SampleSetReportDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReceivedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Notes1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Notes2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Notes3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Table_Sample_Set_BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ListBox_Sample_ID = New System.Windows.Forms.ListBox()
         Me.B_Add_Sample = New System.Windows.Forms.Button()
@@ -413,7 +410,7 @@ Partial Class Form_SLI_Irradiation_Log
         '
         Me.MaskedTextBox_SLI_Irradiation_Log.Enabled = False
         Me.MaskedTextBox_SLI_Irradiation_Log.Location = New System.Drawing.Point(497, 12)
-        Me.MaskedTextBox_SLI_Irradiation_Log.Mask = "00/00/0000"
+        Me.MaskedTextBox_SLI_Irradiation_Log.Mask = "00.00.0000"
         Me.MaskedTextBox_SLI_Irradiation_Log.Name = "MaskedTextBox_SLI_Irradiation_Log"
         Me.MaskedTextBox_SLI_Irradiation_Log.Size = New System.Drawing.Size(66, 20)
         Me.MaskedTextBox_SLI_Irradiation_Log.TabIndex = 156
@@ -433,7 +430,7 @@ Partial Class Form_SLI_Irradiation_Log
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView_SLI_Sample_Set.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView_SLI_Sample_Set.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView_SLI_Sample_Set.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CountryCodeDataGridViewTextBoxColumn, Me.ClientIDDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.SampleSetIDDataGridViewTextBoxColumn, Me.SampleSetIndexDataGridViewTextBoxColumn, Me.SampleSetReceiptDateDataGridViewTextBoxColumn, Me.SampleSetReportDateDataGridViewTextBoxColumn, Me.ReceivedByDataGridViewTextBoxColumn, Me.Notes1DataGridViewTextBoxColumn, Me.Notes2DataGridViewTextBoxColumn, Me.Notes3DataGridViewTextBoxColumn})
+        Me.DataGridView_SLI_Sample_Set.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CountryCodeDataGridViewTextBoxColumn, Me.ClientIDDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.SampleSetIDDataGridViewTextBoxColumn, Me.SampleSetIndexDataGridViewTextBoxColumn, Me.SampleSetReceiptDateDataGridViewTextBoxColumn, Me.SampleSetReportDateDataGridViewTextBoxColumn, Me.ReceivedByDataGridViewTextBoxColumn})
         Me.DataGridView_SLI_Sample_Set.DataSource = Me.Table_Sample_Set_BindingSource
         Me.DataGridView_SLI_Sample_Set.Location = New System.Drawing.Point(13, 297)
         Me.DataGridView_SLI_Sample_Set.MultiSelect = False
@@ -499,24 +496,6 @@ Partial Class Form_SLI_Irradiation_Log
         Me.ReceivedByDataGridViewTextBoxColumn.DataPropertyName = "Received_By"
         Me.ReceivedByDataGridViewTextBoxColumn.HeaderText = "Received_By"
         Me.ReceivedByDataGridViewTextBoxColumn.Name = "ReceivedByDataGridViewTextBoxColumn"
-        '
-        'Notes1DataGridViewTextBoxColumn
-        '
-        Me.Notes1DataGridViewTextBoxColumn.DataPropertyName = "Notes_1"
-        Me.Notes1DataGridViewTextBoxColumn.HeaderText = "Notes_1"
-        Me.Notes1DataGridViewTextBoxColumn.Name = "Notes1DataGridViewTextBoxColumn"
-        '
-        'Notes2DataGridViewTextBoxColumn
-        '
-        Me.Notes2DataGridViewTextBoxColumn.DataPropertyName = "Notes_2"
-        Me.Notes2DataGridViewTextBoxColumn.HeaderText = "Notes_2"
-        Me.Notes2DataGridViewTextBoxColumn.Name = "Notes2DataGridViewTextBoxColumn"
-        '
-        'Notes3DataGridViewTextBoxColumn
-        '
-        Me.Notes3DataGridViewTextBoxColumn.DataPropertyName = "Notes_3"
-        Me.Notes3DataGridViewTextBoxColumn.HeaderText = "Notes_3"
-        Me.Notes3DataGridViewTextBoxColumn.Name = "Notes3DataGridViewTextBoxColumn"
         '
         'Table_Sample_Set_BindingSource
         '

@@ -782,7 +782,7 @@ Partial Class Form_LLI_Irradiation_Log
         '
         Me.MaskedTextBox_LLI_Irradiation_Log.Enabled = False
         Me.MaskedTextBox_LLI_Irradiation_Log.Location = New System.Drawing.Point(152, 12)
-        Me.MaskedTextBox_LLI_Irradiation_Log.Mask = "00/00/0000"
+        Me.MaskedTextBox_LLI_Irradiation_Log.Mask = "00.00.0000"
         Me.MaskedTextBox_LLI_Irradiation_Log.Name = "MaskedTextBox_LLI_Irradiation_Log"
         Me.MaskedTextBox_LLI_Irradiation_Log.Size = New System.Drawing.Size(66, 20)
         Me.MaskedTextBox_LLI_Irradiation_Log.TabIndex = 194

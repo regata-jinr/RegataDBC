@@ -149,9 +149,14 @@ Public Class Form_LLI_Irradiation_Log
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
+            MaskedTextBox_LLI_Irradiation_Log.Text = MaskedTextBox_LLI_Irradiation_Log.Text.Replace(",", ".")
+            Dim s As String
+            s = MaskedTextBox_LLI_Irradiation_Log.Text
+            Dim jDateTime As New DateTime(Integer.Parse(s.Split(".")(2)), Integer.Parse(s.Split(".")(1)), Integer.Parse(s.Split(".")(0)))
+
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
-            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, MaskedTextBox_LLI_Irradiation_Log.Text, Convert.ToInt32(TextBox_Download.Text))
+            Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDateTime.ToShortDateString(), Convert.ToInt32(TextBox_Download.Text))
             ListBox_Sample_ID.Items.Clear()
             ListBox_Sample_ID_All_LLI_Weight.Items.Clear()
 
