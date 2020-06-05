@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports Renci.SshNet
 Imports System.IO
 
 Public Class Form_LLI_Irradiation_Log
@@ -3551,64 +3550,35 @@ Label_Exit:     oSheet.Range("B" + (maximum_i + 1).ToString + ":D" + (maximum_i 
         End Try
     End Sub
 
-    Private Sub ButtonSaveSpectra_Click(sender As Object, e As EventArgs) Handles ButtonSaveSpectra.Click
+    Private Async Sub ButtonSaveSpectra_Click(sender As Object, e As EventArgs) Handles ButtonSaveSpectra.Click
         FolderBrowserDialogSaveSpectra.Description = $"Выберите папку для сохранения спектров:"
-        Dim fName As String = ""
-        Dim fDate As New DateTime()
-        Dim FileNamesDict As New Dictionary(Of String, String)
-        Dim ftpPath As String = "/home/FTP/Spectra/"
+        Dim ct As New System.Threading.CancellationTokenSource
+        Try
 
-        If FolderBrowserDialogSaveSpectra.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-            Exit Sub
-        ElseIf System.Windows.Forms.DialogResult.OK Then
-
-            If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
-                MsgBox($"Выберите спетры для сохранения!")
+            If FolderBrowserDialogSaveSpectra.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 Exit Sub
-            End If
-            For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows
-                For i As Integer = 0 To 1
-                    If IsDBNull(row.Cells(16 + i * 2).Value) Then Continue For
-                    fName = row.Cells(16 + i * 2).Value
-                    fDate = row.Cells(15 + i * 2).Value
-                    FileNamesDict.Add($"Spectra/{fDate.Year}/{fDate.Month.ToString("D2")}/dji-{i + 1}/{fName}.cnf", $"{FolderBrowserDialogSaveSpectra.SelectedPath}\dji-{i + 1}\{fName}.cnf")
-                Next
-            Next
-            SaveFile(FileNamesDict)
-        End If
+            ElseIf System.Windows.Forms.DialogResult.OK Then
 
-    End Sub
-
-
-    Sub SaveFile(ByVal fNames As Dictionary(Of String, String))
-        If fNames.Count = 0 Then Exit Sub
-        Dim user As String = ""
-        Dim passw As String = ""
-        Dim src As String = ""
-        Dim ftpPath As String = "/home/FTP/Spectra/"
-        Form_ElsSum.GetPswd(src, user, passw)
-
-        Using client As New SftpClient(src, 22, user, passw)
-            client.Connect()
-            Debug.WriteLine($"Connection is OK")
-            For Each fName As String In fNames.Keys
-                Debug.WriteLine($"Will save here - ${fNames(fName)}")
-
-                If Not client.Exists(fName) Then
-                    fName = fName.Replace("cnf", "CNF")
-                    If Not client.Exists(fName) Then
-                        Debug.WriteLine($"{fName} doesn't exist")
-                        Continue For
-                    End If
+                If DataGridView_LLI_Irradiation_Log.SelectedRows.Count = 0 Then
+                    MsgBox($"Выберите спетры для сохранения!")
+                    Exit Sub
                 End If
+                For Each row As DataGridViewRow In DataGridView_LLI_Irradiation_Log.SelectedRows
+                    For i As Integer = 0 To 1
+                        If IsDBNull(row.Cells(16 + i * 2).Value) Then Continue For
+                        Dim fName = row.Cells(16 + i * 2).Value
+                        Await Regata.Utilities.SpectraTools.DownloadSpectraAsync(fName, FolderBrowserDialogSaveSpectra.SelectedPath, ct.Token)
+                    Next
+                Next
+                MsgBox("Файлы успешно загружены.", MsgBoxStyle.Information)
+            End If
+        Catch ex As Exception
+            Form_Main.LangException(Form_Main.language, ex.Message & ex.ToString)
+            Exit Sub
+        Finally
+            ct?.Dispose()
+        End Try
 
-                Directory.CreateDirectory(Path.GetDirectoryName(fNames(fName)))
-                Using fileStream As FileStream = IO.File.Create(fNames(fName))
-                    Debug.WriteLine($"Will download from here: {fName}")
-                    client.DownloadFile(fName, fileStream)
-                End Using
-            Next
-        End Using
     End Sub
 
 End Class

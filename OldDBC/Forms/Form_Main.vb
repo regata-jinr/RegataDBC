@@ -288,7 +288,8 @@ Public Class Form_Main
             If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub 'чтобы избежать ошибки при сортировке срабатывает selectionChanged до выполнения тела события columnHeaderClick
 
             cmd.CommandType = System.Data.CommandType.Text
-            cmd.CommandText = "select * from SamplesSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
+            cmd.CommandText = $"exec FormDataForMonitor '{DataGridView_Sample_Set.SelectedCells.Item(0).Value}', '{DataGridView_Sample_Set.SelectedCells.Item(1).Value}', '{DataGridView_Sample_Set.SelectedCells.Item(2).Value}', '{DataGridView_Sample_Set.SelectedCells.Item(3).Value}', '{DataGridView_Sample_Set.SelectedCells.Item(4).Value}'"
+            'cmd.CommandText = "select * from SamplesSetForNaaDB where Country_Code ='" + DataGridView_Sample_Set.SelectedCells.Item(0).Value + "' and  Client_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(1).Value + "' and Year = '" + DataGridView_Sample_Set.SelectedCells.Item(2).Value + "' and Sample_Set_ID = '" + DataGridView_Sample_Set.SelectedCells.Item(3).Value + "' and Sample_Set_Index = '" + DataGridView_Sample_Set.SelectedCells.Item(4).Value + "'"
 
             CountOfSample = 0
             i = 1
@@ -494,6 +495,10 @@ Public Class Form_Main
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
             MaskedTextBoxDateOfNewJournal.Text = Now.ToShortDateString()
+
+
+            Regata.Utilities.Settings.ConnectionString = MyConnectionString
+            Regata.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -1532,8 +1537,8 @@ Public Class Form_Main
     Private Sub B_Select_Sample_Set_Click(sender As Object, e As EventArgs) Handles B_Select_Sample_Set.Click
         If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
 
-        Regata.Utilities.Settings.ConnectionString = MyConnectionString
-        Regata.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
+        'Regata.Utilities.Settings.ConnectionString = MyConnectionString
+        'Regata.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
 
         Try
             Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
