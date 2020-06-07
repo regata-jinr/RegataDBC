@@ -617,7 +617,7 @@ Public Class Form_Main
 
             'ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(ForSliLog.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, jDateTime.ToShortDateString())
 
-            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = jDateTime.ToString("dd.MM.yyyy")
+            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = jDateTime.Date.ToString("dd.MM.yyyy")
 
             ' Me.Enabled = False
             ForSliLog.Show()
@@ -1398,14 +1398,14 @@ Public Class Form_Main
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
                         If Split(reader(0), ";")(1) <> "" Then
-                            ListBox_SLI_Irradiation_Log_Date.Items.Add(New ListItem(Convert.ToDateTime(Replace(reader(0), ";s", "")), Color.Black, Color.PaleGoldenrod))
+                            ListBox_SLI_Irradiation_Log_Date.Items.Add(New ListItem(Format(Convert.ToDateTime(Replace(reader(0), ";s", "")), "dd.MM.yyyy"), Color.Black, Color.PaleGoldenrod))
                         Else
-                            ListBox_SLI_Irradiation_Log_Date.Items.Add(New ListItem(Convert.ToDateTime(Replace(reader(0), ";", "")), Color.Black, Color.White))
+                            ListBox_SLI_Irradiation_Log_Date.Items.Add(New ListItem(Format(Convert.ToDateTime(Replace(reader(0), ";", "")), "dd.MM.yyyy"), Color.Black, Color.White))
                         End If
                     End If
-                End While
-                sqlConnection1.Close()
-                If ListBox_SLI_Irradiation_Log_Date.Items.Count > 0 Then
+            End While
+            sqlConnection1.Close()
+            If ListBox_SLI_Irradiation_Log_Date.Items.Count > 0 Then
                     ListBox_SLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_SLI_Irradiation_Log_Date.SetSelected(ListBox_SLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If

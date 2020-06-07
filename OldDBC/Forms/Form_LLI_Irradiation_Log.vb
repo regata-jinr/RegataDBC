@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Globalization
 Imports System.IO
 
 Public Class Form_LLI_Irradiation_Log
@@ -140,7 +141,7 @@ Public Class Form_LLI_Irradiation_Log
                 ' SaveFileDialog_Sample_By_Detector.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
             End If
 
-            MaskedTextBox_Date.Text = Format(Now(), "dd.MM.yyyy")
+            MaskedTextBox_Date.Text = DateTime.Now.ToShortDateString()
             ComboBox_Date_Field_Name.Text = ""
             ComboBox_Time_Field_Name.Text = ""
             ComboBox_Person_Field_Name.Text = ""
@@ -149,10 +150,9 @@ Public Class Form_LLI_Irradiation_Log
             Table_Received_By_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString
             Me.Table_Received_By_TableAdapter.Fill(Me.NAA_DB_EXPDataSet.table_Received_By)
 
-            MaskedTextBox_LLI_Irradiation_Log.Text = MaskedTextBox_LLI_Irradiation_Log.Text.Replace(",", ".")
-            Dim s As String
-            s = MaskedTextBox_LLI_Irradiation_Log.Text
-            Dim jDateTime As New DateTime(Integer.Parse(s.Split(".")(2)), Integer.Parse(s.Split(".")(1)), Integer.Parse(s.Split(".")(0)))
+            Dim prov = CultureInfo.InvariantCulture
+
+            Dim jDateTime = DateTime.ParseExact(MaskedTextBox_LLI_Irradiation_Log.Text, "dd.MM.yyyy", prov)
 
             ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample_LLI_Irradiation_Log". При необходимости она может быть перемещена или удалена.
             Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = Form_Main.MyConnectionString

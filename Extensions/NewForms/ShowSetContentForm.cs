@@ -13,8 +13,6 @@ namespace Extensions.NewForms
 {
     // TODO: add background downloading
     // TODO: test on win7 vm and win10sandbox
-    // TODO: prepare detailed description for app 
-    // TODO: link help button to readme page
     // TODO: add exporting from excel the same as from google sheet
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
@@ -33,18 +31,55 @@ namespace Extensions.NewForms
             var sk = setKey.Split('-');
             var lst = _ic.Samples.Where(s => s.F_Country_Code == sk[0] && s.F_Client_Id == sk[1] && s.F_Year == sk[2] && s.F_Sample_Set_Id == sk[3] && s.F_Sample_Set_Index == sk[4]).ToList();
 
-            DataGridView.CellValueChanged += DataGridView_CellValueChanged;
             DataGridView.RowsAdded += DataGridView_RowsAdded;
             DataGridView.ColumnHeaderMouseDoubleClick += DataGridView_ColumnHeaderMouseDoubleClick;
             Load += ShowSetContentForm_Load;
             Settings.LanguageChanged += Settings_LanguageChanged;
-            DataGridView.CellValidating += DataGridView_CellValidating;
+            //DataGridView.CellValidating += DataGridView_CellValidating;
+            DataGridView.CellValueChanged += DataGridView_CellValueChanged;
 
             foreach (var l in lst)
                 Data.Add(l);
 
             ButtonSaveToDB.Enabled = false;
             HideColumnsWithIndexes(0, 1, 2, 3, 4);
+        }
+
+        private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            ButtonSaveToDB.Enabled = true;
+            if (DataGridView.Rows[e.RowIndex].IsNewRow) return;
+
+            var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            var column = DataGridView.Columns[e.ColumnIndex];
+
+            if (column.Name == "A_Longitude" || column.Name == "A_Latitude")
+            {
+                if (cell.Value == null)
+                {
+                    MessageBoxTemplates.InfoSync($"Value of {column.Name} is empty and doesn't match with template: <->00.00000<0>");
+                    return;
+                }
+                if (cell.Value.ToString().Length > 9)
+                {
+                    MessageBoxTemplates.InfoSync($"Value of {column.Name} is to long for db {cell.Value.ToString().Length}. Should be 9.");
+                    return;
+                }
+
+                var reg = new System.Text.RegularExpressions.Regex(@"[-]{0,1}\d{1,2}.\d{1,6}");
+                if (!reg.IsMatch(cell.Value.ToString()))
+                {
+                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
+                    return;
+                }
+
+                if (!double.TryParse(cell.Value.ToString(), out _))
+                {
+                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
+                    return;
+                }
+            }
         }
 
         private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -109,11 +144,6 @@ namespace Extensions.NewForms
         }
 
         private void DataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            ButtonSaveToDB.Enabled = true;
-        }
-
-        private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             ButtonSaveToDB.Enabled = true;
         }
