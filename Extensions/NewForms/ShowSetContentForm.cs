@@ -47,8 +47,10 @@ namespace Extensions.NewForms
 
         private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            ButtonSaveToDB.Enabled = true;
+            if (e.RowIndex >= DataGridView.Rows.Count) return;
+            if (e.RowIndex == -1) return;
             if (DataGridView.Rows[e.RowIndex].IsNewRow) return;
+            ButtonSaveToDB.Enabled = true;
 
             var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
@@ -82,35 +84,6 @@ namespace Extensions.NewForms
             }
         }
 
-        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (DataGridView.Rows[e.RowIndex].IsNewRow) return;
-
-            var column = DataGridView.Columns[e.ColumnIndex];
-
-            if (column.Name == "A_Longitude" || column.Name == "A_Latitude")
-            {
-                if (e.FormattedValue.ToString().Length > 9)
-                {
-                    e.Cancel = true;
-                    MessageBoxTemplates.InfoSync($"Value of {column.Name} is to long for db {e.FormattedValue.ToString().Length}. Should be 9.");
-                }
-
-                var reg = new System.Text.RegularExpressions.Regex(@"[-]{0,1}\d{1,2}.\d{1,6}");
-                if (!reg.IsMatch(e.FormattedValue.ToString()))
-                {
-                    e.Cancel = true;
-                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
-                }
-
-                if (!double.TryParse(e.FormattedValue.ToString(), out _))
-                {
-                    e.Cancel = true;
-                    MessageBoxTemplates.InfoSync($"Format of {column.Name} doesn't match with template: <->00.00000<0>");
-                }
-            }
-        }
-
         private void Settings_LanguageChanged()
         {
             SetKeyLabel.Text = SetKey;
@@ -125,7 +98,9 @@ namespace Extensions.NewForms
                 DataGridView.Size = new System.Drawing.Size(1164, 553);
                 DataGridView.ReadOnly = false;
                 ButtonsLayoutPanel.Visible = true;
-                MenuItemMenu.Visible = true;
+                MenuItemMenuCopyLinkToClip.Visible = true;
+                MenuItemMenuExportFromGoogle.Visible = true;
+                MenuItemMenuExportFromExcel.Visible = true;
                 FooterStatusStrip.Visible = true;
 
                 DataGridView.Columns["A_Sample_ID"].ReadOnly = true;
@@ -337,8 +312,13 @@ namespace Extensions.NewForms
             }
             catch (OperationCanceledException ose)
             {
-                FooterStatusProgressBar.Value = 0;
-                FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+                try
+                {
+                    FooterStatusProgressBar.Value = 0;
+                    FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+                }
+                catch (NullReferenceException)
+                { }
             }
             catch (AggregateException ae)
             {
@@ -396,8 +376,13 @@ namespace Extensions.NewForms
             }
             catch (OperationCanceledException ose)
             {
-                FooterStatusProgressBar.Value = 0;
-                FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+                try
+                {
+                    FooterStatusProgressBar.Value = 0;
+                    FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");
+                }
+                catch (NullReferenceException)
+                { }
             }
             catch (AggregateException ae)
             {
@@ -481,7 +466,19 @@ namespace Extensions.NewForms
                 _cts.Dispose();
                 _cts = null;
             }
+        }
 
+        private void ShowSetContentForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_cts == null) return;
+
+            var dr = MessageBox.Show(_labels.GetLabel("AreYouSure"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
+            _cts.Cancel();
         }
 
     } //  public partial class ShowSetContentForm : DataTableForm<Sample>

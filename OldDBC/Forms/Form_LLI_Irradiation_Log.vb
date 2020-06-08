@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Globalization
-Imports System.IO
 
 Public Class Form_LLI_Irradiation_Log
 
@@ -141,7 +140,7 @@ Public Class Form_LLI_Irradiation_Log
                 ' SaveFileDialog_Sample_By_Detector.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
             End If
 
-            MaskedTextBox_Date.Text = DateTime.Now.ToShortDateString()
+            MaskedTextBox_Date.Text = DateTime.Now.Date.ToString("dd.MM.yyyy")
             ComboBox_Date_Field_Name.Text = ""
             ComboBox_Time_Field_Name.Text = ""
             ComboBox_Person_Field_Name.Text = ""
@@ -1520,9 +1519,11 @@ Public Class Form_LLI_Irradiation_Log
                 End If
                 Exit Sub
             End If
+            Dim prov = CultureInfo.CurrentCulture
+            Dim jDateTime = DateTime.ParseExact(MaskedTextBox_Date.Text, "dd.MM.yyyy", prov)
             For i = 0 To DataGridView_LLI_Irradiation_Log.RowCount - 1
                 'Table_SampleDataGridView.Rows.Item(i).Cells.Item(2).Value = 0 '2 - cleaning
-                If DataGridView_LLI_Irradiation_Log.Rows.Item(i).Selected = True Then DataGridView_LLI_Irradiation_Log.Rows.Item(i).Cells.Item(9).Value = MaskedTextBox_Date.Text
+                If DataGridView_LLI_Irradiation_Log.Rows.Item(i).Selected = True Then DataGridView_LLI_Irradiation_Log.Rows.Item(i).Cells.Item(9).Value = jDateTime.ToShortDateString()
             Next
 
             Me.Validate()

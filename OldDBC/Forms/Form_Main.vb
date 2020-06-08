@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
 Imports System.Globalization
+Imports System.Threading.Tasks
 
 Public Class Form_Main
     Public us As String
@@ -495,7 +496,7 @@ Public Class Form_Main
 
             DataSampleSetLoad("where color <> 'LimeGreen'")
 
-            MaskedTextBoxDateOfNewJournal.Text = Now.ToShortDateString()
+            MaskedTextBoxDateOfNewJournal.Text = Now.Date.ToString("dd.MM.yyyy")
 
 
             Regata.Utilities.Settings.ConnectionString = MyConnectionString
@@ -528,7 +529,8 @@ Public Class Form_Main
         Try
             Dim SLI_Irradiation_Log As Date
             Try
-                SLI_Irradiation_Log = MaskedTextBoxDateOfNewJournal.Text
+                Dim prov = CultureInfo.InvariantCulture
+                SLI_Irradiation_Log = DateTime.ParseExact(MaskedTextBoxDateOfNewJournal.Text, "dd.MM.yyyy", prov)
             Catch ex As Exception
                 LangException(language, ex.Message & ex.ToString)
                 Exit Sub
@@ -537,7 +539,7 @@ Public Class Form_Main
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
             Dim reader As SqlDataReader
-            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start= convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
+            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start = convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
@@ -1403,9 +1405,9 @@ Public Class Form_Main
                             ListBox_SLI_Irradiation_Log_Date.Items.Add(New ListItem(Format(Convert.ToDateTime(Replace(reader(0), ";", "")), "dd.MM.yyyy"), Color.Black, Color.White))
                         End If
                     End If
-            End While
-            sqlConnection1.Close()
-            If ListBox_SLI_Irradiation_Log_Date.Items.Count > 0 Then
+                End While
+                sqlConnection1.Close()
+                If ListBox_SLI_Irradiation_Log_Date.Items.Count > 0 Then
                     ListBox_SLI_Irradiation_Log_Date.ClearSelected()
                     ListBox_SLI_Irradiation_Log_Date.SetSelected(ListBox_SLI_Irradiation_Log_Date.Items.Count - 1, True)
                 End If
@@ -1442,7 +1444,7 @@ Public Class Form_Main
             If DataGridView_Description.CurrentRow.Index() = 0 Then
                 ' whereString = "where s.Results is null and a.SamplPrep is null and s.SamplSLI is null and s.SamplLLI is null"
                 whereString = "where s.color='LightPink'"
-                    ElseIf DataGridView_Description.CurrentRow.Index() = 1 Then
+            ElseIf DataGridView_Description.CurrentRow.Index() = 1 Then
                 ' whereString = "where s.Results is null and s.SamplPrep is not null and s.SamplSLI is null and s.SamplLLI is null and s.PrepCompl=0"
                 whereString = "where s.color='White'"
             ElseIf DataGridView_Description.CurrentRow.Index() = 2 Then
@@ -1555,7 +1557,7 @@ Public Class Form_Main
         End Try
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Async Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
             If DataGridView_Description.Rows(0).Cells(0).Value = 0 Then
@@ -1581,36 +1583,43 @@ Public Class Form_Main
             Form_NAA_Results.L_SS_Sample_Set_ID.Text = L_SS_Sample_Set_ID
             Form_NAA_Results.L_SS_Sample_Set_Index.Text = L_SS_Sample_Set_Index
 
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim cmd As New System.Data.SqlClient.SqlCommand
-            cmd.CommandType = System.Data.CommandType.Text
-            cmd.CommandText = "select * from NaaRes where F_Country_Code = '" & L_SS_Country_Code & "' and F_Client_ID = '" & L_SS_Client_ID & "' and F_Year = '" & L_SS_Year & "' and F_Sample_Set_Id = '" & L_SS_Sample_Set_ID & "' and F_Sample_Set_Index = '" & L_SS_Sample_Set_Index & "'"
+            Using sqlConnection1 As New SqlConnection(MyConnectionString)
+                Using cmd As New System.Data.SqlClient.SqlCommand
+                    cmd.CommandType = System.Data.CommandType.Text
+                    cmd.CommandText = "select * from NaaRes where F_Country_Code = '" & L_SS_Country_Code & "' and F_Client_ID = '" & L_SS_Client_ID & "' and F_Year = '" & L_SS_Year & "' and F_Sample_Set_Id = '" & L_SS_Sample_Set_ID & "' and F_Sample_Set_Index = '" & L_SS_Sample_Set_Index & "'"
 
-            Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
-            Dim ds As New DataSet()
+                    Dim dataadapter As New SqlDataAdapter(cmd.CommandText, sqlConnection1)
+                    Dim ds As New DataSet()
 
+                    dataadapter.Fill(ds, "SampleInf")
 
-            dataadapter.Fill(ds, "SampleInf")
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = False
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataSource = ds
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataMember = "SampleInf"
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = False
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataSource = ds
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.DataMember = "SampleInf"
 
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Country_Code")
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Client_ID")
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Year")
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Id")
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Index")
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Country_Code")
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Client_ID")
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Year")
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Id")
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns.Remove("F_Sample_Set_Index")
 
-            For k As Integer = 0 To 6
-                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).Frozen = True
-                Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).ReadOnly = True
-            Next
+                    For k As Integer = 0 To 6
+                        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).Frozen = True
+                        Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(k).ReadOnly = True
+                    Next
 
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(5).ReadOnly = False
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.AllowUserToAddRows = False
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns(5).ReadOnly = False
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.AllowUserToAddRows = False
 
-            Dim inum As Integer = 1
-            Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = True
+                    Dim inum As Integer = 1
+                    Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.ColumnHeadersVisible = True
+                End Using
+            End Using
+
+            ' FIXME: I have to deny sorting by the elements value, but it decrease perfomance too much
+            'For Each dgvc As DataGridViewColumn In Form_NAA_Results.DataGridView_Table_Sample_NAA_Results.Columns
+            '    dgvc.SortMode = DataGridViewColumnSortMode.NotSortable
+            'Next
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)
@@ -1623,6 +1632,8 @@ Public Class Form_Main
             Exit Sub
         End Try
     End Sub
+
+
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Form_Notice.Show()

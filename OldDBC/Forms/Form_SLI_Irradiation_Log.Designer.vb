@@ -408,6 +408,7 @@ Partial Class Form_SLI_Irradiation_Log
         '
         'MaskedTextBox_SLI_Irradiation_Log
         '
+        Me.MaskedTextBox_SLI_Irradiation_Log.Culture = New System.Globalization.CultureInfo("")
         Me.MaskedTextBox_SLI_Irradiation_Log.Enabled = False
         Me.MaskedTextBox_SLI_Irradiation_Log.Location = New System.Drawing.Point(497, 12)
         Me.MaskedTextBox_SLI_Irradiation_Log.Mask = "00.00.0000"

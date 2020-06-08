@@ -677,13 +677,13 @@ Partial Class Form_Main
         'MaskedTextBoxDateOfNewJournal
         '
         Me.MaskedTextBoxDateOfNewJournal.BackColor = System.Drawing.Color.White
+        Me.MaskedTextBoxDateOfNewJournal.Culture = New System.Globalization.CultureInfo("")
         Me.MaskedTextBoxDateOfNewJournal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MaskedTextBoxDateOfNewJournal.Location = New System.Drawing.Point(879, 451)
-        Me.MaskedTextBoxDateOfNewJournal.Mask = "00/00/0000"
+        Me.MaskedTextBoxDateOfNewJournal.Mask = "00.00.0000"
         Me.MaskedTextBoxDateOfNewJournal.Name = "MaskedTextBoxDateOfNewJournal"
         Me.MaskedTextBoxDateOfNewJournal.Size = New System.Drawing.Size(70, 22)
         Me.MaskedTextBoxDateOfNewJournal.TabIndex = 197
-        Me.MaskedTextBoxDateOfNewJournal.ValidatingType = GetType(Date)
         '
         'LabelDateOfNewJournalTitle
         '

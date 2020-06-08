@@ -60,7 +60,6 @@ Public Class Form_NAA_Results
                     Next
                     cntColumns += StartColumnForCounting
 
-
                     Debug.WriteLine($"StartRow - {StartRow}{vbCrLf}cntRows - {cntRows}{vbCrLf}StartColumn - {StartColumn}{vbCrLf}cntColumns - {cntColumns}")
                     Dim elem As String = ""
 
@@ -174,62 +173,59 @@ Public Class Form_NAA_Results
 
         If Form_Main.DataGridView_Sample_Set.SelectedRows.Count = 0 Then Exit Sub
         Try
-            Dim sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
-            Dim reader As SqlDataReader
-            Dim cmd As New System.Data.SqlClient.SqlCommand
-            cmd.CommandType = System.Data.CommandType.Text
+            Using sqlConnection1 As New SqlConnection(Form_Main.MyConnectionString)
+                Using cmd As New System.Data.SqlClient.SqlCommand
+                    Dim reader As SqlDataReader
 
-            cmd.CommandText = "select * from ActingHandlers"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then ComboBox_Person.Items.Add(reader(0))
+                    cmd.CommandType = System.Data.CommandType.Text
 
-            End While
-            sqlConnection1.Close()
+                    cmd.CommandText = "select * from ActingHandlers"
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then ComboBox_Person.Items.Add(reader(0))
+                    End While
+                    sqlConnection1.Close()
 
-            Me.Text = "Результаты НАА"
+                    Me.Text = "Результаты НАА"
 
-            L_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Инд. парт."
+                    L_Name_Code.Text = "Страна-Клиент-Год-№ парт.-Инд. парт."
 
-            L_Name_Person.Text = "ФИО"
+                    L_Name_Person.Text = "ФИО"
 
+                    Dim Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index As String
 
+                    Country_Code = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(0).Value
+                    Client_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(1).Value
+                    Year = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(2).Value
+                    Sample_Set_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(3).Value
+                    Sample_Set_Index = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(4).Value
 
-            Dim Country_Code, Client_ID, Year, Sample_Set_ID, Sample_Set_Index As String
+                    cmd.CommandText = "select distinct Обработано from NaaRes where F_Country_Code = '" & Country_Code & "' and F_Client_ID = '" & Client_ID & "' and F_YEAR = '" & Year & "' and F_Sample_Set_ID = '" & Sample_Set_ID & "' and F_Sample_Set_index = '" & Sample_Set_Index & "'"
 
-            Country_Code = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(0).Value
-            Client_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(1).Value
-            Year = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(2).Value
-            Sample_Set_ID = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(3).Value
-            Sample_Set_Index = Form_Main.DataGridView_Sample_Set.SelectedRows(0).Cells(4).Value
+                    cmd.Connection = sqlConnection1
+                    sqlConnection1.Open()
+                    reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader(0)) Then
+                            ComboBox_Person.Text = reader(0)
+                            ComboBox_Person_SelectedValueChanged(sender, e)
+                        End If
 
+                    End While
+                    sqlConnection1.Close()
 
-            cmd.CommandText = "select distinct Обработано from NaaRes where F_Country_Code = '" & Country_Code & "' and F_Client_ID = '" & Client_ID & "' and F_YEAR = '" & Year & "' and F_Sample_Set_ID = '" & Sample_Set_ID & "' and F_Sample_Set_index = '" & Sample_Set_Index & "'"
+                    B_Fill_In_From_File.Text = "Заполнить из файла"
+                    Clear_Table.Text = "Очистить таблицу"
+                    B_Save.Text = "Сохранить в БД"
+                    B_Save_Final_Report.Text = "Сохранить финальный отчёт"
+                    B_Close.Text = "Закрыть"
 
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then
-                    ComboBox_Person.Text = reader(0)
-                    ComboBox_Person_SelectedValueChanged(sender, e)
-                End If
-
-            End While
-            sqlConnection1.Close()
-
-            B_Fill_In_From_File.Text = "Заполнить из файла"
-            Clear_Table.Text = "Очистить таблицу"
-            B_Save.Text = "Сохранить в БД"
-            B_Save_Final_Report.Text = "Сохранить финальный отчёт"
-            B_Close.Text = "Закрыть"
-
-            OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-            SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
-
-
+                    OpenFileDialog_Fill_In_From_File_NAA_Results.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+                    SaveFileDialog_Final_Report.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+                End Using
+            End Using
 
         Catch ex As Exception
             MsgBox(ex.ToString)
@@ -242,6 +238,10 @@ Public Class Form_NAA_Results
         End Try
     End Sub
 
+    Private Sub DataGridView_Table_Sample_NAA_Results_ColumnHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DataGridView_Table_Sample_NAA_Results.ColumnHeaderMouseClick
+        Exit Sub
+
+    End Sub
     Private Sub B_Save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Save.Click
 
         Try

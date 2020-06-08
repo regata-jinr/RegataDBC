@@ -23,9 +23,9 @@ namespace Extensions.NewForms
                 components.Dispose();
                 _folderDialog?.Dispose();
                 _cts?.Dispose();
+                _ic?.Dispose();
             }
             base.Dispose(disposing);
-            _ic?.Dispose();
         }
 
         private Button ButtonSaveToDB;
@@ -43,8 +43,6 @@ namespace Extensions.NewForms
         private ToolStripMenuItem MenuItemMenuSpectraBgrnd;
         private ToolStripMenuItem MenuItemMenuSpectraAll;
         private FolderBrowserDialog _folderDialog;
-
-
 
         #region Windows Form Designer generated code
 
@@ -73,7 +71,6 @@ namespace Extensions.NewForms
             MenuItemMenuSpectra.DropDownItems.AddRange((new ToolStripItem[] { MenuItemMenuSpectraSLI, MenuItemMenuSpectraLLI1, MenuItemMenuSpectraLLI2, MenuItemMenuSpectraBgrnd, MenuItemMenuSpectraAll }));
             
             this.Text = "Content of set: ";
-            DataGridView.ReadOnly = false;
             MenuItemMenuExportFromGoogle.Click += ExportFromGoogleButton_Click;
             MenuItemMenuExportFromExcel.Click += ExportFromExcelButton_Click;
 
@@ -121,6 +118,8 @@ namespace Extensions.NewForms
             DataGridView.Location = new System.Drawing.Point(18, 35);
             this.DataGridView.Size = new System.Drawing.Size(1162, 615);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+
+            FormClosing += ShowSetContentForm_FormClosing;
         }
 
         private void MenuItemMenuCopyLinkToClip_Click(object sender, EventArgs e)
@@ -132,9 +131,6 @@ namespace Extensions.NewForms
         {
             DataGridView.ClearSelection();
         }
-
-
-
         #endregion
     }
 }

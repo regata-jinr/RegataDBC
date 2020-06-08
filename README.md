@@ -1,4 +1,4 @@
-﻿![](https://psv4.userapi.com/c856436/u3549405/docs/d9/d9708bfc256e/RegataDBCLogoTitle.png)
+﻿![](https://sun9-64.userapi.com/c854124/v854124073/23bc9b/CVquDOCJiLo.jpg)
 
 _Программа предназначена для доступа к данным, полученным в ходе экспериментов на установке ["Регата" ЛНФ, ОИЯИ](http://regata.jinr.ru/)._
 

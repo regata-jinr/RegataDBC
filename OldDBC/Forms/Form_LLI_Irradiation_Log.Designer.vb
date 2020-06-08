@@ -1109,8 +1109,9 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'MaskedTextBox_Date
         '
+        Me.MaskedTextBox_Date.Culture = New System.Globalization.CultureInfo("")
         Me.MaskedTextBox_Date.Location = New System.Drawing.Point(690, 287)
-        Me.MaskedTextBox_Date.Mask = "00/00/0000"
+        Me.MaskedTextBox_Date.Mask = "00.00.0000"
         Me.MaskedTextBox_Date.Name = "MaskedTextBox_Date"
         Me.MaskedTextBox_Date.Size = New System.Drawing.Size(66, 20)
         Me.MaskedTextBox_Date.TabIndex = 227
