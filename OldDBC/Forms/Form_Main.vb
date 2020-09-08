@@ -1674,6 +1674,10 @@ Public Class Form_Main
         System.Diagnostics.Process.Start("https://github.com/regata-jinr/RegataDBC#%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%B0%D1%80%D1%82%D0%B8%D0%B9")
     End Sub
 
+    Private Sub ErrorJournalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ErrorJournalToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://docs.google.com/document/d/14e4ZUJlgrXMQ4VOL0Xopj1fB9Qgd8s1bWbHCoJSEzTU/edit?usp=sharing")
+    End Sub
+
     Public firstFlag As Integer = 0
 
     Private Sub CBFilter_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBFilter.SelectedIndexChanged

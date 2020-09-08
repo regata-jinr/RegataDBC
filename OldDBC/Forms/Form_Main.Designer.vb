@@ -637,11 +637,9 @@ Partial Class Form_Main
         '
         'ErrorJournalToolStripMenuItem
         '
-        Me.ErrorJournalToolStripMenuItem.Enabled = False
         Me.ErrorJournalToolStripMenuItem.Name = "ErrorJournalToolStripMenuItem"
         Me.ErrorJournalToolStripMenuItem.Size = New System.Drawing.Size(152, 20)
         Me.ErrorJournalToolStripMenuItem.Text = "Журнал несоответствий"
-        Me.ErrorJournalToolStripMenuItem.Visible = False
         '
         'ПомощьToolStripMenuItem
         '
