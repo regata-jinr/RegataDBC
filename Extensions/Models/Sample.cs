@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Extensions.Models
 {
@@ -25,7 +26,16 @@ namespace Extensions.Models
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            var newsmp = this.MemberwiseClone() as Sample;
+            newsmp.P_Weighting_LLI = null;
+            newsmp.P_Weighting_SLI = null;
+
+            newsmp.A_Drying_Plan= false;
+            newsmp.A_Freeze_Drying_Plan = false;
+            newsmp.A_Homogenizing_Plan = false;
+            newsmp.A_Pelletization_Plan = false;
+
+            return newsmp;
         }
 
         [Ignore]
