@@ -619,6 +619,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="Resources\headerDict.txt" />
     <None Include="bin\Debug\ClosedXML.dll" />
     <None Include="bin\Debug\DocumentFormat.OpenXml.dll" />

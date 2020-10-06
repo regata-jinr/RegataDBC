@@ -32,6 +32,7 @@ namespace Extensions.NewForms
         private Button ButtonCancel;
         private Button ButtonAddSample;
         private Button ButtonClearSelection;
+        private Button ButtonDeleteRow;
         private Label  SetKeyLabel;
         private ToolStripMenuItem MenuItemMenuCopyLinkToClip;
         private ToolStripMenuItem MenuItemMenuExportFromGoogle;
@@ -97,6 +98,10 @@ namespace Extensions.NewForms
             ButtonAddSample.Name = "ButtonAddSample";
             ButtonAddSample.Click += ButtonAddSample_Click;
 
+            ButtonDeleteRow = new Button();
+            ButtonDeleteRow.Name = "ButtonDeleteRow";
+            ButtonDeleteRow.Click += ButtonDeleteRow_Click;
+
             SetKeyLabel = new Label();
             SetKeyLabel.Name = "SetKeyLabel";
             SetKeyLabel.Text = SetKey;
@@ -105,6 +110,7 @@ namespace Extensions.NewForms
 
             AddButtonToLayout(ButtonAddSample);
             AddButtonToLayout(ButtonClearSelection);
+            AddButtonToLayout(ButtonDeleteRow);
             AddButtonToLayout(ButtonCancel);
             AddButtonToLayout(ButtonSaveToDB);
             ButtonsLayoutPanel.Controls.Add(SetKeyLabel);

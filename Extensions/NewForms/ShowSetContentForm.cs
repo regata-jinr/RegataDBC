@@ -8,6 +8,7 @@ using Extensions.Models;
 using Microsoft.EntityFrameworkCore;
 using Regata.Utilities;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Extensions.NewForms
 {
@@ -104,6 +105,7 @@ namespace Extensions.NewForms
                 FooterStatusStrip.Visible = true;
 
                 DataGridView.Columns["A_Sample_ID"].ReadOnly = true;
+                DataGridView.Columns["I_SLI_Date_Start"].ReadOnly = true;
                 DataGridView.Columns["P_Weighting_SLI"].ReadOnly = true;
                 DataGridView.Columns["P_Weighting_LLI"].ReadOnly = true;
             }
@@ -147,6 +149,33 @@ namespace Extensions.NewForms
                 }
             }
             DataGridView.ClearSelection();
+        }
+
+        private async void ButtonDeleteRow_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DataGridView.SelectedCells.Count == 0)
+                {
+                    MessageBoxTemplates.InfoSync(_labels.GetLabel("SelectBeforeRemove"));
+                    return;
+                }
+
+                var res = MessageBox.Show(_labels.GetLabel("WarningBeforeRemove"),"Warning",MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+                if (res == DialogResult.Cancel) return;
+
+                foreach (DataGridViewCell selCell in DataGridView.SelectedCells)
+                {
+                    _ic.Samples.Remove(Data.Where(s => s.ToString() == SetKey && s.A_Sample_ID == selCell.OwningRow.Cells["A_Sample_ID"].Value.ToString()).FirstOrDefault());
+                    DataGridView.Rows.Remove(selCell.OwningRow);
+                }
+                await _ic.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBoxTemplates.ErrorSync(ex.Message);
+            }
         }
 
         private async void ButtonSaveToDB_Click(object sender, EventArgs e)
