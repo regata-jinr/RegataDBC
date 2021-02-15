@@ -4,10 +4,11 @@ namespace Extensions.Models
 {
     public class InfoContext : DbContext
     {
-        public DbSet<Sample>      Samples { get; set; }
-        public DbSet<SetInfo>     Sets    { get; set; }
-        public DbSet<SampleTypes> Types   { get; set; }
-        public DbSet<ScRecord>    Records { get; set; }
+        public DbSet<Sample>       Samples   { get; set; }
+        public DbSet<SetInfo>      Sets      { get; set; }
+        public DbSet<SampleTypes>  Types     { get; set; }
+        public DbSet<ScRecord>     Records   { get; set; }
+        public DbSet<ReweightInfo> Reweights { get; set; }
 
 
         private readonly string connectionString;
@@ -36,6 +37,9 @@ namespace Extensions.Models
 
             modelBuilder.Entity<ScRecord>()
                 .HasKey(s => new { s.SampleSet, s.Sample_ID });
+
+            modelBuilder.Entity<ReweightInfo>()
+               .HasKey(r => new { r.loadNumber, r.Country_Code, r.Client_ID, r.Year, r.Sample_Set_ID, r.Sample_Set_Index, r.Sample_ID });
         }
     }
 }

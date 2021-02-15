@@ -1531,7 +1531,8 @@ Public Class Form_Main
     End Sub
 
     Private Sub ResetLoginButton_Click(sender As Object, e As EventArgs) Handles ResetLoginButton.Click
-        Extensions.PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", us, "")
+        Extensions.PasswordManager.RemoveCredentials($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
+
         Application.Restart()
     End Sub
 

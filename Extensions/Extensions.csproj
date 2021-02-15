@@ -19,10 +19,10 @@
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="UITemplatesWinForm">
-      <HintPath>..\..\Libs\UITemplatesWinForm\bin\Release\net48\UITemplatesWinForm.dll</HintPath>
+      <HintPath>bin\Release\net48\UITemplatesWinForm.dll</HintPath>
     </Reference>
     <Reference Include="Utilities">
-      <HintPath>..\..\Libs\Utilities\bin\Release\net48\Utilities.dll</HintPath>
+      <HintPath>bin\Release\net48\Utilities.dll</HintPath>
     </Reference>
   </ItemGroup>
 

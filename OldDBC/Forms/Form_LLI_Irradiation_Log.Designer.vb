@@ -198,6 +198,7 @@ Partial Class Form_LLI_Irradiation_Log
         Me.L_Name_Download = New System.Windows.Forms.Label()
         Me.ButtonSaveSpectra = New System.Windows.Forms.Button()
         Me.FolderBrowserDialogSaveSpectra = New System.Windows.Forms.FolderBrowserDialog()
+        Me.ButtonShowReweight = New System.Windows.Forms.Button()
         CType(Me.DataGridView_Table_Monitor, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Table_Monitor_BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NAA_DB_EXPDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1326,9 +1327,9 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'Button_Save_LLI_Log_To_File
         '
-        Me.Button_Save_LLI_Log_To_File.Location = New System.Drawing.Point(838, 9)
+        Me.Button_Save_LLI_Log_To_File.Location = New System.Drawing.Point(859, 9)
         Me.Button_Save_LLI_Log_To_File.Name = "Button_Save_LLI_Log_To_File"
-        Me.Button_Save_LLI_Log_To_File.Size = New System.Drawing.Size(138, 23)
+        Me.Button_Save_LLI_Log_To_File.Size = New System.Drawing.Size(117, 23)
         Me.Button_Save_LLI_Log_To_File.TabIndex = 268
         Me.Button_Save_LLI_Log_To_File.Text = "Save LLI log to file"
         Me.Button_Save_LLI_Log_To_File.UseVisualStyleBackColor = True
@@ -1406,9 +1407,9 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'Button_Samples_By_Detectors
         '
-        Me.Button_Samples_By_Detectors.Location = New System.Drawing.Point(690, 9)
+        Me.Button_Samples_By_Detectors.Location = New System.Drawing.Point(717, 9)
         Me.Button_Samples_By_Detectors.Name = "Button_Samples_By_Detectors"
-        Me.Button_Samples_By_Detectors.Size = New System.Drawing.Size(142, 23)
+        Me.Button_Samples_By_Detectors.Size = New System.Drawing.Size(136, 23)
         Me.Button_Samples_By_Detectors.TabIndex = 277
         Me.Button_Samples_By_Detectors.Text = "Samples by detectors"
         Me.Button_Samples_By_Detectors.UseVisualStyleBackColor = True
@@ -1515,18 +1516,28 @@ Partial Class Form_LLI_Irradiation_Log
         '
         'ButtonSaveSpectra
         '
-        Me.ButtonSaveSpectra.Location = New System.Drawing.Point(542, 8)
+        Me.ButtonSaveSpectra.Location = New System.Drawing.Point(584, 9)
         Me.ButtonSaveSpectra.Name = "ButtonSaveSpectra"
-        Me.ButtonSaveSpectra.Size = New System.Drawing.Size(142, 23)
+        Me.ButtonSaveSpectra.Size = New System.Drawing.Size(127, 23)
         Me.ButtonSaveSpectra.TabIndex = 289
         Me.ButtonSaveSpectra.Text = "Save Spectra"
         Me.ButtonSaveSpectra.UseVisualStyleBackColor = True
+        '
+        'ButtonShowReweight
+        '
+        Me.ButtonShowReweight.Location = New System.Drawing.Point(481, 9)
+        Me.ButtonShowReweight.Name = "ButtonShowReweight"
+        Me.ButtonShowReweight.Size = New System.Drawing.Size(97, 23)
+        Me.ButtonShowReweight.TabIndex = 290
+        Me.ButtonShowReweight.Text = "Вес образцов"
+        Me.ButtonShowReweight.UseVisualStyleBackColor = True
         '
         'Form_LLI_Irradiation_Log
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(985, 919)
+        Me.Controls.Add(Me.ButtonShowReweight)
         Me.Controls.Add(Me.ButtonSaveSpectra)
         Me.Controls.Add(Me.TextBox_Download)
         Me.Controls.Add(Me.L_Name_Download)
@@ -1789,4 +1800,5 @@ Partial Class Form_LLI_Irradiation_Log
     Friend WithEvents L_Name_Download As System.Windows.Forms.Label
     Friend WithEvents ButtonSaveSpectra As Button
     Friend WithEvents FolderBrowserDialogSaveSpectra As FolderBrowserDialog
+    Friend WithEvents ButtonShowReweight As Button
 End Class

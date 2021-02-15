@@ -3033,4 +3033,8 @@ a:          cmd.CommandText = "DELETE FROM dbo.table_LLI_Irradiation_Log " +
 
     End Sub
 
+    Private Sub ButtonShowReweight_Click(sender As Object, e As EventArgs) Handles ButtonShowReweight.Click
+        Dim reweights As New Extensions.NewForms.ReweightsInfoForm(Integer.Parse(TextBox_Download.Text))
+        reweights.Show()
+    End Sub
 End Class
