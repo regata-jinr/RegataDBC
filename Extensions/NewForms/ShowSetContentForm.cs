@@ -111,7 +111,7 @@ namespace Extensions.NewForms
             }
         }
 
-        private async void ShowSetContentForm_Load(object sender, EventArgs e)
+        private void ShowSetContentForm_Load(object sender, EventArgs e)
         {
             ChangeLanguageOfControlsTexts(Controls);
             DataGridView.ClearSelection();
@@ -206,7 +206,7 @@ namespace Extensions.NewForms
             }
         }
 
-        private async void ExportFromExcelButton_Click(object sender, EventArgs e)
+        private void ExportFromExcelButton_Click(object sender, EventArgs e)
         {
             MessageBoxTemplates.InfoSync("Functional would soon be added");
         }
@@ -258,6 +258,7 @@ namespace Extensions.NewForms
                 FooterStatusProgressBar.Value = FooterStatusProgressBar.Maximum;
                 FooterStatusLabel.Text = _labels.GetLabel("SuccessExport");
                 await _ic.Samples.AddRangeAsync(Data);
+                Data.OrderBy(d => int.Parse(d.A_Sample_ID)).ToArray();
                 //await _ic.SaveChangesAsync();
             }
             catch (NullReferenceException nre)
@@ -293,11 +294,11 @@ namespace Extensions.NewForms
                 newSamp = Data.Last().Clone() as Sample;
                 newSamp.A_Sample_ID = (int.Parse(newSamp.A_Sample_ID) + 1).ToString("d2");
 
-                if (int.Parse(newSamp.A_Sample_ID) > 99)
-                {
-                    MessageBox.Show(_labels.GetLabel("MoreThan99Message"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                //if (int.Parse(newSamp.A_Sample_ID) > 99)
+                //{
+                //    MessageBox.Show(_labels.GetLabel("MoreThan99Message"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //    return;
+                //}
             }
             else
             {
@@ -339,7 +340,7 @@ namespace Extensions.NewForms
             {
                 MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (OperationCanceledException ose)
+            catch (OperationCanceledException)
             {
                 try
                 {
@@ -403,7 +404,7 @@ namespace Extensions.NewForms
             {
                 MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (OperationCanceledException ose)
+            catch (OperationCanceledException)
             {
                 try
                 {
@@ -479,7 +480,7 @@ namespace Extensions.NewForms
             {
                 MessageBox.Show(_labels.GetLabel("SpectraNotFound"), Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (OperationCanceledException ose)
+            catch (OperationCanceledException)
             {
                 FooterStatusProgressBar.Value = 0;
                 FooterStatusLabel.Text = _labels.GetLabel("CancelOperation");

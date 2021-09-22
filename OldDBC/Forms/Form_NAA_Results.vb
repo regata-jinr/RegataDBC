@@ -141,12 +141,12 @@ Public Class Form_NAA_Results
                     For Each column As DataGridViewColumn In DataGridView_Table_Sample_NAA_Results.Columns
                         If dti.Columns.Contains(column.HeaderText) Then
                             For k As Integer = 0 To dti.Rows.Count - 1
-                                DataGridView_Table_Sample_NAA_Results.Rows(k).Cells(column.Index).Value = dti(k)(dti.Columns.IndexOf(column.HeaderText))
+                                DataGridView_Table_Sample_NAA_Results.Rows(k).Cells(column.Index).Value = dti.Rows(k)(dti.Columns.IndexOf(column.HeaderText))
                             Next
                         End If
 
                     Next
-                    ComboBox_Person.Text = dti(0)(7).ToString
+                    ComboBox_Person.Text = dti.Rows(0)(7).ToString
                     dti.Clear()
 
                 End Using

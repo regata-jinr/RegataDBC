@@ -1,0 +1,338 @@
+[
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "IrradiationRegister",
+        "RusText": "Журнал облучений",
+        "EngText": "Irradiation register"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "lli",
+        "RusText": "ДЖИ-1",
+        "EngText": "LLI-1"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "sli",
+        "RusText": "КЖИ",
+        "EngText": "SLI"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "LanguageMenuItem",
+        "RusText": "Language",
+        "EngText": "Language"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "English",
+        "RusText": "English",
+        "EngText": "English"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Russian",
+        "RusText": "Russian",
+        "EngText": "Russian"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "tabPage1",
+        "RusText": "Образцы",
+        "EngText": "Samples"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "tabPage2",
+        "RusText": "Стандарты",
+        "EngText": "SRMs"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "tabPage3",
+        "RusText": "Мониторы",
+        "EngText": "Monitors"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_1_0",
+        "RusText": "Партии образцов",
+        "EngText": "Samples sets"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_1_1",
+        "RusText": "Образцы из выбранной партии",
+        "EngText": "Samples from selected set"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_2_0",
+        "RusText": "Партии стандартов",
+        "EngText": "SRMs sets"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_2_1",
+        "RusText": "Стандарты из выбранной партии",
+        "EngText": "SRMs from selected set"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_3_0",
+        "RusText": "Партии мониторов",
+        "EngText": "Monitors sets"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "label_dgv_3_1",
+        "RusText": "Мониторы из выбранной партии",
+        "EngText": "Monitors from selected set"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "LoadNumber",
+        "RusText": "Загрузка",
+        "EngText": "LoadNumber"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Number",
+        "RusText": "Номер",
+        "EngText": "Number"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SLIWeight",
+        "RusText": "Вес КЖИ, г.",
+        "EngText": "SLI weight, gr."
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "LLIWeight",
+        "RusText": "Вес ДЖИ, г.",
+        "EngText": "LLI weight, gr."
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SetName",
+        "RusText": "Имя партии",
+        "EngText": "Set name"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SetNumber",
+        "RusText": "Номер партии",
+        "EngText": "Set number"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SetWeight",
+        "RusText": "Вес партии, г.",
+        "EngText": "Set weight, gr."
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DateTimeStart",
+        "RusText": "Дата начала облучения",
+        "EngText": "Irr. date start"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DateTimeFinish",
+        "RusText": "Дата завершения облучения",
+        "EngText": "Irr. date finish"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "CountryCode",
+        "RusText": "Код страны",
+        "EngText": "Country code"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "ClientNumber",
+        "RusText": "Код клиента",
+        "EngText": "Client id"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SetNumber",
+        "RusText": "Номер партии",
+        "EngText": "Sample set id"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SetIndex",
+        "RusText": "Индекс партии",
+        "EngText": "Sample set index"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "SampleNumber",
+        "RusText": "Номер образца",
+        "EngText": "Sample id"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Year",
+        "RusText": "Год",
+        "EngText": "Year"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Container",
+        "RusText": "Номер конт.",
+        "EngText": "Cont. num."
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Position",
+        "RusText": "Позиция",
+        "EngText": "Pos. num."
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonAddAllSamples",
+        "RusText": "Добавить всё",
+        "EngText": "Add all"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonAddSelectedSamplesToReg",
+        "RusText": "Добавить выделенный образец",
+        "EngText": "Add selected sample"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonRemoveSelectedSamples",
+        "RusText": "Удалить выбранные записи",
+        "EngText": "Remove selected records"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonClearRegister",
+        "RusText": "Очистить журнал",
+        "EngText": "Clear register"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonCancel",
+        "RusText": "Добавить всё",
+        "EngText": "Add all"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonsRegFormBox",
+        "RusText": "Формирование журнала облучений",
+        "EngText": "Irradiation register panel"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DurationControlLabelDays",
+        "RusText": "Дни",
+        "EngText": "Day"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DurationControlLabelHours",
+        "RusText": "Часы",
+        "EngText": "Hour"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DurationControlLabelMinutes",
+        "RusText": "Мин",
+        "EngText": "Min"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DurationControlLabelSeconds",
+        "RusText": "Сек",
+        "EngText": "Sec"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "DurationControlGroupBox",
+        "RusText": "Длительность",
+        "EngText": "Duration"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "controlsIrrParams",
+        "RusText": "Параметры облучений",
+        "EngText": "Irradiation params"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonAssingNowDateTime",
+        "RusText": "Записать время начала",
+        "EngText": "Assing date start"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "rb_Single_3",
+        "RusText": "20",
+        "EngText": "20"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "CheckedArrayControlContainers",
+        "RusText": "Контейнер",
+        "EngText": "Container"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "groupBoxMainRDGV",
+        "RusText": "Журнал облучений",
+        "EngText": "Irradiation register"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "buttonRehandle",
+        "RusText": "Перепаковано",
+        "EngText": "Rehandled"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "ChangeDateMenu",
+        "RusText": "Сменить дату журнала",
+        "EngText": "Change register date"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "ChannelMenuStrip",
+        "RusText": "Канал облучения",
+        "EngText": "Irradiation channel"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Duration",
+        "RusText": "Продолжительность, сек.",
+        "EngText": "Duration, sec"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "Note",
+        "RusText": "Примечание",
+        "EngText": "Note"
+    },
+    {
+        "FormName": "IrradiationRegister",
+        "ComponentName": "StatusMenuItem",
+        "RusText": "Детализация сообщений",
+        "EngText": "Verbosity"
+    },
+    {
+        "FormName": "ContainersToDetectorsForm",
+        "ComponentName": "buttonExportToCSV",
+        "RusText": "Экспорт в CSV файл",
+        "EngText": "Export to CSV file"
+    },
+    {
+        "FormName": "ContainersToDetectorsForm",
+        "ComponentName": "buttonExportToExcel",
+        "RusText": "Экспорт в Excel",
+        "EngText": "Export to Excel"
+    }
+]

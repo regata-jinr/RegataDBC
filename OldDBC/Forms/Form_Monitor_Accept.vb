@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Windows.Forms
 
 Public Class Form_Monitor_Accept
     Private Sub Form_Monitor_Accept_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -283,7 +284,7 @@ b1:                                 currentRow = currentRow.Trim 'удаляем
                                     While InStr(currentRow, "  ") > 0
                                         currentRow = Replace(currentRow, "  ", " ") ' заменяем все двойные пробелы одинарными
                                     End While
-                                    If currentRow(currentRow.Count - 1) <> " " Then currentRow = currentRow + " " 'добавляем пробел в конец строки
+                                    If currentRow(currentRow.Length - 1) <> " " Then currentRow = currentRow + " " 'добавляем пробел в конец строки
                                     Samples_Names(row_count, 0) = Mid(currentRow, 1, InStr(1, currentRow, " ") - 1) 'индекс пробы - первое слово до пробела
                                     currentRow = Replace(currentRow, Samples_Names(row_count, 0) + " ", "", , 1, )
                                     Samples_Names(row_count, 1) = Mid(currentRow, 1, InStr(1, currentRow, " ") - 1) 'имя образца - первое слово до пробела

@@ -1,7 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports System.Data.SqlClient
 Imports System.Globalization
-Imports System.Threading.Tasks
+Imports System.Linq
+
+
 
 Public Class Form_Main
     Public us As String
@@ -161,7 +162,7 @@ Public Class Form_Main
             'L_NSSID_New_Sample_Set_ID.Text = MaskedTextBox_New_Sample_Set_ID.Text
 
             cmd.CommandText = "SELECT MAX(Sample_Set_ID) FROM dbo.Table_Sample_Set WHERE Year = '" + Form_Sample_Set_Accept.L_NSSID_Year.Text + "'"
-            cmd.CommandType = CommandType.Text
+            'cmd.CommandType = CommandType.Text
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
             reader = cmd.ExecuteReader()
@@ -411,6 +412,7 @@ Public Class Form_Main
             Me.Text = $"Regata experiment data base client - {Application.ProductVersion}   {us}"
         End If
         Try
+            InitializeComponent()
             CBFilter.Text = "Показать все"
 
             Using sqlConnection1 As New SqlConnection(MyConnectionString)
@@ -1531,7 +1533,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub ResetLoginButton_Click(sender As Object, e As EventArgs) Handles ResetLoginButton.Click
-        Extensions.PasswordManager.RemoveCredentials($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
+        AdysTech.CredentialManager.CredentialManager.RemoveCredentials($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
 
         Application.Restart()
     End Sub

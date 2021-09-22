@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Linq
 
 Public Class Form_Notice
 

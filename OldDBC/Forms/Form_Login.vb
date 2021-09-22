@@ -2,8 +2,11 @@
 Imports System.Threading.Tasks
 Imports Squirrel
 Imports System.Net
+Imports System.Linq
 Imports System.IO
 Imports Extensions
+Imports AdysTech.CredentialManager
+
 
 Public Class Form_Login
 
@@ -57,14 +60,15 @@ Public Class Form_Login
         Try
 
             If CheckBoxKeep.Checked Then
-                If Not PasswordManager.SetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", UsernameTextBox.Text, PasswordTextBox.Text) Then
-                    Debug.WriteLine("Сохранение пароля не произошло")
-                End If
+                Dim nc As NetworkCredential = New NetworkCredential()
+                nc.UserName = UsernameTextBox.Text
+                nc.Password = PasswordTextBox.Text
+                CredentialManager.SaveCredentials($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC", nc)
             End If
 
             Form_Main.MyConnectionString = $"{My.Settings.NAA_DB_EXPConnectionString}User ID={UsernameTextBox.Text};Password={PasswordTextBox.Text}"
 #If DEBUG Then
-            Form_Main.MyConnectionString = "Data Source=RUMLAB\REGATALOCAL;Initial Catalog=NAA_DB_TEST;Integrated Security=True;User ID=bdrum" ' abdusamadzoda
+            Form_Main.MyConnectionString = "Data Source=RUMLAB;Initial Catalog=NAA_DB;Integrated Security=True;User ID=bdrum" ' abdusamadzoda
             CreateObject("WScript.Shell").Popup("You are in the debug mode. Don't forget switch to release before publishing.", 3, "D E B U G   M O D E")
 #End If
             Form_Main.us = UsernameTextBox.Text
@@ -99,12 +103,14 @@ Public Class Form_Login
         Await GetUpdate()
 #End If
 
-        If PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC") IsNot Nothing Then
-            Dim uc As Extensions.UserCredential = PasswordManager.GetCredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
-            UsernameTextBox.Text = uc.Login
-            PasswordTextBox.Text = uc.Password
+        Dim uc As ICredential = CredentialManager.GetICredential($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}_RDBC")
+
+        If uc IsNot Nothing Then
+            Dim nc As NetworkCredential = uc.ToNetworkCredential()
+            UsernameTextBox.Text = nc.UserName
+            PasswordTextBox.Text = nc.Password
             CheckBoxKeep.Checked = True
-            If Not String.IsNullOrEmpty(uc.Password) Then
+            If Not String.IsNullOrEmpty(nc.Password) Then
                 OK_Click(sender, e)
             End If
         End If

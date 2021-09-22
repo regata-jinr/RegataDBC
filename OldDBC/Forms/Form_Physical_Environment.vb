@@ -198,7 +198,7 @@ b:                          currentRow = currentRow.Trim 'удаляем про�
                             While InStr(currentRow, "  ") > 0
                                 currentRow = Replace(currentRow, "  ", " ") ' заменяем все двойные пробелы одинарными
                             End While
-                            If currentRow(currentRow.Count - 1) <> " " Then currentRow = currentRow + " " 'добавляем пробел в конец строки
+                            If currentRow(currentRow.Length - 1) <> " " Then currentRow = currentRow + " " 'добавляем пробел в конец строки
                             current_value = Mid(currentRow, 1, InStr(1, currentRow, " ") - 1) 'дата - первое слово до пробела
                             Data_Time(row_count, 0) = current_value
                             currentRow = Replace(currentRow, current_value + " ", "", , 1, )

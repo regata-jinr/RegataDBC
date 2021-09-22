@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿Imports System.Windows.Forms
+
+
 Partial Class Form_Main
     Inherits System.Windows.Forms.Form
 

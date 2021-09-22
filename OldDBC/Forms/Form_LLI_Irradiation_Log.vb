@@ -1,6 +1,5 @@
-﻿Imports System.CodeDom.Compiler
-Imports System.Data.SqlClient
-Imports System.Globalization
+﻿Imports System.Globalization
+Imports System.Linq
 
 Public Class Form_LLI_Irradiation_Log
 
