@@ -500,9 +500,8 @@ Public Class Form_Main
 
             MaskedTextBoxDateOfNewJournal.Text = Now.Date.ToString("dd.MM.yyyy")
 
-
-            Regata.Utilities.Settings.ConnectionString = MyConnectionString
-            Regata.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
+            OldCore.Utilities.Settings.ConnectionString = MyConnectionString
+            OldCore.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -527,131 +526,29 @@ Public Class Form_Main
 
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
 
-        Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
-            Dim SLI_Irradiation_Log As Date
-            Try
-                Dim prov = CultureInfo.InvariantCulture
-                SLI_Irradiation_Log = DateTime.ParseExact(MaskedTextBoxDateOfNewJournal.Text, "dd.MM.yyyy", prov)
-            Catch ex As Exception
-                LangException(language, ex.Message & ex.ToString)
-                Exit Sub
-            End Try
-
-            Dim sqlConnection1 As New SqlConnection(MyConnectionString)
-            Dim cmd As New SqlCommand
-            Dim reader As SqlDataReader
-            cmd.CommandText = $"SELECT COUNT(*) FROM table_SLI_Irradiation_Log WHERE Date_Start = convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-
-            While reader.Read()
-                If reader(0) > 0 Then
-                    If language = "Русский" Then
-                        MsgBox("This SLI irradiation log already exist!", MsgBoxStyle.Exclamation, Me.Text)
-                    ElseIf language = "English" Then
-                        MsgBox("Такой журнал КЖИ уже существует!", MsgBoxStyle.Exclamation, Me.Text)
-                    End If
-                    sqlConnection1.Close()
-                    Exit Sub
-                End If
-            End While
-            sqlConnection1.Close()
-
-            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = MaskedTextBoxDateOfNewJournal.Text
-
-            ForSliLog.Show()
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
-            End If
-            ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
-            End If
-            ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
-            End If
-            ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
+            Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(DateTime.Now, Regata.Core.DataBase.Models.IrradiationType.sli)
+            m.mainForm.Show()
+            'Regata.Core.Settings.GlobalSettings.User = us
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Exit Sub
+        Exit Sub
         End Try
     End Sub
 
     Private Sub B_Select_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_SLI_Irradiation_Log.Click
-        Dim ForSliLog As New Form_SLI_Irradiation_Log
         Try
-            If ListBox_SLI_Irradiation_Log_Date.Items.Count < 1 Then
-                If language = "Русский" Then
-                    MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            If ListBox_SLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                If language = "Русский" Then
-                    MsgBox("Выберите журнал КЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            'Form_SLI_Table.DataGridView_SLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
-            Dim s As String
-            s = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
-            Dim jDateTime As New DateTime(Integer.Parse(s.Split(".")(2)), Integer.Parse(s.Split(".")(1)), Integer.Parse(s.Split(".")(0)))
-
-            'ForSliLog.Table_SLI_Irradiation_Log_TableAdapter.Fill_SLI_Irradiation_Log(ForSliLog.NAA_DB_EXPDataSet.table_SLI_Irradiation_Log, jDateTime.ToShortDateString())
-
-            ForSliLog.MaskedTextBox_SLI_Irradiation_Log.Text = jDateTime.Date.ToString("dd.MM.yyyy")
-
-            ' Me.Enabled = False
-            ForSliLog.Show()
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            ForSliLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
-            End If
-            ForSliLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-            ElseIf language = "English" Then
-                ForSliLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
-            End If
-            ForSliLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
-            '  Me.Enabled = False
+            Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+            Dim s As String = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
+            Dim d As DateTime = DateTime.Parse(s, System.Globalization.CultureInfo.CurrentCulture)
+            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(d, Regata.Core.DataBase.Models.IrradiationType.sli)
+            m.mainForm.Show()
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
-            Exit Sub
+        Exit Sub
         End Try
     End Sub
 
@@ -711,70 +608,18 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_New_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_LLI_Irradiation_Log.Click
-        Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
-            Dim LLI_Irradiation_Log As Date
-            Try
-                LLI_Irradiation_Log = MaskedTextBoxDateOfNewJournal.Text
-            Catch ex As Exception
-                If language = "Русский" Then
-                    MsgBox("Check date!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Проверьте дату!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End Try
-
             Dim sqlConnection1 As New SqlConnection(MyConnectionString)
             Dim cmd As New SqlCommand
-            Dim reader As SqlDataReader
 
-            cmd.CommandText = $"declare @maxln int; SELECT @maxln = max(loadNumber) from table_LLI_Irradiation_Log; update  table_LLI_Irradiation_Log set loadNumber = @maxln where Date_Start =  convert(datetime, '{MaskedTextBoxDateOfNewJournal.Text}', 104);"
+            cmd.CommandText = "SELECT max(loadNumber) from Irradiations"
             cmd.Connection = sqlConnection1
             sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            sqlConnection1.Close()
-
-            cmd.CommandText = " SELECT max(loadNumber) from table_LLI_Irradiation_Log"
-            cmd.Connection = sqlConnection1
-            sqlConnection1.Open()
-            reader = cmd.ExecuteReader()
-            ' по-хорошему надо добавить проверку на число 
-            While reader.Read()
-                If Not IsDBNull(reader(0)) Then
-                    FormLLiLog.TextBox_Download.Text = reader(0) + 1
-                Else
-                    FormLLiLog.TextBox_Download.Text = InputBox("Программа не может определить номер загрузки, пожалуйста, введите его самостоятельно.", "Ввод номера загрузки", "0")
-                End If
-            End While
-
-            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = MaskedTextBoxDateOfNewJournal.Text
-
-            ' Me.Enabled = False
-            FormLLiLog.Show()
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Все партии образцов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "All sample sets"
-            End If
-            FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Все партии стандартов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "All SRM sets"
-            End If
-            FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Все партии мониторов"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "All monitor sets"
-            End If
-            FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
-            '  Me.Enabled = False
+            Dim maxLoadNumber = DirectCast(cmd.ExecuteScalar(), Integer)
+            Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(DateTime.Now, Regata.Core.DataBase.Models.IrradiationType.lli, maxLoadNumber + 1)
+            m.mainForm.Show()
+            'Regata.Core.Settings.GlobalSettings.User = us
 
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
@@ -783,65 +628,19 @@ Public Class Form_Main
     End Sub
 
     Private Sub B_Select_LLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Select_LLI_Irradiation_Log.Click
-        Dim FormLLiLog As New Form_LLI_Irradiation_Log
         Try
-            If ListBox_LLI_Irradiation_Log_Date.Items.Count < 1 Then
-                If language = "Русский" Then
-                    MsgBox("Пустой список журналов!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Empty list of logs!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            If ListBox_LLI_Irradiation_Log_Date.SelectedItems.Count = 0 Then
-                If language = "Русский" Then
-                    MsgBox("Выберите журнал ДЖИ!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf language = "English" Then
-                    MsgBox("Select LLI log!", MsgBoxStyle.Exclamation, Me.Text)
-                End If
-                Exit Sub
-            End If
-
-            'Form_LLI_Table.DataGridView_LLI_Table.ColumnHeadersDefaultCellStyle.Alignment.MiddleCenter()
-            ' данная строка кода позволяет загрузить данные в таблицу "NAA_DB_EXPDataSet.table_Sample". При необходимости она может быть перемещена или удалена.
-            FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Connection.ConnectionString = MyConnectionString
             Dim jDate As String
-            Dim number As String
+            Dim number As Integer
 
             jDate = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(0)
-            number = Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1)
-            Dim jDateTime As New DateTime(Integer.Parse(jDate.Split(".")(2)), Integer.Parse(jDate.Split(".")(1)), Integer.Parse(jDate.Split(".")(0)))
-            'FormLLiLog.Table_LLI_Irradiation_Log_TableAdapter.Fill_LLI_Irradiation_Log(FormLLiLog.NAA_DB_EXPDataSet.table_LLI_Irradiation_Log, jDateTime.ToShortDateString(), number)
+            number = Integer.Parse(Split(ListBox_LLI_Irradiation_Log_Date.Text, "-")(1))
+            Dim d As DateTime = DateTime.Parse(jDate, System.Globalization.CultureInfo.CurrentCulture)
 
-            FormLLiLog.MaskedTextBox_LLI_Irradiation_Log.Text = jDateTime.Date.ToString("dd.MM.yyyy")
-            FormLLiLog.TextBox_Download.Text = number
+            Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(d, Regata.Core.DataBase.Models.IrradiationType.lli, number)
+            m.mainForm.Show()
 
-            ' Me.Enabled = False))
-            FormLLiLog.Show()
 
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Партии образцов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Sample_Set_View.SelectedItem = "Sample sets from log"
-            End If
-            FormLLiLog.ComboBox_Sample_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "Партии стандартов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_SRM_Set_View.SelectedItem = "SRM sets from log"
-            End If
-            FormLLiLog.ComboBox_SRM_Set_View_SelectionChangeCommitted(sender, e)
-
-            If language = "Русский" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Партии мониторов из журнала"
-            ElseIf language = "English" Then
-                FormLLiLog.ComboBox_Monitor_Set_View.SelectedItem = "Monitor sets from log"
-            End If
-            FormLLiLog.ComboBox_Monitor_Set_View_SelectionChangeCommitted(sender, e)
-
-            ' Me.Enabled = False
         Catch ex As Exception
             LangException(language, ex.Message & ex.ToString)
             Exit Sub
@@ -1348,10 +1147,11 @@ Public Class Form_Main
             cmd.CommandType = System.Data.CommandType.Text
 
             ' текущий год
-            If ComboBox_Journal_Of_Irradiation_View.SelectedItem = "За текущий год" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = "Current year" Then
+            If ComboBox_Journal_Of_Irradiation_View.SelectedItem = "За текущий год" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = "Current year" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = Nothing Then
                 ListBox_SLI_Irradiation_Log_Date.DrawMode = DrawMode.OwnerDrawFixed
                 ListBox_SLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT Cast(a.Date_Start as nvarchar(10)) + ';' as dates FROM table_SLI_Irradiation_Log  as a where 's' not in (select distinct client_id from table_SLI_Irradiation_Log where Date_Start = a.Date_Start) and Year(a.Date_Start) = Year(GETDATE()) union SELECT DISTINCT Cast(Date_Start as nvarchar(10)) + ';' + Client_ID as dates FROM table_SLI_Irradiation_Log where Client_ID = 's' and Year(Date_Start) = Year(GETDATE()) ORDER BY dates;"
+                cmd.CommandText = "SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and Year(a.DateTimeStart) = Year(GETDATE()) and a.[Type] = 0 union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and Year(DateTimeStart) = Year(GETDATE()) and [Type] = 0 ORDER BY dates;"
+
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1372,15 +1172,13 @@ Public Class Form_Main
                 MaskedTextBoxDateOfNewJournal.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT Date_Start, loadNumber FROM table_LLI_Irradiation_Log ORDER BY Date_Start"
+                cmd.CommandText = "SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null and  Year(DateTimeStart) = Year(GETDATE()) ORDER BY date"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
                 While reader.Read()
                     If Not IsDBNull(reader(0)) Then
-                        If Format(reader(0), "yyyy") = Format(Now(), "yyyy") Then
-                            ListBox_LLI_Irradiation_Log_Date.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString & "-" & reader(1))
-                        End If
+                        ListBox_LLI_Irradiation_Log_Date.Items.Add(Format(reader(0), "dd.MM.yyyy").ToString & "-" & reader(1))
                     End If
                 End While
                 sqlConnection1.Close()
@@ -1395,7 +1193,7 @@ Public Class Form_Main
 
                 ListBox_SLI_Irradiation_Log_Date.DrawMode = DrawMode.OwnerDrawFixed
                 ListBox_SLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT Cast(a.Date_Start as nvarchar(10)) + ';' as dates FROM table_SLI_Irradiation_Log  as a where 's' not in (select distinct client_id from table_SLI_Irradiation_Log where Date_Start = a.Date_Start) union SELECT DISTINCT Cast(Date_Start as nvarchar(10)) + ';' + Client_ID as dates FROM table_SLI_Irradiation_Log where Client_ID = 's' ORDER BY dates;"
+                cmd.CommandText = "SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and a.[Type] = 0 and DateTimeStart is not null union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and [Type] = 0 and DateTimeStart is not null  ORDER BY dates;"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1416,7 +1214,7 @@ Public Class Form_Main
                 MaskedTextBoxDateOfNewJournal.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT Date_Start, loadNumber FROM table_LLI_Irradiation_Log ORDER BY Date_Start"
+                cmd.CommandText = "SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null ORDER BY date"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1545,18 +1343,15 @@ Public Class Form_Main
     Private Sub B_Select_Sample_Set_Click(sender As Object, e As EventArgs) Handles B_Select_Sample_Set.Click
         If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
 
-        'Regata.Utilities.Settings.ConnectionString = MyConnectionString
-        'Regata.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
+        OldCore.Utilities.Settings.ConnectionString = MyConnectionString
+        OldCore.Utilities.Settings.AssemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
 
         Try
             Dim showcontentform As New Extensions.NewForms.ShowSetContentForm(String.Join("-", DataGridView_Sample_Set.SelectedCells.Cast(Of DataGridViewCell).Where(Function(c As DataGridViewCell) c.Value <> Nothing).Select(Function(c As DataGridViewCell) c.Value.ToString()).ToArray()))
             showcontentform.Show()
 
         Catch ex As Exception
-            Dim exx As New Regata.UITemplates.ExceptionEventsArgs()
-            exx.exception = ex
-            exx.Level = Regata.UITemplates.ExceptionLevel.Error
-            Regata.UITemplates.MessageBoxTemplates.WrapExceptionToMessageBox(exx)
+            MsgBox(ex.ToString())
         End Try
     End Sub
 
