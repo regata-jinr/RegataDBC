@@ -1355,7 +1355,7 @@ Public Class Form_Main
         End Try
     End Sub
 
-    Private Async Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             If DataGridView_Sample_Set.SelectedCells.Count = 0 Then Exit Sub
             If DataGridView_Description.Rows(0).Cells(0).Value = 0 Then
