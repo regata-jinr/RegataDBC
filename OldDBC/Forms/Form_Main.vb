@@ -527,9 +527,9 @@ Public Class Form_Main
     Private Sub B_New_SLI_Irradiation_Log_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_New_SLI_Irradiation_Log.Click
 
         Try
-            Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
-            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(DateTime.Now, Regata.Core.DataBase.Models.IrradiationType.sli)
-            m.mainForm.Show()
+            'Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+            'Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(DateTime.Now, Regata.Core.DataBase.Models.IrradiationType.sli)
+            'm.mainForm.Show()
             'Regata.Core.Settings.GlobalSettings.User = us
 
         Catch ex As Exception
@@ -543,7 +543,9 @@ Public Class Form_Main
             Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
             Dim s As String = ListBox_SLI_Irradiation_Log_Date.SelectedItem.Name()
             Dim d As DateTime = DateTime.Parse(s, System.Globalization.CultureInfo.CurrentCulture)
-            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(d, Regata.Core.DataBase.Models.IrradiationType.sli)
+            'Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(d, Regata.Core.DataBase.Models.IrradiationType.sli)
+            'm.mainForm.Show()
+            Dim m As New Regata.Core.UI.WinForms.Forms.Measurements.MeasurementsRegisterForm(d.Date, Regata.Core.DataBase.Models.MeasurementsType.sli)
             m.mainForm.Show()
 
         Catch ex As Exception
@@ -637,7 +639,7 @@ Public Class Form_Main
             Dim d As DateTime = DateTime.Parse(jDate, System.Globalization.CultureInfo.CurrentCulture)
 
             Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
-            Dim m As New Regata.Core.UI.WinForms.Forms.Irradiations.IrradiationRegister(d, Regata.Core.DataBase.Models.IrradiationType.lli, number)
+            Dim m As New Regata.Core.UI.WinForms.Forms.Measurements.MeasurementsRegisterForm(d.Date, Regata.Core.DataBase.Models.MeasurementsType.lli1)
             m.mainForm.Show()
 
 
@@ -1150,7 +1152,8 @@ Public Class Form_Main
             If ComboBox_Journal_Of_Irradiation_View.SelectedItem = "За текущий год" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = "Current year" Or ComboBox_Journal_Of_Irradiation_View.SelectedItem = Nothing Then
                 ListBox_SLI_Irradiation_Log_Date.DrawMode = DrawMode.OwnerDrawFixed
                 ListBox_SLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and Year(a.DateTimeStart) = Year(GETDATE()) and a.[Type] = 0 union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and Year(DateTimeStart) = Year(GETDATE()) and [Type] = 0 ORDER BY dates;"
+                cmd.CommandText = "  SELECT        DISTINCT convert(varchar, mr.IrradiationDate,23) +';' as dates    FROM Measurements  as a        join MeasurementsRegister as mr ON    mr.Id = a.RegId AND            mr.[Type] = 0    where     's' not in     (        select            distinct ClientNumber        from Measurements        where             a.RegId =  RegId and            [Type] = 0    ) and        Year(mr.IrradiationDate) = Year(GETDATE()) and        a.[Type] = 0 union    SELECT DISTINCT convert(varchar, mr.IrradiationDate,23) + ';' + ClientNumber as dates    FROM Measurements as m        join MeasurementsRegister as mr ON    mr.Id = RegId AND            mr.[Type] = 0    where     ClientNumber = 's' and        Year(mr.IrradiationDate) = Year(GETDATE()) and        m.[Type] = 0 ORDER BY dates;"
+                '"SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and Year(a.DateTimeStart) = Year(GETDATE()) and a.[Type] = 0 union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and Year(DateTimeStart) = Year(GETDATE()) and [Type] = 0 ORDER BY dates;"
 
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
@@ -1172,7 +1175,8 @@ Public Class Form_Main
                 MaskedTextBoxDateOfNewJournal.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null and  Year(DateTimeStart) = Year(GETDATE()) ORDER BY date"
+                cmd.CommandText = "SELECT DISTINCT convert(date, IrradiationDate) as date, loadNumber FROM MeasurementsRegister where [Type] = 1 and IrradiationDate is not null  and loadNumber is not null and  Year(IrradiationDate) = Year(GETDATE()) ORDER BY date"
+                '"SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null and  Year(DateTimeStart) = Year(GETDATE()) ORDER BY date"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1193,7 +1197,8 @@ Public Class Form_Main
 
                 ListBox_SLI_Irradiation_Log_Date.DrawMode = DrawMode.OwnerDrawFixed
                 ListBox_SLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and a.[Type] = 0 and DateTimeStart is not null union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and [Type] = 0 and DateTimeStart is not null  ORDER BY dates;"
+                cmd.CommandText = "SELECT        DISTINCT convert(varchar, mr.IrradiationDate,23) +';' as dates    FROM Measurements  as a        join MeasurementsRegister as mr ON    mr.Id = a.RegId AND            mr.[Type] = 0    where     's' not in     (        select            distinct ClientNumber        from Measurements        where             a.RegId =  RegId and            [Type] = 0    ) and        a.[Type] = 0 union    SELECT DISTINCT convert(varchar, mr.IrradiationDate,23) + ';' + ClientNumber as dates    FROM Measurements as m        join MeasurementsRegister as mr ON    mr.Id = RegId AND            mr.[Type] = 0    where     ClientNumber = 's' and  m.[Type] = 0 ORDER BY dates;"
+                '"SELECT DISTINCT convert(varchar, a.DateTimeStart,23) +';' as dates FROM Irradiations  as a where 's' not in (select distinct ClientNumber from Irradiations where convert(varchar, a.DateTimeStart,23) =  convert(varchar, DateTimeStart,23) and [Type] = 0) and a.[Type] = 0 and DateTimeStart is not null union SELECT DISTINCT convert(varchar, DateTimeStart,23) + ';' + ClientNumber as dates FROM Irradiations where ClientNumber = 's' and [Type] = 0 and DateTimeStart is not null  ORDER BY dates;"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1214,7 +1219,8 @@ Public Class Form_Main
                 MaskedTextBoxDateOfNewJournal.Text = Format(Now(), "dd.MM.yyyy")
 
                 ListBox_LLI_Irradiation_Log_Date.Items.Clear()
-                cmd.CommandText = "SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null ORDER BY date"
+                cmd.CommandText = "SELECT DISTINCT convert(date, IrradiationDate) as date, loadNumber FROM MeasurementsRegister where [Type] = 1 and IrradiationDate is not null  and loadNumber is not null ORDER BY date"
+                '"SELECT DISTINCT convert(date, DateTimeStart) as date, loadNumber FROM Irradiations where [Type] = 1 and DateTimeStart is not null  and loadNumber is not null ORDER BY date"
                 cmd.Connection = sqlConnection1
                 sqlConnection1.Open()
                 reader = cmd.ExecuteReader()
@@ -1638,6 +1644,14 @@ Public Class Form_Main
             LangException(language, ex.Message & ex.ToString)
         End Try
     End Sub
+
+
+    Private Sub ShowIrrRegisters_Click(sender As System.Object, e As System.EventArgs) Handles ShowIrrRegisters.Click
+        Regata.Core.DataBase.RegataContext.ConString = MyConnectionString
+        Dim f As New Extensions.NewForms.ChooseIrrRegForm()
+        f.Show()
+    End Sub
+
 
     Private Sub BackgroundWorkerColorizer_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorkerColorizer.DoWork
         ColorizeAll()

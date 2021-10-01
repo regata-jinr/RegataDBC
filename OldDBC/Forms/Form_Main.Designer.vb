@@ -77,6 +77,7 @@ Partial Class Form_Main
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.МенюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowIrrRegisters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
         Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
@@ -602,10 +603,12 @@ Partial Class Form_Main
         '
         'BackgroundWorkerColorizer
         '
+        ShowIrrRegisters.Name = "ShowIrrRegistersMenu"
+        ShowIrrRegisters.Text = "Журналы облучений"
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem, ShowIrrRegisters})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(955, 24)
@@ -851,6 +854,7 @@ Partial Class Form_Main
     Friend WithEvents BackgroundWorkerColorizer As System.ComponentModel.BackgroundWorker
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents МенюToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowIrrRegisters As ToolStripMenuItem
     Friend WithEvents ChangeLang As ToolStripMenuItem
     Friend WithEvents B_Refresh As ToolStripMenuItem
     Friend WithEvents ResetLoginButton As ToolStripMenuItem
