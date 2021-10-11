@@ -77,7 +77,6 @@ Partial Class Form_Main
         Me.BackgroundWorkerColorizer = New System.ComponentModel.BackgroundWorker()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.МенюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShowIrrRegisters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeLang = New System.Windows.Forms.ToolStripMenuItem()
         Me.B_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetLoginButton = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +86,7 @@ Partial Class Form_Main
         Me.HowToDownloadAllSpectraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HowToDownloadSomeSpectraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HowToFindTheSetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowIrrRegisters = New System.Windows.Forms.ToolStripMenuItem()
         Me.MaskedTextBoxDateOfNewJournal = New System.Windows.Forms.MaskedTextBox()
         Me.LabelDateOfNewJournalTitle = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -234,6 +234,7 @@ Partial Class Form_Main
         Me.B_New_SLI_Irradiation_Log.TabIndex = 153
         Me.B_New_SLI_Irradiation_Log.Text = "New SLI irradiation log"
         Me.B_New_SLI_Irradiation_Log.UseVisualStyleBackColor = True
+        Me.B_New_SLI_Irradiation_Log.Visible = False
         '
         'L_Name_Sample_Set
         '
@@ -392,6 +393,7 @@ Partial Class Form_Main
         Me.B_New_LLI_Irradiation_Log.TabIndex = 165
         Me.B_New_LLI_Irradiation_Log.Text = "New LLI irradiation log"
         Me.B_New_LLI_Irradiation_Log.UseVisualStyleBackColor = True
+        Me.B_New_LLI_Irradiation_Log.Visible = False
         '
         'L_Count
         '
@@ -603,12 +605,10 @@ Partial Class Form_Main
         '
         'BackgroundWorkerColorizer
         '
-        ShowIrrRegisters.Name = "ShowIrrRegistersMenu"
-        ShowIrrRegisters.Text = "Журналы облучений"
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem, ShowIrrRegisters})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.МенюToolStripMenuItem, Me.ErrorJournalToolStripMenuItem, Me.ПомощьToolStripMenuItem, Me.ShowIrrRegisters})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(955, 24)
@@ -677,6 +677,12 @@ Partial Class Form_Main
         Me.HowToFindTheSetToolStripMenuItem.Size = New System.Drawing.Size(387, 22)
         Me.HowToFindTheSetToolStripMenuItem.Text = "Как найти партию?"
         '
+        'ShowIrrRegisters
+        '
+        Me.ShowIrrRegisters.Name = "ShowIrrRegisters"
+        Me.ShowIrrRegisters.Size = New System.Drawing.Size(136, 20)
+        Me.ShowIrrRegisters.Text = "Журналы облучений"
+        '
         'MaskedTextBoxDateOfNewJournal
         '
         Me.MaskedTextBoxDateOfNewJournal.BackColor = System.Drawing.Color.White
@@ -687,6 +693,7 @@ Partial Class Form_Main
         Me.MaskedTextBoxDateOfNewJournal.Name = "MaskedTextBoxDateOfNewJournal"
         Me.MaskedTextBoxDateOfNewJournal.Size = New System.Drawing.Size(70, 22)
         Me.MaskedTextBoxDateOfNewJournal.TabIndex = 197
+        Me.MaskedTextBoxDateOfNewJournal.Visible = False
         '
         'LabelDateOfNewJournalTitle
         '
@@ -696,6 +703,7 @@ Partial Class Form_Main
         Me.LabelDateOfNewJournalTitle.Size = New System.Drawing.Size(192, 30)
         Me.LabelDateOfNewJournalTitle.TabIndex = 198
         Me.LabelDateOfNewJournalTitle.Text = "Установите дату нового" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "журнала"
+        Me.LabelDateOfNewJournalTitle.Visible = False
         '
         'Button2
         '

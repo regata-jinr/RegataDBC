@@ -1025,11 +1025,11 @@ Public Class Form_Main
                 OpenSet.Text = "Список для облучения"
                 L_Name_Sample_Set_View.Text = "Выберите тип" & vbCrLf & "фильтра"
 
-                L_Name_SLI_Irradiation_Log.Text = "Журналы облучения КЖИ"
-                B_Select_SLI_Irradiation_Log.Text = "Выбр. жур. обл. КЖИ"
+                L_Name_SLI_Irradiation_Log.Text = "Журналы измерений КЖИ"
+                B_Select_SLI_Irradiation_Log.Text = "Выбр. жур. КЖИ"
                 B_New_SLI_Irradiation_Log.Text = "Новый жур. обл. КЖИ"
-                L_Name_LLI_Irradiation_Log.Text = "Журналы облучения ДЖИ"
-                B_Select_LLI_Irradiation_Log.Text = "Выбр. жур. обл. ДЖИ"
+                L_Name_LLI_Irradiation_Log.Text = "Журналы измерений ДЖИ"
+                B_Select_LLI_Irradiation_Log.Text = "Выбр. жур. ДЖИ"
                 B_New_LLI_Irradiation_Log.Text = "Новый жур. обл. ДЖИ"
                 ComboBox_Journal_Of_Irradiation_View.Items.Clear()
                 ComboBox_Journal_Of_Irradiation_View.Items.Add("За текущий год")
@@ -1075,10 +1075,10 @@ Public Class Form_Main
 
                 L_Name_Sample_Set_View.Text = "Choose type of" & vbCrLf & "filter"
 
-                L_Name_SLI_Irradiation_Log.Text = "SLI irradiation logs"
+                L_Name_SLI_Irradiation_Log.Text = "SLI measurements logs"
                 B_Select_SLI_Irradiation_Log.Text = "Select SLI irradiation log"
                 B_New_SLI_Irradiation_Log.Text = "New SLI irradiation log"
-                L_Name_LLI_Irradiation_Log.Text = "LLI irradiation logs"
+                L_Name_LLI_Irradiation_Log.Text = "LLI measurements logs"
                 B_Select_LLI_Irradiation_Log.Text = "Select LLI irradiation log"
                 B_New_LLI_Irradiation_Log.Text = "New LLI irradiation log"
                 ComboBox_Journal_Of_Irradiation_View.Items.Clear()

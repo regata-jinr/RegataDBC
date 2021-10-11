@@ -1,6 +1,30 @@
 [
   {
     "FormName": "IrradiationRegister",
+    "ComponentName": "SamplesToDetectors",
+    "RusText": "Образцы на детекторах",
+    "EngText": "Samples to detectors"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "buttonMoveDownInContainer",
+    "RusText": "▼",
+    "EngText": "▼"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "buttonMoveUpInContainer",
+    "RusText": "▲",
+    "EngText": "▲"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "controlsMovingInContainer",
+    "RusText": "Смена позиции образца",
+    "EngText": "Change sample position"
+  },
+  {
+    "FormName": "IrradiationRegister",
     "ComponentName": "IrradiationRegister",
     "RusText": "Журнал облучений",
     "EngText": "Irradiation register"
@@ -340,5 +364,649 @@
     "ComponentName": "DisplaySetsParam",
     "RusText": "Отображать только партии из журнала",
     "EngText": "Show only sets from registers"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "MeasurementsTypeMenuItem",
+    "RusText": "Тип измерений",
+    "EngText": "Measurements Type"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "lli1",
+    "RusText": "ДЖИ-1",
+    "EngText": "LLI-1"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "lli2",
+    "RusText": "ДЖИ-2",
+    "EngText": "LLI-2"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "sli",
+    "RusText": "КЖИ",
+    "EngText": "SLI"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "bckg",
+    "RusText": "Фон",
+    "EngText": "Background"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "LanguageMenuItem",
+    "RusText": "Language",
+    "EngText": "Language"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "English",
+    "RusText": "English",
+    "EngText": "English"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Russian",
+    "RusText": "Russian",
+    "EngText": "Russian"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "tabPage1",
+    "RusText": "Журналы облучений",
+    "EngText": "Irradiation Registers"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "tabPage2",
+    "RusText": "Журналы измерений",
+    "EngText": "Measurement Registers"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "label_dgv_1_0",
+    "RusText": "Журналы облучений",
+    "EngText": "Irradiation Registers"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "label_dgv_1_1",
+    "RusText": "Образцы из выбранного журнала",
+    "EngText": "Samples from selected register"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "label_dgv_2_0",
+    "RusText": "Журналы измерений",
+    "EngText": "Measurement Registers"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "label_dgv_2_1",
+    "RusText": "Образцы из выбранного журнала",
+    "EngText": "Samples from selected register"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "LoadNumber",
+    "RusText": "Загрузка",
+    "EngText": "LoadNumber"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Date",
+    "RusText": "Дата",
+    "EngText": "Date"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "CountryCode",
+    "RusText": "Код страны",
+    "EngText": "Country code"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "ClientNumber",
+    "RusText": "Код клиента",
+    "EngText": "Client id"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "SetNumber",
+    "RusText": "Номер партии",
+    "EngText": "Sample set id"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "SetIndex",
+    "RusText": "Индекс партии",
+    "EngText": "Sample set index"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "SampleNumber",
+    "RusText": "Номер образца",
+    "EngText": "Sample id"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Year",
+    "RusText": "Год",
+    "EngText": "Year"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Container",
+    "RusText": "Номер конт.",
+    "EngText": "Cont. num."
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Position",
+    "RusText": "Позиция",
+    "EngText": "Pos. num."
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DiskPosition",
+    "RusText": "Позиция на диске",
+    "EngText": "Pos. on disk"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonRemoveSample",
+    "RusText": "Удалить выбранную запись",
+    "EngText": "Remove selected record"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonAddAllSamples",
+    "RusText": "Добавить всё",
+    "EngText": "Add all"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonAddSampleToReg",
+    "RusText": "Добавить выделенный образец",
+    "EngText": "Add selected sample"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonRemoveSelectedSamples",
+    "RusText": "Удалить выбранные записи",
+    "EngText": "Remove selected records"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonClearRegister",
+    "RusText": "Очистить журнал",
+    "EngText": "Clear register"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonCancel",
+    "RusText": "Добавить всё",
+    "EngText": "Add all"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonsRegFormBox",
+    "RusText": "Формирование журнала измерений",
+    "EngText": "Measurements register panel"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonAddSelectedSamplesToReg",
+    "RusText": "Добавить выделенные записи",
+    "EngText": "Add selected samples"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DurationControlLabelDays",
+    "RusText": "Дни",
+    "EngText": "Day"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DurationControlLabelHours",
+    "RusText": "Часы",
+    "EngText": "Hour"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DurationControlLabelMinutes",
+    "RusText": "Мин",
+    "EngText": "Min"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DurationControlLabelSeconds",
+    "RusText": "Сек",
+    "EngText": "Sec"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DurationControlGroupBox",
+    "RusText": "Длительность",
+    "EngText": "Duration"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "controlsMeasParams",
+    "RusText": "Параметры измерений",
+    "EngText": "Measurements params"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonShowAcqQueue",
+    "RusText": "Образцы на диске",
+    "EngText": "Show Acq Queue"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "rb_Single_0",
+    "RusText": "2.5",
+    "EngText": "2.5"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "rb_Single_1",
+    "RusText": "5",
+    "EngText": "5"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "rb_Single_2",
+    "RusText": "10",
+    "EngText": "10"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "rb_Single_3",
+    "RusText": "20",
+    "EngText": "20"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "CheckedArrayControlHeights",
+    "RusText": "Высота",
+    "EngText": "Height"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "CheckedArrayControlHeights",
+    "RusText": "Высота",
+    "EngText": "Height"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "groupBoxMainRDGV",
+    "RusText": "Журнал измерений",
+    "EngText": "Measurement register"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonStop",
+    "RusText": "Стоп",
+    "EngText": "Stop"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonClear",
+    "RusText": "Очистить",
+    "EngText": "Clear"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonPause",
+    "RusText": "Пауза/Прод.",
+    "EngText": "Pause/Cont."
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonStart",
+    "RusText": "Старт",
+    "EngText": "Start"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "CheckedAvailableDetectorArrayControl",
+    "RusText": "Детекторы",
+    "EngText": "Detectors"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DownloadpectraMenuItem",
+    "RusText": "Загрузить выбранные спектры",
+    "EngText": "Download selected spectra"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "controlsMeasControl",
+    "RusText": "Панель измерений",
+    "EngText": "Measurements panel"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "MeasurementsRegisterForm",
+    "RusText": "Программа набора гамма спектров",
+    "EngText": "Gamma spectra acquisition software"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DateTimeStart",
+    "RusText": "Дата и время начала измерения",
+    "EngText": "DateTime Start"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Duration",
+    "RusText": "Продолжительность, сек.",
+    "EngText": "Duration, sec"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DateTimeFinish",
+    "RusText": "Дата и время окончания измерения",
+    "EngText": "DateTime Finish"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Height",
+    "RusText": "Высота",
+    "EngText": "Height"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "DeadTime",
+    "RusText": "Мертвое время",
+    "EngText": "Dead time"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "FileSpectra",
+    "RusText": "Файл спектра",
+    "EngText": "File spectra"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Detector",
+    "RusText": "Детектор",
+    "EngText": "Detector"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Note",
+    "RusText": "Примечание",
+    "EngText": "Note"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "IrradiationDate",
+    "RusText": "Дата облучения",
+    "EngText": "Irradiation Date"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "Id",
+    "RusText": "Номер",
+    "EngText": "Id"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "StatusMenuItem",
+    "RusText": "Детализация сообщений",
+    "EngText": "Verbosity"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "AcquisitionModeItems",
+    "RusText": "Режим набора спектра",
+    "EngText": "Acquisition Mode"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "buttonFillMeasurementRegister",
+    "RusText": "Продолжить",
+    "EngText": "Continue"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "ContToDetsGroupBox",
+    "RusText": "Контейнеры на детекторах",
+    "EngText": "Detector containers"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "ContToDetsButtonsGroupBox",
+    "RusText": "Выберите действие",
+    "EngText": "Choose an action"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "AcquisitionModesMenuItem",
+    "RusText": "Режим набора спектра",
+    "EngText": "Acquisition Mode"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "ContainersToDetectorsForm",
+    "RusText": "Распределение контейнеров по детекторам",
+    "EngText": "Spreading containers to detector"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "MainLabelDesc",
+    "RusText": "Выберите контейнеры для измерений на каждом детекторе",
+    "EngText": "Assign the numbers of container for each detector."
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "buttonExportToCSV",
+    "RusText": "Экспорт в CSV файл",
+    "EngText": "Export to CSV file"
+  },
+  {
+    "FormName": "ContainersToDetectorsForm",
+    "ComponentName": "buttonExportToExcel",
+    "RusText": "Экспорт в Excel",
+    "EngText": "Export to Excel"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "scDropDownMenu",
+    "RusText": "Параметры УСО",
+    "EngText": "Sample Changer"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "scFlagMenuItem",
+    "RusText": "Включить",
+    "EngText": "Enable"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonStopSC",
+    "RusText": "УСО:СТОП",
+    "EngText": "SC: Stop"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "buttonHalt",
+    "RusText": "УСО: Пр. ОСТ",
+    "EngText": "SC: Force stop"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "showDevCams",
+    "RusText": "Камеры УСО",
+    "EngText": "Xemo cameras"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "GoToLLI2",
+    "RusText": "Перейти к ДЖИ2",
+    "EngText": "Show LLI2 register"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "SLIMenuItem",
+    "RusText": "Параметры КЖИ",
+    "EngText": "SLI params"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "SLIShowAlreadyAdded",
+    "RusText": "Показывать уже добавленные образцы",
+    "EngText": "Show already added samples"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "DetsSampleControlBox",
+    "RusText": "Образцы на детекторах",
+    "EngText": "Detector samples"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "SamplesQueueForm",
+    "RusText": "Просмотр образцов на детекторах",
+    "EngText": "List of detector samples"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "SetKey",
+    "RusText": "Код партии",
+    "EngText": "Set Key"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "SampleNumber",
+    "RusText": "Номер образца",
+    "EngText": "Sample  Number"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "DiskPosition",
+    "RusText": "Позиция на диске",
+    "EngText": "Disk Position"
+  },
+  {
+    "FormName": "SamplesQueueForm",
+    "ComponentName": "Height",
+    "RusText": "Высота",
+    "EngText": "Height"
+  },
+  {
+    "FormName": "MeasurementsRegisterForm",
+    "ComponentName": "ShareSpectraMenuItem",
+    "RusText": "Загрузка спектров в облако",
+    "EngText": "Share spectra"
+  },
+  {
+    "FormName": "ShareSpectraForm",
+    "ComponentName": "ShareSpectraForm",
+    "RusText": "Загрузка спектров в облачное хранилище",
+    "EngText": "Upload chosen spectra into the cloud storage"
+  },
+
+  {
+    "FormName": "ShareSpectraForm",
+    "ComponentName": "CancelMenuButton",
+    "RusText": "Отменить загрузку",
+    "EngText": "Cancel uploading"
+  },
+
+  {
+    "FormName": "ShareSpectraForm",
+    "ComponentName": "uploadNotExistButton",
+    "RusText": "Загрузить недостающие спектры",
+    "EngText": "Upload only not existed spectra"
+  },
+  {
+    "FormName": "ShareSpectraForm",
+    "ComponentName": "uploadAllButton",
+    "RusText": "Загрузить всё",
+    "EngText": "Upload all"
+  },
+  {
+    "FormName": "ShareSpectraForm",
+    "ComponentName": "chooseFilesButton",
+    "RusText": "Выберите файлы спектров",
+    "EngText": "Choose spectra files"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "gbMain",
+    "RusText": "Журналы облучений",
+    "EngText": "Irradiation registers"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "gbIrrLliList",
+    "RusText": "Журналы ДЖИ",
+    "EngText": "LLI registers"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "gbIrrSliList",
+    "RusText": "Журналы КЖИ",
+    "EngText": "SLI registers"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "openChoseRegister",
+    "RusText": "Открыть выбранный журнал",
+    "EngText": "Open selected register"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "createNewSliRegister",
+    "RusText": "Новый журнал КЖИ",
+    "EngText": "New SLI register"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "createNewLliRegister",
+    "RusText": "Новый журнал ДЖИ",
+    "EngText": "New LLI register"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "Date",
+    "RusText": "Дата",
+    "EngText": "Date"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "LoadNumber",
+    "RusText": "Загрузка",
+    "EngText": "LoadNumber"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "LanguageMenuItem",
+    "RusText": "Language",
+    "EngText": "Language"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "English",
+    "RusText": "English",
+    "EngText": "English"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "Russian",
+    "RusText": "Russian",
+    "EngText": "Russian"
+  },
+  {
+    "FormName": "ChooseIrrRegForm",
+    "ComponentName": "ChooseIrrRegForm",
+    "RusText": "Журналы облучений",
+    "EngText": "Irradiation registers"
   }
 ]

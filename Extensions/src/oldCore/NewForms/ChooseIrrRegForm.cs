@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Regata.Core.DataBase;
 using Regata.Core.Settings;
 using Regata.Core.DataBase.Models;
+using Regata.Core.UI.WinForms;
 using Regata.Core.UI.WinForms.Forms;
 using Regata.Core.UI.WinForms.Forms.Irradiations;
 using Regata.Core.UI.WinForms.Controls;
@@ -20,6 +21,8 @@ namespace Extensions.NewForms
         public ControlsGroupBox _gbIrrLliList;
 
         public ToolStripMenuItem _openChoseRegister;
+        public ToolStripMenuItem _createNewSliRegister;
+        public ToolStripMenuItem _createNewLliRegister;
 
         public DataGridView _dgvIrrSli;
         public DataGridView _dgvIrrLli;
@@ -32,12 +35,12 @@ namespace Extensions.NewForms
 
         public ChooseIrrRegForm()
         {
+            Name = "ChooseIrrRegForm";
+            base.Name = "ChooseIrrRegForm";
             StatusStrip.Visible = false;
 
             _dgvIrrSli = CreateDGV("dgvIrrSli");
             _dgvIrrLli = CreateDGV("dgvIrrLli");
-
-           
 
             _gbIrrSliList = new ControlsGroupBox(new Control[] { _dgvIrrSli }) {Name = "gbIrrSliList" };
             _gbIrrLliList = new ControlsGroupBox(new Control[] { _dgvIrrLli }) { Name = "gbIrrLliList" }; ;
@@ -53,10 +56,33 @@ namespace Extensions.NewForms
 
             _openChoseRegister = new ToolStripMenuItem();
             _openChoseRegister.Name = "openChoseRegister";
-
             _openChoseRegister.Click += _openChoseRegister_Click;
 
+            _createNewSliRegister = new ToolStripMenuItem();
+            _createNewSliRegister.Name = "createNewSliRegister";
+            _createNewSliRegister.Click += (s, e) =>
+            {
+                Settings<IrradiationSettings>.AssemblyName = "IrradiationRegister";
+
+                var f = new IrradiationRegister(DateTime.Now, IrradiationType.sli);
+                f.mainForm.Show();
+            };
+
+
+            _createNewLliRegister = new ToolStripMenuItem();
+            _createNewLliRegister.Name = "createNewLliRegister";
+            _createNewLliRegister.Click += (s, e) =>
+            {
+                Settings<IrradiationSettings>.AssemblyName = "IrradiationRegister";
+                var maxLn = (int)_dgvIrrLli.Rows[0].Cells[0].Value;
+                var f = new IrradiationRegister(DateTime.Now, IrradiationType.lli, maxLn + 1);
+                f.mainForm.Show();
+            };
+
+
             MenuStrip.Items.Insert(0, _openChoseRegister);
+            MenuStrip.Items.Insert(0, _createNewLliRegister);
+            MenuStrip.Items.Insert(0, _createNewSliRegister);
 
         }
 
@@ -66,7 +92,9 @@ namespace Extensions.NewForms
 
             var f = new IrradiationRegister(_currDate.Value, _currType, _currLoadNumber);
             f.mainForm.Show();
+            //f._samplesToDetectors.Click += (s,ee) => { var ff = new SamplesToDetectors(8, _currLoadNumber.Value, RegataContext.ConString); ff.Show(); };
         }
+
 
         private DataGridView CreateDGV(string name)
         {
@@ -107,7 +135,6 @@ namespace Extensions.NewForms
             _dgvIrrSli.ClearSelection();
             _dgvIrrLli.ClearSelection();
 
-
             _dgvIrrLli.SelectionChanged += (s, ee) => 
             { 
                 _dgvIrrSli.ClearSelection(); 
@@ -124,8 +151,10 @@ namespace Extensions.NewForms
                 _currType = IrradiationType.sli; 
                 _currDate = (DateTime)_dgvIrrSli.SelectedCells[1].Value; 
             };
-        }
 
+            Labels.SetControlsLabels(this);
+
+        }
 
         private async Task FillDGV(DataGridView dgv, int type)
         {

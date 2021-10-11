@@ -66,7 +66,7 @@
             this.labelD5.Name = "labelD5";
             this.labelD5.Size = new System.Drawing.Size(62, 42);
             this.labelD5.TabIndex = 3;
-            this.labelD5.Text = "D5";
+            this.labelD5.Text = "D2";
             // 
             // labelD6
             // 
@@ -75,7 +75,7 @@
             this.labelD6.Name = "labelD6";
             this.labelD6.Size = new System.Drawing.Size(62, 42);
             this.labelD6.TabIndex = 3;
-            this.labelD6.Text = "D6";
+            this.labelD6.Text = "D3";
             // 
             // buttonExportToSC
             // 
@@ -107,7 +107,7 @@
             this.labelD7.Name = "labelD7";
             this.labelD7.Size = new System.Drawing.Size(62, 42);
             this.labelD7.TabIndex = 3;
-            this.labelD7.Text = "D7";
+            this.labelD7.Text = "D4";
             // 
             // labelExpl
             // 
@@ -285,7 +285,7 @@
             this.Controls.Add(this.labelD5);
             this.Controls.Add(this.labelD1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SamplesToDetectors";
