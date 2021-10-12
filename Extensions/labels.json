@@ -7,6 +7,12 @@
   },
   {
     "FormName": "IrradiationRegister",
+    "ComponentName": "Channel",
+    "RusText": "Канал",
+    "EngText": "Channel"
+  },
+  {
+    "FormName": "IrradiationRegister",
     "ComponentName": "buttonMoveDownInContainer",
     "RusText": "▼",
     "EngText": "▼"
