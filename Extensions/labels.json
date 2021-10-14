@@ -1,6 +1,12 @@
 [
   {
     "FormName": "IrradiationRegister",
+    "ComponentName": "selectedRowsCount",
+    "RusText": "Выделенных образцов:",
+    "EngText": "Selected samples number:"
+  },
+  {
+    "FormName": "IrradiationRegister",
     "ComponentName": "SamplesToDetectors",
     "RusText": "Образцы на детекторах",
     "EngText": "Samples to detectors"
