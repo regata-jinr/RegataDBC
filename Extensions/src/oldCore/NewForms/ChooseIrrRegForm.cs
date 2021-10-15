@@ -107,6 +107,7 @@ namespace Extensions.NewForms
             dgv.AllowUserToAddRows = false;
             dgv.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.DoubleClick += (s, e) => { if (dgv.SelectedCells.Count <= 0) return; _openChoseRegister.PerformClick(); };
 
             return dgv;
         }

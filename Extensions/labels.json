@@ -1,6 +1,30 @@
 [
   {
     "FormName": "IrradiationRegister",
+    "ComponentName": "comboBoxRepackers",
+    "RusText": "Выберите логин",
+    "EngText": "Choose login"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "controlsRepack",
+    "RusText": "Перепаковка выбранных образцов",
+    "EngText": "Samples selected repack"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "selectedRowsRepackers",
+    "RusText": "Перепаковщики:",
+    "EngText": "Repackers:"
+  },
+  {
+    "FormName": "IrradiationRegister",
+    "ComponentName": "selectedRowsOperators",
+    "RusText": "Операторы:",
+    "EngText": "Operators:"
+  },
+  {
+    "FormName": "IrradiationRegister",
     "ComponentName": "selectedRowsCount",
     "RusText": "Выделенных образцов:",
     "EngText": "Selected samples number:"

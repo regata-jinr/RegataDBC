@@ -425,6 +425,7 @@ Partial Class Form_Main
         Me.ListBox_SLI_Irradiation_Log_Date.Name = "ListBox_SLI_Irradiation_Log_Date"
         Me.ListBox_SLI_Irradiation_Log_Date.Size = New System.Drawing.Size(129, 342)
         Me.ListBox_SLI_Irradiation_Log_Date.TabIndex = 170
+
         '
         'ListBox_LLI_Irradiation_Log_Date
         '
