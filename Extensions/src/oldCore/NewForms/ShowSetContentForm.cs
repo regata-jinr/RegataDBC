@@ -13,8 +13,6 @@ using Regata.Core.Cloud;
 
 namespace Extensions.NewForms
 {
-    // TODO: add background downloading
-    // TODO: test on win7 vm and win10sandbox
     // TODO: add exporting from excel the same as from google sheet
 
     public partial class ShowSetContentForm : DataTableForm<Sample>
@@ -30,6 +28,7 @@ namespace Extensions.NewForms
             {
                 SetKey = setKey;
                 _ic = new InfoContext(Settings.ConnectionString);
+                Regata.Core.DataBase.RegataContext.ConString = Settings.ConnectionString;
                 InitializeComponent();
 
                 var sk = setKey.Split('-');
